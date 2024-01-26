@@ -51,6 +51,8 @@ dependencies:
   firebase_storage: ^11.6.0
   # google sihn in
   google_sign_in: ^6.2.1
+  #  for google maps
+  google_maps_flutter: ^2.5.3
 
 
 
@@ -78,7 +80,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/a_dot_burr.jpeg
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

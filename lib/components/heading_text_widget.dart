@@ -28,6 +28,7 @@ class HeadingTextWidget extends StatelessWidget {
     return Text(
       title,
       textAlign: textAlign,
+
       style: GoogleFonts.montserrat(
         decoration: decoration,
         decorationColor: decorationColor,
@@ -35,6 +36,7 @@ class HeadingTextWidget extends StatelessWidget {
         fontSize: fontSize,
         fontWeight: fontWeight,
         fontStyle: fontStyle,
+        height: 1.0
 
       ),
     );
