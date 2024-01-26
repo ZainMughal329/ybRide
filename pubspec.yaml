@@ -51,6 +51,8 @@ dependencies:
   firebase_storage: ^11.6.0
   # google sihn in
   google_sign_in: ^6.2.1
+  #  for google maps
+  google_maps_flutter: ^2.5.3
 
 
 

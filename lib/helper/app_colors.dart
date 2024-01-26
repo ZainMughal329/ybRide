@@ -12,4 +12,7 @@ class AppColors {
   static final Color orangeColor = Color(0xfff26b35);
   static final Color promoCodeColor = Colors.yellow;
   static Color dotColor = Color(0xffafafaf);
+  static final Color snackBarBgColor = Color(0xff583d8b);
+  static final Color snackBarTextColor = Colors.white;
+
 }
