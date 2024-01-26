@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:yb_ride/routes/routes_name.dart';
+import 'package:yb_ride/screens/application/inded.dart';
 import 'package:yb_ride/screens/onBoarding/inded.dart';
 import 'package:yb_ride/screens/pages/book_page/bindings.dart';
+import 'package:yb_ride/screens/pages/book_page/inded.dart';
 import 'package:yb_ride/screens/session/login/inded.dart';
 import 'package:yb_ride/screens/session/signUp/inded.dart';
 import 'package:yb_ride/screens/session/welcome.dart';
@@ -32,9 +34,16 @@ class AppRoutes {
       transition: Transition.rightToLeft,
     ),
     GetPage(
+      name: RoutesName.bookNowScreen,
+      page: () => BookNowView(),
+      binding: BookViewBindings(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
       name: RoutesName.applicationScreen,
-      page: () => WelcomePage(),
+      page: () => ApplicationView(),
       bindings: <Bindings>[
+        ApplicationViewBindings(),
         BookViewBindings(),
       ],
       transition: Transition.rightToLeft,

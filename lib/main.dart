@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:yb_ride/components/custom_Appbar.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
@@ -52,6 +53,5 @@ class MyApp extends StatelessWidget {
       initialRoute: RoutesName.welcomeScreen,
       getPages: AppRoutes.routes,
     );
-
   }
 }
