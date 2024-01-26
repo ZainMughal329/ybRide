@@ -12,7 +12,20 @@
           "package_name": "com.example.yb_ride"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1046745632203-pfcd5glhbsh04tp9pvtflegec796h70t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yb_ride",
+            "certificate_hash": "62d49e1f771ab8baab2451edfc181e2ebc5b5288"
+          }
+        },
+        {
+          "client_id": "1046745632203-hc9tc22f3r5jnsnmgp2f2ulk8hgs4ctf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAL3BrJ_7Q2cCjaPYMjEbfrmRSM2TBtPk0"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1046745632203-hc9tc22f3r5jnsnmgp2f2ulk8hgs4ctf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1046745632203-fccvitagq7oa35p3lf7jebg8hoq8u5mq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ybRide"
+              }
+            }
+          ]
         }
       }
     }
