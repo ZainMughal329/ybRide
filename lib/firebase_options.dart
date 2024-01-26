@@ -63,6 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1046745632203',
     projectId: 'yb-ride-88e8b',
     storageBucket: 'yb-ride-88e8b.appspot.com',
+    androidClientId: '1046745632203-pfcd5glhbsh04tp9pvtflegec796h70t.apps.googleusercontent.com',
+    iosClientId: '1046745632203-fccvitagq7oa35p3lf7jebg8hoq8u5mq.apps.googleusercontent.com',
     iosBundleId: 'com.example.ybRide',
   );
 }
