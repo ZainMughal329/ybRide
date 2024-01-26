@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1046745632203",
+    "project_id": "yb-ride-88e8b",
+    "storage_bucket": "yb-ride-88e8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1046745632203:android:d540eab0c11b153bae7a4e",
+        "android_client_info": {
+          "package_name": "com.example.yb_ride"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAL3BrJ_7Q2cCjaPYMjEbfrmRSM2TBtPk0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

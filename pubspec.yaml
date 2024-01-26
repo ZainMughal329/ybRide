@@ -41,6 +41,16 @@ dependencies:
   google_fonts: ^6.1.0
   # for state management
   get: ^4.6.6
+  # for initializing firebase
+  firebase_core: ^2.24.2
+  # for authentication
+  firebase_auth: ^4.16.0
+  # for  firebase firestore database
+  cloud_firestore: ^4.14.0
+  # for firebase storage
+  firebase_storage: ^11.6.0
+  # google sihn in
+  google_sign_in: ^6.2.1
 
 
 
