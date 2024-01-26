@@ -15,8 +15,8 @@ class LoginScreen extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(LoginController());
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Spacer(
@@ -26,7 +26,8 @@ class LoginScreen extends GetView<LoginController> {
             child: Container(
               height: mq.height * 0.2,
               width: mq.height * 0.2,
-              color: Colors.black54,
+              // color: Colors.black54,
+              child: Image.asset('assets/images/logo.jpeg'),
             ),
           ),
           Spacer(),
@@ -66,13 +67,24 @@ class LoginScreen extends GetView<LoginController> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: mq.width * 0.06),
-            child: RoundButton(title: 'Login', onPress: () {}),
+            child: RoundButton(
+              title: 'Login',
+              onPress: () {
+                controller.loginUserWithEmailAndPassword(
+                    controller.state.emailCon.text.trim().toString(),
+                    controller.state.passCon.text.trim().toString(),
+                    context);
+              },
+            ),
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SubHeadingTextWidget(title: 'Don\'t have an account?',fontSize: 10,fontWeight: FontWeight.w600,),
+              SubHeadingTextWidget(
+                title: 'Don\'t have an account?',
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+              ),
               HeadingTextWidget(
                 title: 'SignUp',
                 decoration: TextDecoration.underline,
@@ -90,10 +102,12 @@ class LoginScreen extends GetView<LoginController> {
             child: Row(
               children: [
                 Expanded(child: Divider()),
-                SubHeadingTextWidget(title: ' or ',fontSize: 10,fontWeight: FontWeight.w600,),
-
+                SubHeadingTextWidget(
+                  title: ' or ',
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                ),
                 Expanded(child: Divider()),
-
               ],
             ),
           ),
@@ -101,8 +115,12 @@ class LoginScreen extends GetView<LoginController> {
             height: mq.height * .01,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10 , horizontal: mq.width * .1),
+            padding:
+                EdgeInsets.symmetric(vertical: 10, horizontal: mq.width * .1),
             child: InkWell(
+              onTap: () {
+                controller.handleGoogleSignIn(context);
+              },
               child: Container(
                 height: mq.height * .06,
                 width: double.infinity,
@@ -115,10 +133,16 @@ class LoginScreen extends GetView<LoginController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(Icons.g_mobiledata,color: AppColors.buttonTextColor,),
+                      Icon(
+                        Icons.g_mobiledata,
+                        color: AppColors.buttonTextColor,
+                      ),
                       Text(
                         'Sign in with google',
-                        style: GoogleFonts.openSans(color: AppColors.buttonTextColor, fontSize: 14,fontWeight: FontWeight.w600),
+                        style: GoogleFonts.openSans(
+                            color: AppColors.buttonTextColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),
@@ -126,9 +150,7 @@ class LoginScreen extends GetView<LoginController> {
               ),
             ),
           ),
-          Spacer(
-            // flex: 2,
-          ),
+          Spacer(),
         ],
       ),
     );
