@@ -7,6 +7,7 @@ import 'package:yb_ride/components/reuseable_button.dart';
 import 'package:yb_ride/components/text_form_field.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/screens/onBoarding/view.dart';
 import 'firebase_options.dart';
 
 late Size mq;
@@ -46,14 +47,14 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(mq.height * 0.04),
-          child:  CustomAppBarWidget(
-            centerTitle: 'AppBar',
-          ),
-        ),
+      home: OnBoardingScreen(
+        // backgroundColor: Colors.white,
+        // appBar: PreferredSize(
+        //   preferredSize: Size.fromHeight(mq.height * 0.04),
+        //   child:  CustomAppBarWidget(
+        //     centerTitle: 'AppBar',
+        //   ),
+        // ),
       ),
     );
   }
