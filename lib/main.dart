@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
       //   // ),
       // ),
 
-      initialRoute: RoutesName.welcomeScreen,
+      initialRoute: RoutesName.applicationScreen,
       getPages: AppRoutes.routes,
     );
   }
