@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:yb_ride/components/custom_Appbar.dart';
 import 'package:yb_ride/screens/pages/trips_page/controller.dart';
 import 'package:yb_ride/screens/pages/trips_page/trip_pages/myTrips/view.dart';
+import 'package:yb_ride/screens/pages/trips_page/trip_pages/sharedTrips/view.dart';
 
 import '../../../helper/app_colors.dart';
 import '../../../main.dart';
@@ -67,11 +68,7 @@ class TripScreen extends GetView<TripController> {
                 controller: controller.tabController,
                 children: [
                   MyTripsView(),
-                  Container(
-                    child: Center(
-                      child: Text('Shared trips'),
-                    ),
-                  ),
+                  SharedTripsView(),
                 ],
               ),
             ),)
