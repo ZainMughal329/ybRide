@@ -40,11 +40,7 @@ class ApplicationView extends GetView<ApplicationViewController> {
       ),
     ];
     var navBody = [
-      Scaffold(
-        appBar: AppBar(
-          title: Text('Book'),
-        ),
-      ),
+      BookNowView(),
       TripScreen(),
       Scaffold(
         appBar: AppBar(
