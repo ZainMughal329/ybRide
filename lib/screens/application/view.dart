@@ -1,104 +1,137 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ionicons/ionicons.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/screens/application/controller.dart';
 import 'package:yb_ride/screens/pages/book_page/inded.dart';
 import 'package:yb_ride/screens/pages/invite_page/inded.dart';
 import 'package:yb_ride/screens/pages/trips_page/inded.dart';
+import 'package:yb_ride/screens/settings/inded.dart';
 
 import '../../main.dart';
-import '../pages/help_page/view.dart';
 
-class ApplicationView extends GetView<ApplicationViewController> {
+class ApplicationView extends StatelessWidget {
   const ApplicationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-
-    var navbarItem = [
-      BottomNavigationBarItem(
+    var navBarItems = [
+      PersistentBottomNavBarItem(
         icon: returnNavBarIcon(CupertinoIcons.car_detailed),
-        label: 'Book',
+        title: 'Book',
+        activeColorPrimary: AppColors.buttonColor,
+        inactiveColorPrimary: AppColors.buttonColor,
+        textStyle: GoogleFonts.openSans(
+            fontWeight: FontWeight.w700,
+            fontSize: 12,
+            color: AppColors.buttonColor
+        ),
+      ),
+      PersistentBottomNavBarItem(
+        icon: returnNavBarIcon(Icons.trip_origin),
+        title: 'Trips',
+        activeColorPrimary: AppColors.buttonColor,
+        inactiveColorPrimary: AppColors.buttonColor,
+        textStyle: GoogleFonts.openSans(
+            fontWeight: FontWeight.w700,
+            fontSize: 12,
+            color: AppColors.buttonColor
+        ),
 
       ),
-      BottomNavigationBarItem(
-        icon: returnNavBarIcon(Icons.route),
-        label: 'Trips',
+      PersistentBottomNavBarItem(
+        icon: returnNavBarIcon(Icons.card_giftcard),
+        title: 'Invite',
+        activeColorPrimary: AppColors.buttonColor,
+        inactiveColorPrimary: AppColors.buttonColor,
+        textStyle: GoogleFonts.openSans(
+            fontWeight: FontWeight.w700,
+            fontSize: 12,
+            color: AppColors.buttonColor
+        ),
+
       ),
-      BottomNavigationBarItem(
-        icon: returnNavBarIcon(CupertinoIcons.gift),
-        label: 'Help',
+      PersistentBottomNavBarItem(
+        icon: returnNavBarIcon(Icons.help),
+        title: 'Help',
+        activeColorPrimary: AppColors.buttonColor,
+        inactiveColorPrimary: AppColors.buttonColor,
+        textStyle: GoogleFonts.openSans(
+            fontWeight: FontWeight.w700,
+            fontSize: 12,
+            color: AppColors.buttonColor
+        ),
+
       ),
-      BottomNavigationBarItem(
-        icon: returnNavBarIcon(Icons.person),
-        label: 'Invite',
-      ),
-      BottomNavigationBarItem(
-        icon: returnNavBarIcon(Ionicons.settings),
-        label: 'Settings',
+      PersistentBottomNavBarItem(
+        icon: returnNavBarIcon(Icons.settings),
+        title: 'Settings',
+        activeColorPrimary: AppColors.buttonColor,
+        inactiveColorPrimary: AppColors.buttonColor,
+        textStyle: GoogleFonts.openSans(
+            fontWeight: FontWeight.w700,
+            fontSize: 12,
+            color: AppColors.buttonColor
+        ),
+
       ),
     ];
-    var navBody = [
+
+    var navScreens = [
       Scaffold(
         appBar: AppBar(
-          title: Text('Book'),
+          title: Text('Help'),
         ),
       ),
       TripScreen(),
-      HelpScreen(),
       InviteScreen(),
       Scaffold(
         appBar: AppBar(
-          title: Text('settings'),
+          title: Text('Help'),
         ),
       ),
+      SettingsView(),
     ];
-    return Scaffold(
-      body: Column(
-        children: [
-          Obx(() => Expanded(
-                child:
-                    navBody.elementAt(controller.state.currentNavIndex.value),
-              )),
+
+    return PersistentTabView(
+
+      context,
+      controller: PersistentTabController(initialIndex: 0),
+      screens: navScreens,
+      items: navBarItems,
+      confineInSafeArea: true,
+      backgroundColor: Colors.white,
+      handleAndroidBackButtonPress: true,
+      resizeToAvoidBottomInset: true,
+      stateManagement: false,
+      hideNavigationBarWhenKeyboardShows: true,
+      decoration: NavBarDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        colorBehindNavBar: Colors.white.withOpacity(0.8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(.1),
+            spreadRadius: 1,
+            blurRadius: 3,
+            offset: Offset(0,-3),
+          ),
         ],
+
       ),
-      bottomNavigationBar: Obx(
-        () => Container(
-          height: mq.height * .14,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(.25),
-                spreadRadius: 1,
-                blurRadius: 3,
-                offset: Offset(0,-3),
-              ),
-            ],
-          ),
-          child: BottomNavigationBar(
-            elevation: 2,
-            backgroundColor: Colors.grey.shade100,
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: AppColors.buttonColor,
-            selectedLabelStyle: GoogleFonts.openSans(fontWeight: FontWeight.w800,color: AppColors.buttonColor),
-            unselectedLabelStyle: GoogleFonts.openSans(fontWeight: FontWeight.w800,color: AppColors.buttonColor),
-            unselectedItemColor: AppColors.buttonColor,
-            currentIndex: controller.state.currentNavIndex.value,
-            items: navbarItem,
-            onTap: (value) {
-              controller.state.currentNavIndex.value = value;
-            },
-          ),
-        ),
+      popAllScreensOnTapOfSelectedTab: true,
+      itemAnimationProperties: ItemAnimationProperties(
+        duration: Duration(milliseconds: 200),
+        curve: Curves.ease,
       ),
+      screenTransitionAnimation: ScreenTransitionAnimation(
+        animateTabTransition: true,
+        curve: Curves.easeInOut,
+        duration: Duration(milliseconds: 200),
+      ),
+      navBarStyle: NavBarStyle.style6,
     );
   }
-
   Widget returnNavBarIcon(IconData icon) {
     return CircleAvatar(
       radius: 15,

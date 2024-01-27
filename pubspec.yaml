@@ -57,6 +57,12 @@ dependencies:
   #  extra icons
   ionicons: ^0.2.2
 
+  font_awesome_flutter:
+
+  persistent_bottom_nav_bar:
+
+  fl_country_code_picker:
+
 
 
 
