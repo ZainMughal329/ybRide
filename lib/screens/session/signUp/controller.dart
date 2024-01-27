@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/api/api.dart';
 import 'package:yb_ride/helper/app_helpers.dart';
+import 'package:yb_ride/helper/session_controller.dart';
 import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/session/signUp/inded.dart';
 
@@ -19,6 +20,7 @@ class SignUpController extends GetxController {
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
         userinfo.id = APis.auth.currentUser!.uid.toString();
+        SessionController().userId = APis.auth.currentUser!.uid.toString();;
         // SessionController().userId = value.user!.uid.toString();
         // StorePrefrences sp = StorePrefrences();
         // sp.setIsFirstOpen(true);
@@ -48,7 +50,7 @@ class SignUpController extends GetxController {
       Navigator.pop(context);
       // StorePrefrences sp = StorePrefrences();
       // sp.setIsFirstOpen(true);
-      Get.offAllNamed(RoutesName.onBoardingScreen);
+      Get.offAllNamed(RoutesName.applicationScreen);
       print('success');
     }).catchError((error, stackTrace) {
       // Snackbar.showSnackBar("Error", error.toString(), Icons.error_outline);
