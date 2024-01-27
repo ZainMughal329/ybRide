@@ -23,9 +23,9 @@ class ApplicationView extends StatelessWidget {
         activeColorPrimary: AppColors.buttonColor,
         inactiveColorPrimary: AppColors.buttonColor,
         textStyle: GoogleFonts.openSans(
-          fontWeight: FontWeight.w700,
-          fontSize: 12,
-          color: AppColors.buttonColor
+            fontWeight: FontWeight.w700,
+            fontSize: 12,
+            color: AppColors.buttonColor
         ),
       ),
       PersistentBottomNavBarItem(
@@ -79,11 +79,11 @@ class ApplicationView extends StatelessWidget {
     ];
 
     var navScreens = [
-    Scaffold(
-      appBar: AppBar(
-        title: Text('Help'),
+      Scaffold(
+        appBar: AppBar(
+          title: Text('Help'),
+        ),
       ),
-    ),
       TripScreen(),
       InviteScreen(),
       Scaffold(
@@ -142,4 +142,4 @@ class ApplicationView extends StatelessWidget {
       ),
     );
   }
-  }
+}
