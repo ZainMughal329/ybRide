@@ -8,6 +8,7 @@ import 'package:yb_ride/screens/pages/invite_page/inded.dart';
 import 'package:yb_ride/screens/session/login/inded.dart';
 import 'package:yb_ride/screens/session/signUp/inded.dart';
 import 'package:yb_ride/screens/session/welcome.dart';
+import 'package:yb_ride/screens/settings/pages/profile/inded.dart';
 
 class AppRoutes {
   static final List<GetPage> routes = [
@@ -57,6 +58,13 @@ class AppRoutes {
         InviteBindings(),
         BookViewBindings(),
       ],
+      transition: Transition.rightToLeft,
+    ),
+
+    GetPage(
+      name: RoutesName.profileScreen,
+      page: () => ProfileScreen(),
+      binding: ProfileBindings(),
       transition: Transition.rightToLeft,
     ),
   ];

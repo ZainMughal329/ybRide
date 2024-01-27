@@ -15,4 +15,7 @@ class RoutesName {
   static final helpScreen = '/helpScreen';
   static final settingScreen = '/settingScreen';
 
+//   setting routes
+  static final profileScreen = '/profileScreen';
+
 }
