@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/routes/app_routes.dart';
+import 'package:yb_ride/routes/routes_name.dart';
 import '../../components/heading_text_widget.dart';
 import '../../components/reuseable_button.dart';
 import '../../components/text_widget.dart';
@@ -46,11 +48,8 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
     return Scaffold(
       body: PageView.builder(
           itemCount: list.length,
-          // onPageChanged: (int page){
-          //   controller.state.index.value=page;
-          // },
           itemBuilder: (ctx, ind) {
-            // controller.state.index.value=ind;
+            final isLast =ind==list.length - 1;
             return Stack(
               children: [
                 Column(
@@ -120,11 +119,19 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
                           padding: EdgeInsets.only(
                               left: mq.width * .02, right: mq.width * .02),
                           child: RoundButton(
-                              title: 'Next',
+                              title:isLast ?'Finish':
+                              'Next',
                               onPress: () {
-                                c.nextPage(
-                                    duration: Duration(milliseconds: 600),
-                                    curve: Curves.ease);
+                                if(isLast){
+                                  Get.offNamed(RoutesName.welcomeScreen);
+
+                                }else{
+                                  c.nextPage(
+                                      duration: Duration(milliseconds: 600),
+                                      curve: Curves.ease);
+                                }
+
+
                               }),
                         ),
                         SizedBox(

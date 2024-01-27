@@ -54,6 +54,10 @@ dependencies:
   #  for google maps
   google_maps_flutter: ^2.5.3
 
+  #  extra icons
+  ionicons: ^0.2.2
+
+
 
 
 dev_dependencies:
