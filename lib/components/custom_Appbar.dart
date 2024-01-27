@@ -2,15 +2,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../main.dart';
+
 class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final IconData? leadingIcon;
   final String centerTitle;
   final IconData? trailingIcon;
+  final bool isLeading;
 
   CustomAppBarWidget({
     this.leadingIcon,
     required this.centerTitle,
-    this.trailingIcon,
+    this.trailingIcon, required this.isLeading,
   });
 
   @override
@@ -33,18 +36,22 @@ class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Row(
           children: [
-            IconButton(
+            isLeading ? IconButton(
               icon: Icon(leadingIcon),
               onPressed: () {
                 // Handle leading icon press
               },
+            ) : Container(),
+            SizedBox(
+              width: mq.width * .02,
             ),
             Expanded(
               child: Text(
                 centerTitle,
                 style: GoogleFonts.openSans(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 18,
+                  color: Colors.black
                 ),
               ),
             ),
