@@ -24,78 +24,78 @@ class InviteScreen extends GetView<InviteCon> {
     mq = MediaQuery.sizeOf(context);
 
     return Scaffold(
-      appBar: PreferredSize(preferredSize: Size.fromHeight(mq.height* .08), child:CustomAppBarWidget(centerTitle: 'Invite friends',isLeading: false,) ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: mq.height * .06,
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: mq.height * .09),
-            child: Image(
-                image: AssetImage(
-                    'assets/images/01.png'),
-                height: mq.height * .3,
-                width: mq.width * .5),
-          ),
-          Center(
-            child: SizedBox(
-              width: mq.width * .9,
-              child: HeadingTextWidget(
-                fontSize:  16,
-                fontWeight: FontWeight.w600,
-                textAlign: TextAlign.center,
-                title:'Invite your friends',
-              ),
+        appBar: PreferredSize(preferredSize: Size.fromHeight(mq.height* .08), child:CustomAppBarWidget(centerTitle: 'Invite friends',isLeading: false,) ),
+        body: Column(
+          children: [
+            SizedBox(
+              height: mq.height * .06,
             ),
-          ),
-          SizedBox(
-            height: mq.height * .02,
-          ),
-          Center(
-            child: SizedBox(
-                width: mq.width * .8,
-                child: SubHeadingTextWidget(
-                  textAlign: TextAlign.center,
-                  title: subtittle,
+            Padding(
+              padding: EdgeInsets.only(top: mq.height * .09),
+              child: Image(
+                  image: AssetImage(
+                      'assets/images/01.png'),
+                  height: mq.height * .3,
+                  width: mq.width * .5),
+            ),
+            Center(
+              child: SizedBox(
+                width: mq.width * .9,
+                child: HeadingTextWidget(
+                  fontSize:  16,
                   fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  maxLines:5,
-                  overflow: TextOverflow.ellipsis,
-                )),
-          ),
-          SizedBox(
-            height: mq.height * .02,
-          ),
-          Center(
-            child: SizedBox(
-              width: mq.width * .9,
-              child: HeadingTextWidget(
-                fontSize:  14,
-                textColor: AppColors.buttonColor,
-                fontWeight: FontWeight.w600,
-                textAlign: TextAlign.center,
-                title:'Information about Referrals',
+                  textAlign: TextAlign.center,
+                  title:'Invite your friends',
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: mq.height * .02,
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-                left: mq.width * .02, right: mq.width * .02),
-            child: RoundButton(
-                title:'Book your YBCar now',
-                onPress: () {
-                  // Get.toNamed(RoutesName.bookNowScreen);
-                  final con = Get.put(ApplicationViewController());
-                  con.state.currentNavIndex.value = 0;
-                }),
-          ),
+            SizedBox(
+              height: mq.height * .02,
+            ),
+            Center(
+              child: SizedBox(
+                  width: mq.width * .8,
+                  child: SubHeadingTextWidget(
+                    textAlign: TextAlign.center,
+                    title: subtittle,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                    maxLines:5,
+                    overflow: TextOverflow.ellipsis,
+                  )),
+            ),
+            SizedBox(
+              height: mq.height * .02,
+            ),
+            Center(
+              child: SizedBox(
+                width: mq.width * .9,
+                child: HeadingTextWidget(
+                  fontSize:  14,
+                  textColor: AppColors.buttonColor,
+                  fontWeight: FontWeight.w600,
+                  textAlign: TextAlign.center,
+                  title:'Information about Referrals',
+                ),
+              ),
+            ),
+            SizedBox(
+              height: mq.height * .02,
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                  left: mq.width * .02, right: mq.width * .02),
+              child: RoundButton(
+                  title:'Book your YBCar now',
+                  onPress: () {
+                    // Get.toNamed(RoutesName.bookNowScreen);
+                    final con = Get.put(ApplicationViewController());
+                    con.state.currentNavIndex.value = 0;
+                  }),
+            ),
 
-        ],
-      )
+          ],
+        )
     );
   }
 }

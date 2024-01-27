@@ -61,7 +61,11 @@ dependencies:
 
   persistent_bottom_nav_bar:
 
-  shared_preferences: ^2.2.2
+
+  shared_preferences:
+
+  fl_country_code_picker:
+
 
 
 

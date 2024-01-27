@@ -33,7 +33,7 @@ class SubHeadingTextWidget extends StatelessWidget {
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: overflow,
-      style: GoogleFonts.montserrat(
+      style: GoogleFonts.openSans(
         decoration: decoration,
         decorationColor: decorationColor,
         color: textColor,

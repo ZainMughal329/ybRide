@@ -5,6 +5,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/screens/application/controller.dart';
 import 'package:yb_ride/screens/pages/book_page/inded.dart';
+import 'package:yb_ride/screens/pages/help_page/inded.dart';
 import 'package:yb_ride/screens/pages/invite_page/inded.dart';
 import 'package:yb_ride/screens/pages/trips_page/inded.dart';
 import 'package:yb_ride/screens/settings/inded.dart';
@@ -80,14 +81,11 @@ class ApplicationView extends StatelessWidget {
     ];
 
     var navScreens = [
+
       BookNowView(),
       TripScreen(),
       InviteScreen(),
-      Scaffold(
-        appBar: AppBar(
-          title: Text('Help'),
-        ),
-      ),
+      HelpScreen(),
       SettingsView(),
     ];
 

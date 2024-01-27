@@ -10,7 +10,8 @@ class HeadingTextWidget extends StatelessWidget {
   final Color decorationColor;
   final FontStyle fontStyle;
   final TextAlign? textAlign;
-
+  final int? maxLines;
+  final TextOverflow? overflow;
   const HeadingTextWidget(
       {super.key,
         required this.title,
@@ -21,6 +22,8 @@ class HeadingTextWidget extends StatelessWidget {
         this.decorationColor = Colors.black,
         this.fontStyle = FontStyle.normal,
         this.textAlign,
+        this.maxLines,
+        this.overflow,
       });
 
   @override
@@ -28,7 +31,8 @@ class HeadingTextWidget extends StatelessWidget {
     return Text(
       title,
       textAlign: textAlign,
-
+      maxLines: maxLines,
+      overflow: overflow,
       style: GoogleFonts.montserrat(
         decoration: decoration,
         decorationColor: decorationColor,
