@@ -23,11 +23,11 @@ class InviteScreen extends GetView<InviteCon> {
     mq = MediaQuery.sizeOf(context);
 
     return Scaffold(
-      appBar: PreferredSize(preferredSize: Size.fromHeight(mq.height*0.04), child:CustomAppBarWidget(centerTitle: 'Invite friends') ),
+      appBar: PreferredSize(preferredSize: Size.fromHeight(mq.height*0.04), child:CustomAppBarWidget(centerTitle: 'Invite friends',isLeading: false,) ),
       body: Column(
         children: [
           SizedBox(
-            height: mq.height * .03,
+            height: mq.height * .06,
           ),
           Padding(
             padding: EdgeInsets.only(top: mq.height * .09),
@@ -87,13 +87,9 @@ class InviteScreen extends GetView<InviteCon> {
             child: RoundButton(
                 title:'Book your YBCar now',
                 onPress: () {
-                  Get.toNamed(RoutesName.inviteScreen);
+                  Get.toNamed(RoutesName.bookNowScreen);
                 }),
           ),
-          SizedBox(
-            height: mq.height * .04,
-          ),
-
 
         ],
       )
