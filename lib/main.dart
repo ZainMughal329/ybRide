@@ -50,7 +50,6 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-
       initialRoute: RoutesName.applicationScreen,
       getPages: AppRoutes.routes,
     );
