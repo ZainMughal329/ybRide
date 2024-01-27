@@ -37,7 +37,7 @@ class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
         child: Row(
           children: [
             isLeading ? IconButton(
-              icon: Icon(leadingIcon),
+              icon: Icon(leadingIcon,size: 18,),
               onPressed: () {
                 // Handle leading icon press
               },
