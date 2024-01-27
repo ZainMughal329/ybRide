@@ -23,7 +23,7 @@ class InviteScreen extends GetView<InviteCon> {
     mq = MediaQuery.sizeOf(context);
 
     return Scaffold(
-      appBar: PreferredSize(preferredSize: Size.fromHeight(mq.height*0.04), child:CustomAppBarWidget(centerTitle: 'Invite friends',isLeading: false,) ),
+      appBar: PreferredSize(preferredSize: Size.fromHeight(mq.height*0.08), child:CustomAppBarWidget(centerTitle: 'Invite friends',isLeading: false,) ),
       body: Column(
         children: [
           SizedBox(

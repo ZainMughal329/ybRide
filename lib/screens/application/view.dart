@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
@@ -10,12 +11,15 @@ import 'package:yb_ride/screens/pages/invite_page/inded.dart';
 import 'package:yb_ride/screens/pages/trips_page/inded.dart';
 
 import '../../main.dart';
+import '../pages/help_page/view.dart';
 
 class ApplicationView extends GetView<ApplicationViewController> {
   const ApplicationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
     var navbarItem = [
       BottomNavigationBarItem(
         icon: returnNavBarIcon(CupertinoIcons.car_detailed),
@@ -46,11 +50,7 @@ class ApplicationView extends GetView<ApplicationViewController> {
         ),
       ),
       TripScreen(),
-      Scaffold(
-        appBar: AppBar(
-          title: Text('help'),
-        ),
-      ),
+      HelpScreen(),
       InviteScreen(),
       Scaffold(
         appBar: AppBar(
@@ -58,7 +58,6 @@ class ApplicationView extends GetView<ApplicationViewController> {
         ),
       ),
     ];
-
     return Scaffold(
       body: Column(
         children: [
@@ -70,7 +69,7 @@ class ApplicationView extends GetView<ApplicationViewController> {
       ),
       bottomNavigationBar: Obx(
         () => Container(
-          height: mq.height * .11,
+          height: mq.height * .14,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
