@@ -83,6 +83,7 @@ class ApplicationView extends StatelessWidget {
         appBar: AppBar(
           title: Text('Help'),
         ),
+
       ),
       TripScreen(),
       InviteScreen(),
