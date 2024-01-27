@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yb_ride/helper/app_colors.dart';
@@ -13,6 +14,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]
+  );
   runApp(const MyApp());
 }
 
@@ -22,6 +27,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+
     mq = MediaQuery.sizeOf(context);
     return GetMaterialApp(
       title: 'Flutter Demo',
@@ -43,18 +50,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      // home: OnBoardingScreen(
-      //   // backgroundColor: Colors.white,
-      //   // appBar: PreferredSize(
-      //   //   preferredSize: Size.fromHeight(mq.height * 0.04),
-      //   //   child:  CustomAppBarWidget(
-      //   //     centerTitle: 'AppBar',
-      //   //   ),
-      //   // ),
-      // ),
-      initialRoute: RoutesName.bookNowScreen,
 
-      // initialRoute: RoutesName.welcomeScreen,
+      initialRoute: RoutesName.applicationScreen,
       getPages: AppRoutes.routes,
     );
   }
