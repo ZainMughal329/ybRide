@@ -52,8 +52,9 @@ class MyApp extends StatelessWidget {
       //   //   ),
       //   // ),
       // ),
+      initialRoute: RoutesName.bookNowScreen,
 
-      initialRoute: RoutesName.welcomeScreen,
+      // initialRoute: RoutesName.welcomeScreen,
       getPages: AppRoutes.routes,
     );
   }
