@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
 class ApplicationState {
-  final RxInt currentNavIndex = 1.obs;
+  final RxInt currentNavIndex = 4.obs;
 
 }

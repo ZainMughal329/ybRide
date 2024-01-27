@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/components/custom_Appbar.dart';
+import 'package:yb_ride/screens/application/inded.dart';
 import '../../../components/heading_text_widget.dart';
 import '../../../components/reuseable_button.dart';
 import '../../../components/text_widget.dart';
@@ -23,7 +24,7 @@ class InviteScreen extends GetView<InviteCon> {
     mq = MediaQuery.sizeOf(context);
 
     return Scaffold(
-      appBar: PreferredSize(preferredSize: Size.fromHeight(mq.height*0.04), child:CustomAppBarWidget(centerTitle: 'Invite friends',isLeading: false,) ),
+      appBar: PreferredSize(preferredSize: Size.fromHeight(mq.height* .08), child:CustomAppBarWidget(centerTitle: 'Invite friends',isLeading: false,) ),
       body: Column(
         children: [
           SizedBox(
@@ -87,7 +88,9 @@ class InviteScreen extends GetView<InviteCon> {
             child: RoundButton(
                 title:'Book your YBCar now',
                 onPress: () {
-                  Get.toNamed(RoutesName.bookNowScreen);
+                  // Get.toNamed(RoutesName.bookNowScreen);
+                  final con = Get.put(ApplicationViewController());
+                  con.state.currentNavIndex.value = 0;
                 }),
           ),
 
