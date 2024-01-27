@@ -6,6 +6,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/screens/application/controller.dart';
 import 'package:yb_ride/screens/pages/book_page/inded.dart';
+import 'package:yb_ride/screens/pages/invite_page/inded.dart';
 import 'package:yb_ride/screens/pages/trips_page/inded.dart';
 
 import '../../main.dart';
@@ -47,14 +48,10 @@ class ApplicationView extends GetView<ApplicationViewController> {
       TripScreen(),
       Scaffold(
         appBar: AppBar(
-          title: Text('invite'),
-        ),
-      ),
-      Scaffold(
-        appBar: AppBar(
           title: Text('help'),
         ),
       ),
+      InviteScreen(),
       Scaffold(
         appBar: AppBar(
           title: Text('settings'),
@@ -73,7 +70,7 @@ class ApplicationView extends GetView<ApplicationViewController> {
       ),
       bottomNavigationBar: Obx(
         () => Container(
-          height: mq.height * .09,
+          height: mq.height * .11,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
