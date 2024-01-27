@@ -17,7 +17,7 @@ class TripScreen extends GetView<TripController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(mq.height * .04),
+        preferredSize: Size.fromHeight(mq.height * .08),
         child: CustomAppBarWidget(centerTitle: 'Trips', isLeading: false,),
       ),
       body: SafeArea(child: Column(
