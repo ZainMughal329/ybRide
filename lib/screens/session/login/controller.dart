@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yb_ride/helper/session_controller.dart';
 import 'package:yb_ride/screens/session/login/state.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:yb_ride/models/usermodel.dart';
@@ -39,13 +40,15 @@ class LoginController extends GetxController {
   handleGoogleSignIn(BuildContext context) async {
     showProgressIndicator(context);
     _signInWithGoogle().then((user) async {
+      // SessionController().userId = user!.uid.toString();
       Navigator.pop(context);
       if (user != null) {
+        SessionController().userId = user.user!.uid.toString();
         if ((await userExists())) {
-          return Get.offAndToNamed(RoutesName.onBoardingScreen);
+          return Get.offAndToNamed(RoutesName.applicationScreen);
         } else {
           await createUser().then((value) {
-            return Get.offAndToNamed(RoutesName.onBoardingScreen);
+            return Get.offAndToNamed(RoutesName.applicationScreen);
           });
         }
       }
@@ -85,22 +88,23 @@ class LoginController extends GetxController {
       await APis.auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) async {
-        // SessionController().userId = value.user!.uid.toString();
-        final serviceData = await APis.db
-            .collection('serviceProviders')
-            .where('id', isEqualTo: APis.auth.currentUser!.uid.toString())
-            .get();
-        if (serviceData.docs.isNotEmpty) {
-          // StorePrefrences sp = StorePrefrences();
-          // sp.setIsFirstOpen(true);
-          Get.offAllNamed(RoutesName.onBoardingScreen);
-          Navigator.pop(context);
-        } else {
-          // StorePrefrences sp = StorePrefrences();
-          // sp.setIsFirstOpen(true);
-          Get.offAllNamed(RoutesName.onBoardingScreen);
-          Navigator.pop(context);
-        }
+        SessionController().userId = value.user!.uid.toString();
+        Get.offAllNamed(RoutesName.applicationScreen);
+        // final serviceData = await APis.db
+        //     .collection('serviceProviders')
+        //     .where('id', isEqualTo: APis.auth.currentUser!.uid.toString())
+        //     .get();
+        // if (serviceData.docs.isNotEmpty) {
+        //   // StorePrefrences sp = StorePrefrences();
+        //   // sp.setIsFirstOpen(true);
+        //
+        //   Navigator.pop(context);
+        // } else {
+        //   // StorePrefrences sp = StorePrefrences();
+        //   // sp.setIsFirstOpen(true);
+        //   Get.offAllNamed(RoutesName.onBoardingScreen);
+        //   Navigator.pop(context);
+        // }
 
         Navigator.pop(context);
 

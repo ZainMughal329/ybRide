@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/helper/shared_pref.dart';
 import 'package:yb_ride/routes/app_routes.dart';
 import 'package:yb_ride/routes/routes_name.dart';
 import '../../components/heading_text_widget.dart';
@@ -123,6 +124,7 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
                               'Next',
                               onPress: () {
                                 if(isLast){
+                                  Pref().setIsFirstOpen(true);
                                   Get.offNamed(RoutesName.welcomeScreen);
 
                                 }else{
