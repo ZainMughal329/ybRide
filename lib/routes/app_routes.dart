@@ -92,7 +92,10 @@ class AppRoutes {
       name: RoutesName.paymentScreen,
       page: () => PaymentScreen(),
       binding: PaymentBindings(),
-      name: RoutesName.preferenceScreen,
+
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(name: RoutesName.preferenceScreen,
       page: () => PreferenceScreen(),
       binding: PreferenceBindings(),
       transition: Transition.rightToLeft,

@@ -52,6 +52,7 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
     mq = MediaQuery.sizeOf(context);
     return Scaffold(
       body: PageView.builder(
+        controller: c,
           itemCount: list.length,
           itemBuilder: (ctx, ind) {
             final isLast = ind == list.length - 1;

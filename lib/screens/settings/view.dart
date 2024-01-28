@@ -14,6 +14,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../components/custom_Appbar.dart';
 import '../../main.dart';
+import 'package:get/get.dart';
 
 class SettingsView extends GetView<SettingsController> {
   const SettingsView({super.key});

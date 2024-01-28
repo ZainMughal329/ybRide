@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yb_ride/helper/app_colors.dart';
@@ -17,6 +18,7 @@ class ApplicationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
     var navBarItems = [
       PersistentBottomNavBarItem(
@@ -80,8 +82,7 @@ class ApplicationView extends StatelessWidget {
       ),
     ];
 
-    var navScreens = [
-
+    var navScreens = <Widget>[
       BookNowView(),
       TripScreen(),
       InviteScreen(),
