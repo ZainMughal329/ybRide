@@ -9,6 +9,7 @@ import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/screens/session/login/controller.dart';
 
 import '../../../main.dart';
+import '../../../routes/routes_name.dart';
 
 class LoginScreen extends GetView<LoginController> {
   const LoginScreen({super.key});
@@ -16,142 +17,149 @@ class LoginScreen extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Column(
-        children: [
-          Spacer(
-            flex: 2,
-          ),
-          Center(
-            child: Container(
-              height: mq.height * 0.2,
-              width: mq.height * 0.2,
-              // color: Colors.black54,
-              child: Image.asset('assets/images/logo.jpeg'),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: mq.height * 0.15,
             ),
-          ),
-          Spacer(),
-          ReuseableTextField(
-              contr: controller.state.emailCon,
-              label: 'Email',
-              textInputAction: TextInputAction.next,
-              keyboardType: TextInputType.emailAddress,
-              obsecure: false),
-          SizedBox(
-            height: mq.height * .0005,
-          ),
-          ReuseableTextField(
-              contr: controller.state.passCon,
-              label: 'Password',
-              textInputAction: TextInputAction.done,
-              keyboardType: TextInputType.visiblePassword,
-              obsecure: true),
-          SizedBox(
-            height: mq.height * .01,
-          ),
-          Padding(
-            padding: EdgeInsets.only(right: mq.width * 0.06),
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: HeadingTextWidget(
-                title: 'Forgot Password?',
-                decoration: TextDecoration.underline,
-                decorationColor: AppColors.buttonColor,
-                fontSize: 12,
-                textColor: AppColors.buttonColor,
+            Center(
+              child: Container(
+                height: mq.height * 0.2,
+                width: mq.height * 0.2,
+                // color: Colors.black54,
+                child: Image.asset('assets/images/logo1.jpeg'),
               ),
             ),
-          ),
-          SizedBox(
-            height: mq.height * .02,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: mq.width * 0.06),
-            child: RoundButton(
-              title: 'Login',
-              onPress: () {
-                controller.loginUserWithEmailAndPassword(
-                    controller.state.emailCon.text.trim().toString(),
-                    controller.state.passCon.text.trim().toString(),
-                    context);
-              },
+            SizedBox(
+              height: mq.height * 0.05,
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SubHeadingTextWidget(
-                title: 'Don\'t have an account?',
-                fontSize: 10,
-                fontWeight: FontWeight.w600,
+            ReuseableTextField(
+                contr: controller.state.emailCon,
+                label: 'Email',
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.emailAddress,
+                obsecure: false),
+            SizedBox(
+              height: mq.height * .0005,
+            ),
+            ReuseableTextField(
+                contr: controller.state.passCon,
+                label: 'Password',
+                textInputAction: TextInputAction.done,
+                keyboardType: TextInputType.visiblePassword,
+                obsecure: true),
+            SizedBox(
+              height: mq.height * .01,
+            ),
+            Padding(
+              padding: EdgeInsets.only(right: mq.width * 0.06),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: HeadingTextWidget(
+                  title: 'Forgot Password?',
+                  decoration: TextDecoration.underline,
+                  decorationColor: AppColors.buttonColor,
+                  fontSize: 12,
+                  textColor: AppColors.buttonColor,
+                ),
               ),
-              HeadingTextWidget(
-                title: 'SignUp',
-                decoration: TextDecoration.underline,
-                decorationColor: AppColors.buttonColor,
-                fontSize: 10,
-                textColor: AppColors.buttonColor,
+            ),
+            SizedBox(
+              height: mq.height * .02,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: mq.width * 0.06),
+              child: RoundButton(
+                title: 'Login',
+                onPress: () {
+                  controller.loginUserWithEmailAndPassword(
+                      controller.state.emailCon.text.trim().toString(),
+                      controller.state.passCon.text.trim().toString(),
+                      context);
+                },
               ),
-            ],
-          ),
-          SizedBox(
-            height: mq.height * .01,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: mq.width * 0.05),
-            child: Row(
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(child: Divider()),
                 SubHeadingTextWidget(
-                  title: ' or ',
+                  title: 'Don\'t have an account?',
                   fontSize: 10,
                   fontWeight: FontWeight.w600,
                 ),
-                Expanded(child: Divider()),
+                InkWell(
+                  onTap: (){
+                    Get.offNamed(RoutesName.signUpScreen);
+                  },
+                  child: HeadingTextWidget(
+                    title: 'SignUp',
+                    decoration: TextDecoration.underline,
+                    decorationColor: AppColors.buttonColor,
+                    fontSize: 10,
+                    textColor: AppColors.buttonColor,
+                  ),
+                ),
               ],
             ),
-          ),
-          SizedBox(
-            height: mq.height * .01,
-          ),
-          Padding(
-            padding:
-                EdgeInsets.symmetric(vertical: 10, horizontal: mq.width * .1),
-            child: InkWell(
-              onTap: () {
-                controller.handleGoogleSignIn(context);
-              },
-              child: Container(
-                height: mq.height * .06,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: AppColors.buttonColor,
-                ),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.g_mobiledata,
-                        color: AppColors.buttonTextColor,
-                      ),
-                      Text(
-                        'Sign in with google',
-                        style: GoogleFonts.openSans(
-                            color: AppColors.buttonTextColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ],
+            SizedBox(
+              height: mq.height * .01,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: mq.width * 0.05),
+              child: Row(
+                children: [
+                  Expanded(child: Divider()),
+                  SubHeadingTextWidget(
+                    title: ' or ',
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  Expanded(child: Divider()),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: mq.height * .01,
+            ),
+            Padding(
+              padding:
+                  EdgeInsets.symmetric(vertical: 10, horizontal: mq.width * .1),
+              child: InkWell(
+                onTap: () {
+                  controller.handleGoogleSignIn(context);
+                },
+                child: Container(
+                  height: mq.height * .06,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: AppColors.buttonColor,
+                  ),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.g_mobiledata,
+                          color: AppColors.buttonTextColor,
+                        ),
+                        Text(
+                          'Sign in with google',
+                          style: GoogleFonts.openSans(
+                              color: AppColors.buttonTextColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          Spacer(),
-        ],
+          ],
+        ),
       ),
     );
   }

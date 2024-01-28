@@ -21,9 +21,9 @@ class _WelcomePageState extends State<WelcomePage> {
       body: Stack(
         children: [
           Container(
-            height: double.infinity,
-            width: double.infinity,
-            child: Image.asset('assets/images/2.png'),
+            height: mq.height,
+            width: mq.height,
+            child: Image.asset('assets/background.jpeg',fit: BoxFit.fill,),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: mq.height * .02),
@@ -34,13 +34,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 Spacer(
                   flex: 2,
                 ),
-                Center(
-                  child: Container(
-                    height: mq.height * 0.2,
-                    width: mq.height * 0.2,
-                    color: Colors.black54,
-                  ),
-                ),
+
                 Spacer(),
                 HeadingTextWidget(
                   title: 'Welcome,',
@@ -51,12 +45,12 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
                 HeadingTextWidget(
                   title: 'Long time',
-                  textColor: Colors.black,
+                  textColor: Colors.white,
                   fontSize: 45,
                 ),
                 HeadingTextWidget(
                   title: 'no see.',
-                  textColor: Colors.black,
+                  textColor: Colors.white,
                   fontSize: 45,
                 ),
                 SizedBox(

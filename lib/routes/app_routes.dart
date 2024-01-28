@@ -10,14 +10,14 @@ import 'package:yb_ride/screens/pages/invite_page/inded.dart';
 import 'package:yb_ride/screens/session/login/inded.dart';
 import 'package:yb_ride/screens/session/signUp/inded.dart';
 import 'package:yb_ride/screens/session/welcome.dart';
+
 import 'package:yb_ride/screens/settings/pages/payment_method/bindings.dart';
 import 'package:yb_ride/screens/settings/pages/payment_method/view.dart';
-// <<<<<<< HEAD
+import 'package:yb_ride/screens/settings/pages/prefrences/apperence/inded.dart';
+import 'package:yb_ride/screens/settings/pages/prefrences/inded.dart';
 import 'package:yb_ride/screens/splash/bindings.dart';
 import 'package:yb_ride/screens/splash/view.dart';
-// =======
 import 'package:yb_ride/screens/settings/pages/profile/inded.dart';
-// >>>>>>> ba994db1a6399fa6d78c746743295dcd0fb21664
 
 class AppRoutes {
   static final List<GetPage> routes = [
@@ -29,7 +29,7 @@ class AppRoutes {
     ),
     GetPage(
       name: RoutesName.onBoardingScreen,
-      page: () => OnBoardingScreen(),
+      page: () => OnBoardingScreen(isOnboarding: true,),
       binding: onBoardingBindings(),
       transition: Transition.rightToLeft,
     ),
@@ -92,6 +92,15 @@ class AppRoutes {
       name: RoutesName.paymentScreen,
       page: () => PaymentScreen(),
       binding: PaymentBindings(),
+      name: RoutesName.preferenceScreen,
+      page: () => PreferenceScreen(),
+      binding: PreferenceBindings(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: RoutesName.appearanceScreen,
+      page: () => AppearanceScreen(),
+      binding: AppearanceBindings(),
       transition: Transition.rightToLeft,
     ),
   ];

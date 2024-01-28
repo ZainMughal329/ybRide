@@ -4,4 +4,7 @@ import 'package:yb_ride/screens/settings/pages/profile/inded.dart';
 
 class ProfileController extends GetxController {
   final state = ProfileState();
+  void onFocusChange(bool value) {
+    state.focused.value = value;
+  }
 }
