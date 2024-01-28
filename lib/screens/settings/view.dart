@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/screens/settings/pages/payment_method/view.dart';
 import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/onBoarding/inded.dart';
 import 'package:yb_ride/screens/settings/controller.dart';
@@ -51,6 +51,9 @@ class SettingsView extends GetView<SettingsController> {
                 SizedBox(
                   height: mq.height * .02,
                 ),
+                _buildListTile('Saved payment methods', FontAwesomeIcons.wallet, Icons.arrow_forward_ios,(){
+                  PersistentNavBarNavigator.pushNewScreen(context, screen: PaymentScreen(),withNavBar: true);
+                }),
                 _buildListTile('Saved payment methods', FontAwesomeIcons.wallet,
                     Icons.arrow_forward_ios, () {}),
                 SizedBox(

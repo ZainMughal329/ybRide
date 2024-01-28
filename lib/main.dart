@@ -64,10 +64,12 @@ class MyApp extends StatelessWidget {
               ? ThemeMode.light
               : ThemeMode.dark,
 
+      
           initialRoute: RoutesName.splashScreen,
           getPages: AppRoutes.routes,
         );
       }
+
     );
   }
 }
