@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../main.dart';
@@ -8,12 +9,14 @@ class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
   final IconData? leadingIcon;
   final String centerTitle;
   final IconData? trailingIcon;
+  final VoidCallback? leadingPress;
+  final VoidCallback? trailingPress;
   final bool isLeading;
 
   CustomAppBarWidget({
     this.leadingIcon,
     required this.centerTitle,
-    this.trailingIcon, required this.isLeading,
+    this.trailingIcon, required this.isLeading, this.leadingPress, this.trailingPress,
   });
 
   @override
@@ -38,9 +41,7 @@ class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
           children: [
             isLeading ? IconButton(
               icon: Icon(leadingIcon,size: 18,),
-              onPressed: () {
-                // Handle leading icon press
-              },
+              onPressed: leadingPress,
             ) : Container(),
             SizedBox(
               width: mq.width * .02,
@@ -57,9 +58,7 @@ class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
             ),
             IconButton(
               icon: Icon(trailingIcon),
-              onPressed: () {
-                // Handle trailing icon press
-              },
+              onPressed: trailingPress,
             ),
           ],
         ),

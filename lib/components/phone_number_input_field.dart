@@ -1,20 +1,25 @@
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/screens/settings/pages/profile/controller.dart';
 
 
 
-Widget PhoneNumberField(CountryCode code, Function changeCountry,TextEditingController phone,bool isFocus , VoidCallback onPress) {
+Widget PhoneNumberField(CountryCode code, Function changeCountry,TextEditingController phone,bool isFocus , Function onPress) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
     child: InkWell(
+        onFocusChange: (value) {
+          final con = Get.put(ProfileController());
+          con.onFocusChange(value ?? false);
+        },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-
-
           Container(
             height: 65,
             width: double.infinity,
@@ -70,7 +75,6 @@ Widget PhoneNumberField(CountryCode code, Function changeCountry,TextEditingCont
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       child: TextFormField(
-                        onTap: onPress,
                         controller: phone,
                         textInputAction: TextInputAction.done,
                         keyboardType: TextInputType.phone,
