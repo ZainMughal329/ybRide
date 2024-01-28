@@ -10,6 +10,8 @@ import 'package:yb_ride/screens/pages/invite_page/inded.dart';
 import 'package:yb_ride/screens/session/login/inded.dart';
 import 'package:yb_ride/screens/session/signUp/inded.dart';
 import 'package:yb_ride/screens/session/welcome.dart';
+import 'package:yb_ride/screens/settings/pages/prefrences/apperence/inded.dart';
+import 'package:yb_ride/screens/settings/pages/prefrences/inded.dart';
 // <<<<<<< HEAD
 import 'package:yb_ride/screens/splash/bindings.dart';
 import 'package:yb_ride/screens/splash/view.dart';
@@ -27,7 +29,7 @@ class AppRoutes {
     ),
     GetPage(
       name: RoutesName.onBoardingScreen,
-      page: () => OnBoardingScreen(),
+      page: () => OnBoardingScreen(isOnboarding: true,),
       binding: onBoardingBindings(),
       transition: Transition.rightToLeft,
     ),
@@ -84,6 +86,18 @@ class AppRoutes {
       name: RoutesName.profileScreen,
       page: () => ProfileScreen(),
       binding: ProfileBindings(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: RoutesName.preferenceScreen,
+      page: () => PreferenceScreen(),
+      binding: PreferenceBindings(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: RoutesName.appearanceScreen,
+      page: () => AppearanceScreen(),
+      binding: AppearanceBindings(),
       transition: Transition.rightToLeft,
     ),
   ];
