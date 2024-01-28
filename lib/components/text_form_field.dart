@@ -10,6 +10,7 @@ class ReuseableTextField extends StatelessWidget {
   final TextEditingController contr;
   final bool readOnly;
   final void Function(String)? onChange;
+  final Icon? prefixIcon;
 
   ReuseableTextField({
     super.key,
@@ -20,6 +21,7 @@ class ReuseableTextField extends StatelessWidget {
     required this.obsecure,
     this.onChange,
     this.readOnly = false,
+    this.prefixIcon,
 
     //
   });
@@ -47,6 +49,7 @@ class ReuseableTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(),
           ),
+          prefixIcon: prefixIcon,
           enabled: true,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),

@@ -56,16 +56,23 @@ dependencies:
 
   #  extra icons
   ionicons: ^0.2.2
-
+#icons
   font_awesome_flutter:
-
+# bottom navigation bar
   persistent_bottom_nav_bar:
 
-
+# shared prefrences
   shared_preferences:
-
+# country code picker
   fl_country_code_picker:
+# internet connectivity
+  http: ^1.2.0
 
+#   to get the id of mobile device
+  uuid: ^4.3.3
+
+#  to convert place into latLang
+  geocoding: ^2.1.1
 
 
 
