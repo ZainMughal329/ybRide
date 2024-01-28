@@ -17,5 +17,9 @@ class RoutesName {
 
 //   setting routes
   static final profileScreen = '/profileScreen';
+  static final paymentScreen = '/paymentScreen';
+  static final preferenceScreen = '/preferenceScreen';
+  static final appearanceScreen = '/appearanceScreen';
+
 
 }

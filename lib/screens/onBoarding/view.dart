@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/helper/shared_pref.dart';
@@ -11,7 +12,9 @@ import '../../main.dart';
 import 'controller.dart';
 
 class OnBoardingScreen extends GetView<OnBoardingController> {
-  const OnBoardingScreen({super.key});
+  final bool isOnboarding;
+
+  const OnBoardingScreen({required this.isOnboarding, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,27 +26,28 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
       onBoard(
           title: 'Rental cars delivered to your door',
           subtittle: 'The easiest way to rent a car',
-          image: '3'),
+          image: 'logo1.jpeg'),
       onBoard(
           title: 'Tell us where and when',
           subtittle:
               'Reserve a new, clean car and a driver will bring it to your, whenever you need it.',
-          image: '2'),
+          image: '2.png'),
       onBoard(
           title: 'We deliver car with love',
           subtittle:
               "Let's face it... Picking up a rental car is painful so don't do it, Reserve a ybride, a driver will bring it to you, on demand",
-          image: '01'),
+          image: '4.jpeg'),
+
+      onBoard(
+          title: 'We fuel up for you',
+          subtittle:
+          "It's your adventure! No need to refuel your car before you return it. We'll fuel up for you at transparent rates! No hidden fees. ",
+          image: '7.png'),
       onBoard(
           title: 'We pick up YBCars',
           subtittle:
               "When you're done! A driver\n will pick up the car from a location of your choice",
-          image: '3'),
-      onBoard(
-          title: 'We fuel up for you',
-          subtittle:
-              "It's your adventure! No need to refuel your car before you return it. We'll fuel up for you at transparent rates! No hidden fees. ",
-          image: '3'),
+          image: '3.png'),
     ];
     mq = MediaQuery.sizeOf(context);
     return Scaffold(
@@ -51,7 +55,7 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
         controller: c,
           itemCount: list.length,
           itemBuilder: (ctx, ind) {
-            final isLast =ind==list.length - 1;
+            final isLast = ind == list.length - 1;
             return Stack(
               children: [
                 Column(
@@ -61,7 +65,7 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
                       padding: EdgeInsets.only(top: mq.height * .09),
                       child: Image(
                           image: AssetImage(
-                              'assets/images/${list[ind].image}.png'),
+                              'assets/images/${list[ind].image}'),
                           height: mq.height * .3,
                           width: mq.width * .5),
                     ),
@@ -86,8 +90,10 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
                             title: list[ind].subtittle,
                             fontWeight: FontWeight.w600,
                             fontSize: 14,
-                            maxLines: ind==3?null:3,
-                            overflow: ind==3?TextOverflow.visible:TextOverflow.ellipsis,
+                            maxLines: ind == 3 ? null : 3,
+                            overflow: ind == 3
+                                ? TextOverflow.visible
+                                : TextOverflow.ellipsis,
                           )),
                     ),
                     Spacer(),
@@ -96,52 +102,65 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
                 SizedBox(
                   height: mq.height * .06,
                 ),
-                 Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Wrap(
-                          spacing: 5,
-                          children: List.generate(
-                              list.length,
-                              (i) => Container(
-                                    width: 8,
-                                    height: 8,
-                                    decoration: BoxDecoration(
-                                        color: i == ind
-                                            ? AppColors.buttonColor
-                                            : Colors.grey,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                  )),
-                        ),
-                        SizedBox(
-                          height: mq.height * .02,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: mq.width * .02, right: mq.width * .02),
-                          child: RoundButton(
-                              title:isLast ?'Finish':
-                              'Next',
-                              onPress: () {
-                                if(isLast){
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Wrap(
+                      spacing: 5,
+                      children: List.generate(
+                          list.length,
+                          (i) => Container(
+                                width: 8,
+                                height: 8,
+                                decoration: BoxDecoration(
+                                    color: i == ind
+                                        ? AppColors.buttonColor
+                                        : Colors.grey,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                              )),
+                    ),
+                    SizedBox(
+                      height: mq.height * .02,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: mq.width * .02, right: mq.width * .02),
+                      child: RoundButton(
+                        title: isLast ? 'Finish' : 'Next',
+                        onPress: isOnboarding
+                            ? () {
+                                if (isLast) {
                                   Pref().setIsFirstOpen(true);
                                   Get.offNamed(RoutesName.welcomeScreen);
-
-                                }else{
+                                } else {
                                   c.nextPage(
                                       duration: Duration(milliseconds: 600),
                                       curve: Curves.ease);
                                 }
-
-
-                              }),
+                              }
+                            : () {
+                                Get.back();
+                              },
+                      ),
+                    ),
+                    SizedBox(
+                      height: mq.height * .04,
+                    ),
+                  ],
+                ),
+                isOnboarding
+                    ? SizedBox()
+                    : Positioned(
+                        top: 20,
+                        left: 20,
+                        child: InkWell(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: FaIcon(FontAwesomeIcons.xmark),
                         ),
-                        SizedBox(
-                          height: mq.height * .04,
-                        ),
-                      ],
-                    )
+                      ),
               ],
             );
           }),
@@ -152,5 +171,6 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
 class onBoard {
   final String title, subtittle;
   final String image;
+
   onBoard({required this.title, required this.subtittle, required this.image});
 }

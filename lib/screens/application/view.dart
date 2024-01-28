@@ -82,8 +82,7 @@ class ApplicationView extends StatelessWidget {
       ),
     ];
 
-    var navScreens = [
-
+    var navScreens = <Widget>[
       BookNowView(),
       TripScreen(),
       InviteScreen(),
@@ -93,7 +92,7 @@ class ApplicationView extends StatelessWidget {
 
     return PersistentTabView(
       context,
-      controller: PersistentTabController(initialIndex: 0),
+      controller: PersistentTabController(initialIndex: 4),
       screens: navScreens,
       items: navBarItems,
       confineInSafeArea: true,
