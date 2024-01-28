@@ -5,14 +5,14 @@ class CreditCardModel {
   final String cvc;
   String? id;
   final String expiryDate;
-  final String cardHolderName;
+  final String zipCode;
 
   CreditCardModel({
     required this.number,
     required this.cvc,
     this.id = '',
     required this.expiryDate,
-    required this.cardHolderName,
+    required this.zipCode,
   });
 
   toJson() {
@@ -21,7 +21,7 @@ class CreditCardModel {
       'number': number,
       'cvc': cvc,
       'expiryDate': expiryDate,
-      'zipCode' : cardHolderName,
+      'zipCode' : zipCode,
     };
   }
 
@@ -34,7 +34,7 @@ class CreditCardModel {
       cvc: json["cvc"],
       number: json["number"],
       expiryDate: json["expiryDate"],
-      cardHolderName : json['zipCode'],
+      zipCode : json['zipCode'],
     );
   }
 }

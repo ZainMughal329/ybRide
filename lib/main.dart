@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
               : controller.currentTheme.value == AppTheme.Light
               ? ThemeMode.light
               : ThemeMode.dark,
-          initialRoute: RoutesName.splashScreen,
+          initialRoute: RoutesName.applicationScreen,
           getPages: AppRoutes.routes,
         );
       }

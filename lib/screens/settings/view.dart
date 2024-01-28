@@ -14,6 +14,7 @@ import 'package:yb_ride/screens/settings/pages/profile/view.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../components/custom_Appbar.dart';
 import '../../main.dart';
+import 'package:get/get.dart';
 
 class SettingsView extends GetView<SettingsController> {
   const SettingsView({super.key});
@@ -54,8 +55,7 @@ class SettingsView extends GetView<SettingsController> {
                 _buildListTile('Saved payment methods', FontAwesomeIcons.wallet, Icons.arrow_forward_ios,(){
                   PersistentNavBarNavigator.pushNewScreen(context, screen: PaymentScreen(),withNavBar: true);
                 }),
-                _buildListTile('Saved payment methods', FontAwesomeIcons.wallet,
-                    Icons.arrow_forward_ios, () {}),
+
                 SizedBox(
                   height: mq.height * .02,
                 ),
