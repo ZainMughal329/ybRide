@@ -67,6 +67,9 @@ dependencies:
   fl_country_code_picker:
 
 
+#    credit card
+  flutter_credit_card: ^4.0.1
+
 
 
 
