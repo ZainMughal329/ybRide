@@ -61,8 +61,18 @@ dependencies:
 #    credit card
   flutter_credit_card: ^4.0.1
 
+
+#  date picker
+  syncfusion_flutter_datepicker: ^24.1.47
+
+
   # for launching urls
   url_launcher: ^6.2.4
+  hive: ^4.0.0-dev.2
+  isar_flutter_libs: ^4.0.0-dev.13
+  path_provider: ^2.1.0
+
+  connectivity_plus:
 
 
 

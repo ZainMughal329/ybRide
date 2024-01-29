@@ -18,6 +18,7 @@ class HelpScreen extends GetView<HelpCon> {
     mq = MediaQuery.sizeOf(context);
 
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBgClr,
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
@@ -92,12 +93,12 @@ class HelpScreen extends GetView<HelpCon> {
               child: ListView(
                 children: [
                   SizedBox(
-                    height: mq.height * .10,
+                    height: mq.height * .15,
                   ),
                   Container(
                     padding: EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).cardBgClr,
                       border: Border.all(
                           color: AppColors.dotColor
                       ),
@@ -120,6 +121,7 @@ class HelpScreen extends GetView<HelpCon> {
                             textSize: 14,
                             fontWeight: FontWeight.w500,
                             iconData: Icons.message,
+
                             iconColor: AppColors.buttonColor,
 
                           ),
@@ -138,7 +140,7 @@ class HelpScreen extends GetView<HelpCon> {
                   SizedBox(height: mq.height * .02),
                   Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).cardBgClr,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                           color: AppColors.dotColor
@@ -157,6 +159,7 @@ class HelpScreen extends GetView<HelpCon> {
                         title: 'Send us a message',
                         fontWeight: FontWeight.w500,
                         fontSize: 15,
+                        textColor: Theme.of(context).headingColor,
                       ),
                       subtitle: SubHeadingTextWidget(
                         title: "We'll be back online in 30 minutes",
@@ -164,6 +167,7 @@ class HelpScreen extends GetView<HelpCon> {
                         fontSize: 15,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
+                        textColor: Theme.of(context).lightTextColor,
                       ),
                       trailing: Icon(
                         Icons.navigate_next,
@@ -175,7 +179,7 @@ class HelpScreen extends GetView<HelpCon> {
                   Container(
                     padding: EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).cardBgClr,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                           color: AppColors.dotColor
@@ -207,7 +211,7 @@ class HelpScreen extends GetView<HelpCon> {
                   SizedBox(height: mq.height * .02),
                   Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).cardBgClr,
                       border: Border.all(
                           color: AppColors.dotColor
                       ),
@@ -225,6 +229,7 @@ class HelpScreen extends GetView<HelpCon> {
                         title: 'Where is my Surfer?',
                         fontWeight: FontWeight.w500,
                         fontSize: 15,
+                        textColor: Theme.of(context).headingColor,
                       ),
                       subtitle: Padding(
                         padding:  EdgeInsets.only(top: mq.height*.006),
@@ -234,6 +239,7 @@ class HelpScreen extends GetView<HelpCon> {
                           fontWeight: FontWeight.w400,
                           fontSize: 15,
                           maxLines: 2,
+                          textColor: Theme.of(context).lightTextColor,
                         ),
                       ),
                     ),
@@ -241,7 +247,7 @@ class HelpScreen extends GetView<HelpCon> {
                   SizedBox(height: mq.height * .02),
                   Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).cardBgClr,
                       border: Border.all(
                           color: AppColors.dotColor
                       ),
@@ -261,6 +267,7 @@ class HelpScreen extends GetView<HelpCon> {
                         maxLines: 2,
                         fontWeight: FontWeight.w500,
                         fontSize: 15,
+                        textColor: Theme.of(context).headingColor,
                       ),
 
                       subtitle: Padding(
@@ -270,6 +277,7 @@ class HelpScreen extends GetView<HelpCon> {
                           fontWeight: FontWeight.w400,
                           fontSize: 15,
                           maxLines: 2,
+                          textColor: Theme.of(context).lightTextColor,
                         ),
                       ),
                     ),
@@ -309,7 +317,7 @@ class ReuseableRow extends StatelessWidget {
           fontWeight: fontWeight,
           fontSize: textSize,
 
-          textColor: Colors.black,
+          textColor: Theme.of(context).headingColor,
         ),
         Icon(
           iconData,

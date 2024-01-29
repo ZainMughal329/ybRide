@@ -55,6 +55,7 @@ class SharedTripsView extends GetView<SharedTripController> {
                       fontSize:  16,
                       fontWeight: FontWeight.w600,
                       textAlign: TextAlign.center,
+                      textColor: Theme.of(context).headingColor,
                       title:'No trips (yet)',
                     ),
                   ),
@@ -70,6 +71,7 @@ class SharedTripsView extends GetView<SharedTripController> {
                         title:
                         "Trips, where you have accepted and invite to be an additional driver, will show up here!",
                         fontWeight: FontWeight.w600,
+                        textColor: Theme.of(context).lightTextColor,
                         fontSize: 15,
                         maxLines:5,
                         overflow: TextOverflow.ellipsis,

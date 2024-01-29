@@ -48,14 +48,14 @@ class PreferenceScreen extends GetView<PreferenceController> {
                     PersistentNavBarNavigator.pushNewScreen(context,
                         screen: AppearanceScreen(), withNavBar: true);
                   },
-                  child: _buildTile('Appearance', 'Yes, we have a dark theme')),
+                  child: _buildTile('Appearance', 'Yes, we have a dark theme',context)),
               SizedBox(
                 height: mq.height * .03,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildTile('SMS notifications', 'For chat and trips updates'),
+                  _buildTile('SMS notifications', 'For chat and trips updates',context),
                   Obx(
                     () => _switchButtonWithOutAppSettings(
                       controller.state.smsSwitchVal.value,
@@ -74,7 +74,7 @@ class PreferenceScreen extends GetView<PreferenceController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _buildTile(
-                      'Push notifications', 'For chat and trips updates'),
+                      'Push notifications', 'For chat and trips updates',context),
                   Obx(
                     () => _switchButtonWithAppSettings(
                       controller.state.notificationSwitchVal.value,
@@ -92,7 +92,7 @@ class PreferenceScreen extends GetView<PreferenceController> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildTile('Location', 'For a better booking experience'),
+                  _buildTile('Location', 'For a better booking experience',context),
                   Obx(
                     () => _switchButtonWithAppSettings(
                         controller.state.locationSwitchVal.value, (value) {
@@ -108,16 +108,17 @@ class PreferenceScreen extends GetView<PreferenceController> {
     );
   }
 
-  Widget _buildTile(String title, String subTitle) {
+  Widget _buildTile(String title, String subTitle,BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        HeadingTextWidget(title: title),
+        HeadingTextWidget(title: title,textColor: Theme.of(context).headingColor),
         SizedBox(
           height: mq.height * .01,
         ),
         SubHeadingTextWidget(
           title: subTitle,
+          textColor: Theme.of(context).lightTextColor,
           fontWeight: FontWeight.w600,
         ),
       ],

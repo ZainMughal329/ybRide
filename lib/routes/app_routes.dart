@@ -16,6 +16,7 @@ import 'package:yb_ride/screens/settings/pages/payment_method/bindings.dart';
 import 'package:yb_ride/screens/settings/pages/payment_method/view.dart';
 import 'package:yb_ride/screens/settings/pages/prefrences/apperence/inded.dart';
 import 'package:yb_ride/screens/settings/pages/prefrences/inded.dart';
+import 'package:yb_ride/screens/settings/pages/ybcar_surfer/inded.dart';
 import 'package:yb_ride/screens/splash/bindings.dart';
 import 'package:yb_ride/screens/splash/view.dart';
 import 'package:yb_ride/screens/settings/pages/profile/inded.dart';
@@ -104,6 +105,11 @@ class AppRoutes {
       name: RoutesName.appearanceScreen,
       page: () => AppearanceScreen(),
       binding: AppearanceBindings(),
+      transition: Transition.rightToLeft,
+    ),    GetPage(
+      name: RoutesName.surferScreen,
+      page: () => SurferScreen(),
+      binding: SurferBindings(),
       transition: Transition.rightToLeft,
     ),
 

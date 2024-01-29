@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../../components/heading_text_widget.dart';
 import '../../../../../components/reuseable_button.dart';
@@ -32,6 +33,7 @@ class MyTripsView extends StatelessWidget {
                 fontSize:  16,
                 fontWeight: FontWeight.w600,
                 textAlign: TextAlign.center,
+                textColor: Theme.of(context).headingColor,
                 title:'No trips (yet)',
               ),
             ),
@@ -47,6 +49,7 @@ class MyTripsView extends StatelessWidget {
                   title:
                   "You haven't booked YBCars yet. How about doing so for your next adventure?",
                   fontWeight: FontWeight.w600,
+                  textColor: Theme.of(context).lightTextColor,
                   fontSize: 14,
                   maxLines:5,
                   overflow: TextOverflow.ellipsis,

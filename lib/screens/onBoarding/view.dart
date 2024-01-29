@@ -21,6 +21,8 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
     OnBoardingController controller =
         Get.put<OnBoardingController>(OnBoardingController());
 
+
+
     final c = PageController();
     final list = [
       onBoard(
@@ -51,6 +53,7 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
     ];
     mq = MediaQuery.sizeOf(context);
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBgClr,
       body: PageView.builder(
         controller: c,
           itemCount: list.length,
@@ -76,6 +79,7 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
                           fontSize: ind == 0 ? 23 : 20,
                           textAlign: TextAlign.center,
                           title: list[ind].title,
+                            textColor: AppColors.headingColor
                         ),
                       ),
                     ),
@@ -89,6 +93,7 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
                             textAlign: TextAlign.center,
                             title: list[ind].subtittle,
                             fontWeight: FontWeight.w600,
+                            textColor: AppColors.textColor,
                             fontSize: 14,
                             maxLines: ind == 3 ? null : 3,
                             overflow: ind == 3
