@@ -19,16 +19,26 @@ void getSuggestions(
   String request =
       '$baseURL?input=$input&key=$kPLACES_API_KEY&sessiontoken=$sessionToken';
 
-  var response = await http.get(Uri.parse(request));
+  state.searchLoading.value==true;
+  var response = await http.get(Uri.parse(request)).then((response){
+    if (response.statusCode == 200) {
+      List predictions = jsonDecode(response.body.toString())['predictions'];
+      List bostonPredictions = predictions.where((prediction) {
+        return prediction['description'].toLowerCase().contains('boston');
+      }).toList();
 
-  if (response.statusCode == 200) {
-    state.searchLoading.value = false;
-    cont.state.placeList.value =
-    jsonDecode(response.body.toString())['predictions'];
-    // print(jsonDecode(response.body.toString())['predictions'].toString());
-  }else{
-    state.searchLoading.value = true;
-  }
+      state.results.value = bostonPredictions.length;
+      cont.state.placeList.value =
+          cont.state.placeList.value = bostonPredictions;
+      state.searchLoading.value==false;
+    }else{
+      state.searchLoading.value = false;
+    }
+  }).onError((error, stackTrace){
+    state.searchLoading.value==true;
+  });
+
+
 }
 
  void GetCoordinates(BuildContext context)async{
@@ -36,22 +46,26 @@ void getSuggestions(
   if(coordinates.isNotEmpty){
     final lat = coordinates.first;
     state.loc.value = LatLng(lat.latitude, lat.longitude);
-    state.mapController?.animateCamera(
-      // CameraUpdate.newLatLngZoom(state.loc.value, 15.0),
-    CameraUpdate.newCameraPosition(CameraPosition(target: state.loc.value),),
-    );
-    // animationOfCamera(state.loc.value);
+    animationOfCamera(state.loc.value);
+
   }
-
-
-
  }
 
  void animationOfCamera(LatLng val){
-  // print("animationCmaer"+val.toString());
-  //  state.mapController?.animateCamera(CameraUpdate.newLatLngZoom(val, 15.0));
-   // updateMarker(latLng);
+   state.mapController?.animateCamera(
+     CameraUpdate.newCameraPosition(CameraPosition(target: val,zoom: 12,),),
+   );
+   update();
  }
+
+void GetCoordinatesofReturn(BuildContext context)async{
+  List<Location> coordinates = await locationFromAddress(state.returnPlace.toString());
+  if(coordinates.isNotEmpty){
+    final lat = coordinates.first;
+    state.returnLoc.value = LatLng(lat.latitude, lat.longitude);
+
+  }
+}
 
 
 }

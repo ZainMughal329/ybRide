@@ -10,10 +10,19 @@ class BookNowState {
   final locationSearchController = TextEditingController();
   Uuid? uuid ;
   String? sessionToken;
+
+  RxBool searchLoading = false.obs;
+
+  GoogleMapController? mapController;
+  RxInt results = 0.obs;
+  RxDouble heightOfSheet = 0.0.obs;
+
+
+  //location variables
   RxList placeList = [].obs;
   RxString selectedPlace = 'Tap to Search'.obs;
-  RxBool searchLoading = false.obs;
+  RxString returnPlace = 'Return Place'.obs;
   final loc = LatLng(42.361145, -71.057083).obs;
-  GoogleMapController? mapController;
-
+  final returnLoc = LatLng(0, 0).obs;
+  // 42.361145, -71.057083
 }

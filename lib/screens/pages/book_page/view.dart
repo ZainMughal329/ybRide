@@ -12,27 +12,28 @@ import 'package:yb_ride/main.dart';
 import 'package:yb_ride/screens/pages/book_page/widget/1st_bottom_sheet.dart';
 import 'package:yb_ride/screens/pages/book_page/controller.dart';
 
-class BookNowView extends GetView<BookViewController> {
+class BookNowView extends StatelessWidget {
   BookNowView({Key? key}) : super(key: key);
-  final con = BookViewController();
+  final cont = Get.put(BookViewController());
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-         Obx((){
-           return GoogleMap(
-             onMapCreated: (con){
-               controller.state.mapController = con;
-             },
-             initialCameraPosition: CameraPosition(
-               target: con.state.loc.value,
-               zoom: 12,
-             ),
+          GetBuilder<BookViewController>(builder: (controller){
+            return GoogleMap(
+              onMapCreated: (con){
+                cont.state.mapController = con;
+              },
+              initialCameraPosition: CameraPosition(
+                target: cont.state.loc.value,
+                zoom: 12,
+              ),
 
-           );
-         }),
+            );
+          }),
           SafeArea(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -67,7 +68,7 @@ class BookNowView extends GetView<BookViewController> {
                         child: RoundButton(
                           title: 'Start Searching',
                           onPress: () {
-                            firstBottomSheet(context,con);
+                            firstBottomSheet(context,cont);
                           },
                         ),
                       ),
