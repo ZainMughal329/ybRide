@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/application/inded.dart';
 import 'package:yb_ride/screens/onBoarding/inded.dart';
+import 'package:yb_ride/screens/pages/Checkout/bindings.dart';
+import 'package:yb_ride/screens/pages/Checkout/view.dart';
 import 'package:yb_ride/screens/pages/book_page/bindings.dart';
 import 'package:yb_ride/screens/pages/book_page/inded.dart';
 import 'package:yb_ride/screens/pages/help_page/bindings.dart';
@@ -104,5 +106,16 @@ class AppRoutes {
       binding: AppearanceBindings(),
       transition: Transition.rightToLeft,
     ),
+
+
+  //   checkOut Screen
+
+    GetPage(
+      name: RoutesName.checkOutScreen,
+      page: () => CheckOutScreen(),
+      binding: CheckOutBindings(),
+      transition: Transition.rightToLeft,
+    ),
+
   ];
 }

@@ -3,14 +3,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
 import 'package:yb_ride/components/text_form_field.dart';
 import 'package:yb_ride/screens/settings/pages/payment_method/controller.dart';
 import '../../../../components/custom_Appbar.dart';
 import '../../../../main.dart';
-import '../../../../models/creditCart.dart';
 class CreditCardScreen extends GetView<PaymentCon> {
   bool isLightTheme = false;
   bool useGlassMorphism = false;
@@ -71,6 +69,12 @@ class CreditCardScreen extends GetView<PaymentCon> {
                         textInputAction: TextInputAction.next,
                         obsecure: false,
                         keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          LengthLimitingTextInputFormatter(5),
+                          ExpiryDateInputFormatter(),
+                        ],
+
                       ),
                     ),
                   ),
@@ -87,9 +91,6 @@ class CreditCardScreen extends GetView<PaymentCon> {
                       ) ,
                     ),
                   ),
-
-
-
                 ],
               ),
               Container(
@@ -113,13 +114,108 @@ class CreditCardScreen extends GetView<PaymentCon> {
                     controller.state.cvc.text.trim(),
                 );
               })
-
             ]
         ),
       ),
     );
   }
 }
+
+class ExpiryDateInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue,
+      TextEditingValue newValue,
+      ) {
+    final text = newValue.text;
+
+    if (text.length == 3 && !text.contains('/')) {
+      return TextEditingValue(
+        text: '${text.substring(0, 2)}/${text.substring(2)}',
+        selection: TextSelection.collapsed(offset: 3),
+      );
+    } else if (text.length == 4) {
+      final month = text.substring(0, 2);
+      final year = text.substring(2);
+      if (int.tryParse(year) == null || !isValidExpiryDate(month, year)) {
+        // Handle non-numeric input for the year or invalid expiry date
+        return oldValue;
+      }
+      return TextEditingValue(
+        text: '$month/$year',
+        selection: TextSelection.collapsed(offset: 4),
+      );
+    }
+
+    return newValue;
+  }
+
+  bool isValidExpiryDate(String month, String year) {
+    final currentYear = DateTime.now().year % 100;
+    final enteredYear = int.tryParse(year) ?? 0;
+
+    return enteredYear > currentYear || (enteredYear == currentYear && monthValid(month));
+  }
+
+  bool monthValid(String month) {
+    final intMonth = int.tryParse(month) ?? 0;
+    return intMonth >= 1 && intMonth <= 12;
+  }
+}
+
+
+// class ExpiryDateInputFormatter extends TextInputFormatter {
+//   @override
+//   TextEditingValue formatEditUpdate(
+//       TextEditingValue oldValue,
+//       TextEditingValue newValue,
+//       ) {
+//     final text = newValue.text;
+//
+//     if (text.length == 3 && !text.contains('/')) {
+//       return TextEditingValue(
+//         text: '${text.substring(0, 2)}/${text.substring(2)}',
+//         selection: TextSelection.collapsed(offset: 3),
+//       );
+//     } else if (text.length == 4) {
+//       return TextEditingValue(
+//         text: '${text.substring(0, 2)}/${text.substring(2, 4)}',
+//         selection: TextSelection.collapsed(offset: 4),
+//       );
+//     }
+//
+//     return newValue;
+//   }
+// }
+
+
+
+// class ExpiryDateInputFormatter extends TextInputFormatter {
+//   @override
+//   TextEditingValue formatEditUpdate(
+//       TextEditingValue oldValue,
+//       TextEditingValue newValue,
+//       ) {
+//     // Handle backspace
+//     if (newValue.text.length < oldValue.text.length) {
+//       return newValue;
+//     }
+//
+//     var text = newValue.text;
+//
+//     if (text.length == 2) {
+//       text += '/';
+//     }
+//
+//     return TextEditingValue(
+//       text: text,
+//       selection: TextSelection.collapsed(offset: text.length),
+//     );
+//   }
+// }
+
+
+
   //Column(
 //               crossAxisAlignment: CrossAxisAlignment.end,
 //               children: <Widget>[

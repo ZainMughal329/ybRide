@@ -1,3 +1,5 @@
+import 'package:yb_ride/screens/pages/Checkout/index.dart';
+
 class RoutesName {
 
   // session routes
@@ -20,6 +22,12 @@ class RoutesName {
   static final paymentScreen = '/paymentScreen';
   static final preferenceScreen = '/preferenceScreen';
   static final appearanceScreen = '/appearanceScreen';
+
+
+// checkOut
+  static final checkOutScreen = '/checkOutScreen';
+
+
 
 
 }
