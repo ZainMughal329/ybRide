@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../helper/app_colors.dart';
 import '../main.dart';
 
 class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
@@ -26,7 +27,7 @@ class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white, // Set your preferred background color
+        color: Theme.of(context).appBarColor, // Set your preferred background color
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2), // Set shadow color
@@ -52,7 +53,7 @@ class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
                 style: GoogleFonts.openSans(
                   fontWeight: FontWeight.w700,
                   fontSize: 18,
-                  color: Colors.black
+                  color: Theme.of(context).headingColor,
                 ),
               ),
             ),

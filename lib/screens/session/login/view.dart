@@ -17,6 +17,7 @@ class LoginScreen extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBgClr,
       body: SingleChildScrollView(
         child: Column(
           children: [
