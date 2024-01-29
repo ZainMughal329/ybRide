@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/helper/prefs.dart';
 import 'package:yb_ride/routes/app_routes.dart';
 import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/settings/pages/prefrences/apperence/controller.dart';
@@ -13,6 +14,9 @@ late Size mq;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Pref.init();
+  Pref.initialize();
+
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]
@@ -33,43 +37,54 @@ class MyApp extends StatelessWidget {
 
 
     mq = MediaQuery.sizeOf(context);
-    final controller = Get.put(AppearanceController());
-    return GetBuilder<AppearanceController>(
-        builder: (controller) {
-        return GetMaterialApp(
-          title: 'Flutter Demo',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
+    return GetMaterialApp(
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
 
-            appBarTheme: AppBarTheme(
-              elevation: 3,
-              centerTitle: false,
-              backgroundColor: Colors.transparent,
+        appBarTheme: AppBarTheme(
+          elevation: 3,
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
 
-              iconTheme: IconThemeData(
-                color: Colors.black,
-              ),
-              shadowColor: Colors.black54,
-              titleTextStyle: GoogleFonts.openSans(
-                color: AppColors.headingColor,
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+          iconTheme: IconThemeData(
+            color: Colors.black,
           ),
-          darkTheme: ThemeData.dark(),
-          themeMode: controller.currentTheme.value == AppTheme.System
-              ? ThemeMode.system
-              : controller.currentTheme.value == AppTheme.Light
-              ? ThemeMode.light
-              : ThemeMode.dark,
+          shadowColor: Colors.black54,
+          titleTextStyle: GoogleFonts.openSans(
+            color: AppColors.headingColor,
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
+      darkTheme: ThemeData.dark(),
+      themeMode: Pref.defaultTheme(),
 
-      
-          initialRoute: RoutesName.splashScreen,
-          getPages: AppRoutes.routes,
-        );
-      }
 
+      initialRoute: RoutesName.splashScreen,
+      getPages: AppRoutes.routes,
     );
   }
+}
+
+
+extension AppTheme on ThemeData {
+
+  Color get lightTextColor => brightness == Brightness.dark ? Colors.white70 : Color(0xff606060);
+
+  Color get headingColor => brightness == Brightness.dark ? Colors.white : Colors.black;
+
+  Color get appBarColor => brightness == Brightness.dark ? Colors.grey.shade900 : Colors.white;
+
+  Color get nonActiveTextFieldColor => brightness == Brightness.dark ? Colors.white : Colors.black;
+
+  Color get detailsIconColor => brightness == Brightness.dark ? Colors.white : Colors.black;
+
+  Color get navBarColor => brightness == Brightness.dark ? Colors.grey.shade900 : Colors.white;
+
+  Color get scaffoldBgClr => brightness == Brightness.dark ? Colors.grey.shade900 : Colors.white;
+
+  Color get cardBgClr => brightness == Brightness.dark ? Colors.grey.shade900 : Colors.white;
+
 }

@@ -43,8 +43,8 @@ class PaymentScreen extends GetView<PaymentCon> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SubHeadingTextWidget(title: 'Your credits',fontWeight: FontWeight.w600,),
-                  SubHeadingTextWidget(title: '\$0.00')
+                  SubHeadingTextWidget(title: 'Your credits',fontWeight: FontWeight.w600,textColor: Theme.of(context).lightTextColor,),
+                  SubHeadingTextWidget(title: '\$0.00',textColor: Theme.of(context).lightTextColor)
                 ],
               )
             ],

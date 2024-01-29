@@ -17,4 +17,14 @@ class SettingsController extends GetxController {
       log( 'Could not launch $url');
     }
   }
+
+  Future<void> launchTwitter() async {
+    print('object');
+    final url = state.twitterUrl;
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url),);
+    } else {
+      log( 'Could not launch $url');
+    }
+  }
 }

@@ -5,11 +5,12 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/main.dart';
 import 'package:yb_ride/screens/settings/pages/profile/controller.dart';
 
 
 
-Widget PhoneNumberField(CountryCode code, Function changeCountry,TextEditingController phone,bool isFocus , Function onPress) {
+Widget PhoneNumberField(CountryCode code, Function changeCountry,TextEditingController phone,bool isFocus , Function onPress,BuildContext context) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
     child: InkWell(
@@ -58,7 +59,7 @@ Widget PhoneNumberField(CountryCode code, Function changeCountry,TextEditingCont
                             ),
                             Icon(
                               Icons.keyboard_arrow_down_outlined,
-                              color: Colors.black.withOpacity(0.4),
+                              color: Theme.of(context).lightTextColor,
                             )
                           ],
                         ),
@@ -68,7 +69,7 @@ Widget PhoneNumberField(CountryCode code, Function changeCountry,TextEditingCont
                   Container(
                     height: 45,
                     width: 1,
-                    color: Colors.black.withOpacity(0.1),
+                    color: Theme.of(context).lightTextColor,
                   ),
                   Expanded(
                     flex: 3,
