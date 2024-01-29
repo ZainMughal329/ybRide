@@ -20,7 +20,7 @@ import 'package:http/http.dart' as http;
 
 import '../../../../main.dart';
 
-Future largeBottomSheet(BuildContext context, BookViewController cont) {
+Future returnBottomSheet(BuildContext context, BookViewController cont) {
   cont.state.uuid = Uuid();
   cont.state.locationSearchController.addListener(() {
     if (cont.state.sessionToken == null) {
@@ -93,7 +93,7 @@ Future largeBottomSheet(BuildContext context, BookViewController cont) {
                   ),
                   Flexible(
                     child: HeadingTextWidget(
-                      title: 'Delivery & return location',
+                      title: 'Return location',
                       fontWeight: FontWeight.w600,
                       fontSize: 19,
                       textColor: AppColors.headingColor,
@@ -129,39 +129,39 @@ Future largeBottomSheet(BuildContext context, BookViewController cont) {
                 ),
               )
                   : Expanded(
-                      child: cont.state.searchLoading.value
+                child: cont.state.searchLoading.value
+                    ? Container()
+                    : ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                    itemCount: cont.state.placeList.length,
+                    itemBuilder: (context, index) {
+                      return cont.state.placeList.length == 0
                           ? Container()
-                          : ListView.builder(
-                              physics: BouncingScrollPhysics(),
-                              itemCount: cont.state.placeList.length,
-                              itemBuilder: (context, index) {
-                                return cont.state.placeList.length == 0
-                                    ? Container()
-                                    : ListTile(
-                                        title: Text(cont.state
-                                            .placeList[index]['description']
-                                            .toString()),
-                                        subtitle: Text(cont
-                                            .state
-                                            .placeList[index]
-                                                ['structured_formatting']
-                                                ['secondary_text']
-                                            .toString()),
-                                        onTap: () {
-                                          cont.state.selectedPlace.value = cont
-                                              .state
-                                              .placeList[index]['description']
-                                              .toString();
+                          : ListTile(
+                        title: Text(cont.state
+                            .placeList[index]['description']
+                            .toString()),
+                        subtitle: Text(cont
+                            .state
+                            .placeList[index]
+                        ['structured_formatting']
+                        ['secondary_text']
+                            .toString()),
+                        onTap: () {
+                          cont.state.returnPlace.value = cont
+                              .state
+                              .placeList[index]['description']
+                              .toString();
 
-                                          cont.GetCoordinates(context);
-                                          cont.state.locationSearchController
-                                              .clear();
-                                          cont.state.placeList.clear();
-                                          Navigator.pop(context);
-                                        },
-                                      );
-                              }),
-                    );
+                          cont.GetCoordinatesofReturn(context);
+                          cont.state.locationSearchController
+                              .clear();
+                          cont.state.placeList.clear();
+                          Navigator.pop(context);
+                        },
+                      );
+                    }),
+              );
             }),
           ],
         ),
