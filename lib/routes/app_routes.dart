@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/application/inded.dart';
 import 'package:yb_ride/screens/onBoarding/inded.dart';
+import 'package:yb_ride/screens/pages/Checkout/bindings.dart';
+import 'package:yb_ride/screens/pages/Checkout/view.dart';
 import 'package:yb_ride/screens/pages/book_page/bindings.dart';
 import 'package:yb_ride/screens/pages/book_page/inded.dart';
 import 'package:yb_ride/screens/pages/help_page/bindings.dart';
@@ -10,7 +12,6 @@ import 'package:yb_ride/screens/pages/invite_page/inded.dart';
 import 'package:yb_ride/screens/session/login/inded.dart';
 import 'package:yb_ride/screens/session/signUp/inded.dart';
 import 'package:yb_ride/screens/session/welcome.dart';
-
 import 'package:yb_ride/screens/settings/pages/payment_method/bindings.dart';
 import 'package:yb_ride/screens/settings/pages/payment_method/view.dart';
 import 'package:yb_ride/screens/settings/pages/prefrences/apperence/inded.dart';
@@ -19,7 +20,6 @@ import 'package:yb_ride/screens/settings/pages/ybcar_surfer/inded.dart';
 import 'package:yb_ride/screens/splash/bindings.dart';
 import 'package:yb_ride/screens/splash/view.dart';
 import 'package:yb_ride/screens/settings/pages/profile/inded.dart';
-
 class AppRoutes {
   static final List<GetPage> routes = [
     GetPage(
@@ -93,9 +93,9 @@ class AppRoutes {
       name: RoutesName.paymentScreen,
       page: () => PaymentScreen(),
       binding: PaymentBindings(),
-
       transition: Transition.rightToLeft,
     ),
+
     GetPage(name: RoutesName.preferenceScreen,
       page: () => PreferenceScreen(),
       binding: PreferenceBindings(),
@@ -112,5 +112,16 @@ class AppRoutes {
       binding: SurferBindings(),
       transition: Transition.rightToLeft,
     ),
+
+
+  //   checkOut Screen
+
+    GetPage(
+      name: RoutesName.checkOutScreen,
+      page: () => CheckOutScreen(),
+      binding: CheckOutBindings(),
+      transition: Transition.rightToLeft,
+    ),
+
   ];
 }
