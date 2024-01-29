@@ -16,6 +16,7 @@ class TripScreen extends GetView<TripController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBgClr,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(mq.height * .08),
         child: CustomAppBarWidget(centerTitle: 'Trips', isLeading: false,),
@@ -26,7 +27,7 @@ class TripScreen extends GetView<TripController> {
             child: TabBar(
               indicatorSize: TabBarIndicatorSize.tab,
               tabAlignment:TabAlignment.fill,
-              labelColor: AppColors.headingColor,
+              labelColor: Theme.of(context).headingColor,
               indicatorColor: AppColors.buttonColor,
               indicator: UnderlineTabIndicator(
                 borderSide: BorderSide(width: 2.0,color: AppColors.buttonColor), // Adjust the width of the line
@@ -37,7 +38,7 @@ class TripScreen extends GetView<TripController> {
               ),
 
               indicatorPadding: EdgeInsets.all(0),
-              unselectedLabelColor: AppColors.headingColor,
+              unselectedLabelColor: Theme.of(context).headingColor,
               unselectedLabelStyle: GoogleFonts.openSans(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,

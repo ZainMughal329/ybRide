@@ -19,8 +19,11 @@ class SignupScreen extends GetView<SignUpController> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       // resizeToAvoidBottomInset: false,
+      backgroundColor: Theme.of(context).scaffoldBgClr,
+
       body: SingleChildScrollView(
         child: Column(
           children: [

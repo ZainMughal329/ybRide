@@ -4,6 +4,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/screens/settings/pages/faqs/faq_bottom_sheet.dart';
 import 'package:yb_ride/screens/settings/pages/payment_method/view.dart';
 import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/onBoarding/inded.dart';
@@ -40,7 +41,10 @@ class SettingsView extends GetView<SettingsController> {
                 SizedBox(
                   height: mq.height * .03,
                 ),
-                HeadingTextWidget(title: 'Account'),
+                HeadingTextWidget(
+                  title: 'Account',
+                  textColor: Theme.of(context).headingColor,
+                ),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -48,15 +52,15 @@ class SettingsView extends GetView<SettingsController> {
                     () {
                   PersistentNavBarNavigator.pushNewScreen(context,
                       screen: ProfileScreen(), withNavBar: true);
-                }),
+                },context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
-                _buildListTile('Saved payment methods', FontAwesomeIcons.wallet, Icons.arrow_forward_ios,(){
-                  PersistentNavBarNavigator.pushNewScreen(context, screen: PaymentScreen(),withNavBar: true);
-                }),
                 _buildListTile('Saved payment methods', FontAwesomeIcons.wallet,
-                    Icons.arrow_forward_ios, () {}),
+                    Icons.arrow_forward_ios, () {
+                  PersistentNavBarNavigator.pushNewScreen(context,
+                      screen: PaymentScreen(), withNavBar: true);
+                },context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -64,7 +68,7 @@ class SettingsView extends GetView<SettingsController> {
                     Icons.arrow_forward_ios, () {
                   PersistentNavBarNavigator.pushNewScreen(context,
                       screen: PreferenceScreen(), withNavBar: true);
-                }),
+                },context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -72,7 +76,8 @@ class SettingsView extends GetView<SettingsController> {
                 SizedBox(
                   height: mq.height * .02,
                 ),
-                HeadingTextWidget(title: 'Help'),
+                HeadingTextWidget(
+                    title: 'Help', textColor: Theme.of(context).headingColor),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -85,12 +90,14 @@ class SettingsView extends GetView<SettingsController> {
                     transition: Transition.downToUp,
                     duration: Duration(milliseconds: 500),
                   );
-                }),
+                },context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
                 _buildListTile('FAQ', FontAwesomeIcons.book,
-                    Icons.arrow_forward_ios, () {}),
+                    Icons.arrow_forward_ios, () {
+                  Get.to(faqBottomSheet(context),transition: Transition.downToUp);
+                    },context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -98,19 +105,22 @@ class SettingsView extends GetView<SettingsController> {
                 SizedBox(
                   height: mq.height * .04,
                 ),
-                HeadingTextWidget(title: 'Social'),
+                HeadingTextWidget(
+                    title: 'Social', textColor: Theme.of(context).headingColor),
                 SizedBox(
                   height: mq.height * .02,
                 ),
                 _buildListTile('Follow us on Instagram',
                     Ionicons.logo_instagram, Icons.arrow_forward_ios, () {
-                  controller.launchInstagram;
-                    }),
+                  controller.launchInstagram();
+                },context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
                 _buildListTile('Follow us on Twitter', FontAwesomeIcons.twitter,
-                    Icons.arrow_forward_ios, () {}),
+                    Icons.arrow_forward_ios, () {
+                  controller.launchTwitter();
+                    },context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -118,7 +128,8 @@ class SettingsView extends GetView<SettingsController> {
                 SizedBox(
                   height: mq.height * .04,
                 ),
-                HeadingTextWidget(title: 'Partnerships'),
+                HeadingTextWidget(
+                    title: 'Partnerships', textColor: Theme.of(context).headingColor),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -126,7 +137,9 @@ class SettingsView extends GetView<SettingsController> {
                     'Become a YBCar Surfer',
                     FontAwesomeIcons.personSnowboarding,
                     Icons.arrow_forward_ios,
-                    () {}),
+                    () {
+                      Get.toNamed(RoutesName.surferScreen);
+                    },context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -134,7 +147,7 @@ class SettingsView extends GetView<SettingsController> {
                     'Partner with us',
                     FontAwesomeIcons.handshakeSimple,
                     Icons.arrow_forward_ios,
-                    () {}),
+                    () {},context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -142,7 +155,8 @@ class SettingsView extends GetView<SettingsController> {
                 SizedBox(
                   height: mq.height * .04,
                 ),
-                HeadingTextWidget(title: 'Legal'),
+                HeadingTextWidget(
+                    title: 'Legal', textColor: Theme.of(context).lightTextColor),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -150,12 +164,12 @@ class SettingsView extends GetView<SettingsController> {
                     'Terms of service',
                     FontAwesomeIcons.bookBookmark,
                     Icons.arrow_forward_ios,
-                    () {}),
+                    () {},context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
                 _buildListTile('Privacy Policy', FontAwesomeIcons.shieldHalved,
-                    Icons.arrow_forward_ios, () {}),
+                    Icons.arrow_forward_ios, () {},context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -163,7 +177,8 @@ class SettingsView extends GetView<SettingsController> {
                 SizedBox(
                   height: mq.height * .04,
                 ),
-                HeadingTextWidget(title: 'Rate Our App'),
+                HeadingTextWidget(
+                    title: 'Rate Our App', textColor: Theme.of(context).headingColor),
                 SizedBox(
                   height: mq.height * .03,
                 ),
@@ -176,9 +191,9 @@ class SettingsView extends GetView<SettingsController> {
                 ),
                 Center(
                   child: SubHeadingTextWidget(
-                    title: "YBRide VERSION 1.0",
-                    fontWeight: FontWeight.w600,
-                  ),
+                      title: "YBRide VERSION 1.0",
+                      fontWeight: FontWeight.w600,
+                      textColor: Theme.of(context).lightTextColor),
                 ),
                 SizedBox(
                   height: mq.height * .04,
@@ -192,7 +207,7 @@ class SettingsView extends GetView<SettingsController> {
   }
 
   Widget _buildListTile(String title, IconData leadingIcon,
-      IconData trailingIcon, VoidCallback onPress) {
+      IconData trailingIcon, VoidCallback onPress,BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: mq.width * .005),
       child: InkWell(
@@ -214,6 +229,7 @@ class SettingsView extends GetView<SettingsController> {
                   SubHeadingTextWidget(
                     title: title,
                     fontWeight: FontWeight.w600,
+                    textColor: Theme.of(context).lightTextColor,
                     fontSize: 15,
                   ),
                 ],

@@ -65,7 +65,7 @@ class ProfileScreen extends GetView<ProfileController> {
                     controller.state.focused.value,
                     () {
                       controller.state.focused.value = !controller.state.focused.value;
-                    }),
+                    },context),
               ),
               Spacer(),
               RoundButton(title: 'Save', onPress: () {}),

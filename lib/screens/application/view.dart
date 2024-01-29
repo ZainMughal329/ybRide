@@ -10,7 +10,6 @@ import 'package:yb_ride/screens/pages/help_page/inded.dart';
 import 'package:yb_ride/screens/pages/invite_page/inded.dart';
 import 'package:yb_ride/screens/pages/trips_page/inded.dart';
 import 'package:yb_ride/screens/settings/inded.dart';
-
 import '../../main.dart';
 
 class ApplicationView extends StatelessWidget {
@@ -22,7 +21,7 @@ class ApplicationView extends StatelessWidget {
 
     var navBarItems = [
       PersistentBottomNavBarItem(
-        icon: returnNavBarIcon(CupertinoIcons.car_detailed),
+        icon: returnNavBarIcon(CupertinoIcons.car_detailed,context),
         title: 'Book',
         activeColorPrimary: AppColors.buttonColor,
         inactiveColorPrimary: AppColors.buttonColor,
@@ -33,7 +32,7 @@ class ApplicationView extends StatelessWidget {
         ),
       ),
       PersistentBottomNavBarItem(
-        icon: returnNavBarIcon(Icons.trip_origin),
+        icon: returnNavBarIcon(Icons.trip_origin,context),
         title: 'Trips',
         activeColorPrimary: AppColors.buttonColor,
         inactiveColorPrimary: AppColors.buttonColor,
@@ -45,7 +44,7 @@ class ApplicationView extends StatelessWidget {
 
       ),
       PersistentBottomNavBarItem(
-        icon: returnNavBarIcon(Icons.card_giftcard),
+        icon: returnNavBarIcon(Icons.card_giftcard,context),
         title: 'Invite',
         activeColorPrimary: AppColors.buttonColor,
         inactiveColorPrimary: AppColors.buttonColor,
@@ -57,7 +56,7 @@ class ApplicationView extends StatelessWidget {
 
       ),
       PersistentBottomNavBarItem(
-        icon: returnNavBarIcon(Icons.help),
+        icon: returnNavBarIcon(Icons.help,context),
         title: 'Help',
         activeColorPrimary: AppColors.buttonColor,
         inactiveColorPrimary: AppColors.buttonColor,
@@ -69,7 +68,7 @@ class ApplicationView extends StatelessWidget {
 
       ),
       PersistentBottomNavBarItem(
-        icon: returnNavBarIcon(Icons.settings),
+        icon: returnNavBarIcon(Icons.settings,context),
         title: 'Settings',
         activeColorPrimary: AppColors.buttonColor,
         inactiveColorPrimary: AppColors.buttonColor,
@@ -96,14 +95,14 @@ class ApplicationView extends StatelessWidget {
       screens: navScreens,
       items: navBarItems,
       confineInSafeArea: true,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).appBarColor,
       handleAndroidBackButtonPress: true,
       resizeToAvoidBottomInset: true,
       stateManagement: false,
       hideNavigationBarWhenKeyboardShows: true,
       decoration: NavBarDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        colorBehindNavBar: Colors.white.withOpacity(0.8),
+        colorBehindNavBar: Theme.of(context).navBarColor,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(.1),
@@ -127,10 +126,10 @@ class ApplicationView extends StatelessWidget {
       navBarStyle: NavBarStyle.style6,
     );
   }
-  Widget returnNavBarIcon(IconData icon) {
+  Widget returnNavBarIcon(IconData icon,BuildContext context) {
     return CircleAvatar(
       radius: 15,
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: Theme.of(context).appBarColor,
       child: Icon(
         icon,
         size: 18,
