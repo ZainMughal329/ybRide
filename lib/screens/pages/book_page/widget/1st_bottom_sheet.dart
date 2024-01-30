@@ -22,7 +22,8 @@ Future firstBottomSheet(BuildContext context, BookViewController con) {
       return Builder(builder: (BuildContext innerContext) {
         con.state.heightOfSheet.value = MediaQuery.of(innerContext).size.height;
         return SingleChildScrollView(
-          // physics: ClampingScrollPhysics(),
+          // reverse: false,
+          physics: BouncingScrollPhysics(),
           controller: scrollController,
           child: Container(
             height: con.state.switchVal.value == false
@@ -235,53 +236,55 @@ Future firstBottomSheet(BuildContext context, BookViewController con) {
                                 onTap: (){
                                   dateBottomSheet(context, con);
                                 },
-                                child: Container(
-                                  child: Column(
-                                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          SubHeadingTextWidget(
-                                            title: 'Jan 11, ',
-                                            fontWeight: FontWeight.w500,
-                                            textAlign: TextAlign.start,
-                                            textColor: AppColors.headingColor,
-                                          ),
-                                          SubHeadingTextWidget(
-                                            title: '11:00 AM',
-                                            fontWeight: FontWeight.w500,
-                                            textAlign: TextAlign.start,
-                                            textColor: AppColors.headingColor,
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: mq.height * 0.015,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          SubHeadingTextWidget(
-                                            title: 'Jan 17, ',
-                                            fontWeight: FontWeight.w500,
-                                            textAlign: TextAlign.start,
-                                            textColor: AppColors.headingColor,
-                                          ),
-                                          SubHeadingTextWidget(
-                                            title: '11:00 AM',
-                                            fontWeight: FontWeight.w500,
-                                            textAlign: TextAlign.start,
-                                            textColor: AppColors.headingColor,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                child: Obx((){
+                                  return Container(
+                                    child: Column(
+                                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          children: [
+                                            SubHeadingTextWidget(
+                                              title: '${con.state.fromMonthName.value} ${con.state.fromDate.value}, ',
+                                              fontWeight: FontWeight.w500,
+                                              textAlign: TextAlign.start,
+                                              textColor: AppColors.headingColor,
+                                            ),
+                                            SubHeadingTextWidget(
+                                              title: '${con.state.fromTime.value}',
+                                              fontWeight: FontWeight.w500,
+                                              textAlign: TextAlign.start,
+                                              textColor: AppColors.headingColor,
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: mq.height * 0.015,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          children: [
+                                            SubHeadingTextWidget(
+                                              title: '${con.state.toMonthName.value} ${con.state.toDate.value}, ',
+                                              fontWeight: FontWeight.w500,
+                                              textAlign: TextAlign.start,
+                                              textColor: AppColors.headingColor,
+                                            ),
+                                            SubHeadingTextWidget(
+                                              title: '${con.state.toTime.value}',
+                                              fontWeight: FontWeight.w500,
+                                              textAlign: TextAlign.start,
+                                              textColor: AppColors.headingColor,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }),
                               ),
                             ],
                           ),

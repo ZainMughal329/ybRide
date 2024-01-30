@@ -18,7 +18,6 @@ class ApplicationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-
     var navBarItems = [
       PersistentBottomNavBarItem(
         icon: returnNavBarIcon(CupertinoIcons.car_detailed,context),
