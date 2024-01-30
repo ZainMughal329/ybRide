@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 
@@ -10,6 +11,7 @@ class ReuseableTextField extends StatelessWidget {
   final TextEditingController contr;
   final bool readOnly;
   final void Function(String)? onChange;
+  final List<TextInputFormatter>? inputFormatters;
   final Icon? prefixIcon;
 
   ReuseableTextField({
@@ -21,6 +23,7 @@ class ReuseableTextField extends StatelessWidget {
     required this.obsecure,
     this.onChange,
     this.readOnly = false,
+    this.inputFormatters,
     this.prefixIcon,
 
     //
@@ -40,6 +43,7 @@ class ReuseableTextField extends StatelessWidget {
         style: GoogleFonts.openSans(
           fontSize: 15,
         ),
+        inputFormatters: inputFormatters,
 
         // focusNode: focNode,
         decoration: InputDecoration(

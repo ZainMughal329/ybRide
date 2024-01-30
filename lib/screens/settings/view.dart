@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
@@ -12,7 +13,6 @@ import 'package:yb_ride/screens/settings/controller.dart';
 import 'package:yb_ride/screens/settings/pages/prefrences/inded.dart';
 import 'package:yb_ride/screens/settings/pages/profile/view.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-
 import '../../components/custom_Appbar.dart';
 import '../../main.dart';
 import 'package:get/get.dart';
@@ -56,6 +56,8 @@ class SettingsView extends GetView<SettingsController> {
                 SizedBox(
                   height: mq.height * .02,
                 ),
+
+
                 _buildListTile('Saved payment methods', FontAwesomeIcons.wallet,
                     Icons.arrow_forward_ios, () {
                   PersistentNavBarNavigator.pushNewScreen(context,
