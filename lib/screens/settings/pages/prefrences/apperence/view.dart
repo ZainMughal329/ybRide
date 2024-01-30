@@ -17,6 +17,8 @@ class AppearanceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBgClr,
+
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(mq.height * .08),
         child: CustomAppBarWidget(

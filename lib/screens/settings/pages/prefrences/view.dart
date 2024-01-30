@@ -25,6 +25,8 @@ class PreferenceScreen extends GetView<PreferenceController> {
   Widget build(BuildContext context) {
     Get.put(PreferenceController());
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBgClr,
+
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(mq.height * .08),
         child: CustomAppBarWidget(

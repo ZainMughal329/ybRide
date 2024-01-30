@@ -9,6 +9,7 @@ import 'package:yb_ride/screens/pages/Checkout/state.dart';
 import '../../../../../main.dart';
 Future promoCodeBottomSheet(BuildContext context) {
   final state = CheckOutState();
+
   final scrollController = ScrollController();
   final focusNode = FocusNode();
   state.promoCodeCon.addListener(() {
@@ -19,6 +20,7 @@ Future promoCodeBottomSheet(BuildContext context) {
     }
   });
   return showModalBottomSheet(
+    backgroundColor: Theme.of(context).scaffoldBgClr,
     isScrollControlled: true,
     useSafeArea: true,
     context: context,
@@ -33,7 +35,6 @@ Future promoCodeBottomSheet(BuildContext context) {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: AppColors.whiteColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15),
                   topRight: Radius.circular(15),

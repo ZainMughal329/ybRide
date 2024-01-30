@@ -103,6 +103,8 @@ class SignupScreen extends GetView<SignUpController> {
                   title: 'Already have an account?',
                   fontSize: 10,
                   fontWeight: FontWeight.w600,
+                  textColor: Theme.of(context).lightTextColor,
+
                 ),
                 InkWell(
                   onTap: (){

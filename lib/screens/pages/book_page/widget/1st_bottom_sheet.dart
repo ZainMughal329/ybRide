@@ -17,7 +17,7 @@ Future firstBottomSheet(BuildContext context, BookViewController con) {
   return showModalBottomSheet(
     context: context,
     // isScrollControlled: true,
-
+    backgroundColor: Theme.of(context).scaffoldBgClr,
     builder: (BuildContext context) {
       return Builder(builder: (BuildContext innerContext) {
         con.state.heightOfSheet.value = MediaQuery.of(innerContext).size.height;
@@ -31,7 +31,6 @@ Future firstBottomSheet(BuildContext context, BookViewController con) {
                 : null,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: AppColors.whiteColor,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(15),
                 topRight: Radius.circular(15),
@@ -55,14 +54,14 @@ Future firstBottomSheet(BuildContext context, BookViewController con) {
                     Icon(
                       Icons.horizontal_rule,
                       size: 40,
-                      color: Colors.grey.shade400,
+                      color: Theme.of(context).lightTextColor,
                     )
                   ],
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 5),
                   child: HeadingTextWidget(
-                      title: "Where & When", fontWeight: FontWeight.w600),
+                      title: "Where & When", fontWeight: FontWeight.w600,textColor: Theme.of(context).headingColor,),
                 ),
                 Divider(),
                 SizedBox(
@@ -103,6 +102,7 @@ Future firstBottomSheet(BuildContext context, BookViewController con) {
                             return SubHeadingTextWidget(
                               title: con.state.selectedPlace.value,
                               fontSize: 12,
+                              textColor: Theme.of(context).lightTextColor,
                               fontWeight: FontWeight.w600,
                             );
                           }),
@@ -116,7 +116,7 @@ Future firstBottomSheet(BuildContext context, BookViewController con) {
                                     returnBottomSheet(context, con);
                                   },
                                   leading: Icon(Icons.circle_outlined,
-                                      size: 30, color: AppColors.headingColor),
+                                      size: 30, color: Theme.of(context).headingColor),
                                   title: HeadingTextWidget(
                                     title: 'Return return location',
                                     fontWeight: FontWeight.w600,
@@ -127,6 +127,7 @@ Future firstBottomSheet(BuildContext context, BookViewController con) {
                                     return SubHeadingTextWidget(
                                       title: con.state.returnPlace.value,
                                       fontSize: 12,
+                                      textColor: Theme.of(context).lightTextColor,
                                       fontWeight: FontWeight.w600,
                                     );
                                   }),
@@ -150,13 +151,13 @@ Future firstBottomSheet(BuildContext context, BookViewController con) {
                                   title: 'Same delivery & return locations',
                                   fontWeight: FontWeight.w600,
                                   fontSize: 13.5,
-                                  textColor: AppColors.headingColor,
+                                  textColor: Theme.of(context).headingColor,
                                 ),
                               ),
                               Obx(
                                 () {
                                   return Switch(
-                                    activeColor: AppColors.whiteColor,
+                                    activeColor: Theme.of(context).scaffoldBgClr,
                                     activeTrackColor: AppColors.buttonColor,
                                     value: con.state.switchVal.value,
                                     onChanged: (val) {
@@ -200,7 +201,7 @@ Future firstBottomSheet(BuildContext context, BookViewController con) {
                           leading: Icon(
                             Icons.calendar_today_rounded,
                             size: 20,
-                            color: AppColors.headingColor,
+                            color: Theme.of(context).headingColor,
                           ),
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -250,13 +251,13 @@ Future firstBottomSheet(BuildContext context, BookViewController con) {
                                               title: '${con.state.fromMonthName.value} ${con.state.fromDate.value}, ',
                                               fontWeight: FontWeight.w500,
                                               textAlign: TextAlign.start,
-                                              textColor: AppColors.headingColor,
+                                              textColor: Theme.of(context).headingColor,
                                             ),
                                             SubHeadingTextWidget(
                                               title: '${con.state.fromTime.value}',
                                               fontWeight: FontWeight.w500,
                                               textAlign: TextAlign.start,
-                                              textColor: AppColors.headingColor,
+                                              textColor: Theme.of(context).headingColor,
                                             ),
                                           ],
                                         ),
@@ -271,13 +272,13 @@ Future firstBottomSheet(BuildContext context, BookViewController con) {
                                               title: '${con.state.toMonthName.value} ${con.state.toDate.value}, ',
                                               fontWeight: FontWeight.w500,
                                               textAlign: TextAlign.start,
-                                              textColor: AppColors.headingColor,
+                                              textColor: Theme.of(context).headingColor,
                                             ),
                                             SubHeadingTextWidget(
                                               title: '${con.state.toTime.value}',
                                               fontWeight: FontWeight.w500,
                                               textAlign: TextAlign.start,
-                                              textColor: AppColors.headingColor,
+                                              textColor: Theme.of(context).headingColor,
                                             ),
                                           ],
                                         ),
