@@ -10,14 +10,15 @@ class ReuseableTextField extends StatelessWidget {
   final String label;
   final TextEditingController contr;
   final bool readOnly;
+  final FocusNode? focusNode;
   final void Function(String)? onChange;
   final List<TextInputFormatter>? inputFormatters;
   final Icon? prefixIcon;
-
   ReuseableTextField({
     super.key,
     required this.contr,
     required this.label,
+    this.focusNode,
     required this.textInputAction,
     required this.keyboardType,
     required this.obsecure,
@@ -35,6 +36,7 @@ class ReuseableTextField extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       child: TextFormField(
         controller: contr,
+        focusNode: focusNode,
         readOnly: readOnly,
         textInputAction: textInputAction,
         obscureText: obsecure,

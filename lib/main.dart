@@ -59,9 +59,7 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData.dark(),
       themeMode: Pref.defaultTheme(),
-
-
-      initialRoute: RoutesName.splashScreen,
+      initialRoute: RoutesName.checkOutScreen,
       getPages: AppRoutes.routes,
     );
   }
