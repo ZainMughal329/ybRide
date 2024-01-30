@@ -28,6 +28,8 @@ class RoutesName {
 
 // checkOut
   static final checkOutScreen = '/checkOutScreen';
+  static final carDetailsScreen = '/carDetailsScreen';
+
 
 
 

@@ -49,19 +49,6 @@ class HelpScreen extends GetView<HelpCon> {
                         height: mq.height * .20,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(right: mq.width * .05),
-                      child: InkWell(
-                        onTap: () {},
-                        child: CircleAvatar(
-                          backgroundColor: AppColors.buttonColor,
-                          child: Icon(
-                            Icons.cancel_outlined,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ],

@@ -23,6 +23,9 @@ class ProfileScreen extends GetView<ProfileController> {
           isLeading: true,
           leadingIcon: Icons.arrow_back_ios_new,
           trailingIcon: Icons.delete,
+          leadingPress: (){
+            Navigator.pop(context);
+          },
         ),
       ),
       body: SafeArea(

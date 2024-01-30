@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
       themeMode: Pref.defaultTheme(),
 
 
-      initialRoute: RoutesName.splashScreen,
+      initialRoute: RoutesName.applicationScreen,
       getPages: AppRoutes.routes,
     );
   }

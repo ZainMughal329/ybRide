@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/screens/pages/trips_page/trip_pages/sharedTrips/controller.dart';
@@ -7,6 +8,8 @@ import 'package:yb_ride/screens/pages/trips_page/trip_pages/sharedTrips/controll
 import '../../../../../components/reuseable_button.dart';
 import '../../../../../components/text_widget.dart';
 import '../../../../../main.dart';
+import '../../../../application/controller.dart';
+import '../../../book_page/view.dart';
 
 class SharedTripsView extends GetView<SharedTripController> {
   const SharedTripsView({super.key});
@@ -86,7 +89,9 @@ class SharedTripsView extends GetView<SharedTripController> {
                   child: RoundButton(
                       title:'Book a YBCar',
                       onPress: () {
-                        // Get.toNamed(RoutesName.inviteScreen);
+                        final con = Get.put(ApplicationViewController());
+                        // con.state.currentNavIndex.value = 0;
+                        con.changeTab(0);
                       }),
                 ),
 

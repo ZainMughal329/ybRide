@@ -73,6 +73,7 @@ dependencies:
   path_provider: ^2.1.0
 
   connectivity_plus:
+  card_swiper:
 
 
 
