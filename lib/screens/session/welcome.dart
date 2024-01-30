@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
@@ -15,8 +16,10 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     return Scaffold(
       body: Stack(
         children: [
