@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yb_ride/helper/app_colors.dart';
@@ -12,58 +16,61 @@ import 'package:yb_ride/screens/pages/trips_page/inded.dart';
 import 'package:yb_ride/screens/settings/inded.dart';
 import '../../main.dart';
 
-class ApplicationView extends StatelessWidget {
+class ApplicationView extends GetView<ApplicationViewController> {
   const ApplicationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-
     var navBarItems = [
       PersistentBottomNavBarItem(
-        icon: returnNavBarIcon(CupertinoIcons.car_detailed,context),
+        icon: returnNavBarIcon(FontAwesomeIcons.car,context),
         title: 'Book',
+
         activeColorPrimary: AppColors.buttonColor,
-        inactiveColorPrimary: AppColors.buttonColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
         textStyle: GoogleFonts.openSans(
             fontWeight: FontWeight.w700,
             fontSize: 12,
-            color: AppColors.buttonColor
+            color: CupertinoColors.systemGrey
         ),
       ),
       PersistentBottomNavBarItem(
-        icon: returnNavBarIcon(Icons.trip_origin,context),
+        icon: returnNavBarIcon(FontAwesomeIcons.road,context),
         title: 'Trips',
+
         activeColorPrimary: AppColors.buttonColor,
-        inactiveColorPrimary: AppColors.buttonColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
         textStyle: GoogleFonts.openSans(
             fontWeight: FontWeight.w700,
             fontSize: 12,
-            color: AppColors.buttonColor
+            color: CupertinoColors.systemGrey,
         ),
 
       ),
       PersistentBottomNavBarItem(
-        icon: returnNavBarIcon(Icons.card_giftcard,context),
+        icon: returnNavBarIcon(FontAwesomeIcons.gift,context),
         title: 'Invite',
+
         activeColorPrimary: AppColors.buttonColor,
-        inactiveColorPrimary: AppColors.buttonColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
         textStyle: GoogleFonts.openSans(
             fontWeight: FontWeight.w700,
             fontSize: 12,
-            color: AppColors.buttonColor
+            color: CupertinoColors.systemGrey,
         ),
 
       ),
       PersistentBottomNavBarItem(
-        icon: returnNavBarIcon(Icons.help,context),
+        icon: returnNavBarIcon(FontAwesomeIcons.solidMessage,context),
         title: 'Help',
+
         activeColorPrimary: AppColors.buttonColor,
-        inactiveColorPrimary: AppColors.buttonColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
         textStyle: GoogleFonts.openSans(
             fontWeight: FontWeight.w700,
             fontSize: 12,
-            color: AppColors.buttonColor
+            color: CupertinoColors.systemGrey,
         ),
 
       ),
@@ -71,11 +78,11 @@ class ApplicationView extends StatelessWidget {
         icon: returnNavBarIcon(Icons.settings,context),
         title: 'Settings',
         activeColorPrimary: AppColors.buttonColor,
-        inactiveColorPrimary: AppColors.buttonColor,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
         textStyle: GoogleFonts.openSans(
             fontWeight: FontWeight.w700,
             fontSize: 12,
-            color: AppColors.buttonColor
+            color: CupertinoColors.systemGrey,
         ),
 
       ),
@@ -89,9 +96,12 @@ class ApplicationView extends StatelessWidget {
       SettingsView(),
     ];
 
-    return PersistentTabView(
+    return Obx( () {
+      log('application:' + controller.state.currentNavIndex.value.toString());
+      return PersistentTabView(
+
       context,
-      controller: PersistentTabController(initialIndex: 4),
+      controller: controller.perController,
       screens: navScreens,
       items: navBarItems,
       confineInSafeArea: true,
@@ -124,16 +134,14 @@ class ApplicationView extends StatelessWidget {
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle: NavBarStyle.style6,
+
     );
+    });
   }
   Widget returnNavBarIcon(IconData icon,BuildContext context) {
-    return CircleAvatar(
-      radius: 15,
-      backgroundColor: Theme.of(context).appBarColor,
-      child: Icon(
-        icon,
-        size: 18,
-      ),
+    return Icon(
+      icon,
+      size: 18,
     );
   }
 }

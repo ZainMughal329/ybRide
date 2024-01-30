@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
@@ -75,6 +76,17 @@ class SurferScreen extends GetView<SurferController> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.pop(context);
+                              },
+                              child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: Icon(FontAwesomeIcons.xmark)),
+                            ),
+                          ),
                           Spacer(),
                           SubHeadingTextWidget(
                             title: 'You are applying for:',
@@ -89,7 +101,9 @@ class SurferScreen extends GetView<SurferController> {
                             fontSize: 27,
                             fontWeight: FontWeight.w600,
                           ),
-                          Spacer(),
+                          Spacer(
+                            flex: 2,
+                          ),
 
                         ],
                       ),

@@ -1,11 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../../../components/heading_text_widget.dart';
 import '../../../../../components/reuseable_button.dart';
 import '../../../../../components/text_widget.dart';
 import '../../../../../helper/app_colors.dart';
 import '../../../../../main.dart';
+import '../../../../application/controller.dart';
+import '../../../book_page/view.dart';
 
 class MyTripsView extends StatelessWidget {
   const MyTripsView({super.key});
@@ -64,7 +68,10 @@ class MyTripsView extends StatelessWidget {
             child: RoundButton(
                 title:'Book your YBCar now',
                 onPress: () {
-                  // Get.toNamed(RoutesName.inviteScreen);
+                  final con = Get.put(ApplicationViewController());
+                  // con.state.currentNavIndex.value = 0;
+                  con.changeTab(0);
+
                 }),
           ),
           SizedBox(

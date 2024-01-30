@@ -22,6 +22,9 @@ class PaymentScreen extends GetView<PaymentCon> {
           centerTitle: 'Saved payment methods',
           isLeading: true,
           leadingIcon: Icons.arrow_back_ios_new,
+          leadingPress: (){
+            Navigator.pop(context);
+          },
         ),
       ),
       body: SafeArea(

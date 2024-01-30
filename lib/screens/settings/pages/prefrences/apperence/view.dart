@@ -19,150 +19,111 @@ class AppearanceScreen extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(mq.height * .08),
-        child: CustomAppBarWidget(centerTitle: 'Appearance', isLeading: true,
-            leadingIcon: Icons.arrow_back_ios_new,
-            leadingPress: () {
-              Navigator.pop(context);
-            }
-            ,),
+        child: CustomAppBarWidget(
+          centerTitle: 'Appearance',
+          isLeading: true,
+          leadingIcon: Icons.arrow_back_ios_new,
+          leadingPress: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
-
       body: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: mq.width * .04, vertical: mq.height * .01),
-        child:
-
-        Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SubHeadingTextWidget(
-                  title: 'System',
-                  fontWeight: FontWeight.w600,
-                  textColor: Theme.of(context).headingColor,
-                ),
-                Obx(() => Radio(
-                  value: _appearanceController.state.isDarkMode.value,
-                  groupValue: _appearanceController.state.isDarkMode.value
-                      ? ThemeMode.light
-                      : ThemeMode.dark,
-                  onChanged: (value) {
-                    Get.changeThemeMode(
-                      _appearanceController.state.isDarkMode.value
-                          ? ThemeMode.light
-                          : ThemeMode.dark,
-                    );
+            InkWell(
+              onTap: () {
+                Get.changeThemeMode(_appearanceController.state.isDarkMode.value
+                    ? ThemeMode.light
+                    : ThemeMode.dark);
 
-                    _appearanceController.state.isDarkMode.value =
+                _appearanceController.state.isDarkMode.value =
                     !_appearanceController.state.isDarkMode.value;
-                    Pref.isDarkMode = _appearanceController.state.isDarkMode.value;
-                  },
-                )),
-              ],
+                Pref.isDarkMode = _appearanceController.state.isDarkMode.value;
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.brightness_4_outlined),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      SubHeadingTextWidget(
+                        title: 'Light',
+                        fontWeight: FontWeight.w600,
+                        textColor: Theme.of(context).headingColor,
+                      ),
+                    ],
+                  ),
+                  // Obx(() => Radio(
+                  //   value: ThemeMode.light,
+                  //   groupValue: _appearanceController.state.isDarkMode.value
+                  //       ? ThemeMode.light
+                  //       : ThemeMode.dark,
+                  //   onChanged: (value) {
+                  //     Get.changeThemeMode(ThemeMode.light);
+                  //     _appearanceController.state.isDarkMode.value = false;
+                  //     Pref.isDarkMode = false;
+                  //   },
+                  // )),
+                  Obx(
+                    () => _appearanceController.state.isDarkMode.value == false
+                        ? Icon(
+                            Icons.done,
+                            size: 26,
+                          )
+                        : Container(),
+                  ),
+                ],
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SubHeadingTextWidget(
-                  title: 'Light',
-                  fontWeight: FontWeight.w600,
-                  textColor: Theme.of(context).headingColor,
-                ),
-                Obx(() => Radio(
-                  value: ThemeMode.light,
-                  groupValue: _appearanceController.state.isDarkMode.value
-                      ? ThemeMode.light
-                      : ThemeMode.dark,
-                  onChanged: (value) {
-                    Get.changeThemeMode(ThemeMode.light);
-                    _appearanceController.state.isDarkMode.value = false;
-                    Pref.isDarkMode = false;
-                  },
-                )),
-              ],
+            SizedBox(
+              height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SubHeadingTextWidget(
-                  title: 'Dark',
-                  fontWeight: FontWeight.w600,
-                  textColor: Theme.of(context).headingColor,
-                ),
-                Obx(() => Radio(
-                  value: ThemeMode.dark,
-                  groupValue: _appearanceController.state.isDarkMode.value
-                      ? ThemeMode.dark
-                      : ThemeMode.dark,
-                  onChanged: (value) {
-                    Get.changeThemeMode(ThemeMode.dark);
-                    _appearanceController.state.isDarkMode.value = true;
-                    Pref.isDarkMode = true;
-                  },
-                )),
-              ],
+            InkWell(
+              onTap: () {
+                Get.changeThemeMode(_appearanceController.state.isDarkMode.value
+                    ? ThemeMode.light
+                    : ThemeMode.dark);
+
+                _appearanceController.state.isDarkMode.value =
+                    !_appearanceController.state.isDarkMode.value;
+                Pref.isDarkMode = _appearanceController.state.isDarkMode.value;
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.brightness_2_outlined),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      SubHeadingTextWidget(
+                        title: 'Dark',
+                        fontWeight: FontWeight.w600,
+                        textColor: Theme.of(context).headingColor,
+                      ),
+                    ],
+                  ),
+                  Obx(
+                    () => _appearanceController.state.isDarkMode.value
+                        ? Icon(
+                            Icons.done,
+                            size: 26,
+                          )
+                        : Container(),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
-
-
-
-
-        // Column(
-        //   crossAxisAlignment: CrossAxisAlignment.start,
-        //
-        //   children: [
-        //     Row(
-        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //       children: [
-        //         SubHeadingTextWidget(title:'System',fontWeight: FontWeight.w600,textColor: AppColors.headingColor,),
-        //         Obx(() => Radio(
-        //           value: _appearanceController.state.isDarkMode.value,
-        //           groupValue: _appearanceController.currentTheme.value,
-        //           onChanged: (value) {
-        //             Get.changeThemeMode(_appearanceController.state.isDarkMode.value ? ThemeMode.light : ThemeMode.dark);
-        //
-        //             _appearanceController.state..isDarkMode.value = !_appearanceController.state.isDarkMode.value;
-        //             Pref.isDarkMode = _appearanceController.state.isDarkMode.value;;
-        //           },
-        //         )),
-        //
-        //       ],
-        //     ),
-        //     Row(
-        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //       children: [
-        //         SubHeadingTextWidget(title:'Light',fontWeight: FontWeight.w600,textColor: AppColors.headingColor,),
-        //         Obx(() => Radio(
-        //           value: AppTheme.Light,
-        //           groupValue: _appearanceController.currentTheme.value,
-        //           onChanged: (value) {
-        //             _appearanceController.setTheme(value as AppTheme);
-        //           },
-        //         )),
-        //
-        //       ],
-        //     ),
-        //     Row(
-        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //       children: [
-        //         SubHeadingTextWidget(title:'Dark',fontWeight: FontWeight.w600,textColor: AppColors.headingColor,),
-        //         Obx(() => Radio(
-        //           value: AppTheme.Dark,
-        //           groupValue: _appearanceController.currentTheme.value,
-        //           onChanged: (value) {
-        //             _appearanceController.setTheme(value as AppTheme);
-        //           },
-        //         )),
-        //
-        //       ],
-        //     ),
-        //
-        //
-        //   ],
-        // ),
       ),
     );
   }

@@ -1,23 +1,14 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:uuid/uuid.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
-import 'package:yb_ride/components/reuseable_button.dart';
-import 'package:yb_ride/components/text_form_field.dart';
-import 'package:yb_ride/components/text_widget.dart';
-import 'package:yb_ride/helper/app_colors.dart';
-import 'package:http/http.dart' as http;
-import 'package:yb_ride/screens/settings/pages/faqs/getting_started,dart.dart';
+import 'package:yb_ride/main.dart';
 
-import '../../../../main.dart';
+import '../../../../components/faq_item.dart';
+import '../../../../helper/app_colors.dart';
 
-Future faqBottomSheet(BuildContext context) {
+
+Future gettingStartedSheet(BuildContext context) {
   return showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -38,6 +29,10 @@ Future faqBottomSheet(BuildContext context) {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Icon(
+                        Icons.arrow_back_ios_new,
+                        size: 12,
+                      ),
                       HeadingTextWidget(
                         title: 'Help',
                         textColor: Colors.white,
@@ -96,70 +91,52 @@ Future faqBottomSheet(BuildContext context) {
               ),
             ),
           ),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: mq.height * .18,
-                ),
-                _buildListTile('Getting Started', '5 articles', () {
-                  Get.to(
-                    gettingStartedSheet(context),
-                  );
-                }, context),
-                Divider(),
-                _buildListTile('Booking Changes & Cancellation', '4 articles',
-                    () {}, context),
-                Divider(),
-                _buildListTile(
-                    'Delivery & Return', '29 articles', () {}, context),
-                Divider(),
-                _buildListTile('Deposits, Charges, Payments & Referrals',
-                    '11 articles', () {}, context),
-                Divider(),
-                _buildListTile(
-                    'Electric Vehicles (EV)', '13 articles', () {}, context),
-                Divider(),
-                _buildListTile('Insurance, Accidents & Incidents',
-                    '20 articles', () {}, context),
-                Divider(),
-                _buildListTile(
-                    'Self-Pickup and Return', '12 articles', () {}, context),
-                Divider(),
-                _buildListTile(
-                    'Vehicles & Equipment', '6 articles', () {}, context),
-                Divider(),
-                _buildListTile('Verification & Driver Requirements',
-                    '8 articles', () {}, context),
-                Divider(),
-              ],
-            ),
+          ListView(
+            padding: EdgeInsets.all(16.0),
+            physics: BouncingScrollPhysics(),
+            children: [
+              FAQItem(
+                question: 'How does YBCar work?',
+                answer:
+                    "Book a car from our new and clean fleet.\nTell us where you want to get the car and choose a good time to meet.\nYBCar Surfers can deliver your vehicle and pick it up when you’re done. If it’s more convenient, you can pick it up yourself at one of our lots.\nIf you chose delivery, a YBCar Surfer will pick up the car at the return address you selected. Otherwise, you can return the car to one of our lots.\nIt's that easy, no lines, no paperwork, just rental cars, your way.",
+              ),
+              Divider(),
+              FAQItem(
+                question: 'Where is YBCar available?',
+                answer: "We're currently operating in the following cities:"
+                    "a:Boston",
+              ),
+              Divider(),
+
+              FAQItem(
+                question:
+                    "What are the mileage limits? Can I purchase unlimited mileage?",
+                answer:
+                    "At YBCar, we include 300 miles per day for all our trips, which are cumulative throughout the booking period. So, if you book for 3 days, you will have a total of 900 miles for free that you can use during your trip. However, if you exceed the mileage limit, we will charge a surcharge of \$0.45 per mile."
+                    "If you want to add unlimited mileage to your trip, you can easily do so through our website or app during the checkout process. In case you have already booked your trip and want to add unlimited mileage later, just reach out to us before your trip starts, and we will add it for you.",
+              ),
+              Divider(),
+
+              FAQItem(
+                question: 'Can I take my YBCar into Canada or Mexico?',
+                answer:
+                    "Unfortunately, our cars can't travel into Canada or Mexico."
+                    "If for any reason your YBCar is detained in either Canada or Mexico, you'll be fully liable for any costs associated with the retrieval of the car up to the full cost of the car.",
+              ),
+              Divider(),
+
+              FAQItem(
+                question: 'Can I bring pets on my YBCar trip?',
+                answer:
+                    'Absolutely, your furry friends are welcome. We suggest using a carrier or seat cover if you have an extra fluffy copilot.',
+              ),
+              Divider(),
+
+              // Add more FAQ items as needed
+            ],
           ),
         ],
       );
     },
-  );
-}
-
-Widget _buildListTile(
-    String title, String subTitle, VoidCallback onPress, BuildContext context) {
-  return InkWell(
-    onTap: onPress,
-    child: ListTile(
-      title: HeadingTextWidget(
-        title: title,
-        textColor: Theme.of(context).headingColor,
-        fontSize: 16,
-      ),
-      subtitle: SubHeadingTextWidget(
-        title: subTitle,
-        textColor: Theme.of(context).lightTextColor,
-        fontSize: 15,
-      ),
-      trailing: Icon(
-        Icons.arrow_forward_ios,
-        size: 12,
-      ),
-    ),
   );
 }

@@ -1,11 +1,16 @@
 
 
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yb_ride/components/custom_Appbar.dart';
+import 'package:yb_ride/routes/app_routes.dart';
 import 'package:yb_ride/screens/application/inded.dart';
+import 'package:yb_ride/screens/pages/book_page/inded.dart';
 import '../../../components/heading_text_widget.dart';
 import '../../../components/reuseable_button.dart';
 import '../../../components/text_widget.dart';
@@ -90,9 +95,10 @@ class InviteScreen extends GetView<InviteCon> {
               child: RoundButton(
                   title:'Book your YBCar now',
                   onPress: () {
-                    // Get.toNamed(RoutesName.bookNowScreen);
                     final con = Get.put(ApplicationViewController());
-                    con.state.currentNavIndex.value = 0;
+                    // con.state.currentNavIndex.value = 0;
+                    con.changeTab(0);
+
                   }),
             ),
 

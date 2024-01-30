@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
 
     mq = MediaQuery.sizeOf(context);
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'YB Ride',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
 

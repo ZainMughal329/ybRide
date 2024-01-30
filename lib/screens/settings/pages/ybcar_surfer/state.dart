@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class SurferState {
-  var isCollapsed = true.obs;
+  var isCollapsed = false.obs;
 
   RxBool focused = false.obs;
   final countryPicker = FlCountryCodePicker();

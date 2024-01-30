@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
 import 'package:yb_ride/components/text_form_field.dart';
@@ -23,6 +24,9 @@ class ProfileScreen extends GetView<ProfileController> {
           isLeading: true,
           leadingIcon: Icons.arrow_back_ios_new,
           trailingIcon: Icons.delete,
+          leadingPress: (){
+            Navigator.pop(context);
+          },
         ),
       ),
       body: SafeArea(
