@@ -22,7 +22,6 @@ class ApplicationView extends GetView<ApplicationViewController> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-
     var navBarItems = [
       PersistentBottomNavBarItem(
         icon: returnNavBarIcon(FontAwesomeIcons.car,context),

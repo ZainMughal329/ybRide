@@ -18,13 +18,17 @@ class BookNowView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+
+
+    cont.state.datesFetched==false ? cont.getCurrentDate() : null;
     return Scaffold(
       body: Stack(
         children: [
           GetBuilder<BookViewController>(builder: (controller){
             return GoogleMap(
-              onMapCreated: (con){
+              onMapCreated: (con)async{
                 cont.state.mapController = con;
+                await firstBottomSheet(context, cont);
               },
               initialCameraPosition: CameraPosition(
                 target: cont.state.loc.value,

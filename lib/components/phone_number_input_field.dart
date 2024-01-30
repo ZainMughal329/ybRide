@@ -48,7 +48,7 @@ Widget PhoneNumberField(CountryCode code, Function changeCountry,TextEditingCont
                             ),
                             Expanded(
                               child: Container(
-                                child: code.flagImage(),
+                                child: code.flagImage,
                               ),
                             ),
                             SizedBox(
