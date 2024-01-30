@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
 
     mq = MediaQuery.sizeOf(context);
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'YB Ride',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
 
@@ -59,9 +59,7 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData.dark(),
       themeMode: Pref.defaultTheme(),
-
-
-      initialRoute: RoutesName.applicationScreen,
+      initialRoute: RoutesName.splashScreen,
       getPages: AppRoutes.routes,
     );
   }
