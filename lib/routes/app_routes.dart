@@ -5,6 +5,7 @@ import 'package:yb_ride/screens/onBoarding/inded.dart';
 import 'package:yb_ride/screens/pages/Checkout/bindings.dart';
 import 'package:yb_ride/screens/pages/Checkout/view.dart';
 import 'package:yb_ride/screens/pages/book_page/bindings.dart';
+import 'package:yb_ride/screens/pages/book_page/car_details/inded.dart';
 import 'package:yb_ride/screens/pages/book_page/inded.dart';
 import 'package:yb_ride/screens/pages/help_page/bindings.dart';
 import 'package:yb_ride/screens/pages/help_page/view.dart';
@@ -110,7 +111,7 @@ class AppRoutes {
       name: RoutesName.surferScreen,
       page: () => SurferScreen(),
       binding: SurferBindings(),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
 
 
@@ -123,5 +124,11 @@ class AppRoutes {
       transition: Transition.rightToLeft,
     ),
 
+    GetPage(
+      name: RoutesName.carDetailsScreen,
+      page: () => CarDetailsScreen(),
+      binding: CarDetailsBindings(),
+      transition: Transition.rightToLeft,
+    ),
   ];
 }

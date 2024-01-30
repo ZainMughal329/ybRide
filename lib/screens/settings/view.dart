@@ -98,7 +98,7 @@ class SettingsView extends GetView<SettingsController> {
                 ),
                 _buildListTile('FAQ', FontAwesomeIcons.book,
                     Icons.arrow_forward_ios, () {
-                  Get.to(faqBottomSheet(context),transition: Transition.downToUp);
+                  // Get.to(faqBottomSheet(context),transition: Transition.downToUp);
                     },context),
                 SizedBox(
                   height: mq.height * .02,

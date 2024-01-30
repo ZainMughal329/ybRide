@@ -48,7 +48,9 @@ class PreferenceScreen extends GetView<PreferenceController> {
                     PersistentNavBarNavigator.pushNewScreen(context,
                         screen: AppearanceScreen(), withNavBar: true);
                   },
-                  child: _buildTile('Appearance', 'Yes, we have a dark theme',context)),
+                  child: Container(
+                      width: double.infinity,
+                      child: _buildTile('Appearance', 'Yes, we have a dark theme',context))),
               SizedBox(
                 height: mq.height * .03,
               ),
@@ -110,6 +112,7 @@ class PreferenceScreen extends GetView<PreferenceController> {
 
   Widget _buildTile(String title, String subTitle,BuildContext context) {
     return Column(
+
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         HeadingTextWidget(title: title,textColor: Theme.of(context).headingColor),

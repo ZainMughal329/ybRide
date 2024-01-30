@@ -33,4 +33,10 @@ class PaymentCon extends GetxController{
     }
   }
 
+  void onExpiryDateChange(String value) {
+    final String expiry = state.expiryDate.text;
+    state.expiryDate.text =
+    expiry.startsWith(RegExp('[2-9]')) ? '0$expiry' : expiry;
+  }
+
 }
