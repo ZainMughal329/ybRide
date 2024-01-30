@@ -23,6 +23,8 @@ class SettingsView extends GetView<SettingsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBgClr,
+
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(mq.height * .08),
         child: CustomAppBarWidget(

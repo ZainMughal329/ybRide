@@ -34,13 +34,13 @@ Future largeBottomSheet(BuildContext context, BookViewController cont) {
 
   return showModalBottomSheet(
     context: context,
+    backgroundColor: Theme.of(context).scaffoldBgClr,
     isScrollControlled: true,
     useSafeArea: true,
     builder: (BuildContext context) {
       return Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: AppColors.whiteColor,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15),
             topRight: Radius.circular(15),
@@ -64,7 +64,7 @@ Future largeBottomSheet(BuildContext context, BookViewController cont) {
                 Icon(
                   Icons.horizontal_rule,
                   size: 40,
-                  color: Colors.grey.shade400,
+                  color: Theme.of(context).lightTextColor,
                 ),
               ],
             ),
@@ -86,7 +86,7 @@ Future largeBottomSheet(BuildContext context, BookViewController cont) {
                         child: Container(
                           width: mq.width * 0.2,
                           child: FaIcon(FontAwesomeIcons.xmark,
-                              size: 23, color: AppColors.headingColor),
+                              size: 23, color: Theme.of(context).headingColor),
                         ),
                       ),
                     ],
@@ -96,7 +96,7 @@ Future largeBottomSheet(BuildContext context, BookViewController cont) {
                       title: 'Delivery & return location',
                       fontWeight: FontWeight.w600,
                       fontSize: 19,
-                      textColor: AppColors.headingColor,
+                      textColor: Theme.of(context).headingColor,
                     ),
                   ),
                 ],
@@ -114,8 +114,9 @@ Future largeBottomSheet(BuildContext context, BookViewController cont) {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(height: mq.height * 0.01),
-                    HeadingTextWidget(title: 'No result found (yet)',fontWeight: FontWeight.w600,),
+                    HeadingTextWidget(title: 'No result found (yet)',fontWeight: FontWeight.w600,textColor: Theme.of(context).headingColor,),
                     SubHeadingTextWidget(title: "Try to adding more details, like 123 Main Street Black Bay Boston",
+                      textColor: Theme.of(context).lightTextColor,
                       textAlign: TextAlign.center,),
                     Padding(
                       padding: EdgeInsets.symmetric(
@@ -124,6 +125,7 @@ Future largeBottomSheet(BuildContext context, BookViewController cont) {
                     ),
                     SubHeadingTextWidget(
                       title: 'Add a city for better results',
+                      textColor: Theme.of(context).lightTextColor,
                     ),
                   ],
                 ),

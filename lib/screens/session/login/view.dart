@@ -88,6 +88,7 @@ class LoginScreen extends GetView<LoginController> {
                   title: 'Don\'t have an account?',
                   fontSize: 10,
                   fontWeight: FontWeight.w600,
+                  textColor: Theme.of(context).lightTextColor,
                 ),
                 InkWell(
                   onTap: (){
@@ -115,6 +116,8 @@ class LoginScreen extends GetView<LoginController> {
                     title: ' or ',
                     fontSize: 10,
                     fontWeight: FontWeight.w600,
+                    textColor: Theme.of(context).lightTextColor,
+
                   ),
                   Expanded(child: Divider()),
                 ],

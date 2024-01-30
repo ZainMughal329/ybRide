@@ -17,6 +17,8 @@ class ProfileScreen extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     Get.put(ProfileController());
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBgClr,
+
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(mq.height * .08),
         child: CustomAppBarWidget(
