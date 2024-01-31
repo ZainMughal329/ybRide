@@ -158,6 +158,8 @@ class BookViewController extends GetxController {
           state.toMonth.value = formattedDateMonth;
           state.toMonthName.value = getMonthName(formattedDateMonth);
           state.toYear.value = formattedDateYear;
+          state.startEndDateSelected.value=true;
+
 
         }
       }

@@ -9,6 +9,7 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
+import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/components/text_form_field.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
@@ -229,7 +230,16 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
                     ),
                   ),
                   RoundButton(title: "Choose date & time", onPress: () {
-                    Navigator.pop(context);
+
+                    if(cont.state.startEndDateSelected.value == true
+                    ){
+                      cont.state.timeandDateSelected.value = true;
+                      Navigator.pop(context);
+                    }else{
+                      Snackbar.showSnackBar("Error","Select Date & Time", Icons.error_outline_outlined);
+                    }
+
+
                   }),
                 ],
               ),

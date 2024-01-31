@@ -27,9 +27,9 @@ class BookNowView extends StatelessWidget {
         children: [
           GetBuilder<BookViewController>(builder: (controller){
             return GoogleMap(
-              onMapCreated: (con)async{
+              onMapCreated: (con) {
                 cont.state.mapController = con;
-                await firstBottomSheet(context, cont);
+                // await firstBottomSheet(context, cont);
               },
               initialCameraPosition: CameraPosition(
                 target: cont.state.loc.value,

@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:uuid/uuid.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
+import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/components/text_form_field.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
@@ -154,6 +155,14 @@ Future returnBottomSheet(BuildContext context, BookViewController cont) {
                               .state
                               .placeList[index]['description']
                               .toString();
+
+                          if(cont.state.switchVal.value == false){
+                            if(cont.state.selectedPlace.value != "Tap to Search"
+                                && cont.state.returnPlace.value != "Return Place"
+                            ){
+                              cont.state.locationSelected.value = true;
+                            }
+                          }
 
                           cont.GetCoordinatesofReturn(context);
                           cont.state.locationSearchController

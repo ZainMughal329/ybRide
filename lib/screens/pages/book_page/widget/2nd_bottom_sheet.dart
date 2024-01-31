@@ -155,6 +155,11 @@ Future largeBottomSheet(BuildContext context, BookViewController cont) {
                                               .placeList[index]['description']
                                               .toString();
 
+                                          if(cont.state.switchVal.value ==true){
+                                            cont.state.locationSelected.value = true;
+                                          }
+
+
                                           cont.GetCoordinates(context);
                                           cont.state.locationSearchController
                                               .clear();
