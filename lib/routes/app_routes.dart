@@ -27,36 +27,36 @@ class AppRoutes {
       name: RoutesName.splashScreen,
       page: () => SplashScreen(),
       binding: SplashBindings(),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
     GetPage(
       name: RoutesName.onBoardingScreen,
       page: () => OnBoardingScreen(isOnboarding: true,),
       binding: onBoardingBindings(),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
     GetPage(
       name: RoutesName.welcomeScreen,
       page: () => WelcomePage(),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
     GetPage(
       name: RoutesName.loginScreen,
       page: () => LoginScreen(),
       binding: LoginBindings(),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
     GetPage(
       name: RoutesName.signUpScreen,
       page: () => SignupScreen(),
       binding: SignUpBindings(),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
     GetPage(
       name: RoutesName.bookNowScreen,
       page: () => BookNowView(),
       binding: BookViewBindings(),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
     GetPage(
       name: RoutesName.applicationScreen,
@@ -65,7 +65,7 @@ class AppRoutes {
         ApplicationViewBindings(),
         BookViewBindings(),
       ],
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
     GetPage(
       name: RoutesName.inviteScreen,
@@ -73,7 +73,7 @@ class AppRoutes {
       bindings: <Bindings>[
         InviteBindings(),
       ],
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
     GetPage(
       name: RoutesName.helpScreen,
@@ -81,32 +81,32 @@ class AppRoutes {
       bindings: <Bindings>[
         HelpBindings()
       ],
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
 
     GetPage(
       name: RoutesName.profileScreen,
       page: () => ProfileScreen(),
       binding: ProfileBindings(),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
     GetPage(
       name: RoutesName.paymentScreen,
       page: () => PaymentScreen(),
       binding: PaymentBindings(),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
 
     GetPage(name: RoutesName.preferenceScreen,
       page: () => PreferenceScreen(),
       binding: PreferenceBindings(),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
     GetPage(
       name: RoutesName.appearanceScreen,
       page: () => AppearanceScreen(),
       binding: AppearanceBindings(),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),    GetPage(
       name: RoutesName.surferScreen,
       page: () => SurferScreen(),
@@ -121,14 +121,14 @@ class AppRoutes {
       name: RoutesName.checkOutScreen,
       page: () => CheckOutScreen(),
       binding: CheckOutBindings(),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
 
     GetPage(
       name: RoutesName.carDetailsScreen,
-      page: () => CarDetailsScreen(),
+      page: () => CarDetailsScreen(isTextShow: false,),
       binding: CarDetailsBindings(),
-      transition: Transition.rightToLeft,
+      transition: Transition.downToUp,
     ),
   ];
 }

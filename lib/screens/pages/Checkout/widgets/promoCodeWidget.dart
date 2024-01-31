@@ -20,7 +20,7 @@ Future promoCodeBottomSheet(BuildContext context) {
     }
   });
   return showModalBottomSheet(
-    backgroundColor: Theme.of(context).scaffoldBgClr,
+    // backgroundColor: Theme.of(context).scaffoldBgClr,
     isScrollControlled: true,
     useSafeArea: true,
     context: context,
@@ -35,6 +35,7 @@ Future promoCodeBottomSheet(BuildContext context) {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBgClr,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15),
                   topRight: Radius.circular(15),
