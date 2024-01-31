@@ -11,6 +11,7 @@ class PaymentState{
   String documentId = DateTime.now().millisecondsSinceEpoch.toString();
   bool isCvvFocused = false;
 
+  final RxString expiryDateVal = ''.obs;
 
 
 }

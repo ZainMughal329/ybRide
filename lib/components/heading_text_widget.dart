@@ -12,6 +12,7 @@ class HeadingTextWidget extends StatelessWidget {
   final TextAlign? textAlign;
   final int? maxLines;
   final TextOverflow? overflow;
+  final double? height;
   const HeadingTextWidget(
       {super.key,
         required this.title,
@@ -24,6 +25,7 @@ class HeadingTextWidget extends StatelessWidget {
         this.textAlign,
         this.maxLines,
         this.overflow,
+        this.height = 1.0,
       });
 
   @override
@@ -40,7 +42,7 @@ class HeadingTextWidget extends StatelessWidget {
         fontSize: fontSize,
         fontWeight: fontWeight,
         fontStyle: fontStyle,
-        height: 1.0
+        height: height,
 
       ),
     );

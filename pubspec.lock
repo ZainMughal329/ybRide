@@ -552,6 +552,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.7"
+  ikchatbot:
+    dependency: "direct main"
+    description:
+      name: ikchatbot
+      sha256: "8a7c49d9b68004af283ff165e08385816f1dfb77202abd9e50da6f1b97c31a3c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   image:
     dependency: transitive
     description:
