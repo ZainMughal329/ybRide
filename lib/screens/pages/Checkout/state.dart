@@ -13,4 +13,9 @@ class CheckOutState{
   // bottom
   final buttonVisible = false.obs;
 
+
+  final cdwSwitchVal = false.obs;
+  final rcliSwitchVal = false.obs;
+  final sliSwitchVal = false.obs;
+
 }

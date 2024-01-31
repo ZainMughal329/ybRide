@@ -7,6 +7,7 @@ import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/screens/pages/Checkout/controller.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/agePolicy.dart';
+import 'package:yb_ride/screens/pages/Checkout/widgets/coverge_sheet.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/promoCodeWidget.dart';
 import 'package:yb_ride/screens/pages/book_page/car_details/inded.dart';
 
@@ -18,6 +19,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(CheckOutCon());
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBgClr,
       appBar: PreferredSize(
@@ -744,12 +746,20 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .03,
               ),
-              HeadingTextWidget(
-                title: 'Add custom coverage',
-                
-                fontSize: 16,
-                textColor: AppColors.buttonColor,
-              ),
+              GetBuilder<CheckOutCon>(builder: (con) {
+                return InkWell(
+                  onTap: () {
+                    controller.init();
+                    coverageBottomSheet(context, controller);
+                  },
+                  child: HeadingTextWidget(
+                    title: 'Add custom coverage',
+
+                    fontSize: 16,
+                    textColor: AppColors.buttonColor,
+                  ),
+                );
+              }),
               SizedBox(
                 height: mq.height * .02,
               ),
