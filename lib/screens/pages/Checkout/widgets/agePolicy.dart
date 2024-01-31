@@ -9,6 +9,7 @@ import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/screens/pages/Checkout/state.dart';
 import '../../../../../main.dart';
+import '../../../../components/reuseable_chatbot.dart';
 
 Future agePolicySheet(BuildContext context) {
   final state = CheckOutState();
@@ -146,6 +147,50 @@ Future agePolicySheet(BuildContext context) {
                               fontWeight: FontWeight.w600,
                               textColor: Theme.of(context).lightTextColor,
                               title: 'Did this answer your question?'),
+                        ),
+
+                        Container(
+                          height: mq.height * .2,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.blue.withOpacity(.1),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            children: [
+                              Spacer(),
+                              InkWell(
+                                onTap: (){
+                                  Get.to(ReUseAbleChatBot(),);
+                                },
+                                child: Container(
+                                  height: 40,
+                                  width: 180,
+                                  decoration: BoxDecoration(
+                                    color: Colors.deepPurple,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        HeadingTextWidget(title: 'Ask a question' , textColor: Colors.white,fontSize: 15,),
+                                        Icon(Icons.question_mark_outlined , color: Colors.white,size: 15,),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: mq.height * .02,
+                              ),
+                              SubHeadingTextWidget(title: 'The team can be helped if needed',fontWeight: FontWeight.w600,fontSize: 12,textColor: Theme.of(context).headingColor,),
+
+                              Spacer(),
+
+                            ],
+                          ),
                         ),
 
                       ],
