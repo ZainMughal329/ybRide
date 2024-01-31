@@ -17,10 +17,9 @@ import '../../../../../main.dart';
 Future detailsBottomSheet(BuildContext context) {
   final scrollController = ScrollController();
   return showModalBottomSheet(
-    backgroundColor: Theme.of(context).scaffoldBgClr,
+    // backgroundColor: Theme.of(context).scaffoldBgClr,
     context: context,
     // isScrollControlled: true,
-
     builder: (BuildContext context) {
       return Builder(builder: (BuildContext innerContext) {
         return SingleChildScrollView(
@@ -30,7 +29,8 @@ Future detailsBottomSheet(BuildContext context) {
 
             width: double.infinity,
             decoration: BoxDecoration(
-              // color: AppColors.whiteColor,
+              color: Theme.of(context).scaffoldBgClr,
+
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(15),
                 topRight: Radius.circular(15),

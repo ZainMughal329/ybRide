@@ -6,7 +6,9 @@ import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/screens/pages/Checkout/controller.dart';
+import 'package:yb_ride/screens/pages/Checkout/widgets/agePolicy.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/promoCodeWidget.dart';
+import 'package:yb_ride/screens/pages/book_page/car_details/inded.dart';
 
 import '../../../components/custom_Appbar.dart';
 import '../../../main.dart';
@@ -23,6 +25,10 @@ class CheckOutScreen extends GetView<CheckOutCon> {
           child: CustomAppBarWidget(
             centerTitle: 'Checkout',
             isLeading: true,
+            leadingIcon: Icons.arrow_back_ios,
+            leadingPress: (){
+              Navigator.pop(context);
+            },
           )),
       body: Stack(children: [
         Padding(
@@ -86,7 +92,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                           ),
                         ),
                         decoration: BoxDecoration(
-                            color: Colors.white38,
+                            color: Theme.of(context).scaffoldBgClr,
                             boxShadow: [
                               BoxShadow(color: Colors.black.withOpacity(0.1))
                             ],
@@ -113,6 +119,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                 },
                 child: Container(
                   height: mq.height * .08,
+
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                         vertical: mq.height * .02, horizontal: mq.width * .02),
@@ -139,7 +146,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                     ),
                   ),
                   decoration: BoxDecoration(
-                      color: Theme.of(context).lightTextColor,
+                      color: Theme.of(context).scaffoldBgClr,
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(color: Colors.black.withOpacity(0.1))
@@ -201,11 +208,16 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                   ),
                   Padding(
                       padding: EdgeInsets.only(right: mq.width * .65),
-                      child: HeadingTextWidget(
-                        title: 'Change car',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                        textColor: AppColors.buttonColor,
+                      child: InkWell(
+                        onTap: (){
+                          Get.to(CarDetailsScreen(isTextShow: true),);
+                        },
+                        child: HeadingTextWidget(
+                          title: 'Change car',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          textColor: AppColors.buttonColor,
+                        ),
                       ))
                 ],
               ),
@@ -975,11 +987,16 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .03,
               ),
-              HeadingTextWidget(
-                title: 'Open minimum age policy',
-                textColor: AppColors.buttonColor,
-                fontWeight: FontWeight.w600,
-                fontSize: 13,
+              InkWell(
+                onTap: (){
+                  agePolicySheet(context);
+                },
+                child: HeadingTextWidget(
+                  title: 'Open minimum age policy',
+                  textColor: AppColors.buttonColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13,
+                ),
               ),
               SizedBox(
                 height: mq.height * .03,
