@@ -8,15 +8,18 @@ import 'package:get/get.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/pages/Checkout/controller.dart';
+import 'package:yb_ride/screens/pages/Checkout/widgets/driverLicensealertbox.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/promoCodeWidget.dart';
+import 'package:yb_ride/screens/pages/Checkout/widgets/viewInstructionsBottomSheet.dart';
 
 import '../../../components/custom_Appbar.dart';
 import '../../../main.dart';
+import '../../settings/pages/payment_method/creditCard.dart';
 
 class CheckOutScreen extends GetView<CheckOutCon> {
   const CheckOutScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +33,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               physics: BouncingScrollPhysics(),
               padding:EdgeInsets.symmetric(vertical: mq.height*.03,horizontal: mq.width*.05),
               children: [
+                // Weekday Savings include section
                 Obx(()=> controller.state.isContainerVisible.value?
                    Container(
                     child: Padding(
@@ -69,6 +73,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                     ),
                   ):SizedBox(),),
                 SizedBox(height: mq.height*.03,),
+                //  have a promo code section
                 HeadingTextWidget(title: 'Have a promo code?',fontSize:18,),
                 SizedBox(height: mq.height*.02,),
                 GestureDetector(
@@ -106,6 +111,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                 SizedBox(height: mq.height*.02,),
                 Divider(color: Colors.black54,thickness: .2,),
                 SizedBox(height: mq.height*.02,),
+                // Economy Section
                 Column(
                   children: [
                   Row(
@@ -135,16 +141,20 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                     ],
                   ) ,
                      SizedBox(height: mq.height*.02,),
-                    Padding(
-                        padding: EdgeInsets.only(right: mq.width*.65),
-                        child: HeadingTextWidget(title: 'Change car',fontWeight: FontWeight.w600,fontSize: 14,textColor:AppColors.buttonColor,))
-            
-            
+                    GestureDetector(
+                      onTap: (){
+                        Get.toNamed(RoutesName.carDetailsScreen);
+                      },
+                      child: Padding(
+                          padding: EdgeInsets.only(right: mq.width*.65),
+                          child: HeadingTextWidget(title: 'Change car',fontWeight: FontWeight.w600,fontSize: 14,textColor:AppColors.buttonColor,)),
+                    )
                   ],
                 ),
                 SizedBox(height: mq.height*.02,),
                 Divider(color: Colors.black54,thickness: .2,),
                 SizedBox(height: mq.height*.02,),
+                // Getting the vehicle section
                 HeadingTextWidget(title: 'Getting the vehicle'),
                 SizedBox(height: mq.height*.02,),
                 Column(
@@ -224,8 +234,13 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                 SizedBox(height: mq.height*.02,),
                 SubHeadingTextWidget(title: 'Pick up your YbRide within a 2-hour window from your scheduled start.',fontWeight: FontWeight.w500,fontSize: 13,),
                 SizedBox(height: mq.height*.02,),
-                HeadingTextWidget(title: 'View instructions',textColor: AppColors.buttonColor,fontSize: 15,),
+                GestureDetector(
+                    onTap: (){
+                      viewInstructionsBottomSheet(context);
+                    },
+                    child: HeadingTextWidget(title: 'View instructions',textColor: AppColors.buttonColor,fontSize: 15,)),
                 SizedBox(height: mq.height*.02,),
+                // Where and When section
                 Divider(color: Colors.black54,thickness: .2,),
                 SizedBox(height: mq.height*.02,),
                 HeadingTextWidget(title: 'Where & When'),
@@ -355,7 +370,19 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                 SizedBox(height: mq.height*.02,),
                 Divider(color: Colors.black54,thickness: .2,),
                 SizedBox(height: mq.height*.02,),
-                HeadingTextWidget(title: 'Delivery process'),
+                // Delivery process
+                Column(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image(image: AssetImage('assets/images/clock.jpeg'),height: mq.height*.05,width: mq.width*.05,),
+                        SizedBox(width: 8),
+                        HeadingTextWidget(title: 'Delivery process')
+                      ],
+                    ),
+                  ],
+                ),
                 SizedBox(height: mq.height*.02,),
                 HeadingTextWidget(title: 'Your YBRide Surfer will wait 10 minutes upon arrival (at least until 12.40 PM),',fontSize: 14,fontWeight: FontWeight.w600,),
                 SizedBox(height: mq.height*.004,),
@@ -364,6 +391,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                 HeadingTextWidget(title: 'Read more',fontSize: 14,textColor: AppColors.buttonColor,),
                 SizedBox(height: mq.height*.02,),
                 Divider(color: Colors.black54,thickness: .2,),
+                //  Coverage section
                 HeadingTextWidget(title: 'Coverage'),
                 SizedBox(height: mq.height*.02,),
                 Column(
@@ -487,6 +515,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                 SizedBox(height: mq.height*.02,),
                 Divider(color: Colors.black54,thickness: .2,),
                 SizedBox(height: mq.height*.02,),
+                // Extras section
                 HeadingTextWidget(title: 'Extras',),
                 SizedBox(height: mq.height*.02,),
                 Column(
@@ -508,6 +537,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                               () => _switchButton(
                             controller.state.extraSwitchVal.value, (value) {
                             controller.state.extraSwitchVal.value = value;
+                            controller.updateTotalPrice_Extras();
                           },
                           ),),
             
@@ -520,6 +550,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                 SizedBox(height: mq.height*.02,),
                 Divider(color: Colors.black54,thickness: .2,),
                 SizedBox(height: mq.height*.02,),
+                // Drivers
                 HeadingTextWidget(title: 'Drivers',),
                 SizedBox(height: mq.height*.02,),
                 Column(
@@ -558,6 +589,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                         value: controller.state.driversCheckBoxVal.value,
                         onChanged: (bool? value) {
                           controller.state.driversCheckBoxVal.value = value!;
+                          controller.updateTotalPrice_Drivers();
                         },
                       ),
                     ),
@@ -580,20 +612,21 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                 SizedBox(height: mq.height*.03,),
                 SubHeadingTextWidget(title: 'Add additional driver fee of cost after bookings!',fontSize: 13,fontWeight: FontWeight.w500,),
                 SizedBox(height: mq.height*.02,),
-                HeadingTextWidget(title: 'See Details',fontSize: 16,textColor: AppColors.buttonColor),
+                GestureDetector(
+                    onTap: (){
+                      showCustomAlertDialog(context);
+                    },
+                    child: HeadingTextWidget(title: 'See Details',fontSize: 16,textColor: AppColors.buttonColor)),
                 SizedBox(height: mq.height*.03,),
                 Divider(color: Colors.black54,thickness: .2,),
                 SizedBox(height: mq.height*.02,),
+                // Deposit policy section
                 Column(
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.credit_card,
-                          size: 20,
-                          color: Colors.black,
-                        ),
+                        Image(image: AssetImage('assets/images/card.jpeg'),height: mq.height*.05,width: mq.width*.05,),
                         SizedBox(width: 8),
                         HeadingTextWidget(title: 'Deposit policy')
                       ],
@@ -607,22 +640,20 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                 SizedBox(height: mq.height*.02,),
                 Divider(color: Colors.black54,thickness: .2,),
                 SizedBox(height: mq.height*.02,),
+                // Minimum age section
                 HeadingTextWidget(title: 'Minimum age policy',),
                 SizedBox(height: mq.height*.03,),
                 HeadingTextWidget(title: 'Open minimum age policy',textColor: AppColors.buttonColor,fontWeight: FontWeight.w600,fontSize: 13,),
                 SizedBox(height: mq.height*.03,),
                 Divider(color: Colors.black54,thickness: .2,),
                 SizedBox(height: mq.height*.03,),
+                // cancellation policy
                 Column(
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.traffic_rounded,
-                          size: 20,
-                          color: Colors.black,
-                        ),
+                        Image(image: AssetImage('assets/images/signals.jpeg'),height: mq.height*.05,width: mq.width*.05,),
                         SizedBox(width: 8),
                         HeadingTextWidget(title: 'Cancellation policy')
                       ],
@@ -638,11 +669,22 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                 SizedBox(height: mq.height*.02,),
                 Divider(color: Colors.black54,thickness: .2,),
                 SizedBox(height: mq.height*.02,),
+                // Payment method section
                 HeadingTextWidget(title: 'Payment method',),
                 SizedBox(height: mq.height*.03,),
-                HeadingTextWidget(title: 'Add payment method',textColor: AppColors.buttonColor,fontWeight: FontWeight.w600,fontSize: 14,),
+                GestureDetector(
+                    onTap: (){
+                      Get.to(()=>CreditCardScreen());
+                    },
+                    child: HeadingTextWidget(title: 'Add payment method',textColor: AppColors.buttonColor,fontWeight: FontWeight.w600,fontSize: 14,)),
                 SizedBox(height: mq.height*.03,),
-                HeadingTextWidget(title: 'Add promo code',textColor: AppColors.buttonColor,fontWeight: FontWeight.w600,fontSize: 14,),
+                GestureDetector(
+                    onTap: (){
+                      promoCodeBottomSheet(
+                          context
+                      );
+                    },
+                    child: HeadingTextWidget(title: 'Add promo code',textColor: AppColors.buttonColor,fontWeight: FontWeight.w600,fontSize: 14,)),
                 SizedBox(height: mq.height*.03,),
                 SizedBox(height:mq.height*.05,),
             
@@ -689,7 +731,9 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                                 ),
                                               ],
                                             ),
-                                            SubHeadingTextWidget(title: '\$#02.11',fontSize: 13,),
+                                            Obx(() =>
+                                                SubHeadingTextWidget(title: '\$${controller.state.totalPrice.toStringAsFixed(2)}',fontSize: 13,),
+                                            )
                                           ],
                                         ),
 
@@ -736,7 +780,7 @@ Widget _switchButton(
     value: val,
     onChanged:  (value) {
       onChanged?.call(value);
-      AppSettings.openAppSettings();
+      // AppSettings.openAppSettings();
 
     },
   );

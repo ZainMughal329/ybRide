@@ -11,5 +11,27 @@ class CheckOutCon extends GetxController{
   }
 
 
+//   for update total price when click on driver check box
+  void updateTotalPrice_Drivers() {
+    if (state.driversCheckBoxVal.value) {
+     state. totalPrice.value = 2.11 + 150;
+    } else {
+      state.totalPrice.value = 2.11;
+    }
+  }
+
+
+
+//   for update total price when click on extras switch button
+  void updateTotalPrice_Extras() {
+    if (state.extraSwitchVal.value) {
+      state. totalPrice.value = 2.11 + 13;
+    } else {
+      state.totalPrice.value = 2.11;
+    }
+  }
+
+
+
 
 }
