@@ -16,10 +16,14 @@ import 'package:yb_ride/screens/settings/pages/payment_method/creditCard.dart';
 import '../../../components/custom_Appbar.dart';
 import '../../../main.dart';
 class CheckOutScreen extends GetView<CheckOutCon> {
-  const CheckOutScreen({super.key});
+  final double carRent;
+   CheckOutScreen({super.key,required this.carRent});
+  final controller = Get.put(CheckOutCon());
 
   @override
   Widget build(BuildContext context) {
+    print("Car Rent is"+carRent.toString());
+    controller.state.totalPrice.value=carRent;
     final controller2 = Get.put<CarDetailsController>(CarDetailsController());
     Get.put(CheckOutCon());
     return Scaffold(
@@ -1099,7 +1103,12 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               // Adjust the height based on your design
               decoration: BoxDecoration(
                   color: Theme.of(context).scaffoldBgClr,
-                  border: Border.all(color: Colors.grey.shade100)),
+                  border: Border.all(color: Colors.grey.shade100),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                  // topRight: Radius.circular(10),
+                ),
+              ),
               child: Padding(
                 padding: EdgeInsets.symmetric(
                     vertical: mq.height * .01, horizontal: mq.width * .05),

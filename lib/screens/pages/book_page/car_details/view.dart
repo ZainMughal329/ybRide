@@ -10,6 +10,7 @@ import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/helper/app_constants.dart';
 import 'package:yb_ride/routes/routes_name.dart';
+import 'package:yb_ride/screens/pages/Checkout/index.dart';
 import 'package:yb_ride/screens/pages/book_page/car_details/inded.dart';
 import 'package:yb_ride/screens/pages/book_page/car_details/widgets/details_sheet.dart';
 import 'package:yb_ride/screens/splash/controller.dart';
@@ -137,7 +138,10 @@ class CarDetailsScreen extends GetView<CarDetailsController> {
   Widget _buildCARCard(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(RoutesName.checkOutScreen);
+controller.calculateNoDays();
+controller.calculateNoDays();
+        Get.to(()=> CheckOutScreen(carRent: controller.state.rentPerDay*AppConstants.rentDays));
+        // Get.toNamed(RoutesName.checkOutScreen,arguments: {'',controller.state.rentPerDay});
       },
       child: Container(
         // height: mq.height * .38,
@@ -218,7 +222,7 @@ class CarDetailsScreen extends GetView<CarDetailsController> {
                       height: mq.height * .015,
                     ),
                     HeadingTextWidget(
-                      title: '\$23.99 | day',
+                      title: '\$${controller.state.rentPerDay} | day',
                       textColor: Theme.of(context).headingColor,
                     ),
                   ],
