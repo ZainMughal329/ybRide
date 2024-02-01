@@ -11,6 +11,7 @@ import 'package:yb_ride/screens/settings/pages/prefrences/apperence/controller.d
 import 'firebase_options.dart';
 import 'helper/app_theme.dart';
 late Size mq;
+late bool isDarkTheme;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,8 +35,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
-
     mq = MediaQuery.sizeOf(context);
     return GetMaterialApp(
       title: 'YB Ride',
@@ -59,7 +58,7 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData.dark(),
       themeMode: Pref.defaultTheme(),
-      initialRoute: RoutesName.carDetailsScreen,
+      initialRoute: RoutesName.splashScreen,
       getPages: AppRoutes.routes,
     );
   }

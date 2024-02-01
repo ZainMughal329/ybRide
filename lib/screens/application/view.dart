@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/screens/application/controller.dart';
@@ -21,10 +22,10 @@ class ApplicationView extends GetView<ApplicationViewController> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    isDarkTheme = Theme.of(context).brightness == Brightness.dark;
     var navBarItems = [
       PersistentBottomNavBarItem(
-        icon: returnNavBarIcon(FontAwesomeIcons.car,context),
+        icon: returnNavBarIcon(Ionicons.car,context),
         title: 'Book',
 
         activeColorPrimary: AppColors.buttonColor,
@@ -141,7 +142,7 @@ class ApplicationView extends GetView<ApplicationViewController> {
   Widget returnNavBarIcon(IconData icon,BuildContext context) {
     return Icon(
       icon,
-      size: 18,
+      size: 20,
     );
   }
 }

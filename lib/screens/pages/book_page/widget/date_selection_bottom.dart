@@ -47,6 +47,7 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
                         -3), // Offset in the negative y-axis to create a top shadow
                   ),
                 ],
+                color: Theme.of(context).scaffoldBgClr,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -103,7 +104,7 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
                       view: DateRangePickerView.month,
                       selectionMode: DateRangePickerSelectionMode.range,
                       minDate: DateTime(
-                          2024, int.parse("${cont.state.fromMonth.value}"), 01),
+                          2024, int.parse("${cont.state.fromDate.value}"), 01),
                       maxDate: DateTime(2029, 12, 31),
                       todayHighlightColor: AppColors.buttonColor,
                       viewSpacing: 5,

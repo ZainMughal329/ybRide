@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
@@ -17,9 +18,7 @@ class BookNowView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
-
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     cont.state.datesFetched==false ? cont.getCurrentDate() : null;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBgClr,

@@ -96,4 +96,6 @@ flutter:
   assets:
     - assets/
     - assets/images/
-
+    - assets/icons/
+    - assets/whiteIcons/
+    - assets/appImages/

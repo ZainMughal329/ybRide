@@ -45,6 +45,7 @@ class AppearanceScreen extends StatelessWidget {
                 _appearanceController.state.isDarkMode.value =
                     !_appearanceController.state.isDarkMode.value;
                 Pref.isDarkMode = _appearanceController.state.isDarkMode.value;
+                isDarkTheme = Theme.of(context).brightness == Brightness.dark;
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,6 +86,7 @@ class AppearanceScreen extends StatelessWidget {
                 _appearanceController.state.isDarkMode.value =
                     !_appearanceController.state.isDarkMode.value;
                 Pref.isDarkMode = _appearanceController.state.isDarkMode.value;
+                isDarkTheme = Theme.of(context).brightness == Brightness.dark;
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

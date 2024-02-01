@@ -29,7 +29,7 @@ class LoginScreen extends GetView<LoginController> {
                 height: mq.height * 0.2,
                 width: mq.height * 0.2,
                 // color: Colors.black54,
-                child: Image.asset('assets/images/logo1.jpeg'),
+                child: Image.asset('assets/appImages/circleLogo.png'),
               ),
             ),
             SizedBox(

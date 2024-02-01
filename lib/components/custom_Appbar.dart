@@ -25,43 +25,47 @@ class CustomAppBarWidget extends StatelessWidget implements PreferredSizeWidget 
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).appBarColor, // Set your preferred background color
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2), // Set shadow color
-            blurRadius: 4, // Set the blur radius for the 3D effect
-            offset: Offset(0, 2), // Set the offset for the shadow
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Row(
-          children: [
-            isLeading ? IconButton(
-              icon: Icon(leadingIcon,size: 18,),
-              onPressed: leadingPress,
-            ) : Container(),
-            SizedBox(
-              width: mq.width * .02,
-            ),
-            Expanded(
-              child: Text(
-                centerTitle,
-                style: GoogleFonts.openSans(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 18,
-                  color: Theme.of(context).headingColor,
-                ),
-              ),
-            ),
-            IconButton(
-              icon: Icon(trailingIcon),
-              onPressed: trailingPress,
+    double notchHeight = MediaQuery.of(context).padding.top;
+    return Padding(
+      padding:  EdgeInsets.only(top: notchHeight+5),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).appBarColor, // Set your preferred background color
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2), // Set shadow color
+              blurRadius: 4, // Set the blur radius for the 3D effect
+              offset: Offset(0, 2), // Set the offset for the shadow
             ),
           ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Row(
+            children: [
+              isLeading ? IconButton(
+                icon: Icon(leadingIcon,size: 18,),
+                onPressed: leadingPress,
+              ) : Container(),
+              SizedBox(
+                width: mq.width * .02,
+              ),
+              Expanded(
+                child: Text(
+                  centerTitle,
+                  style: GoogleFonts.openSans(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                    color: Theme.of(context).headingColor,
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: Icon(trailingIcon),
+                onPressed: trailingPress,
+              ),
+            ],
+          ),
         ),
       ),
     );
