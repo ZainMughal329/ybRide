@@ -86,6 +86,10 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                                 context,
                                 con.state.cdwSwitchVal.value, (value) {
                               con.state.cdwSwitchVal.value = value;
+                              if(!value){
+                                con.subtractCustomCoverageValue('CDW');
+                              }
+                              con.updateTotalPrice_Custom_CDW();
                             }),
                           ),
                           SizedBox(
@@ -99,6 +103,10 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                                 context,
                                 con.state.rcliSwitchVal.value, (value) {
                               con.state.rcliSwitchVal.value = value;
+                              if(!value){
+                                con.subtractCustomCoverageValue('RCLI');
+                              }
+                              con.updateTotalPrice_Custom_RCLI();
                             }),
                           ),
                           SizedBox(
@@ -112,6 +120,11 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                                 context,
                                 con.state.sliSwitchVal.value, (value) {
                               con.state.sliSwitchVal.value = value;
+                              if(!value){
+                                con.subtractCustomCoverageValue('SLI');
+                              }
+
+                              con.updateTotalPrice_Custom_SLI();
                             }),
                           ),
                         ],
@@ -179,7 +192,7 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                                                           height: 45,
                                                           width: 60,
                                                           child: Lottie.asset(
-                                                              'assets/lottie/loading1.json'),
+                                                              'assets/lottie/loading2.json'),
                                                         ),
                                                       )
                                                     : con.state.sliSwitchVal
@@ -199,7 +212,7 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                                                             children: [
                                                               SubHeadingTextWidget(
                                                                 title:
-                                                                    '\$02.11',
+                                                                '\$${con.state.totalPrice.value.toStringAsFixed(2)}',
                                                                 fontSize: 13,
                                                                 decoration:
                                                                     TextDecoration
@@ -217,7 +230,7 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                                                               ),
                                                               SubHeadingTextWidget(
                                                                 title:
-                                                                    '\$02.11',
+                                                                '\$${con.state.totalPrice.value.toStringAsFixed(2)}',
                                                                 fontSize: 13,
                                                                 textColor: Theme.of(
                                                                         context)
@@ -226,7 +239,7 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                                                             ],
                                                           )
                                                         : SubHeadingTextWidget(
-                                                            title: '\$02.11',
+                                                            title: '\$${con.state.totalPrice.value.toStringAsFixed(2)}',
                                                             fontSize: 13,
                                                             textColor: Theme.of(
                                                                     context)

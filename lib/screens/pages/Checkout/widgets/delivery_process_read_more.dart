@@ -11,7 +11,7 @@ import 'package:yb_ride/screens/pages/Checkout/state.dart';
 import '../../../../../main.dart';
 import '../../../../components/reuseable_chatbot.dart';
 
-Future agePolicySheet(BuildContext context) {
+Future deliveryProcessSheet(BuildContext context) {
   final state = CheckOutState();
 
   final scrollController = ScrollController();
@@ -69,7 +69,7 @@ Future agePolicySheet(BuildContext context) {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         HeadingTextWidget(
-                          title: "How old do i need to be to book a YBCar?",
+                          title: "How does the delivery work?",
                           fontWeight: FontWeight.bold,
                           textColor: Theme.of(context).headingColor,
                           // maxLines: 2,
@@ -89,117 +89,116 @@ Future agePolicySheet(BuildContext context) {
                           height: mq.height * 0.03,
                         ),
                         HeadingTextWidget(
-                          title: 'Age requirements for daily rentals',
+                          title: 'Pre Delivery',
                           textColor: Theme.of(context).headingColor,
+                          fontWeight: FontWeight.bold,
                         ),
                         SizedBox(
                           height: 20,
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 15.0),
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 5,
-                                width: 5,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Theme.of(context).headingColor,
-                                ),
-                              ),
-                              SizedBox(
-                                width: mq.width * .02,
-                              ),
-                              SubHeadingTextWidget(
-                                title:
-                                    'Our minimum required age in Boston is 21.',
-                                textColor: Theme.of(context).headingColor,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: mq.height * .05,
-                        ),
                         SubHeadingTextWidget(
-                          textColor: Theme.of(context).headingColor,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
                           title:
-                              'Drivers under the age of 25 will be charged an additional "Young Renter Fee". The value of the fee may vary by region. The exact rate can be viewed in the price details section after selecting "I am under 25 years old" when making a booking on YBCar.',
+                          "Your Surfer will pick out your cleaned car from our lot and drive it to the delivery address of your choice."
+                              "Please note that while we make every effort to be punctual, there may be an arrival window of +/- 15 minutes around the scheduled time."
+                          ,
+                          textColor: Theme.of(context).headingColor,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 14,
                         ),
                         SizedBox(
                           height: mq.height * .02,
                         ),
                         SubHeadingTextWidget(
-                            fontWeight: FontWeight.w500,
-                            textColor: Theme.of(context).headingColor,
-                            fontSize: 14,
-                            title: 'Age requirements apply to all drivers.'),
-
+                          textColor: Theme.of(context).headingColor,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 14,
+                          title:
+                          "You can see your Surfer's ETA and live location in the Kyte app, as well as the make, model, color, and "
+                              "license plate of your vehicle. If you need to contact your Surfer, you'll be able to do so through the app.",
+                        ),
                         SizedBox(
-                          height: mq.height * .05,
+                          height: mq.height * .02,
                         ),
-                        Center(
-                          child: SubHeadingTextWidget(
-                              fontWeight: FontWeight.w600,
-                              textColor: Theme.of(context).lightTextColor,
-                              title: 'Did this answer your question?'),
+                        SizedBox(
+                          height: mq.height * 0.03,
                         ),
+                        HeadingTextWidget(
+                          title: 'The Handover',
+                          textColor: Theme.of(context).headingColor,
+                          fontWeight: FontWeight.bold,
+
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        SubHeadingTextWidget(
+                          title:
+                          "When your Surfer gets to you, they'll take photos of the vehicle and verify your driver's license. The final "
+                              "step before the handover of keys is for you to sign the rental agreement. Yup, that’s really it - you're good to go!"
+                          ,
+                          textColor: Theme.of(context).headingColor,
+                          fontWeight: FontWeight.normal,
+
+                          fontSize: 14,
+                        ),
+                        SizedBox(
+                          height: mq.height * 0.03,
+                        ),
+                        HeadingTextWidget(
+                          title: 'Post Delivery',
+                          textColor: Theme.of(context).headingColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        SubHeadingTextWidget(
+                          title:
+                          "After the handover, we would greatly appreciate your feedback. If you were satisfied with the delivery, you"
+                              "may also leave a trip for the surfer, which will be given to them in full",
+                          textColor: Theme.of(context).headingColor,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 14,
+                        ),
+                        SizedBox(
+                          height: mq.height * .02,
+                        ),
+
+
                         SizedBox(
                           height: mq.height * .03,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Container(
-                            height: mq.height * .2,
+                            height: mq.height * .15,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: Colors.blue.withOpacity(.1),
+                              color: Colors.grey.withOpacity(.1),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Spacer(),
-                                InkWell(
-                                  onTap: (){
-                                    Get.to(ReUseAbleChatBot(),);
-                                  },
-                                  child: Container(
-                                    height: 40,
-                                    width: 180,
-                                    decoration: BoxDecoration(
-                                      color: Colors.deepPurple,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Center(
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        children: [
-                                          HeadingTextWidget(title: 'Ask a question' , textColor: Colors.white,fontSize: 15,),
-                                          Icon(Icons.question_mark_outlined , color: Colors.white,size: 15,),
-                                        ],
-                                      ),
-                                    ),
+                                Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Center(
+                                    child: SubHeadingTextWidget(title: "Pro-tip: Surfers typically only wait for 10 minutes after the scheduled time before they may need to depart for next trip -they are busy peoples!",fontWeight: FontWeight.normal,fontSize: 12,textColor: Theme.of(context).headingColor,),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: mq.height * .02,
-                                ),
-                                SubHeadingTextWidget(title: 'The team can be helped if needed',fontWeight: FontWeight.w600,fontSize: 12,textColor: Theme.of(context).headingColor,),
-                                SizedBox(
-                                  height: mq.height * .02,
-                                ),
-                                Spacer(),
-
-
                               ],
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: mq.height * .01,
+                        ),
+                        Center(child: SubHeadingTextWidget(title: 'Did this answer your question?')),
+                        SizedBox(
+                          height: mq.height * .01,
+                        ),
+
 
                       ],
                     ),
