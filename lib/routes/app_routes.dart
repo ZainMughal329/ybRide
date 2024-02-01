@@ -119,7 +119,7 @@ class AppRoutes {
 
     GetPage(
       name: RoutesName.checkOutScreen,
-      page: () => CheckOutScreen(),
+      page: () => CheckOutScreen(carRent: 0.0,),
       binding: CheckOutBindings(),
       transition: Transition.downToUp,
     ),
