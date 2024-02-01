@@ -1,4 +1,3 @@
-import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -7,19 +6,24 @@ import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/screens/pages/Checkout/controller.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/agePolicy.dart';
+import 'package:yb_ride/screens/pages/Checkout/widgets/coverge_sheet.dart';
+import 'package:yb_ride/screens/pages/Checkout/widgets/driverLicensealertbox.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/promoCodeWidget.dart';
+import 'package:yb_ride/screens/pages/Checkout/widgets/viewInstructionsBottomSheet.dart';
 import 'package:yb_ride/screens/pages/book_page/car_details/inded.dart';
-
+import 'package:yb_ride/screens/settings/pages/payment_method/creditCard.dart';
 import '../../../components/custom_Appbar.dart';
 import '../../../main.dart';
-
 class CheckOutScreen extends GetView<CheckOutCon> {
   const CheckOutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller2 = Get.put<CarDetailsController>(CarDetailsController());
+    Get.put(CheckOutCon());
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBgClr,
+      // AppBAr section
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(mq.height * .08),
           child: CustomAppBarWidget(
@@ -38,73 +42,75 @@ class CheckOutScreen extends GetView<CheckOutCon> {
             padding: EdgeInsets.symmetric(
                 vertical: mq.height * .03, horizontal: mq.width * .05),
             children: [
+              // Drive Container
               Obx(
-                () => controller.state.isContainerVisible.value
+                    () => controller.state.isContainerVisible.value
                     ? Container(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: mq.height * .02,
-                              horizontal: mq.width * .03),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  CircleAvatar(
-                                    child: Icon(
-                                      Icons.done,
-                                      color: Colors.white,
-                                      size: 13,
-                                    ),
-                                    backgroundColor: AppColors.buttonColor,
-                                    radius: 8,
-                                  ),
-                                  SizedBox(
-                                    width: mq.width * .02,
-                                  ),
-                                  HeadingTextWidget(
-                                    title: 'Weekday Savings Included',
-                                    textColor: AppColors.buttonColor,
-                                    fontSize: 14,
-                                  ),
-                                  SizedBox(
-                                    width: mq.width * .12,
-                                  ),
-                                  GestureDetector(
-                                      onTap: () {
-                                        controller.hideContainer();
-                                      },
-                                      child: Icon(
-                                        FontAwesomeIcons.xmark,
-                                        color: Theme.of(context).headingColor,
-                                        size: 16,
-                                      ))
-                                ],
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: mq.height * .02,
+                        horizontal: mq.width * .03),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              child: Icon(
+                                Icons.done,
+                                color: Colors.white,
+                                size: 13,
                               ),
-                              SizedBox(
-                                height: mq.height * .01,
-                              ),
-                              SubHeadingTextWidget(
-                                title:
-                                    'Your booking includes a weekday -you have the best prices 💸',
-                                textColor: Theme.of(context).lightTextColor,
-                              ),
-                            ],
-                          ),
+                              backgroundColor: AppColors.buttonColor,
+                              radius: 8,
+                            ),
+                            SizedBox(
+                              width: mq.width * .02,
+                            ),
+                            HeadingTextWidget(
+                              title: 'Weekday Savings Included',
+                              textColor: AppColors.buttonColor,
+                              fontSize: 14,
+                            ),
+                            SizedBox(
+                              width: mq.width * .12,
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  controller.hideContainer();
+                                },
+                                child: Icon(
+                                  FontAwesomeIcons.xmark,
+                                  color: Theme.of(context).headingColor,
+                                  size: 16,
+                                ))
+                          ],
                         ),
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBgClr,
-                            boxShadow: [
-                              BoxShadow(color: Colors.black.withOpacity(0.1))
-                            ],
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                                color: Theme.of(context).scaffoldBgClr)),
-                      )
+                        SizedBox(
+                          height: mq.height * .01,
+                        ),
+                        SubHeadingTextWidget(
+                          title:
+                          'Your booking includes a weekday -you have the best prices 💸',
+                          textColor: Theme.of(context).lightTextColor,
+                        ),
+                      ],
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBgClr,
+                      boxShadow: [
+                        BoxShadow(color: Colors.black.withOpacity(0.1))
+                      ],
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                          color: Theme.of(context).scaffoldBgClr)),
+                )
                     : SizedBox(),
               ),
               SizedBox(
                 height: mq.height * .03,
               ),
+              // Promo code section
               HeadingTextWidget(
                 title: 'Have a promo code?',
                 fontSize: 18,
@@ -164,6 +170,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .02,
               ),
+              // Vehicle section or chnge a car
               Column(
                 children: [
                   Row(
@@ -231,6 +238,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .02,
               ),
+              // Getting the vehicle
               HeadingTextWidget(
                 title: 'Getting the vehicle',
                 textColor: Theme.of(context).headingColor,
@@ -339,7 +347,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               ),
               SubHeadingTextWidget(
                 title:
-                    'Pick up your YbRide within a 2-hour window from your scheduled start.',
+                'Pick up your YbRide within a 2-hour window from your scheduled start.',
                 fontWeight: FontWeight.w500,
                 fontSize: 13,
                 textColor: Theme.of(context).lightTextColor,
@@ -362,6 +370,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .02,
               ),
+              // Where and When
               HeadingTextWidget(
                 title: 'Where & When',
                 textColor: Theme.of(context).headingColor,
@@ -388,7 +397,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                           children: [
                             HeadingTextWidget(
                               title:
-                                  '844 11th Avenue, 844 11th Avenue, New York, NY 10019',
+                              '844 11th Avenue, 844 11th Avenue, New York, NY 10019',
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
                               maxLines: 2,
@@ -432,7 +441,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                           children: [
                             HeadingTextWidget(
                               title:
-                                  '844 11th Avenue, 844 11th Avenue, New York, NY 10019',
+                              '844 11th Avenue, 844 11th Avenue, New York, NY 10019',
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
                               maxLines: 2,
@@ -518,16 +527,28 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .02,
               ),
-              HeadingTextWidget(
-                title: 'Delivery process',
-                textColor: Theme.of(context).headingColor,
+              // Delivery process
+              Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image(image: AssetImage('assets/images/clock.jpeg'),height: mq.height*.05,width: mq.width*.05,),
+                      SizedBox(width: 8),
+                      HeadingTextWidget(
+                        title: 'Delivery process',
+                        textColor: Theme.of(context).headingColor,
+                      ),
+                    ],
+                  ),
+                ],
               ),
               SizedBox(
                 height: mq.height * .02,
               ),
               HeadingTextWidget(
                 title:
-                    'Your YBRide Surfer will wait 10 minutes upon arrival (at least until 12.40 PM),',
+                'Your YBRide Surfer will wait 10 minutes upon arrival (at least until 12.40 PM),',
                 fontSize: 14,
                 textColor: Theme.of(context).headingColor,
                 fontWeight: FontWeight.w600,
@@ -537,7 +558,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               ),
               SubHeadingTextWidget(
                 title:
-                    "We will keep you updated on your surfer's estimated arrival time through text and/ or push notifications. Enjoy your trip!",
+                "We will keep you updated on your surfer's estimated arrival time through text and/ or push notifications. Enjoy your trip!",
                 fontSize: 13,
                 textColor: Theme.of(context).lightTextColor,
                 fontWeight: FontWeight.w500,
@@ -557,6 +578,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                 color: Colors.black54,
                 thickness: .2,
               ),
+              // Coverage
               HeadingTextWidget(
                 title: 'Coverage',
                 textColor: Theme.of(context).headingColor,
@@ -576,7 +598,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                           HeadingTextWidget(
                             title: 'Standard Protection',
                             textColor: Theme.of(context).headingColor,
-                            
+
                             fontSize: 14,
                           ),
                           SizedBox(
@@ -585,7 +607,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                           SubHeadingTextWidget(
                             title: '\$53.98 | day',
                             textColor: Theme.of(context).lightTextColor,
-                            
+
                             fontSize: 14,
                           )
                         ],
@@ -605,7 +627,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                           // Use the correct icon based on selection
                           size: 13,
                           color:
-                              Theme.of(context).scaffoldBgClr, // Use the color based on selection
+                          Theme.of(context).scaffoldBgClr, // Use the color based on selection
                         ),
                       ),
                     ],
@@ -617,10 +639,10 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               ),
               SubHeadingTextWidget(
                 title:
-                    'Provides liability insurance which is a mandatory legal requirement in all 50 states, covers any damage done to the car past a \$500 deduction. Includes Roadside Assistance.',
+                'Provides liability insurance which is a mandatory legal requirement in all 50 states, covers any damage done to the car past a \$500 deduction. Includes Roadside Assistance.',
                 fontWeight: FontWeight.w500,
                 textColor: Theme.of(context).lightTextColor,
-                
+
                 fontSize: 13,
               ),
               SizedBox(
@@ -665,7 +687,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                           // Use the correct icon based on selection
                           size: 13,
                           color:
-                              Theme.of(context).scaffoldBgClr, // Use the color based on selection
+                          Theme.of(context).scaffoldBgClr, // Use the color based on selection
                         ),
                       ),
                     ],
@@ -677,7 +699,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               ),
               SubHeadingTextWidget(
                 title:
-                    'Provides liability insurance which is a mandatory legal requirement in all 50 states, Driving without liability insurance us illegal',
+                'Provides liability insurance which is a mandatory legal requirement in all 50 states, Driving without liability insurance us illegal',
                 textColor: Theme.of(context).lightTextColor,
                 fontWeight: FontWeight.w500,
                 fontSize: 13,
@@ -724,7 +746,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                           // Use the correct icon based on selection
                           size: 13,
                           color:
-                              Theme.of(context).scaffoldBgClr, // Use the color based on selection
+                          Theme.of(context).scaffoldBgClr, // Use the color based on selection
                         ),
                       ),
                     ],
@@ -736,7 +758,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               ),
               SubHeadingTextWidget(
                 title:
-                    'You have your own insurance that complies with local requirements. You understand that it is illegal to drive without liability insurance, and that you will be liable for any damage done to a 3rd party.',
+                'You have your own insurance that complies with local requirements. You understand that it is illegal to drive without liability insurance, and that you will be liable for any damage done to a 3rd party.',
                 textColor: Theme.of(context).lightTextColor,
                 fontWeight: FontWeight.w500,
                 fontSize: 13,
@@ -744,12 +766,20 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .03,
               ),
-              HeadingTextWidget(
-                title: 'Add custom coverage',
-                
-                fontSize: 16,
-                textColor: AppColors.buttonColor,
-              ),
+              GetBuilder<CheckOutCon>(builder: (con) {
+                return InkWell(
+                  onTap: () {
+                    controller.init();
+                    coverageBottomSheet(context, controller);
+                  },
+                  child: HeadingTextWidget(
+                    title: 'Add custom coverage',
+
+                    fontSize: 16,
+                    textColor: AppColors.buttonColor,
+                  ),
+                );
+              }),
               SizedBox(
                 height: mq.height * .02,
               ),
@@ -760,6 +790,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .02,
               ),
+              // Extras section
               HeadingTextWidget(
                 textColor: Theme.of(context).headingColor,
                 title: 'Extras',
@@ -793,10 +824,11 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                       ),
                       Spacer(), // Add spacing between text and circle
                       Obx(
-                        () => _switchButton(
+                            () => _switchButton(
                           controller.state.extraSwitchVal.value,
-                          (value) {
+                              (value) {
                             controller.state.extraSwitchVal.value = value;
+                            controller.updateTotalPrice_Drivers();
                           },
                           context,
                         ),
@@ -810,7 +842,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               ),
               SubHeadingTextWidget(
                   title:
-                      'Your rental includes 1800 miles. You will pay \$0.45/mile thereafter.',
+                  'Your rental includes 1800 miles. You will pay \$0.45/mile thereafter.',
                   textColor: Theme.of(context).lightTextColor,
                   fontWeight: FontWeight.w500,
                   fontSize: 13),
@@ -824,6 +856,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .02,
               ),
+              // Drivers Section
               HeadingTextWidget(
                 textColor: Theme.of(context).headingColor,
                 title: 'Drivers',
@@ -875,7 +908,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               Row(
                 children: [
                   Obx(
-                    () => Checkbox(
+                        () => Checkbox(
                       shape: ContinuousRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                         side: BorderSide(
@@ -885,6 +918,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                       value: controller.state.driversCheckBoxVal.value,
                       onChanged: (bool? value) {
                         controller.state.driversCheckBoxVal.value = value!;
+                        controller.updateTotalPrice_Drivers();
                       },
                     ),
                   ),
@@ -895,7 +929,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                   SizedBox(width: mq.width * 0.02),
                   CircleAvatar(
                     radius: 6,
-                    backgroundColor:                                 Theme.of(context).headingColor,
+                    backgroundColor: Theme.of(context).headingColor,
 
                     child: Icon(
                       Icons.question_mark,
@@ -910,7 +944,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               ),
               SubHeadingTextWidget(
                 title:
-                    "Drivers License verification is required, you'll receive instructions after payment.",
+                "Drivers License verification is required, you'll receive instructions after payment.",
                 textColor: Theme.of(context).lightTextColor,
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
@@ -927,10 +961,14 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .02,
               ),
-              HeadingTextWidget(
-                  title: 'See Details',
-                  fontSize: 16,
-                  textColor: AppColors.buttonColor),
+              GestureDetector(onTap: (){
+                showCustomAlertDialog(context);
+              },
+                child: HeadingTextWidget(
+                    title: 'See Details',
+                    fontSize: 16,
+                    textColor: AppColors.buttonColor),
+              ),
               SizedBox(
                 height: mq.height * .03,
               ),
@@ -941,17 +979,13 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .02,
               ),
+              // Deposit Policy section
               Column(
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.credit_card,
-                        size: 20,
-                        color:                                 Theme.of(context).headingColor,
-
-                      ),
+                      Image(image: AssetImage('assets/images/card.jpeg'),height: mq.height*.05,width: mq.width*.05,),
                       SizedBox(width: 8),
                       HeadingTextWidget(title: 'Deposit policy',
                         textColor: Theme.of(context).headingColor,
@@ -965,7 +999,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               ),
               SubHeadingTextWidget(
                 title:
-                    'A temporary deposit of \$300.00(\$500.00 for debit cards)will be held on your card 24 hours before your trip starts. Typically, YbRide releases this deposit 3 days after your trip ends, but your bank may take an additional 5-10 business days for processing. Trips longer than 27 days will have the deposit captured and refunded after your trip',
+                'A temporary deposit of \$300.00(\$500.00 for debit cards)will be held on your card 24 hours before your trip starts. Typically, YbRide releases this deposit 3 days after your trip ends, but your bank may take an additional 5-10 business days for processing. Trips longer than 27 days will have the deposit captured and refunded after your trip',
                 textColor: Theme.of(context).lightTextColor,
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
@@ -980,6 +1014,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .02,
               ),
+              // Minimum age policy
               HeadingTextWidget(
                 textColor: Theme.of(context).headingColor,
                 title: 'Minimum age policy',
@@ -1008,16 +1043,13 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .03,
               ),
+              // Cancelation policy
               Column(
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.traffic_rounded,
-                        size: 20,
-                        color: Theme.of(context).headingColor,
-                      ),
+                      Image(image: AssetImage('assets/images/signals.jpeg'),height: mq.height*.05,width: mq.width*.05,),
                       SizedBox(width: 8),
                       HeadingTextWidget(title: 'Cancellation policy',
                         textColor: Theme.of(context).headingColor,
@@ -1032,7 +1064,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               ),
               SubHeadingTextWidget(
                 title:
-                    "Free cancellation until 48h before start. By closing the booking, you confirm that you've read and accepted the trip information and the terms and conditions",
+                "Free cancellation until 48h before start. By closing the booking, you confirm that you've read and accepted the trip information and the terms and conditions",
                 textColor: Theme.of(context).lightTextColor,
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
@@ -1040,11 +1072,16 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .03,
               ),
-              HeadingTextWidget(
-                title: 'See terms and conditions',
-                textColor: AppColors.buttonColor,
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
+              GestureDetector(
+    onTap:(){
+    viewInstructionsBottomSheet(context);
+    },
+                child: HeadingTextWidget(
+                  title: 'See terms and conditions',
+                  textColor: AppColors.buttonColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                ),
               ),
               SizedBox(
                 height: mq.height * .02,
@@ -1056,6 +1093,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .02,
               ),
+              // Payment method
               HeadingTextWidget(
                 textColor: Theme.of(context).headingColor,
                 title: 'Payment method',
@@ -1063,20 +1101,30 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .03,
               ),
-              HeadingTextWidget(
-                title: 'Add payment method',
-                textColor: AppColors.buttonColor,
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
+              GestureDetector(
+              onTap: (){
+                Get.to(()=>CreditCardScreen());
+              },
+                child: HeadingTextWidget(
+                  title: 'Add payment method',
+                  textColor: AppColors.buttonColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                ),
               ),
               SizedBox(
                 height: mq.height * .03,
               ),
-              HeadingTextWidget(
-                title: 'Add promo code',
-                textColor: AppColors.buttonColor,
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
+              GestureDetector(
+                onTap: (){
+                  promoCodeBottomSheet(context);
+                },
+                child: HeadingTextWidget(
+                  title: 'Add promo code',
+                  textColor: AppColors.buttonColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                ),
               ),
               SizedBox(
                 height: mq.height * .03,
@@ -1087,6 +1135,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
             ],
           ),
         ),
+        // Button Section
         Positioned(
             bottom: mq.height * 0,
             left: mq.width * 0,
@@ -1125,16 +1174,18 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                       backgroundColor: Theme.of(context).headingColor,
                                       child: Icon(
                                         Icons.question_mark,
-                                        color:                                 Theme.of(context).scaffoldBgClr,
+                                        color:   Theme.of(context).scaffoldBgClr,
                                         size: 8,
                                       ),
                                     ),
                                   ],
                                 ),
-                                SubHeadingTextWidget(
-                                  title: '\$#02.11',
-                                  fontSize: 13,
-                                  textColor: Theme.of(context).lightTextColor,
+                                Obx(()=>
+                                   SubHeadingTextWidget(
+                                    title: controller.state.totalPrice.value.toString(),
+                                    fontSize: 13,
+                                    textColor: Theme.of(context).lightTextColor,
+                                  ),
                                 ),
                               ],
                             ),
@@ -1158,10 +1209,10 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                         ),
                         child: Center(
                             child: HeadingTextWidget(
-                          title: 'Add personal data',
+                              title: 'Add personal data',
                               textColor: Colors.white,
-                          fontSize: 14,
-                        )),
+                              fontSize: 14,
+                            )),
                       ),
                     )
                   ],
@@ -1177,13 +1228,13 @@ Widget _switchButton(bool val, ValueChanged<bool>? onChanged,BuildContext contex
   return Switch(
     inactiveThumbColor: Theme.of(context).lightTextColor,
     inactiveTrackColor: Colors.transparent,
-    activeColor:                                  Theme.of(context).scaffoldBgClr,
-
+    activeColor:Theme.of(context).scaffoldBgClr,
     activeTrackColor: AppColors.buttonColor,
     value: val,
     onChanged: (value) {
       onChanged?.call(value);
-      AppSettings.openAppSettings();
     },
   );
 }
+
+
