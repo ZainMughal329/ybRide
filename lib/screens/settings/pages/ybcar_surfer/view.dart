@@ -8,10 +8,9 @@ import 'package:yb_ride/components/reuseable_button.dart';
 import 'package:yb_ride/components/text_form_field.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
-import 'package:yb_ride/screens/settings/pages/profile/inded.dart';
 import 'package:yb_ride/screens/settings/pages/ybcar_surfer/inded.dart';
 
-import '../../../../components/custom_Appbar.dart';
+
 import '../../../../components/phone_number_input_field.dart';
 import '../../../../main.dart';
 
@@ -40,8 +39,8 @@ class SurferScreen extends GetView<SurferController> {
                 ),
                 items: [
                   DropdownMenuItem(
-                    child: Text('Bostan'),
-                    value: 'Bostan',
+                    child: Text('Boston'),
+                    value: 'Boston',
                   ),
                 ],
                 onChanged: (value) {
@@ -137,7 +136,9 @@ class SurferScreen extends GetView<SurferController> {
                           ),
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(.9),
+                            color: AppColors.buttonColor.withOpacity(.5),
+                            border: Border.all(color: Theme.of(context).headingColor),
+                            borderRadius: BorderRadius.all(Radius.circular(10),),
                           ),
                           child: Obx( () => controller.state.isCollapsed.value ? Container(
                             child: Column(
@@ -475,8 +476,8 @@ class SurferScreen extends GetView<SurferController> {
                     height: mq.height * .09,
                     width: mq.height * .09,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(45),
-                        image: DecorationImage(image: AssetImage('assets/images/logo1.jpeg' ,),fit: BoxFit.fill)
+                        borderRadius: BorderRadius.circular(5),
+                        image: DecorationImage(image: AssetImage('assets/whiteIcons/WhiteLogo.png',),)
                     ),
                     // child: Image.asset('assets/images/logo1.jpeg' , fit: BoxFit.contain,),
                     // color: AppColors.orangeColor,

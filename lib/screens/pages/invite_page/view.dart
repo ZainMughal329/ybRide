@@ -24,7 +24,7 @@ class InviteScreen extends GetView<InviteCon> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
     final subtittle="They get a YBRide \$30.00 discount on their first booking and you earn \$30.00 in YBride credits. Yours code will be created after you first booking.";
     mq = MediaQuery.sizeOf(context);
 
@@ -40,7 +40,7 @@ class InviteScreen extends GetView<InviteCon> {
               padding: EdgeInsets.only(top: mq.height * .09),
               child: Image(
                   image: AssetImage(
-                      'assets/images/6.jpeg'),
+                      'assets/appImages/invite.png'),
                   height: mq.height * .3,
                   width: mq.width * .5),
             ),

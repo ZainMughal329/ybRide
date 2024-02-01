@@ -30,11 +30,11 @@ class Snackbar {
         color: AppColors.snackBarTextColor,
         size: 25,
       ),
-      snackPosition: SnackPosition.BOTTOM,
+      snackPosition: SnackPosition.TOP,
       borderRadius: 8,
       margin: EdgeInsets.all(10),
-      forwardAnimationCurve: Curves.easeOutExpo,
-      reverseAnimationCurve: Curves.easeInOut,
+      forwardAnimationCurve: Curves.bounceInOut,
+      reverseAnimationCurve: Curves.easeOut,
     );
   }
 

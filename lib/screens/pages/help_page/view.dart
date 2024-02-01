@@ -14,7 +14,6 @@ class HelpScreen extends GetView<HelpCon> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     mq = MediaQuery.sizeOf(context);
 
     return Scaffold(

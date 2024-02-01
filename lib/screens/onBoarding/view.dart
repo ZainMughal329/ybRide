@@ -28,28 +28,28 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
       onBoard(
           title: 'Rental cars delivered to your door',
           subtittle: 'The easiest way to rent a car',
-          image: 'logo1.jpeg'),
+          image: 'assets/appImages/circleLogo.png'),
       onBoard(
           title: 'Tell us where and when',
           subtittle:
               'Reserve a new, clean car and a driver will bring it to your, whenever you need it.',
-          image: '2.png'),
+          image: 'assets/appImages/onBoarding1.png'),
       onBoard(
           title: 'We deliver car with love',
           subtittle:
               "Let's face it... Picking up a rental car is painful so don't do it, Reserve a ybride, a driver will bring it to you, on demand",
-          image: '4.jpeg'),
+          image: 'assets/appImages/onBoarding2.png'),
 
       onBoard(
           title: 'We fuel up for you',
           subtittle:
           "It's your adventure! No need to refuel your car before you return it. We'll fuel up for you at transparent rates! No hidden fees. ",
-          image: '7.png'),
+          image: 'assets/appImages/onBoarding3.png'),
       onBoard(
           title: 'We pick up YBCars',
           subtittle:
               "When you're done! A driver\n will pick up the car from a location of your choice",
-          image: '3.png'),
+          image: 'assets/appImages/onBoarding4.png'),
     ];
     mq = MediaQuery.sizeOf(context);
     return Scaffold(
@@ -68,7 +68,7 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
                       padding: EdgeInsets.only(top: mq.height * .09),
                       child: Image(
                           image: AssetImage(
-                              'assets/images/${list[ind].image}'),
+                              list[ind].image),
                           height: mq.height * .3,
                           width: mq.width * .5),
                     ),
@@ -157,7 +157,7 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
                 isOnboarding
                     ? SizedBox()
                     : Positioned(
-                        top: 20,
+                        top: MediaQuery.of(context).padding.top,
                         left: 20,
                         child: InkWell(
                           onTap: () {

@@ -98,4 +98,6 @@ flutter:
     - assets/
     - assets/lottie/
     - assets/images/
-
+    - assets/icons/
+    - assets/whiteIcons/
+    - assets/appImages/

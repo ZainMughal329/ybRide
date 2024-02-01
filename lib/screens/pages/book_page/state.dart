@@ -18,6 +18,11 @@ class BookNowState {
   RxInt results = 0.obs;
   RxDouble heightOfSheet = 0.0.obs;
 
+  // variables to check selection
+  RxBool locationSelected = false.obs;
+  RxBool timeandDateSelected = false.obs;
+  RxBool startEndDateSelected = false.obs;
+
 
   //location variables
   RxList placeList = [].obs;

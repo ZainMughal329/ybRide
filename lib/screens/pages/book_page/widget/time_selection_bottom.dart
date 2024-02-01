@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:uuid/uuid.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
+import 'package:yb_ride/components/icon_container.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
 import 'package:yb_ride/components/text_form_field.dart';
 import 'package:yb_ride/components/text_widget.dart';
@@ -45,6 +46,7 @@ Future timeSelBottomSheet(
                   -3), // Offset in the negative y-axis to create a top shadow
             ),
           ],
+          color: Theme.of(context).scaffoldBgClr,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -65,7 +67,7 @@ Future timeSelBottomSheet(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: mq.width * 0.1,
+                    width: mq.width * 0.05,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -74,22 +76,23 @@ Future timeSelBottomSheet(
                         onTap: () {
                           Navigator.pop(context);
                         },
-                        child: Container(
-                          width: mq.width * 0.2,
-                          child: FaIcon(FontAwesomeIcons.xmark,
-                              size: 23, color: Theme.of(context).headingColor),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 5),
+                          child: Container(
+                            // width: mq.width * 0.2,
+                            child: IconContainer(iconName: 'XMark.png',height: 15,width: 15,),
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  Flexible(
-                    child: HeadingTextWidget(
-                      title:
-                          isStartTime ? 'Select Start Time' : 'Select End Time',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 19,
-                      textColor: Theme.of(context).headingColor,
-                    ),
+                  SizedBox(width: mq.width*0.1,),
+                  HeadingTextWidget(
+                    title:
+                        isStartTime ? 'Select Start Time' : 'Select End Time',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 19,
+                    textColor: Theme.of(context).headingColor,
                   ),
                 ],
               ),
@@ -112,6 +115,10 @@ Future timeSelBottomSheet(
                       textColor: Theme.of(context).headingColor,
                     ),
                     DropdownButton(
+                      borderRadius: BorderRadius.all(Radius.circular(10),),
+                      style: GoogleFonts.openSans(
+                        color: Theme.of(context).headingColor,
+                      ),
                       hint: isStartTime
                           ? Text('${cont.state.fromTime.value}')
                           : Text('${cont.state.toTime.value}'),
@@ -120,7 +127,7 @@ Future timeSelBottomSheet(
                           isStartTime
                               ? cont.state.fromTime.value = value
                               : cont.state.toTime.value= value;
-                        })
+                        },),
                   ],
                 ),
               );

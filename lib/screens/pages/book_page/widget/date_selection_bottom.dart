@@ -9,6 +9,7 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
+import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/components/text_form_field.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
@@ -46,6 +47,7 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
                         -3), // Offset in the negative y-axis to create a top shadow
                   ),
                 ],
+                color: Theme.of(context).scaffoldBgClr,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -102,7 +104,7 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
                       view: DateRangePickerView.month,
                       selectionMode: DateRangePickerSelectionMode.range,
                       minDate: DateTime(
-                          2024, int.parse("${cont.state.fromMonth.value}"), 01),
+                          2024, int.parse("${cont.state.fromDate.value}"), 01),
                       maxDate: DateTime(2029, 12, 31),
                       todayHighlightColor: AppColors.buttonColor,
                       viewSpacing: 5,
@@ -229,7 +231,16 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
                     ),
                   ),
                   RoundButton(title: "Choose date & time", onPress: () {
-                    Navigator.pop(context);
+
+                    if(cont.state.startEndDateSelected.value == true
+                    ){
+                      cont.state.timeandDateSelected.value = true;
+                      Navigator.pop(context);
+                    }else{
+                      Snackbar.showSnackBar("Error","Select Date & Time", Icons.error_outline_outlined);
+                    }
+
+
                   }),
                 ],
               ),

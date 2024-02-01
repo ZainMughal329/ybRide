@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:yb_ride/helper/app_constants.dart';
+import 'package:yb_ride/routes/routes_name.dart';
+import 'package:yb_ride/screens/pages/book_page/car_details/inded.dart';
 import 'package:yb_ride/screens/pages/book_page/inded.dart';
 import 'package:http/http.dart' as http;
 
@@ -66,7 +68,7 @@ class BookViewController extends GetxController {
         }).toList();
 
         state.results.value = bostonPredictions.length;
-        cont.state.placeList.value =
+        // cont.state.placeList.value =
             cont.state.placeList.value = bostonPredictions;
         state.searchLoading.value == false;
       } else {
@@ -105,7 +107,9 @@ class BookViewController extends GetxController {
     if (coordinates.isNotEmpty) {
       final lat = coordinates.first;
       state.returnLoc.value = LatLng(lat.latitude, lat.longitude);
+
     }
+
   }
 
   void extractStartEndDate(String output) {
@@ -158,8 +162,11 @@ class BookViewController extends GetxController {
           state.toMonth.value = formattedDateMonth;
           state.toMonthName.value = getMonthName(formattedDateMonth);
           state.toYear.value = formattedDateYear;
+          state.startEndDateSelected.value=true;
+
 
         }
+
       }
 
 
@@ -214,4 +221,25 @@ class BookViewController extends GetxController {
 
 
   }
+
+  void moveToSelectVehicleScreen(){
+    AppConstants.fromMonth = state.fromMonth.value;
+    AppConstants.fromMonthName = state.fromMonthName.value;
+    AppConstants.fromDate = state.fromDate.value;
+    AppConstants.fromDateName = state.fromDateName.value;
+    AppConstants.fromYear = state.fromYear.value;
+    AppConstants.fromTime = state.fromTime.value;
+    AppConstants.toMonth = state.toMonth.value;
+    AppConstants.toMonthName = state.toMonthName.value;
+    AppConstants.toDate = state.toDate.value;
+    AppConstants.toDateName = state.toDateName.value;
+    AppConstants.toYear = state.toYear.value;
+    AppConstants.toTime = state.toTime.value;
+
+
+    Get.to(CarDetailsScreen(isTextShow: false));
+
+  }
+
+
 }

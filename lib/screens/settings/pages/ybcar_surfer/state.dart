@@ -12,6 +12,8 @@ class SurferState {
   final emailCon = TextEditingController();
   final phoneNumberCon = TextEditingController();
 
+  final loading = false.obs;
+
   Rx<CountryCode> code =
       CountryCode(name: 'United States', code: 'US', dialCode: '+1').obs;
 

@@ -26,7 +26,7 @@ class MyTripsView extends StatelessWidget {
             padding: EdgeInsets.only(top: mq.height * .09),
             child: Image(
                 image: AssetImage(
-                    'assets/images/trips.jpeg'),
+                    'assets/appImages/myTrips.png'),
                 height: mq.height * .3,
                 width: mq.width * .5),
           ),
