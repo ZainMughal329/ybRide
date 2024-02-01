@@ -21,13 +21,10 @@ Future agePolicySheet(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return Builder(builder: (BuildContext innerContext) {
-        return SingleChildScrollView(
-          controller: scrollController,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight:
-                  mq.height * 0.9, // Set a maximum height for the bottom sheet
-            ),
+        return Padding(
+          padding: EdgeInsets.only(bottom: 30),
+          child: SingleChildScrollView(
+            controller: scrollController,
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
@@ -117,7 +114,8 @@ Future agePolicySheet(BuildContext context) {
                                 title:
                                     'Our minimum required age in Boston is 21.',
                                 textColor: Theme.of(context).headingColor,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
                               )
                             ],
                           ),
@@ -127,7 +125,8 @@ Future agePolicySheet(BuildContext context) {
                         ),
                         SubHeadingTextWidget(
                           textColor: Theme.of(context).headingColor,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
                           title:
                               'Drivers under the age of 25 will be charged an additional "Young Renter Fee". The value of the fee may vary by region. The exact rate can be viewed in the price details section after selecting "I am under 25 years old" when making a booking on YBCar.',
                         ),
@@ -135,8 +134,9 @@ Future agePolicySheet(BuildContext context) {
                           height: mq.height * .02,
                         ),
                         SubHeadingTextWidget(
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w500,
                             textColor: Theme.of(context).headingColor,
+                            fontSize: 14,
                             title: 'Age requirements apply to all drivers.'),
 
                         SizedBox(
@@ -148,7 +148,9 @@ Future agePolicySheet(BuildContext context) {
                               textColor: Theme.of(context).lightTextColor,
                               title: 'Did this answer your question?'),
                         ),
-
+                        SizedBox(
+                          height: mq.height * .03,
+                        ),
                         Container(
                           height: mq.height * .2,
                           width: double.infinity,
@@ -186,8 +188,11 @@ Future agePolicySheet(BuildContext context) {
                                 height: mq.height * .02,
                               ),
                               SubHeadingTextWidget(title: 'The team can be helped if needed',fontWeight: FontWeight.w600,fontSize: 12,textColor: Theme.of(context).headingColor,),
-
+                              SizedBox(
+                                height: mq.height * .02,
+                              ),
                               Spacer(),
+
 
                             ],
                           ),
