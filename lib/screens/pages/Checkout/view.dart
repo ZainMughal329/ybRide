@@ -7,6 +7,7 @@ import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/screens/pages/Checkout/controller.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/agePolicy.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/coverge_sheet.dart';
+import 'package:yb_ride/screens/pages/Checkout/widgets/delivery_process_read_more.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/driverLicensealertbox.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/promoCodeWidget.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/viewInstructionsBottomSheet.dart';
@@ -249,7 +250,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               Column(
                 children: [
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -270,22 +271,19 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                           )
                         ],
                       ),
-                      Spacer(), // Add spacing between text and circle
-                      Container(
-                        width: 15, // Adjust the size of the circle
-                        height: 15, // Adjust the size of the circle
-                        decoration: BoxDecoration(
-                            color: AppColors.buttonColor,
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(color: Colors.black.withOpacity(0.1))
-                            ]),
-                        child: Icon(
-                          Icons.check,
-                          // Use the correct icon based on selection
-                          size: 13,
-                          color: Theme.of(context)
-                              .scaffoldBgClr, // Use the color based on selection
+                      Spacer(),
+                      Obx(
+                            () => Checkbox(
+                          shape: ContinuousRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: BorderSide(
+                                color: Colors.grey.withOpacity(.1), width: .5),
+                          ),
+                          visualDensity: VisualDensity.compact,
+                          value: controller.state.vehicle_delivery.value,
+                          onChanged: (bool? value) {
+                            controller.state.vehicle_delivery.value = value!;
+                          },
                         ),
                       ),
                     ],
@@ -319,25 +317,21 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                           ),
                         ],
                       ),
-                      Spacer(), // Add spacing between text and circle
-                      Container(
-                        width: 15, // Adjust the size of the circle
-                        height: 15, // Adjust the size of the circle
-                        decoration: BoxDecoration(
-                            color: AppColors.buttonColor,
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(color: Colors.black.withOpacity(0.1))
-                            ]),
-                        child: Icon(
-                          Icons.check,
-                          // Use the correct icon based on selection
-                          size: 13,
-                          color: Theme.of(context)
-                              .scaffoldBgClr, // Use the color based on selection
+                      Spacer(),
+                      Obx(
+                            () => Checkbox(
+                          shape: ContinuousRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: BorderSide(
+                                color: Colors.grey.withOpacity(.1), width: .5),
+                          ),
+                          visualDensity: VisualDensity.compact,
+                          value: controller.state.vehicle_pickup.value,
+                          onChanged: (bool? value) {
+                            controller.state.vehicle_pickup.value = value!;
+                          },
                         ),
                       ),
-                      // SizedBox(width: mq.width*.2,),
                     ],
                   ),
                 ],
@@ -566,10 +560,15 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               SizedBox(
                 height: mq.height * .02,
               ),
-              HeadingTextWidget(
-                title: 'Read more',
-                fontSize: 14,
-                textColor: AppColors.buttonColor,
+              GestureDetector(
+                onTap: (){
+                  deliveryProcessSheet(context);
+                },
+                child: HeadingTextWidget(
+                  title: 'Read more',
+                  fontSize: 14,
+                  textColor: AppColors.buttonColor,
+                ),
               ),
               SizedBox(
                 height: mq.height * .02,
@@ -587,6 +586,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                 height: mq.height * .02,
               ),
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -612,24 +612,13 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                           )
                         ],
                       ),
-                      Spacer(), // Add spacing between text and circle
-                      Container(
-                        width: 15, // Adjust the size of the circle
-                        height: 15, // Adjust the size of the circle
-                        decoration: BoxDecoration(
-                            color: AppColors.buttonColor,
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(color: Colors.black.withOpacity(0.1))
-                            ]),
-                        child: Icon(
-                          Icons.check,
-                          // Use the correct icon based on selection
-                          size: 13,
-                          color:
-                          Theme.of(context).scaffoldBgClr, // Use the color based on selection
-                        ),
-                      ),
+                      Spacer(),
+                      Obx(() =>_checkBox(controller.state.standard_protection.value, (value) {
+                        controller.state.standard_protection.value = value!;
+                        controller.updateTotalPrice_Coverage_std_prot();
+                      }, context), ),
+
+
                     ],
                   ),
                 ],
@@ -649,6 +638,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                 height: mq.height * .02,
               ),
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -673,23 +663,10 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                         ],
                       ),
                       Spacer(), // Add spacing between text and circle
-                      Container(
-                        width: 15, // Adjust the size of the circle
-                        height: 15, // Adjust the size of the circle
-                        decoration: BoxDecoration(
-                            color: AppColors.buttonColor,
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(color: Colors.black.withOpacity(0.1))
-                            ]),
-                        child: Icon(
-                          Icons.check,
-                          // Use the correct icon based on selection
-                          size: 13,
-                          color:
-                          Theme.of(context).scaffoldBgClr, // Use the color based on selection
-                        ),
-                      ),
+                      Obx(() =>_checkBox(controller.state.essential_protection.value, (value) {
+                        controller.state.essential_protection.value = value!;
+                        controller.updateTotalPrice_Coverage_essential_prot();
+                      }, context), ),
                     ],
                   ),
                 ],
@@ -708,6 +685,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                 height: mq.height * .02,
               ),
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -732,23 +710,10 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                         ],
                       ),
                       Spacer(), // Add spacing between text and circle
-                      Container(
-                        width: 15, // Adjust the size of the circle
-                        height: 15, // Adjust the size of the circle
-                        decoration: BoxDecoration(
-                            color: AppColors.buttonColor,
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(color: Colors.black.withOpacity(0.1))
-                            ]),
-                        child: Icon(
-                          Icons.check,
-                          // Use the correct icon based on selection
-                          size: 13,
-                          color:
-                          Theme.of(context).scaffoldBgClr, // Use the color based on selection
-                        ),
-                      ),
+                      Obx(() =>_checkBox(controller.state.i_have_own.value, (value) {
+                        controller.state.i_have_own.value = value!;
+                        controller.updateTotalPrice_Coverage_have_Own();
+                      }, context), ),
                     ],
                   ),
                 ],
@@ -828,7 +793,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                           controller.state.extraSwitchVal.value,
                               (value) {
                             controller.state.extraSwitchVal.value = value;
-                            controller.updateTotalPrice_Drivers();
+                            controller.updateTotalPrice_Extras();
                           },
                           context,
                         ),
@@ -907,21 +872,10 @@ class CheckOutScreen extends GetView<CheckOutCon> {
               ),
               Row(
                 children: [
-                  Obx(
-                        () => Checkbox(
-                      shape: ContinuousRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(
-                            color: Colors.grey.withOpacity(.1), width: .5),
-                      ),
-                      visualDensity: VisualDensity.compact,
-                      value: controller.state.driversCheckBoxVal.value,
-                      onChanged: (bool? value) {
-                        controller.state.driversCheckBoxVal.value = value!;
-                        controller.updateTotalPrice_Drivers();
-                      },
-                    ),
-                  ),
+                  Obx(() =>_checkBox(controller.state.driversCheckBoxVal.value, (value) {
+                    controller.state.driversCheckBoxVal.value = value!;
+                    controller.updateTotalPrice_Drivers();
+                  }, context), ),
                   SizedBox(width: mq.width * 0.002),
                   SubHeadingTextWidget(
                       textColor: Theme.of(context).lightTextColor,
@@ -1182,7 +1136,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                 ),
                                 Obx(()=>
                                    SubHeadingTextWidget(
-                                    title: controller.state.totalPrice.value.toString(),
+                                    title:'\$${controller.state.totalPrice.value.toStringAsFixed(2)}',
                                     fontSize: 13,
                                     textColor: Theme.of(context).lightTextColor,
                                   ),
@@ -1236,5 +1190,19 @@ Widget _switchButton(bool val, ValueChanged<bool>? onChanged,BuildContext contex
     },
   );
 }
+Widget _checkBox(bool val, ValueChanged<bool>? onChanged,BuildContext context){
+  return Checkbox(
+      shape: ContinuousRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(
+              color: Colors.grey.withOpacity(.1),width: .5
+          )
+      ),
+      visualDensity: VisualDensity.compact,
+      value: val, onChanged: (bool? value) {
+    onChanged?.call(value!);
+  });
+}
+
 
 

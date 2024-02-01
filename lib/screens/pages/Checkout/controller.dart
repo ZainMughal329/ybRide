@@ -34,7 +34,8 @@ class CheckOutCon extends GetxController{
 //   for update total price when click on driver check box
   void updateTotalPrice_Drivers() {
     if (state.driversCheckBoxVal.value) {
-     state. totalPrice.value = 2.11 + 150;
+     state.totalPrice.value = 2.11 + (state.driversCheckBoxVal.value?150:0)+(state.extraSwitchVal.value?13:0)+(state.standard_protection.value?53.98:0)
+         +(state.essential_protection.value?28.98:0)+(state.i_have_own.value?0:0);
     } else {
       state.totalPrice.value = 2.11;
     }
@@ -45,7 +46,37 @@ class CheckOutCon extends GetxController{
 //   for update total price when click on extras switch button
   void updateTotalPrice_Extras() {
     if (state.extraSwitchVal.value) {
-      state. totalPrice.value = 2.11 + 13;
+      state.totalPrice.value = 2.11 + (state.driversCheckBoxVal.value?150:0)+(state.extraSwitchVal.value?13:0)+(state.standard_protection.value?53.98:0)
+          +(state.essential_protection.value?28.98:0)+(state.i_have_own.value?0:0);
+    } else {
+      state.totalPrice.value = 2.11;
+    }
+  }
+
+//   for update total price when click on custom Covergae_CDW
+
+  void updateTotalPrice_Custom_CDW() {
+    if (state.cdwSwitchVal.value) {
+      state. totalPrice.value = 2.11 +(state.cdwSwitchVal.value?24.99:0)+(state.rcliSwitchVal.value?24.99:0)+(state.sliSwitchVal.value?199.99:0);
+    } else {
+      state.totalPrice.value = 2.11;
+    }
+  }
+
+  //   for update total price when click on custom Covergae_RCLI
+
+  void updateTotalPrice_Custom_RCLI() {
+    if (state.rcliSwitchVal.value) {
+      state. totalPrice.value = 2.11 +(state.rcliSwitchVal.value?24.99:0)+(state.cdwSwitchVal.value?24.99:0)+(state.sliSwitchVal.value?19.99:0);
+    } else {
+      state.totalPrice.value = 2.11;
+    }
+  }
+
+//   for update total price when click on custom Covergae_SLI
+  void updateTotalPrice_Custom_SLI() {
+    if (state.sliSwitchVal.value) {
+      state. totalPrice.value = 2.11 +(state.rcliSwitchVal.value?24.99:0)+(state.cdwSwitchVal.value?24.99:0)+(state.sliSwitchVal.value?19.99:0);
     } else {
       state.totalPrice.value = 2.11;
     }
@@ -54,4 +85,50 @@ class CheckOutCon extends GetxController{
 
 
 
+  void subtractCustomCoverageValue(String coverageType) {
+    double coverageValue = 0;
+
+    switch (coverageType) {
+      case 'CDW':
+        coverageValue = 24.99;
+        break;
+      case 'RCLI':
+        coverageValue = 24.99;
+        break;
+      case 'SLI':
+        coverageValue = 19.99;
+        break;
+    // Add more cases for other custom coverages if needed
+    }
+
+    state.totalPrice.value -= coverageValue;
+  }
+
+
+//   for update total price when click on custom Coverage
+
+  void updateTotalPrice_Coverage_std_prot() {
+    if (state.standard_protection.value) {
+      state.totalPrice.value = 2.11 + (state.driversCheckBoxVal.value?150:0)+(state.extraSwitchVal.value?13:0)+(state.standard_protection.value?53.98:0)
+          +(state.essential_protection.value?28.98:0)+(state.i_have_own.value?0:0);
+    } else {
+      state.totalPrice.value = 2.11;
+    }
+  }
+  void updateTotalPrice_Coverage_essential_prot() {
+    if (state.essential_protection.value) {
+      state.totalPrice.value = 2.11 + (state.driversCheckBoxVal.value?150:0)+(state.extraSwitchVal.value?13:0)+(state.standard_protection.value?53.98:0)
+          +(state.essential_protection.value?28.98:0)+(state.i_have_own.value?0:0);
+    } else {
+      state.totalPrice.value = 2.11;
+    }
+  }
+  void updateTotalPrice_Coverage_have_Own() {
+    if (state.i_have_own.value) {
+      state.totalPrice.value = 2.11 + (state.driversCheckBoxVal.value?150:0)+(state.extraSwitchVal.value?13:0)+(state.standard_protection.value?53.98:0)
+          +(state.essential_protection.value?28.98:0)+(state.i_have_own.value?0:0);
+    } else {
+      state.totalPrice.value = 2.11;
+    }
+  }
 }
