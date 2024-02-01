@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/main.dart';
 import 'package:yb_ride/screens/pages/book_page/controller.dart';
 
 Widget SearchTextField(BuildContext context , BookViewController cont){
@@ -38,7 +39,7 @@ Widget SearchTextField(BuildContext context , BookViewController cont){
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide:
-          BorderSide(color: AppColors.headingColor),
+          BorderSide(color: Theme.of(context).headingColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

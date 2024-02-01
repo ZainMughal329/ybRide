@@ -19,4 +19,9 @@ class CheckOutState{
 //    total price
 RxDouble totalPrice = 2.11.obs;
 
+
+  final cdwSwitchVal = false.obs;
+  final rcliSwitchVal = false.obs;
+  final sliSwitchVal = false.obs;
+
 }

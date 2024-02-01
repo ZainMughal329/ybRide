@@ -24,6 +24,7 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
   return showModalBottomSheet(
     context: context,
     isScrollControlled: true,
+    backgroundColor: Theme.of(context).scaffoldBgClr,
     useSafeArea: true,
     builder: (BuildContext context) {
       return Stack(
@@ -32,7 +33,6 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: AppColors.whiteColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15),
                   topRight: Radius.circular(15),
@@ -77,14 +77,14 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
                           child: Container(
                             width: mq.width * 0.2,
                             child: Icon(Icons.arrow_back_ios,
-                                size: 23, color: AppColors.headingColor),
+                                size: 23, color: Theme.of(context).headingColor),
                           ),
                         ),
                         HeadingTextWidget(
                           title: 'Delivery and return date',
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
-                          textColor: AppColors.headingColor,
+                          textColor: Theme.of(context).headingColor,
                         ),
                         Spacer(
                           flex: 1,
@@ -153,7 +153,7 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
               height: mq.height * 0.2,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).scaffoldBgClr,
                 border: Border.all(
                   color: AppColors.buttonColor,
                 ),
@@ -181,13 +181,14 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
                                   return SubHeadingTextWidget(
                                     title:
                                         "${cont.state.fromDateName.value} ${cont.state.fromMonthName.value} ${cont.state.fromDate.value} 20${cont.state.fromYear.value}",
-                                    textColor: Colors.black,
+                                    textColor: Theme.of(context).headingColor,
                                     fontWeight: FontWeight.w600,
                                   );
                                 }),
                                 Obx((){
                                   return SubHeadingTextWidget(
-                                      title: '${cont.state.fromTime.value}');
+                                    textColor: Theme.of(context).lightTextColor,
+                                      title: '${cont.state.fromTime.value}',);
                                 }),
                               ],
                             ),
@@ -213,12 +214,12 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
                                   return SubHeadingTextWidget(
                                       title:
                                           "${cont.state.toDateName.value} ${cont.state.toMonthName.value} ${cont.state.toDate.value} 20${cont.state.toYear.value}",
-                                      textColor: Colors.black,
+                                      textColor: Theme.of(context).headingColor,
                                       fontWeight: FontWeight.w600);
                                 }),
                                 Obx((){
                                   return SubHeadingTextWidget(
-                                      title: '${cont.state.toTime.value}');
+                                      title: '${cont.state.toTime.value}',textColor: Theme.of(context).lightTextColor,);
                                 }),
                               ],
                             ),

@@ -4,10 +4,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
 import 'package:yb_ride/components/text_form_field.dart';
 import 'package:yb_ride/screens/settings/pages/payment_method/controller.dart';
 import '../../../../components/custom_Appbar.dart';
+import '../../../../helper/app_colors.dart';
 import '../../../../main.dart';
 class CreditCardScreen extends GetView<PaymentCon> {
   bool isLightTheme = false;
@@ -23,6 +25,50 @@ class CreditCardScreen extends GetView<PaymentCon> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   CreditCardScreen({super.key});
+
+  Widget _expiryField () {
+    return Padding(
+      padding: EdgeInsets.only(left: 20,),
+      child: TextFormField(
+        controller: TextEditingController(text: controller.state.expiryDateVal.value),
+        style: GoogleFonts.openSans(
+          fontSize: 15,
+        ),
+        decoration: InputDecoration(
+          labelText: 'MM/YY',
+
+          enabled: true,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: AppColors.nonActiveTextFieldColor),
+          ),
+          floatingLabelAlignment: FloatingLabelAlignment.start,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: AppColors.activeTextFieldColor),
+          ),
+          labelStyle: GoogleFonts.openSans(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+
+          ),
+        ),
+
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          LengthLimitingTextInputFormatter(5),
+          _ExpiryDateInputFormatter(),
+        ],
+        onChanged: (value) {
+          controller.state.expiryDateVal.value = value;
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,19 +109,7 @@ class CreditCardScreen extends GetView<PaymentCon> {
                     child: Container(
                       // padding: const EdgeInsets.symmetric(vertical: 8.0),
                       margin: const EdgeInsets.only( top: 8),
-                      child: ReuseableTextField(
-                        contr: controller.state.expiryDate,
-                        label: 'MM/YY ',
-                        textInputAction: TextInputAction.next,
-                        obsecure: false,
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          LengthLimitingTextInputFormatter(5),
-                          ExpiryDateInputFormatter(),
-                        ],
-
-                      ),
+                      child: _expiryField(),
                     ),
                   ),
                   Expanded(
@@ -121,45 +155,24 @@ class CreditCardScreen extends GetView<PaymentCon> {
   }
 }
 
-class ExpiryDateInputFormatter extends TextInputFormatter {
+class _ExpiryDateInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue,
       TextEditingValue newValue,
       ) {
-    final text = newValue.text;
+    var text = newValue.text;
 
-    if (text.length == 3 && !text.contains('/')) {
-      return TextEditingValue(
-        text: '${text.substring(0, 2)}/${text.substring(2)}',
-        selection: TextSelection.collapsed(offset: 3),
-      );
-    } else if (text.length == 4) {
-      final month = text.substring(0, 2);
-      final year = text.substring(2);
-      if (int.tryParse(year) == null || !isValidExpiryDate(month, year)) {
-        // Handle non-numeric input for the year or invalid expiry date
-        return oldValue;
+    if (newValue.selection.baseOffset == 2) {
+      if (oldValue.text.length < newValue.text.length) {
+        text += '/';
       }
-      return TextEditingValue(
-        text: '$month/$year',
-        selection: TextSelection.collapsed(offset: 4),
-      );
     }
 
-    return newValue;
-  }
-
-  bool isValidExpiryDate(String month, String year) {
-    final currentYear = DateTime.now().year % 100;
-    final enteredYear = int.tryParse(year) ?? 0;
-
-    return enteredYear > currentYear || (enteredYear == currentYear && monthValid(month));
-  }
-
-  bool monthValid(String month) {
-    final intMonth = int.tryParse(month) ?? 0;
-    return intMonth >= 1 && intMonth <= 12;
+    return TextEditingValue(
+      text: text,
+      selection: TextSelection.collapsed(offset: text.length),
+    );
   }
 }
 

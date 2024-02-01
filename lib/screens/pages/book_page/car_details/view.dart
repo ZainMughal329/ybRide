@@ -7,6 +7,7 @@ import 'package:yb_ride/components/custom_Appbar.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/pages/book_page/car_details/inded.dart';
 import 'package:yb_ride/screens/pages/book_page/car_details/widgets/details_sheet.dart';
 import 'package:yb_ride/screens/splash/controller.dart';
@@ -16,14 +17,17 @@ import '../controller.dart';
 import '../widget/1st_bottom_sheet.dart';
 
 class CarDetailsScreen extends GetView<CarDetailsController> {
-  const CarDetailsScreen({Key? key}) : super(key: key);
+  final bool isTextShow;
+  const CarDetailsScreen( {Key? key,required this.isTextShow}) : super(key: key );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(mq.height * .08),
-        child: Container(
+        child: isTextShow ? CustomAppBarWidget(centerTitle: 'Change Car', isLeading: true , leadingIcon: FontAwesomeIcons.xmark , leadingPress: (){
+          Navigator.pop(context);
+        },) :Container(
           decoration: BoxDecoration(
             color: Theme.of(context)
                 .appBarColor, // Set your preferred background color
@@ -82,9 +86,6 @@ class CarDetailsScreen extends GetView<CarDetailsController> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          width: 0,
-                        ),
                         Padding(
                           padding: EdgeInsets.only(bottom: 10.0),
                           child: Icon(
@@ -119,96 +120,118 @@ class CarDetailsScreen extends GetView<CarDetailsController> {
   }
 
   Widget _buildCARCard(BuildContext context) {
-    return Container(
-      height: mq.height * .34,
-      width: double.infinity,
-      child: Column(
-        children: [
-          Container(
-            height: mq.height * .23,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              // color: Colors.red,
-              border: Border.all(
-                color: Colors.black12
-              ),
-            ),
-            child: Swiper(
-
-              itemBuilder: (BuildContext context, int index) {
-                return Image.asset(
-                  controller.imagesList[index],
-                  fit: BoxFit.cover,
-                  // height: 188.h,
-                  width: mq.width *.288,
-                );
-              },
-              autoplay: false,
-              itemCount: controller.imagesList.length,
-              viewportFraction: 0.8,
-              scale: 0.9,
-              pagination: SwiperPagination(
-                alignment: Alignment.bottomCenter,
-                builder: DotSwiperPaginationBuilder(
-                    color: Colors.black12,
-                    activeColor: Colors.white,
-                    activeSize: 13),
-              ),
-            ),
-          ),
-
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              HeadingTextWidget(
-                title: 'Economy',
-                textColor: Theme.of(context).headingColor,
-              ),
-              InkWell(
-                onTap: (){
-                  final cont = Get.put(BookViewController());
-
-                  detailsBottomSheet(context);
-
-                },
-                child: SubHeadingTextWidget(
-                  title: 'See details',
-                  textColor: AppColors.buttonColor,
+    return InkWell(
+      onTap: () {
+        Get.toNamed(RoutesName.checkOutScreen);
+      },
+      child: Container(
+        height: mq.height * .38,
+        width: double.infinity,
+        child: Column(
+          children: [
+            Container(
+              height: mq.height * .23,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                // color: Colors.red,
+                border: Border.all(
+                  color: Colors.black12
                 ),
               ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SubHeadingTextWidget(
-                    title: 'Nissan Versa or similar',
-                    textColor: Theme.of(context).headingColor,
-                  ),
-                  SubHeadingTextWidget(
-                    title: '5 seats . 1 suitcase',
-                    textColor: Theme.of(context).lightTextColor,
-                  ),
-                ],
+              child: Swiper(
+
+                itemBuilder: (BuildContext context, int index) {
+                  return Image.asset(
+                    controller.imagesList[index],
+                    fit: BoxFit.cover,
+                    // height: 188.h,
+                    width: mq.width *.288,
+                  );
+                },
+                autoplay: false,
+                itemCount: controller.imagesList.length,
+                viewportFraction: 0.8,
+                scale: 0.9,
+                pagination: SwiperPagination(
+                  alignment: Alignment.bottomCenter,
+                  builder: DotSwiperPaginationBuilder(
+                      color: Colors.black12,
+                      activeColor: Colors.white,
+                      activeSize: 13),
+                ),
               ),
-              HeadingTextWidget(
-                title: '\$23.99 | day',
-                textColor: Theme.of(context).headingColor,
-              ),
-            ],
-          ),
-        ],
+            ),
+
+            SizedBox(
+              height: mq.height * .01,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                HeadingTextWidget(
+                  title: 'Economy',
+                  textColor: Theme.of(context).headingColor,
+                ),
+                InkWell(
+                  onTap: (){
+                    detailsBottomSheet(context);
+
+                  },
+                  child: SubHeadingTextWidget(
+                    title: 'See details',
+                    fontWeight: FontWeight.w600,
+                    textColor: AppColors.buttonColor,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: mq.height * .01,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SubHeadingTextWidget(
+                      title: 'Nissan Versa or similar',
+                      textColor: Theme.of(context).headingColor,
+                    ),
+                    SubHeadingTextWidget(
+                      title: '5 seats . 1 suitcase',
+                      textColor: Theme.of(context).lightTextColor,
+                    ),
+
+                    SizedBox(
+                      height: mq.height * .015,
+                    ),
+                    HeadingTextWidget(
+                      title: '\$23.99 | day',
+                      textColor: Theme.of(context).headingColor,
+                    ),
+
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: mq.height * .06),
+                  child: Row(
+                    children: [
+                      Icon(FontAwesomeIcons.stopwatch,color: Colors.blue,size: 18,),
+                      SizedBox(
+                        width: mq.width * .015,
+                      ),
+                      HeadingTextWidget(title: '3 vehicles left' , textColor: Colors.blue,),
+                    ],
+                  ),
+                )
+
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

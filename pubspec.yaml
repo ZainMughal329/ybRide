@@ -52,7 +52,7 @@ dependencies:
 #   to get the id of mobile device
   uuid: ^4.3.3
 # for date and time
-  intl: ^0.19.0
+  intl:
   flutter_datetime_picker: ^1.5.1
 
 
@@ -75,6 +75,8 @@ dependencies:
   isar_flutter_libs: ^4.0.0-dev.13
   path_provider: ^2.1.0
   connectivity_plus: ^5.0.2
+  ikchatbot:
+  lottie:
 
 
   card_swiper:
@@ -94,5 +96,6 @@ flutter:
 
   assets:
     - assets/
+    - assets/lottie/
     - assets/images/
 

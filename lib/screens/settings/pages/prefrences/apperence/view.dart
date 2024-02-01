@@ -17,6 +17,8 @@ class AppearanceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBgClr,
+
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(mq.height * .08),
         child: CustomAppBarWidget(
@@ -30,7 +32,7 @@ class AppearanceScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(
-            horizontal: mq.width * .04, vertical: mq.height * .01),
+            horizontal: mq.width * .04, vertical: mq.height * .04),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -51,7 +53,7 @@ class AppearanceScreen extends StatelessWidget {
                     children: [
                       Icon(Icons.brightness_4_outlined),
                       SizedBox(
-                        width: 10,
+                        width: mq.width * .015,
                       ),
                       SubHeadingTextWidget(
                         title: 'Light',
@@ -60,17 +62,6 @@ class AppearanceScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  // Obx(() => Radio(
-                  //   value: ThemeMode.light,
-                  //   groupValue: _appearanceController.state.isDarkMode.value
-                  //       ? ThemeMode.light
-                  //       : ThemeMode.dark,
-                  //   onChanged: (value) {
-                  //     Get.changeThemeMode(ThemeMode.light);
-                  //     _appearanceController.state.isDarkMode.value = false;
-                  //     Pref.isDarkMode = false;
-                  //   },
-                  // )),
                   Obx(
                     () => _appearanceController.state.isDarkMode.value == false
                         ? Icon(
@@ -83,7 +74,7 @@ class AppearanceScreen extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: mq.height * .04,
             ),
             InkWell(
               onTap: () {
@@ -102,7 +93,7 @@ class AppearanceScreen extends StatelessWidget {
                     children: [
                       Icon(Icons.brightness_2_outlined),
                       SizedBox(
-                        width: 10,
+                        width: mq.width * .015,
                       ),
                       SubHeadingTextWidget(
                         title: 'Dark',

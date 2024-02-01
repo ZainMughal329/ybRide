@@ -26,12 +26,12 @@ Future timeSelBottomSheet(
     context: context,
     // isScrollControlled: true,
     // useSafeArea: true,
+    backgroundColor: Theme.of(context).scaffoldBgClr,
     builder: (BuildContext context) {
       return Container(
         height: 200,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: AppColors.whiteColor,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15),
             topRight: Radius.circular(15),
@@ -77,7 +77,7 @@ Future timeSelBottomSheet(
                         child: Container(
                           width: mq.width * 0.2,
                           child: FaIcon(FontAwesomeIcons.xmark,
-                              size: 23, color: AppColors.headingColor),
+                              size: 23, color: Theme.of(context).headingColor),
                         ),
                       ),
                     ],
@@ -88,7 +88,7 @@ Future timeSelBottomSheet(
                           isStartTime ? 'Select Start Time' : 'Select End Time',
                       fontWeight: FontWeight.w600,
                       fontSize: 19,
-                      textColor: AppColors.headingColor,
+                      textColor: Theme.of(context).headingColor,
                     ),
                   ),
                 ],
@@ -107,7 +107,10 @@ Future timeSelBottomSheet(
                     HeadingTextWidget(
                         title: isStartTime
                             ? cont.state.fromTime.value
-                            : cont.state.toTime.value),
+                            : cont.state.toTime.value,
+
+                      textColor: Theme.of(context).headingColor,
+                    ),
                     DropdownButton(
                       hint: isStartTime
                           ? Text('${cont.state.fromTime.value}')

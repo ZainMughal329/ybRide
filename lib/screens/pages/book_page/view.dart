@@ -22,6 +22,7 @@ class BookNowView extends StatelessWidget {
 
     cont.state.datesFetched==false ? cont.getCurrentDate() : null;
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBgClr,
       body: Stack(
         children: [
           GetBuilder<BookViewController>(builder: (controller){
@@ -58,7 +59,7 @@ class BookNowView extends StatelessWidget {
                             -3), // Offset in the negative y-axis to create a top shadow
                       ),
                     ],
-                    color: Colors.white,
+                    color: Theme.of(context).scaffoldBgClr,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
