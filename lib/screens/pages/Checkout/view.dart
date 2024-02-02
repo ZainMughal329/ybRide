@@ -12,9 +12,11 @@ import 'package:yb_ride/screens/pages/Checkout/widgets/agePolicy.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/coverge_sheet.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/delivery_process_read_more.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/driverLicensealertbox.dart';
+import 'package:yb_ride/screens/pages/Checkout/widgets/pickUpBottomSheet.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/promoCodeWidget.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/viewInstructionsBottomSheet.dart';
 import 'package:yb_ride/screens/pages/book_page/car_details/inded.dart';
+import 'package:yb_ride/screens/pages/book_page/widget/1st_bottom_sheet.dart';
 import 'package:yb_ride/screens/settings/pages/payment_method/creditCard.dart';
 import '../../../components/custom_Appbar.dart';
 import '../../../main.dart';
@@ -166,9 +168,10 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                               children: [
                                 Row(
                                   children: [
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.yellow,
+                                    IconContainer(
+                                      iconName: 'Star.png',
+                                      height: 30,
+                                      width: 30,
                                     ),
                                     SizedBox(
                                       width: mq.width * .18,
@@ -299,7 +302,8 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                     height: mq.height * .002,
                                   ),
                                   SubHeadingTextWidget(
-                                    title: 'Your home,hotel or other address',
+                                    title:
+                                        'We will deliver YB-Car to selected address',
                                     fontSize: 14,
                                     textColor: Theme.of(context).lightTextColor,
                                   )
@@ -393,7 +397,9 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                         controller.subtractFromTotalPrince(
                                             controller.state.delivery);
                                       }
+                                      pickUpBottomSheet(context, controller);
                                     }
+
                                     controller.state.vehicle_pickup.value =
                                         value!;
                                   },
@@ -440,14 +446,37 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                   )
                                 : Container();
                       }),
-                      SizedBox(
-                        height: mq.height * .02,
-                      ),
-                      HeadingTextWidget(
-                        title: 'View instructions',
-                        textColor: AppColors.buttonColor,
-                        fontSize: 15,
-                      ),
+                      // SizedBox(
+                      //   height: mq.height * .02,
+                      // ),
+                      Obx(() {
+                        return controller.state.vehicle_pickup.value
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: mq.height * .02,
+                                  ),
+
+                                  // Instructions Bottom Sheet
+                                  InkWell(
+                                    onTap: () async {
+                                      await showModalBottomSheet(
+                                          context: context,
+                                          builder: (_) {
+                                            return Container();
+                                          });
+                                    },
+                                    child: HeadingTextWidget(
+                                      title: 'View instructions',
+                                      textColor: AppColors.buttonColor,
+                                      fontSize: 15,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Container();
+                      }),
                       SizedBox(
                         height: mq.height * .02,
                       ),
@@ -588,7 +617,6 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                     ),
                                     SizedBox(
                                       height: mq.height * .02,
-
                                     ),
                                     Column(
                                       children: [
@@ -610,7 +638,8 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   HeadingTextWidget(
-                                                    title: '${AppConstants.fromMonthName} ${AppConstants.fromDate}, ${AppConstants.fromTime}',
+                                                    title:
+                                                        '${AppConstants.fromMonthName} ${AppConstants.fromDate}, ${AppConstants.fromTime}',
                                                     fontSize: 14,
                                                     fontWeight:
                                                         FontWeight.normal,
@@ -624,7 +653,8 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                                     height: mq.height * .006,
                                                   ),
                                                   HeadingTextWidget(
-                                                    title: '${AppConstants.toMonthName} ${AppConstants.toDate}, ${AppConstants.toTime}',
+                                                    title:
+                                                        '${AppConstants.toMonthName} ${AppConstants.toDate}, ${AppConstants.toTime}',
                                                     fontSize: 14,
                                                     fontWeight:
                                                         FontWeight.normal,
@@ -667,70 +697,75 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                         height: mq.height * .02,
                       ),
                       // Delivery process
-                      Obx((){
-                        return controller.state.vehicle_delivery.value == true ? Column(
-                          children: [
-                            Column(
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Image(
-                                      image: AssetImage('assets/images/clock.jpeg'),
-                                      height: mq.height * .05,
-                                      width: mq.width * .05,
+                      Obx(() {
+                        return controller.state.vehicle_delivery.value == true
+                            ? Column(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Image(
+                                            image: AssetImage(
+                                                'assets/images/clock.jpeg'),
+                                            height: mq.height * .05,
+                                            width: mq.width * .05,
+                                          ),
+                                          SizedBox(width: 8),
+                                          HeadingTextWidget(
+                                            title: 'Delivery process',
+                                            textColor:
+                                                Theme.of(context).headingColor,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: mq.height * .02,
+                                  ),
+                                  HeadingTextWidget(
+                                    title:
+                                        'Your YBRide Surfer will wait 10 minutes upon arrival (at least until 12.40 PM),',
+                                    fontSize: 14,
+                                    textColor: Theme.of(context).headingColor,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  SizedBox(
+                                    height: mq.height * .004,
+                                  ),
+                                  SubHeadingTextWidget(
+                                    title:
+                                        "We will keep you updated on your surfer's estimated arrival time through text and/ or push notifications. Enjoy your trip!",
+                                    fontSize: 13,
+                                    textColor: Theme.of(context).lightTextColor,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  SizedBox(
+                                    height: mq.height * .02,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      deliveryProcessSheet(context);
+                                    },
+                                    child: HeadingTextWidget(
+                                      title: 'Read more',
+                                      fontSize: 14,
+                                      textColor: AppColors.buttonColor,
                                     ),
-                                    SizedBox(width: 8),
-                                    HeadingTextWidget(
-                                      title: 'Delivery process',
-                                      textColor: Theme.of(context).headingColor,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: mq.height * .02,
-                            ),
-                            HeadingTextWidget(
-                              title:
-                              'Your YBRide Surfer will wait 10 minutes upon arrival (at least until 12.40 PM),',
-                              fontSize: 14,
-                              textColor: Theme.of(context).headingColor,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            SizedBox(
-                              height: mq.height * .004,
-                            ),
-                            SubHeadingTextWidget(
-                              title:
-                              "We will keep you updated on your surfer's estimated arrival time through text and/ or push notifications. Enjoy your trip!",
-                              fontSize: 13,
-                              textColor: Theme.of(context).lightTextColor,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            SizedBox(
-                              height: mq.height * .02,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                deliveryProcessSheet(context);
-                              },
-                              child: HeadingTextWidget(
-                                title: 'Read more',
-                                fontSize: 14,
-                                textColor: AppColors.buttonColor,
-                              ),
-                            ),
-                            SizedBox(
-                              height: mq.height * .02,
-                            ),
-                            Divider(
-                              color: Colors.black54,
-                              thickness: .2,
-                            ),
-                          ],
-                        ): Container();
+                                  ),
+                                  SizedBox(
+                                    height: mq.height * .02,
+                                  ),
+                                  Divider(
+                                    color: Colors.black54,
+                                    thickness: .2,
+                                  ),
+                                ],
+                              )
+                            : Container();
                       }),
                       //delivery text
                       // Coverage
