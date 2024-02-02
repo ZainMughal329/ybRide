@@ -80,6 +80,7 @@ class BookViewController extends GetxController {
   }
 
   void GetCoordinates(BuildContext context) async {
+
     List<Location> coordinates =
         await locationFromAddress(state.selectedPlace.toString());
     if (coordinates.isNotEmpty) {
@@ -235,6 +236,13 @@ class BookViewController extends GetxController {
     AppConstants.toDateName = state.toDateName.value;
     AppConstants.toYear = state.toYear.value;
     AppConstants.toTime = state.toTime.value;
+    AppConstants.fromAddress = state.selectedPlace.value;
+    if(state.returnPlace.value =='Return Place'){
+      AppConstants.toAddress = state.selectedPlace.value;
+    }else{
+      AppConstants.toAddress = state.returnPlace.value;
+    }
+
 
 
     Get.to(CarDetailsScreen(isTextShow: false));
