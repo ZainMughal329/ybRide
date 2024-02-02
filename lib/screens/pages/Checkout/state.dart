@@ -16,7 +16,7 @@ class CheckOutState{
 //    driverSections
   final driversCheckBoxVal = false.obs;
 //    total price
-RxDouble totalPrice = 2.11.obs;
+RxDouble totalPrice = 0.0.obs;
   // Getting the vehicle delivery
 
   final vehicle_delivery = false.obs;
@@ -30,5 +30,27 @@ RxDouble totalPrice = 2.11.obs;
   final cdwSwitchVal = false.obs;
   final rcliSwitchVal = false.obs;
   final sliSwitchVal = false.obs;
+
+
+  double? carRent;
+
+
+
+
+  // Firebase payment values
+  RxBool dataLoaded = false.obs;
+  double? delivery;
+  double? CDW ;
+  double? RCLI ;
+  double? SLI ;
+  double? essential ;
+  double? licenseFee ;
+  double? standard ;
+  double? unlimitedMiles ;
+  double? assistance;
+  String? pickupLoc;
+
+
+
 
 }

@@ -30,6 +30,7 @@ class BookNowState {
   RxString returnPlace = 'Return Place'.obs;
   final loc = LatLng(42.361145, -71.057083).obs;
   final returnLoc = LatLng(0, 0).obs;
+
   // 42.361145, -71.057083
 
   // date variables

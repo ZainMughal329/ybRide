@@ -2,7 +2,12 @@
 
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yb_ride/api/api.dart';
+import 'package:yb_ride/components/snackbar_widget.dart';
+import 'package:yb_ride/helper/app_constants.dart';
 import 'package:yb_ride/screens/pages/Checkout/index.dart';
 
 class CheckOutCon extends GetxController{
@@ -11,6 +16,10 @@ class CheckOutCon extends GetxController{
   void hideContainer() {
     state.isContainerVisible.value = false;
   }
+  
+  
+  
+  
 
   var isLoading = true.obs;
 
@@ -131,4 +140,62 @@ class CheckOutCon extends GetxController{
       state.totalPrice.value = 2.11;
     }
   }
+
+
+  void setDataLoaded(bool val){
+    state.dataLoaded.value=val;
+  }
+  
+  Future<void> getCheckoutPayments() async{
+    setDataLoaded(false);
+    try {
+      CollectionReference usersCollection = APis.db.collection('checkoutPayment');
+      QuerySnapshot querySnapshot = await usersCollection.get();
+
+      // Check if there are any documents in the collection
+      if (querySnapshot.docs.isNotEmpty) {
+        // Get the first document
+        QueryDocumentSnapshot firstDocument = querySnapshot.docs.first;
+
+        // Get the details from the document
+        state.delivery = firstDocument['delivery'];
+        state.CDW = firstDocument['CDW'];
+        state.RCLI = firstDocument['RCLI'];
+        state.SLI = firstDocument['SLI'];
+        state.essential = firstDocument['essential'];
+        state.licenseFee = firstDocument['licenseFee'];
+        state.standard = firstDocument['standard'];
+        state.unlimitedMiles = firstDocument['unlimitedMiles'];
+        state.assistance = firstDocument['assistance'];
+        state.pickupLoc = firstDocument['pickUpLoc'];
+
+        print(state.pickupLoc);
+
+        setDataLoaded(true);
+      } else {
+        Snackbar.showSnackBar('Error', 'Something went wrong', Icons.error_outline_outlined);
+        setDataLoaded(true);
+      }
+    } catch (e) {
+      Snackbar.showSnackBar('Error', e.toString(), Icons.error_outline_outlined);
+
+      setDataLoaded(true);
+    }
+
+
+
+
+
+
+
+  }
+
+  void addInTotalPrice(double? price){
+    state.totalPrice.value=state.totalPrice.value+price!;
+  }
+  void subtractFromTotalPrince(double? price){
+    state.totalPrice.value=state.totalPrice.value-price!;
+  }
+  
+  
 }
