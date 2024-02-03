@@ -37,7 +37,18 @@ RxDouble totalPrice = 0.0.obs;
 
   double? carRent;
 
+  RxString cardNumber = "".obs;
+  RxString expNumber = "".obs;
+  RxString cvvNumber = "".obs;
+  RxString zipCode = "".obs;
+  RxString cardType = "".obs;
 
+  RxBool cardLoading = false.obs;
+
+  TextEditingController cardNumController =TextEditingController();
+  TextEditingController expiryController = TextEditingController();
+  TextEditingController cvvController = TextEditingController();
+  TextEditingController zipController = TextEditingController();
 
 
   // Firebase payment values
@@ -52,6 +63,8 @@ RxDouble totalPrice = 0.0.obs;
   double? licenseFee ;
   double? unlimitedMiles ;
   String? pickupLoc;
+
+
 
 
 
