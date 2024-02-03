@@ -2,14 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CreditCardModel {
   final String number;
-  final String cvc;
+  final String cvv;
   String? id;
   final String expiryDate;
   final String zipCode;
 
   CreditCardModel({
     required this.number,
-    required this.cvc,
+    required this.cvv,
     this.id = '',
     required this.expiryDate,
     required this.zipCode,
@@ -19,7 +19,7 @@ class CreditCardModel {
     return {
       'id': id,
       'number': number,
-      'cvc': cvc,
+      'cvv': cvv,
       'expiryDate': expiryDate,
       'zipCode' : zipCode,
     };
@@ -31,7 +31,7 @@ class CreditCardModel {
     final json = snapshot.data()!;
     return CreditCardModel(
       id: json["id"],
-      cvc: json["cvc"],
+      cvv: json["cvv"],
       number: json["number"],
       expiryDate: json["expiryDate"],
       zipCode : json['zipCode'],

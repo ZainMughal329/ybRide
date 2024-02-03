@@ -9,6 +9,7 @@ import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/helper/app_constants.dart';
 import 'package:yb_ride/screens/pages/Checkout/controller.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/agePolicy.dart';
+import 'package:yb_ride/screens/pages/Checkout/widgets/card_bottom_sheet.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/coverge_sheet.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/delivery_process_read_more.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/driverLicensealertbox.dart';
@@ -1249,14 +1250,15 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                   ),
                                   SubHeadingTextWidget(
                                     textColor: Theme.of(context).lightTextColor,
-                                    title: '\$${controller.state.unlimitedMiles} | day',
+                                    title:
+                                        '\$${controller.state.unlimitedMiles} | day',
                                     fontSize: 14,
                                   )
                                 ],
                               ),
                               Spacer(), // Add spacing between text and circle
                               Obx(
-                                    () => Checkbox(
+                                () => Checkbox(
                                   shape: ContinuousRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                     side: BorderSide(
@@ -1264,8 +1266,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                         width: .5),
                                   ),
                                   visualDensity: VisualDensity.compact,
-                                  value:
-                                  controller.state.extraSwitchVal.value,
+                                  value: controller.state.extraSwitchVal.value,
                                   onChanged: (bool? value) {
                                     controller.priceLoadingFunc();
                                     if (value == true) {
@@ -1276,7 +1277,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                           controller.state.unlimitedMiles);
                                     }
                                     controller.state.extraSwitchVal.value =
-                                    value!;
+                                        value!;
                                   },
                                 ),
                               ),
@@ -1356,7 +1357,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                       Row(
                         children: [
                           Obx(
-                                () => Checkbox(
+                            () => Checkbox(
                               shape: ContinuousRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                                 side: BorderSide(
@@ -1364,8 +1365,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                     width: .5),
                               ),
                               visualDensity: VisualDensity.compact,
-                              value:
-                              controller.state.driversCheckBoxVal.value,
+                              value: controller.state.driversCheckBoxVal.value,
                               onChanged: (bool? value) {
                                 controller.priceLoadingFunc();
                                 if (value == true) {
@@ -1376,7 +1376,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                       controller.state.licenseFee);
                                 }
                                 controller.state.driversCheckBoxVal.value =
-                                value!;
+                                    value!;
                               },
                             ),
                           ),
@@ -1570,17 +1570,32 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                       SizedBox(
                         height: mq.height * .03,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(() => CreditCardScreen());
-                        },
-                        child: HeadingTextWidget(
-                          title: 'Add payment method',
-                          textColor: AppColors.buttonColor,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                        ),
-                      ),
+                      Obx(() {
+                        return controller.state.cardNumber.value == ""
+                            ? GestureDetector(
+                                onTap: () {
+                                  // handel add payment method logic
+                                  CardBottomSheet(context, false, controller);
+                                },
+                                child: HeadingTextWidget(
+                                  title: 'Add payment method',
+                                  textColor: AppColors.buttonColor,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                ),
+                              )
+                            : Container(
+                                child: controller.state.cardType.value == 'visa'
+                                    ? paymentCard('visaCard.png', context,controller)
+                                    : controller.state.cardType.value ==
+                                            "master"
+                                        ? paymentCard('masterCard.png', context,controller)
+                                        : controller.state.cardType.value ==
+                                                "default"
+                                            ? paymentCard('invite.png', context,controller)
+                                            : Container(),
+                              );
+                      }),
                       SizedBox(
                         height: mq.height * .03,
                       ),
@@ -1742,4 +1757,47 @@ Widget _checkBox(
       onChanged: (bool? value) {
         onChanged?.call(value!);
       });
+}
+
+Widget paymentCard(String cardImage, BuildContext context,CheckOutCon controller) {
+  return InkWell(
+    onTap: (){
+      CardBottomSheet(context, true, controller);
+    },
+    child: Container(
+      // height: mq.height*0.2,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            width: 60,
+            height: 60,
+            color: Theme.of(context).scaffoldBgClr,
+            child: Image.asset('assets/appImages/${cardImage}'),
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          Text(
+            "****************",
+            style: TextStyle(
+              color: Theme.of(context).headingColor,
+            ),
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          // IconButton(
+          //   icon: Icon(
+          //     Icons.arrow_forward_ios,
+          //     color: Theme.of(context).headingColor,
+          //   ),
+          //   onPressed: () {
+          //
+          //   },
+          // ),
+        ],
+      ),
+    ),
+  );
 }

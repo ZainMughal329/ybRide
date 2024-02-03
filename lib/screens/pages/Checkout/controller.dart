@@ -1,11 +1,15 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:credit_card_type_detector/credit_card_type_detector.dart';
+import 'package:credit_card_type_detector/models.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/api/api.dart';
 import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/helper/app_constants.dart';
+import 'package:yb_ride/helper/session_controller.dart';
+import 'package:yb_ride/models/creditCart.dart';
 import 'package:yb_ride/screens/pages/Checkout/index.dart';
 
 class CheckOutCon extends GetxController {
@@ -182,9 +186,7 @@ class CheckOutCon extends GetxController {
         state.unlimitedMiles = firstDocument['unlimitedMiles'];
         state.assistance = firstDocument['assistance'];
         state.pickupLoc = firstDocument['pickUpLoc'];
-
-        print(state.pickupLoc);
-
+        fetchCardDetails();
         setDataLoaded(true);
       } else {
         Snackbar.showSnackBar(
@@ -207,19 +209,85 @@ class CheckOutCon extends GetxController {
     state.totalPrice.value = state.totalPrice.value - price!;
   }
 
-
-  void removingAllValuesInChekout (){
-    if(state.standard_protection.value == true){
+  void removingAllValuesInChekout() {
+    if (state.standard_protection.value == true) {
       subtractFromTotalPrince(state.standard);
     }
-    if(state.essential_protection.value == true){
+    if (state.essential_protection.value == true) {
       subtractFromTotalPrince(state.essential);
     }
-    if(state.i_have_own.value == true){
-
-    }
+    if (state.i_have_own.value == true) {}
     state.standard_protection.value = false;
     state.essential_protection.value = false;
     state.i_have_own.value = false;
   }
+
+  Future<void> fetchCardDetails() async {
+    try {
+      DocumentSnapshot doc = await APis.db
+          .collection('credit_cards')
+          .doc(SessionController().userId.toString())
+          .get();
+      if (doc.exists) {
+        state.cardNumber.value = doc['number'];
+        state.expNumber.value = doc['expiryDate'];
+        state.cvvNumber.value = doc['cvv'];
+        state.zipCode.value = doc['zipCode'];
+
+        getCardType(state.cardNumber.value);
+      } else {
+      }
+    } catch (e) {
+      Snackbar.showSnackBar("YB-Ride", "Error fetching Details\nRetry again",
+          Icons.error_outline);
+    }
+  }
+
+
+  void getCardType(String cardNumber) {
+    var types = detectCCType(cardNumber);
+    if (types.contains(CreditCardType.visa())) {
+      state.cardType.value = 'visa';
+    } else if (types.contains(CreditCardType.mastercard())) {
+      state.cardType.value = 'master';
+    } else {
+      state.cardType.value = 'default';
+    }
+  }
+
+  setCardLoading( bool val){
+    state.cardLoading.value=val;
+  }
+
+  Future<void> saveCreditCardDataToFirestore(String number,
+      String expiryDate, String cvv, String zipCode,BuildContext context) async {
+    setCardLoading(true);
+    try {
+      await APis.db
+          .collection('credit_cards')
+          .doc(SessionController().userId)
+          .set(CreditCardModel(
+          id: SessionController().userId,
+          number: number,
+          cvv: cvv,
+          expiryDate: expiryDate,
+          zipCode: zipCode)
+          .toJson())
+          .then((value) {
+        getCardType(number);
+        setCardLoading(false);
+        Navigator.pop(context);
+        Snackbar.showSnackBar('YB-Ride', "Payment Saved", Icons.done);
+      }).onError((error, stackTrace) {
+        setCardLoading(false);
+        Snackbar.showSnackBar(
+            'YB-Ride', "Error ${error.toString()}", Icons.done);
+      });
+    } catch (error) {
+      setCardLoading(false);
+      Snackbar.showSnackBar('YB-Ride', "Error ${error.toString()}", Icons.done);
+    }
+  }
+
+
 }
