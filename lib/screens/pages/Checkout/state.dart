@@ -27,9 +27,12 @@ RxDouble totalPrice = 0.0.obs;
   final i_have_own=false.obs;
 
   // Custom Coverage
+  final customValueSelected = false.obs;
+  final customCoverage = false.obs;
   final cdwSwitchVal = false.obs;
   final rcliSwitchVal = false.obs;
   final sliSwitchVal = false.obs;
+  final assistanceVal = false.obs;
 
 
   double? carRent;
@@ -40,14 +43,14 @@ RxDouble totalPrice = 0.0.obs;
   // Firebase payment values
   RxBool dataLoaded = false.obs;
   double? delivery;
+  double? essential ;
+  double? standard ;
   double? CDW ;
   double? RCLI ;
   double? SLI ;
-  double? essential ;
-  double? licenseFee ;
-  double? standard ;
-  double? unlimitedMiles ;
   double? assistance;
+  double? licenseFee ;
+  double? unlimitedMiles ;
   String? pickupLoc;
 
 

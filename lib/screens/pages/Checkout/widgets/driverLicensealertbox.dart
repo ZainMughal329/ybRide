@@ -42,13 +42,14 @@ class CustomAlertDialog extends StatelessWidget {
       ),
       content: Container(
         width: MediaQuery.of(context).size.width * 0.8,
+        height: mq.height *0.4,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             SectionWidget("Drivers License verification is required, you'll receive instructions after payment."),
             SizedBox(height: mq.height*.02),
-            SectionWidget( "you must verify your driver's license at least 2 hours before your trip starts."),
+            SectionWidget( "You must verify your driver's license at least 2 hours before your trip starts."),
             SizedBox(height: mq.height*.02),
             SectionWidget( "Additional drivers can be added free of charge. They will also be asked to verify their driver's license."),
             SizedBox(height: mq.height*.02),
@@ -77,7 +78,7 @@ class SectionWidget extends StatelessWidget {
         Padding(
           padding:  EdgeInsets.only(top: mq.height*.015),
           child: Container(
-            height: mq.height*.005,
+            // height: mq.height*.005,
             width: mq.width*.009,
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,
@@ -86,7 +87,7 @@ class SectionWidget extends StatelessWidget {
           ),
         ),
         SizedBox(width: mq.width*.02),
-        Expanded(child: SubHeadingTextWidget(title: text,maxLines: 2,fontSize: 16,fontWeight: FontWeight.w500,)),
+        Expanded(child: SubHeadingTextWidget(title: text,fontSize: 16,fontWeight: FontWeight.w500,)),
       ],
     );
   }
