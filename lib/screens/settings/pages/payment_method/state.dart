@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:yb_ride/helper/session_controller.dart';
 
 class PaymentState{
 
@@ -8,10 +9,11 @@ class PaymentState{
   final expiryDate = TextEditingController();
   final cvc = TextEditingController();
   final zipCode = TextEditingController();
-  String documentId = DateTime.now().millisecondsSinceEpoch.toString();
+  String documentId = SessionController().userId.toString();
   bool isCvvFocused = false;
 
   final RxString expiryDateVal = ''.obs;
+  RxBool loading = false.obs;
 
 
 }

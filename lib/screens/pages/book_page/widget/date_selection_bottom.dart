@@ -104,7 +104,7 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
                       view: DateRangePickerView.month,
                       selectionMode: DateRangePickerSelectionMode.range,
                       minDate: DateTime(
-                          2024, int.parse("${cont.state.fromDate.value}"), 01),
+                          2024, int.parse("${cont.state.fromMonth.value}"), int.parse("${cont.state.fromDate.value}")),
                       maxDate: DateTime(2029, 12, 31),
                       todayHighlightColor: AppColors.buttonColor,
                       viewSpacing: 5,

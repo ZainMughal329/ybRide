@@ -1,10 +1,13 @@
 
 
 
+import 'package:credit_card_type_detector/credit_card_type_detector.dart';
+import 'package:credit_card_type_detector/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
 import 'package:yb_ride/components/text_form_field.dart';
 import 'package:yb_ride/screens/settings/pages/payment_method/controller.dart';
@@ -83,6 +86,9 @@ class CreditCardScreen extends GetView<PaymentCon> {
           centerTitle: 'Saved payment methods',
           isLeading: true,
           leadingIcon: Icons.arrow_back_ios_new,
+          leadingPress: (){
+            Navigator.pop(context);
+          },
         ),
       ),
       body: Padding(
@@ -100,6 +106,10 @@ class CreditCardScreen extends GetView<PaymentCon> {
                   textInputAction: TextInputAction.next,
                   obsecure: false,
                   keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(16),
+                  ],
                 ),
 
               ),
@@ -139,14 +149,30 @@ class CreditCardScreen extends GetView<PaymentCon> {
                 ),
               ),
               SizedBox(height: 40),
-              RoundButton(title: 'Save', onPress: (){
-                controller.saveCreditCardDataToFirestore(
+              Obx((){
+                return controller.state.loading.value == true ? Container(
+                  height: mq.height * .06,
+                  width: double.infinity,
+                  child: Lottie.asset('assets/lottie/loading2.json'),
+                ) : RoundButton(title: 'Save', onPress: (){
+                  String visaStr = '4647720067791032';
+
+                  var types = detectCCType(visaStr);
+
+                  assert(types.contains(CreditCardType.visa()));
+                  print(types.contains(CreditCardType.visa()));
+                  print(types.contains(CreditCardType.mastercard()));
+                  print(types.contains(CreditCardType.americanExpress()));
+
+                  controller.saveCreditCardDataToFirestore(
                     controller.state.documentId,
                     controller.state.cardNumber.text.trim(),
                     controller.state.expiryDate.text.trim(),
                     controller.state.zipCode.text.trim(),
                     controller.state.cvc.text.trim(),
-                );
+                  );
+
+                },);
               })
             ]
         ),

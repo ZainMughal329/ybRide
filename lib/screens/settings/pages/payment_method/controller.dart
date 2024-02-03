@@ -1,6 +1,10 @@
 
 
+import 'package:credit_card_validator/credit_card_validator.dart';
+import 'package:credit_card_validator/validation_results.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/screens/settings/pages/payment_method/index.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../../models/creditCart.dart';
@@ -10,6 +14,11 @@ class PaymentCon extends GetxController{
   final state =PaymentState();
 
 
+  void setLoading(bool val){
+    state.loading.value = val;
+  }
+
+
   Future<void> saveCreditCardDataToFirestore(
       String id,
       String number,
@@ -17,6 +26,7 @@ class PaymentCon extends GetxController{
       String zipCode,
       String cvc
       ) async {
+    setLoading(true);
     try {
       await FirebaseFirestore.instance.collection('credit_cards').doc(id).set(
         CreditCardModel(
@@ -26,10 +36,17 @@ class PaymentCon extends GetxController{
             expiryDate: expiryDate,
             zipCode: zipCode).toJson()
 
-      );
-      print('Credit card data saved to Firestore successfully.');
+      ).then((value){
+        setLoading(false);
+        Snackbar.showSnackBar('YB-Ride', "Payment Saved", Icons.done);
+      }).onError((error, stackTrace){
+        Snackbar.showSnackBar('YB-Ride', "Error ${error.toString()}", Icons.done);
+      });
+
+
     } catch (error) {
-      print('Error saving credit card data: $error');
+      setLoading(false);
+      Snackbar.showSnackBar('YB-Ride', "Error ${error.toString()}", Icons.done);
     }
   }
 
@@ -38,5 +55,6 @@ class PaymentCon extends GetxController{
     state.expiryDate.text =
     expiry.startsWith(RegExp('[2-9]')) ? '0$expiry' : expiry;
   }
+
 
 }

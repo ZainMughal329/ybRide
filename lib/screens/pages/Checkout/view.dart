@@ -323,6 +323,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                   value:
                                       controller.state.vehicle_delivery.value,
                                   onChanged: (bool? value) {
+                                    controller.priceLoadingFunc();
                                     controller.state.vehicle_delivery.value =
                                         value!;
                                     if (value == true) {
@@ -339,7 +340,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                           controller.state.delivery);
                                     }
                                     controller.state.vehicle_delivery.value =
-                                        value!;
+                                        value;
                                   },
                                 ),
                               ),
@@ -388,6 +389,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                   visualDensity: VisualDensity.compact,
                                   value: controller.state.vehicle_pickup.value,
                                   onChanged: (bool? value) {
+                                    controller.priceLoadingFunc();
                                     if (value == true) {
                                       if (controller
                                               .state.vehicle_delivery.value ==
@@ -804,14 +806,85 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                               ),
                               Spacer(),
                               Obx(
-                                () => _checkBox(
-                                    controller.state.standard_protection.value,
-                                    (value) {
-                                  controller.state.standard_protection.value =
-                                      value;
-                                  controller
-                                      .updateTotalPrice_Coverage_std_prot();
-                                }, context),
+                                () => Checkbox(
+                                  shape: ContinuousRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: BorderSide(
+                                        color: Colors.grey.withOpacity(.1),
+                                        width: .5),
+                                  ),
+                                  visualDensity: VisualDensity.compact,
+                                  value: controller
+                                      .state.standard_protection.value,
+                                  onChanged: (bool? value) {
+                                    controller.priceLoadingFunc();
+                                    if (value == true) {
+                                      controller.addInTotalPrice(
+                                          controller.state.standard);
+                                      //checking if value was true , and then subtracting it
+                                      if (controller.state.essential_protection
+                                              .value ==
+                                          true) {
+                                        controller.subtractFromTotalPrince(
+                                            controller.state.essential);
+                                      }
+                                      if (controller
+                                              .state.customCoverage.value ==
+                                          true) {
+                                        if (controller
+                                                .state.cdwSwitchVal.value ==
+                                            true) {
+                                          controller.subtractFromTotalPrince(
+                                              controller.state.CDW);
+                                        }
+                                        if (controller
+                                                .state.rcliSwitchVal.value ==
+                                            true) {
+                                          controller.subtractFromTotalPrince(
+                                              controller.state.RCLI);
+                                        }
+                                        if (controller
+                                                .state.assistanceVal.value ==
+                                            true) {
+                                          controller.subtractFromTotalPrince(
+                                              controller.state.assistance);
+                                        }
+                                        if (controller
+                                                .state.sliSwitchVal.value ==
+                                            true) {
+                                          controller.subtractFromTotalPrince(
+                                              controller.state.SLI);
+                                        }
+                                      }
+                                      // false the rest of protection values
+                                      controller.state.essential_protection
+                                          .value = false;
+                                      controller.state.i_have_own.value = false;
+                                      controller.state.essential_protection
+                                          .value = false;
+                                      controller.state.customCoverage.value =
+                                          false;
+                                      controller.state.customValueSelected
+                                          .value = false;
+                                      controller.state.cdwSwitchVal.value =
+                                          false;
+                                      controller.state.rcliSwitchVal.value =
+                                          false;
+                                      controller.state.assistanceVal.value =
+                                          false;
+                                      controller.state.sliSwitchVal.value =
+                                          false;
+                                      //updating checkboxValue
+                                      controller.state.standard_protection
+                                          .value = true;
+                                    } else if (value == false) {
+                                      controller.subtractFromTotalPrince(
+                                          controller.state.standard);
+                                      controller.state.standard_protection
+                                          .value = false;
+                                    }
+                                  },
+                                ),
                               ),
                             ],
                           ),
@@ -842,7 +915,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                 children: [
                                   HeadingTextWidget(
                                     textColor: Theme.of(context).headingColor,
-                                    title: 'Essential Protection',
+                                    title: 'Liability Insurance',
                                     fontSize: 14,
                                   ),
                                   SizedBox(
@@ -858,14 +931,85 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                               ),
                               Spacer(), // Add spacing between text and circle
                               Obx(
-                                () => _checkBox(
-                                    controller.state.essential_protection.value,
-                                    (value) {
-                                  controller.state.essential_protection.value =
-                                      value;
-                                  controller
-                                      .updateTotalPrice_Coverage_essential_prot();
-                                }, context),
+                                () => Checkbox(
+                                  shape: ContinuousRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: BorderSide(
+                                        color: Colors.grey.withOpacity(.1),
+                                        width: .5),
+                                  ),
+                                  visualDensity: VisualDensity.compact,
+                                  value: controller
+                                      .state.essential_protection.value,
+                                  onChanged: (bool? value) {
+                                    controller.priceLoadingFunc();
+                                    if (value == true) {
+                                      controller.addInTotalPrice(
+                                          controller.state.essential);
+                                      //checking if value was true , and then subtracting it
+                                      if (controller.state.standard_protection
+                                              .value ==
+                                          true) {
+                                        controller.subtractFromTotalPrince(
+                                            controller.state.standard);
+                                      }
+                                      if (controller
+                                              .state.customCoverage.value ==
+                                          true) {
+                                        if (controller
+                                                .state.cdwSwitchVal.value ==
+                                            true) {
+                                          controller.subtractFromTotalPrince(
+                                              controller.state.CDW);
+                                        }
+                                        if (controller
+                                                .state.rcliSwitchVal.value ==
+                                            true) {
+                                          controller.subtractFromTotalPrince(
+                                              controller.state.RCLI);
+                                        }
+                                        if (controller
+                                                .state.assistanceVal.value ==
+                                            true) {
+                                          controller.subtractFromTotalPrince(
+                                              controller.state.assistance);
+                                        }
+                                        if (controller
+                                                .state.sliSwitchVal.value ==
+                                            true) {
+                                          controller.subtractFromTotalPrince(
+                                              controller.state.SLI);
+                                        }
+                                      }
+                                      // false the rest of protection values
+                                      controller.state.standard_protection
+                                          .value = false;
+                                      controller.state.i_have_own.value = false;
+                                      controller.state.essential_protection
+                                          .value = false;
+                                      controller.state.customValueSelected
+                                          .value = false;
+                                      controller.state.customCoverage.value =
+                                          false;
+                                      controller.state.cdwSwitchVal.value =
+                                          false;
+                                      controller.state.rcliSwitchVal.value =
+                                          false;
+                                      controller.state.assistanceVal.value =
+                                          false;
+                                      controller.state.sliSwitchVal.value =
+                                          false;
+                                      //updating checkboxValue
+                                      controller.state.essential_protection
+                                          .value = true;
+                                    } else if (value == false) {
+                                      controller.subtractFromTotalPrince(
+                                          controller.state.essential);
+                                      controller.state.essential_protection
+                                          .value = false;
+                                    }
+                                  },
+                                ),
                               ),
                             ],
                           ),
@@ -911,12 +1055,85 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                               ),
                               Spacer(), // Add spacing between text and circle
                               Obx(
-                                () => _checkBox(
-                                    controller.state.i_have_own.value, (value) {
-                                  controller.state.i_have_own.value = value;
-                                  controller
-                                      .updateTotalPrice_Coverage_have_Own();
-                                }, context),
+                                () => Checkbox(
+                                  shape: ContinuousRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: BorderSide(
+                                        color: Colors.grey.withOpacity(.1),
+                                        width: .5),
+                                  ),
+                                  visualDensity: VisualDensity.compact,
+                                  value: controller.state.i_have_own.value,
+                                  onChanged: (bool? value) {
+                                    controller.priceLoadingFunc();
+                                    if (value == true) {
+                                      // controller.addInTotalPrice(controller.state.essential);
+                                      //checking if value was true , and then subtracting it
+                                      if (controller.state.standard_protection
+                                              .value ==
+                                          true) {
+                                        controller.subtractFromTotalPrince(
+                                            controller.state.standard);
+                                      }
+                                      if (controller
+                                              .state.customCoverage.value ==
+                                          true) {
+                                        if (controller
+                                                .state.cdwSwitchVal.value ==
+                                            true) {
+                                          controller.subtractFromTotalPrince(
+                                              controller.state.CDW);
+                                        }
+                                        if (controller
+                                                .state.cdwSwitchVal.value ==
+                                            true) {
+                                          controller.subtractFromTotalPrince(
+                                              controller.state.RCLI);
+                                        }
+                                        if (controller
+                                                .state.cdwSwitchVal.value ==
+                                            true) {
+                                          controller.subtractFromTotalPrince(
+                                              controller.state.assistance);
+                                        }
+                                        if (controller
+                                                .state.cdwSwitchVal.value ==
+                                            true) {
+                                          controller.subtractFromTotalPrince(
+                                              controller.state.SLI);
+                                        }
+                                      }
+                                      if (controller.state.essential_protection
+                                              .value ==
+                                          true) {
+                                        controller.subtractFromTotalPrince(
+                                            controller.state.essential);
+                                      }
+                                      // false the rest of protection values
+                                      controller.state.standard_protection
+                                          .value = false;
+                                      controller.state.essential_protection
+                                          .value = false;
+                                      controller.state.customCoverage.value =
+                                          false;
+                                      controller.state.customValueSelected
+                                          .value = false;
+                                      controller.state.cdwSwitchVal.value =
+                                          false;
+                                      controller.state.rcliSwitchVal.value =
+                                          false;
+                                      controller.state.assistanceVal.value =
+                                          false;
+                                      controller.state.sliSwitchVal.value =
+                                          false;
+                                      //updating checkboxValue
+                                      controller.state.i_have_own.value = true;
+                                    } else if (value == false) {
+                                      // controller.subtractFromTotalPrince(controller.state.essential);
+                                      controller.state.i_have_own.value = false;
+                                    }
+                                  },
+                                ),
                               ),
                             ],
                           ),
@@ -935,19 +1152,66 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                       SizedBox(
                         height: mq.height * .03,
                       ),
-                      GetBuilder<CheckOutCon>(builder: (con) {
-                        return InkWell(
-                          onTap: () {
-                            controller.init();
-                            coverageBottomSheet(context, controller);
-                          },
-                          child: HeadingTextWidget(
-                            title: 'Add custom coverage',
-                            fontSize: 16,
-                            textColor: AppColors.buttonColor,
+                      // CustomCoverageSheet
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              // controller.priceLoading();
+                              coverageBottomSheet(context, controller);
+                            },
+                            child: HeadingTextWidget(
+                              title: 'Add custom coverage',
+                              fontSize: 16,
+                              textColor: AppColors.buttonColor,
+                            ),
                           ),
-                        );
-                      }),
+                          Spacer(),
+                          Obx(
+                            () => Checkbox(
+                              shape: ContinuousRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                side: BorderSide(
+                                    color: Colors.grey.withOpacity(.1),
+                                    width: .5),
+                              ),
+                              visualDensity: VisualDensity.compact,
+                              value: controller.state.customCoverage.value,
+                              onChanged: (bool? value) {
+                                controller.priceLoadingFunc();
+                                if (value == true) {
+                                  coverageBottomSheet(context, controller);
+                                } else if (value == false) {
+                                  if (controller.state.cdwSwitchVal.value ==
+                                      true) {
+                                    controller.subtractFromTotalPrince(
+                                        controller.state.CDW);
+                                  }
+                                  if (controller.state.rcliSwitchVal.value ==
+                                      true) {
+                                    controller.subtractFromTotalPrince(
+                                        controller.state.RCLI);
+                                  }
+                                  if (controller.state.assistanceVal.value ==
+                                      true) {
+                                    controller.subtractFromTotalPrince(
+                                        controller.state.assistance);
+                                  }
+                                  if (controller.state.sliSwitchVal.value ==
+                                      true) {
+                                    controller.subtractFromTotalPrince(
+                                        controller.state.SLI);
+                                  }
+                                  controller.removingAllValuesInChekout();
+                                  controller.state.customValueSelected.value =
+                                      false;
+                                  controller.state.customCoverage.value = false;
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                       SizedBox(
                         height: mq.height * .02,
                       ),
@@ -985,21 +1249,35 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                   ),
                                   SubHeadingTextWidget(
                                     textColor: Theme.of(context).lightTextColor,
-                                    title: '\$13.00 | day',
+                                    title: '\$${controller.state.unlimitedMiles} | day',
                                     fontSize: 14,
                                   )
                                 ],
                               ),
                               Spacer(), // Add spacing between text and circle
                               Obx(
-                                () => _switchButton(
+                                    () => Checkbox(
+                                  shape: ContinuousRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: BorderSide(
+                                        color: Colors.grey.withOpacity(.1),
+                                        width: .5),
+                                  ),
+                                  visualDensity: VisualDensity.compact,
+                                  value:
                                   controller.state.extraSwitchVal.value,
-                                  (value) {
+                                  onChanged: (bool? value) {
+                                    controller.priceLoadingFunc();
+                                    if (value == true) {
+                                      controller.addInTotalPrice(
+                                          controller.state.unlimitedMiles);
+                                    } else if (value == false) {
+                                      controller.subtractFromTotalPrince(
+                                          controller.state.unlimitedMiles);
+                                    }
                                     controller.state.extraSwitchVal.value =
-                                        value;
-                                    controller.updateTotalPrice_Extras();
+                                    value!;
                                   },
-                                  context,
                                 ),
                               ),
                             ],
@@ -1078,12 +1356,29 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                       Row(
                         children: [
                           Obx(
-                            () => _checkBox(
-                                controller.state.driversCheckBoxVal.value,
-                                (value) {
-                              controller.state.driversCheckBoxVal.value = value;
-                              controller.updateTotalPrice_Drivers();
-                            }, context),
+                                () => Checkbox(
+                              shape: ContinuousRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                side: BorderSide(
+                                    color: Colors.grey.withOpacity(.1),
+                                    width: .5),
+                              ),
+                              visualDensity: VisualDensity.compact,
+                              value:
+                              controller.state.driversCheckBoxVal.value,
+                              onChanged: (bool? value) {
+                                controller.priceLoadingFunc();
+                                if (value == true) {
+                                  controller.addInTotalPrice(
+                                      controller.state.licenseFee);
+                                } else if (value == false) {
+                                  controller.subtractFromTotalPrince(
+                                      controller.state.licenseFee);
+                                }
+                                controller.state.driversCheckBoxVal.value =
+                                value!;
+                              },
+                            ),
                           ),
                           SizedBox(width: mq.width * 0.002),
                           SubHeadingTextWidget(
@@ -1366,13 +1661,22 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                           ],
                                         ),
                                         Obx(
-                                          () => SubHeadingTextWidget(
-                                            title:
-                                                '\$${controller.state.totalPrice.value.toStringAsFixed(2)}',
-                                            fontSize: 13,
-                                            textColor: Theme.of(context)
-                                                .lightTextColor,
-                                          ),
+                                          () {
+                                            return controller
+                                                        .priceLoading.value ==
+                                                    true
+                                                ? Lottie.asset(
+                                                    'assets/lottie/loading2.json',
+                                                    height: 30,
+                                                    width: 50)
+                                                : SubHeadingTextWidget(
+                                                    title:
+                                                        '\$${controller.state.totalPrice.value.toStringAsFixed(2)}',
+                                                    fontSize: 13,
+                                                    textColor: Theme.of(context)
+                                                        .lightTextColor,
+                                                  );
+                                          },
                                         ),
                                       ],
                                     ),
