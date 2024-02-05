@@ -42,6 +42,7 @@ RxDouble totalPrice = 0.0.obs;
   RxString cvvNumber = "".obs;
   RxString zipCode = "".obs;
   RxString cardType = "".obs;
+  RxBool cardAdded= false.obs;
 
   RxBool cardLoading = false.obs;
 
@@ -63,6 +64,9 @@ RxDouble totalPrice = 0.0.obs;
   double? licenseFee ;
   double? unlimitedMiles ;
   String? pickupLoc;
+
+  RxBool promoCodeapplied = false.obs;
+  RxDouble promoDiscount = 0.0.obs;
 
 
 

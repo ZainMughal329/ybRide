@@ -30,7 +30,11 @@ class LoginController extends GetxController {
         name: user.displayName.toString(),
         id: user.uid.toString(),
         email: user.email.toString(),
-        pushToken: '');
+        pushToken: '',
+      dateTime: DateTime.now().millisecondsSinceEpoch.toString(),
+      list: [],
+
+    );
 
     await APis.db.collection('users').doc(APis.auth.currentUser!.uid).set(
           chatUser.toJson(),

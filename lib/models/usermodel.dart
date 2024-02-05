@@ -6,6 +6,8 @@ class UserModel {
   String? id;
   final String email;
   final String pushToken;
+  final String dateTime;
+  final List<String> list;
 
   UserModel({
     required this.image,
@@ -13,6 +15,8 @@ class UserModel {
     this.id = '',
     required this.email,
     required this.pushToken,
+    required this.dateTime,
+     required this.list,
   });
 
   toJson() {
@@ -22,6 +26,8 @@ class UserModel {
       'name': name,
       'email': email,
       'pushToken' : pushToken,
+      'dateTime':dateTime,
+      'listOfCodes' : list,
     };
   }
 
@@ -35,6 +41,8 @@ class UserModel {
       image: json["image"],
       email: json["email"],
       pushToken : json['pushToken'],
+      dateTime : json['dateTime'],
+      list : json['listOfCodes'],
     );
   }
 }

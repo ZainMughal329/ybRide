@@ -28,4 +28,10 @@ class AppConstants {
   //Calculation Constants
   static double rentDays = 0.0;
 
+  //Card Details Constants
+static String cardNumber="";
+  static String cardCvv="";
+  static String cardExp="";
+  static String cardZip="";
+
 }

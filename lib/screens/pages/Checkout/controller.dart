@@ -14,12 +14,14 @@ import 'package:yb_ride/screens/pages/Checkout/index.dart';
 
 class CheckOutCon extends GetxController {
   final state = CheckOutState();
+
   //  for hide container
   void hideContainer() {
     state.isContainerVisible.value = false;
   }
 
   var priceLoading = false.obs;
+
   setPriceLoading(bool val) {
     priceLoading.value = val;
   }
@@ -112,7 +114,7 @@ class CheckOutCon extends GetxController {
       case 'SLI':
         coverageValue = 19.99;
         break;
-      // Add more cases for other custom coverages if needed
+    // Add more cases for other custom coverages if needed
     }
 
     state.totalPrice.value -= coverageValue;
@@ -167,7 +169,7 @@ class CheckOutCon extends GetxController {
     setDataLoaded(false);
     try {
       CollectionReference usersCollection =
-          APis.db.collection('checkoutPayment');
+      APis.db.collection('checkoutPayment');
       QuerySnapshot querySnapshot = await usersCollection.get();
 
       // Check if there are any documents in the collection
@@ -233,10 +235,11 @@ class CheckOutCon extends GetxController {
         state.expNumber.value = doc['expiryDate'];
         state.cvvNumber.value = doc['cvv'];
         state.zipCode.value = doc['zipCode'];
+        storeDetailsinConstants(doc['number'],
+            doc['cvv'], doc['expiryDate'], doc['zipCode']);
 
         getCardType(state.cardNumber.value);
-      } else {
-      }
+      } else {}
     } catch (e) {
       Snackbar.showSnackBar("YB-Ride", "Error fetching Details\nRetry again",
           Icons.error_outline);
@@ -255,12 +258,13 @@ class CheckOutCon extends GetxController {
     }
   }
 
-  setCardLoading( bool val){
-    state.cardLoading.value=val;
+  setCardLoading(bool val) {
+    state.cardLoading.value = val;
   }
 
   Future<void> saveCreditCardDataToFirestore(String number,
-      String expiryDate, String cvv, String zipCode,BuildContext context) async {
+      String expiryDate, String cvv, String zipCode,
+      BuildContext context) async {
     setCardLoading(true);
     try {
       await APis.db
@@ -274,6 +278,8 @@ class CheckOutCon extends GetxController {
           zipCode: zipCode)
           .toJson())
           .then((value) {
+        storeDetailsinConstants(number,
+            cvv, expiryDate, zipCode);
         getCardType(number);
         setCardLoading(false);
         Navigator.pop(context);
@@ -288,6 +294,103 @@ class CheckOutCon extends GetxController {
       Snackbar.showSnackBar('YB-Ride', "Error ${error.toString()}", Icons.done);
     }
   }
+
+
+  void storeDetailsinConstants(String cardNumber, String cvvNumber,
+      String expDate, String zipCode) {
+    AppConstants.cardNumber = cardNumber;
+    AppConstants.cardCvv = cvvNumber;
+    AppConstants.cardExp = expDate;
+    AppConstants.cardZip = zipCode;
+    state.cardAdded.value = true;
+  }
+
+
+  Future<void> checkPromoCode(BuildContext context, String code) async {
+    try {
+      final doc = await APis.db.collection('promoCodes').where(
+          'code', isEqualTo: code).get();
+
+      if (doc.docs.isNotEmpty) {
+        final amountInt = doc.docs[0]['discountAmount'];
+        final amount = double.parse(amountInt.toString());
+        state.promoDiscount.value = amount;
+        await checkAndAddValueToUserList(context, code, amount);
+      } else {
+        Snackbar.showSnackBar(
+            "YB-Ride", 'PromoCode not found', Icons.error_outline);
+      }
+    } catch (e) {
+      Snackbar.showSnackBar('YB-Ride', e.toString(), Icons.error_outline);
+    }
+  }
+
+
+  Future<void> checkAndAddValueToUserList(BuildContext context,
+      String promoCode, double amount) async {
+    // Reference to the "user" collection and document with ID "1231231231"
+    DocumentReference userDocumentRef = APis.db.collection('users').doc(
+        SessionController().userId);
+
+    // Fetch the current document snapshot
+    final userDocument = await userDocumentRef.get();
+    List list = userDocument['listOfusedCodes'];
+    if (list.length == 0) {
+      await userDocumentRef.update({
+        'listOfusedCodes': FieldValue.arrayUnion([promoCode]),
+      });
+      // handle logic for giving discount
+      applyDiscount(amount);
+      state.promoCodeapplied.value = true;
+      Navigator.pop(context);
+      print("give discount");
+    } else {
+      if (list != 0 && !list.contains(promoCode)) {
+        // Update the document to add the new value to the list
+        await userDocumentRef.update({
+          'listOfusedCodes': FieldValue.arrayUnion([promoCode]),
+        });
+        applyDiscount(amount);
+        state.promoCodeapplied.value = true;
+        Navigator.pop(context);
+        print('give discount');
+      } else if (list.length != 0 && list.contains(promoCode)) {
+        // Handle the case where the value already exists in the list
+        // handle logic for not giving discount
+        // return false;
+        print("dont give discount");
+        Snackbar.showSnackBar(
+            'YB-Ride', 'Already Used Promo Code', Icons.error_outline);
+      }
+    }
+  }
+
+
+  void applyDiscount(amount) {
+    subtractFromTotalPrince(amount);
+  }
+
+
+  bool checkNecessaryFieldsAdded() {
+    if (state.vehicle_delivery.value == true ||
+        state.vehicle_pickup.value == true) {
+      if (state.standard_protection.value == true ||
+          state.essential_protection.value == true
+          || state.i_have_own.value == true ||
+          state.customCoverage.value == true) {
+        if (state.cardAdded.value == true) {
+          return true;
+        } else {
+          false;
+        }
+      } else {
+        return false;
+      }
+    }{
+      return false;
+    }
+
+}
 
 
 }

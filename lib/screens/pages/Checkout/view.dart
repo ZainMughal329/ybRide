@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/icon_container.dart';
+import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/helper/app_constants.dart';
@@ -157,7 +158,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          promoCodeBottomSheet(context);
+                          promoCodeBottomSheet(context,controller);
                         },
                         child: Container(
                           height: mq.height * .08,
@@ -169,20 +170,34 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                               children: [
                                 Row(
                                   children: [
-                                    IconContainer(
+                                    Obx((){
+                                      return controller.state.promoCodeapplied.value == true ? Container(): IconContainer(
                                       iconName: 'Star.png',
                                       height: 30,
                                       width: 30,
-                                    ),
+                                      );
+                                    }),
                                     SizedBox(
                                       width: mq.width * .18,
                                     ),
-                                    HeadingTextWidget(
-                                      title: 'Add promo code',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      textColor: Theme.of(context).headingColor,
-                                    )
+                                    Obx((){
+                                      return controller.state.promoCodeapplied.value == true ?
+                                          Container(
+                                            child: Flexible(
+                                              child: HeadingTextWidget(
+                                                title: 'Promo code discount applied \$-${controller.state.promoDiscount.value}',
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w600,
+                                                textColor: Theme.of(context).headingColor,
+                                              ),
+                                            ),
+                                          ) : HeadingTextWidget(
+                                        title: 'Add promo code',
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
+                                        textColor: Theme.of(context).headingColor,
+                                      );
+                                    }),
                                   ],
                                 ),
                               ],
@@ -278,9 +293,17 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                         height: mq.height * .02,
                       ),
                       // Getting the vehicle
-                      HeadingTextWidget(
-                        title: 'Getting the vehicle',
-                        textColor: Theme.of(context).headingColor,
+                      Row(
+                        children: [
+                          HeadingTextWidget(
+                            title: 'Getting the vehicle',
+                            textColor: Theme.of(context).headingColor,
+                          ),
+                          HeadingTextWidget(
+                            textColor: Colors.red,
+                            title: " *",
+                          ),
+                        ],
                       ),
                       SizedBox(
                         height: mq.height * .02,
@@ -772,9 +795,17 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                       }),
                       //delivery text
                       // Coverage
-                      HeadingTextWidget(
-                        title: 'Coverage',
-                        textColor: Theme.of(context).headingColor,
+                      Row(
+                        children: [
+                          HeadingTextWidget(
+                            title: 'Coverage',
+                            textColor: Theme.of(context).headingColor,
+                          ),
+                          HeadingTextWidget(
+                            textColor: Colors.red,
+                            title: " *",
+                          ),
+                        ],
                       ),
                       SizedBox(
                         height: mq.height * .02,
@@ -1563,9 +1594,17 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                         height: mq.height * .02,
                       ),
                       // Payment method
-                      HeadingTextWidget(
-                        textColor: Theme.of(context).headingColor,
-                        title: 'Payment method',
+                      Row(
+                        children: [
+                          HeadingTextWidget(
+                            textColor: Theme.of(context).headingColor,
+                            title: 'Payment method',
+                          ),
+                          HeadingTextWidget(
+                            textColor: Colors.red,
+                            title: " *",
+                          ),
+                        ],
                       ),
                       SizedBox(
                         height: mq.height * .03,
@@ -1599,17 +1638,29 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                       SizedBox(
                         height: mq.height * .03,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          promoCodeBottomSheet(context);
-                        },
-                        child: HeadingTextWidget(
-                          title: 'Add promo code',
-                          textColor: AppColors.buttonColor,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                        ),
-                      ),
+                      Obx((){
+                        return controller.state.promoCodeapplied.value == true ?
+                            Container(
+                              child: Flexible(
+                                child: HeadingTextWidget(
+                                  title: 'Promo code discount applied \$-${controller.state.promoDiscount.value}',
+                                  textColor: AppColors.buttonColor,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ) : GestureDetector(
+                          onTap: () {
+                            promoCodeBottomSheet(context,controller);
+                          },
+                          child: HeadingTextWidget(
+                            title: 'Add promo code',
+                            textColor: AppColors.buttonColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                          ),
+                        );
+                      }),
                       SizedBox(
                         height: mq.height * .03,
                       ),
@@ -1701,25 +1752,35 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                               ],
                             ),
                             SizedBox(width: mq.width * 0.06),
-                            Padding(
-                              padding:
-                                  EdgeInsets.only(bottom: mq.height * .017),
-                              child: Container(
-                                height: 50,
-                                width: 170,
-                                decoration: BoxDecoration(
-                                  color: AppColors.buttonColor.withOpacity(0.8),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(10),
-                                    // topRight: Radius.circular(10),
+                            InkWell(
+                              onTap : (){
+
+                                if(controller.checkNecessaryFieldsAdded()){
+                                  print('all fields added');
+                                }else{
+                                  Snackbar.showSnackBar("YB-Ride", "Select Necessary Requirments", Icons.error_outline);
+                                }
+                                },
+                              child: Padding(
+                                padding:
+                                    EdgeInsets.only(bottom: mq.height * .017),
+                                child: Container(
+                                  height: 50,
+                                  width: 170,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.buttonColor.withOpacity(0.8),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(10),
+                                      // topRight: Radius.circular(10),
+                                    ),
                                   ),
+                                  child: Center(
+                                      child: HeadingTextWidget(
+                                    title: 'Add personal data',
+                                    textColor: Colors.white,
+                                    fontSize: 14,
+                                  )),
                                 ),
-                                child: Center(
-                                    child: HeadingTextWidget(
-                                  title: 'Add personal data',
-                                  textColor: Colors.white,
-                                  fontSize: 14,
-                                )),
                               ),
                             )
                           ],
@@ -1787,15 +1848,7 @@ Widget paymentCard(String cardImage, BuildContext context,CheckOutCon controller
           SizedBox(
             width: 5,
           ),
-          // IconButton(
-          //   icon: Icon(
-          //     Icons.arrow_forward_ios,
-          //     color: Theme.of(context).headingColor,
-          //   ),
-          //   onPressed: () {
-          //
-          //   },
-          // ),
+
         ],
       ),
     ),
