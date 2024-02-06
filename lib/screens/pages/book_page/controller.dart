@@ -256,6 +256,8 @@ class BookViewController extends GetxController {
     AppConstants.toYear = state.toYear.value;
     AppConstants.toTime = state.toTime.value;
     AppConstants.fromAddress = state.selectedPlace.value;
+    AppConstants.fromTimeinMiliSeconds = state.fromTimeinMiliSeconds;
+    AppConstants.toTimeinMiliSeconds = state.toTimeinMiliSeconds;
     if(state.returnPlace.value =='Return Place'){
       AppConstants.toAddress = state.selectedPlace.value;
     }else{

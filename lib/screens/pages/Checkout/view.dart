@@ -1863,10 +1863,10 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                   completetoaddress
                                   fromDateEpoch
                                   toDateEpoch
-                                  fromTimeEpoch
-                                  fromTimeEpoch
+                                  fromTimeMiliSeconds
+                                  toTimeMiliSeconds
                                   NoOfDays
-                                  VehicelType
+                                  carType
                                   TotalPrice
                                   isPickUp
                                   isDelivery
@@ -1875,8 +1875,8 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                   isIhaveOwnProtection
                                   isCustomCoverage
                                   totalCcustomCoverage
-                                  unlimitedMiles
-                                  under25years
+                                  isUnlimitedMiles
+                                  isUnder25years
                                   cardNum
                                   cardCVV
                                   cardExp
