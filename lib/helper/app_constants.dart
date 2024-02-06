@@ -20,6 +20,7 @@ class AppConstants {
   static   String fromDateName = "";
   static   String fromYear = "";
   static   String fromTime = "11:00 AM";
+  static String fromTimeinMiliSeconds = "";
   static   String epochToDate="";
   static   String toMonth = "";
   static   String toMonthName = "";
@@ -27,6 +28,7 @@ class AppConstants {
   static   String toDateName = "";
   static   String toYear = "";
   static   String toTime = "11:00 AM";
+  static String toTimeinMiliSeconds = "";
 
   //Calculation Constants
   static double rentDays = 0.0;
