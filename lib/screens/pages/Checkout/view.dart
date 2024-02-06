@@ -9,6 +9,7 @@ import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/helper/app_constants.dart';
 import 'package:yb_ride/screens/pages/Checkout/controller.dart';
+import 'package:yb_ride/screens/pages/Checkout/widgets/addPersonalDetails.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/agePolicy.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/card_bottom_sheet.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/coverge_sheet.dart';
@@ -25,7 +26,8 @@ import '../../../main.dart';
 
 class CheckOutScreen extends GetView<CheckOutCon> {
   final double carRent;
-  CheckOutScreen({super.key, required this.carRent});
+  final String carType;
+  CheckOutScreen({super.key, required this.carRent,required this.carType});
   final controller = Get.put(CheckOutCon());
   @override
   Widget build(BuildContext context) {
@@ -311,7 +313,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                       Column(
                         children: [
                           Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            // mainAxisAlignment : MainAxisAlignment.spaceBetween,
                             children: [
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -327,7 +329,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                   ),
                                   SubHeadingTextWidget(
                                     title:
-                                        'We will deliver YB-Car to selected address',
+                                        'We will deliver YB-Car to selected \naddress',
                                     fontSize: 14,
                                     textColor: Theme.of(context).lightTextColor,
                                   )
@@ -378,7 +380,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                       Column(
                         children: [
                           Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                            // crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -394,7 +396,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                   ),
                                   SubHeadingTextWidget(
                                     title:
-                                        'Meet us at our lot and save on delivery fees',
+                                        'Meet us at our lot and save \non delivery fees',
                                     fontSize: 14,
                                     textColor: Theme.of(context).lightTextColor,
                                   ),
@@ -1752,37 +1754,193 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                               ],
                             ),
                             SizedBox(width: mq.width * 0.06),
-                            InkWell(
-                              onTap : (){
+                            Obx((){
+                              return controller.state.personalInfoAdded.value == true ?
+                              InkWell(
+                                onTap : (){
+                                  //Handle Book and Pay Logic here
+                                  print('Book and Pay');
+                                  AppConstants.totalPrice=controller.state.totalPrice.value;
+                                  AppConstants.vehicleType=carType;
 
-                                if(controller.checkNecessaryFieldsAdded()){
-                                  print('all fields added');
-                                }else{
-                                  Snackbar.showSnackBar("YB-Ride", "Select Necessary Requirments", Icons.error_outline);
-                                }
+                                  // condition for getting vehicle
+                                  if(controller.state.vehicle_pickup.value==true){
+                                    AppConstants.isPickup=true;
+                                    AppConstants.isDeliver=false;
+                                  }else{
+                                    AppConstants.isPickup=false;
+                                    AppConstants.isDeliver=true;
+                                  }
+                                  // condition for extra miles and driving license
+                                  if(controller.state.extraSwitchVal.value==true){
+                                    AppConstants.unlimitedMiles=true;
+                                  }else{
+                                    AppConstants.unlimitedMiles=false;
+                                  }
+                                  if(controller.state.driversCheckBoxVal.value==true){
+                                    AppConstants.under25Years=true;
+                                  }
+                                  else{
+                                    AppConstants.under25Years=false;
+                                  }
+                                  //coverage conditions
+                                  if(controller.state.standard_protection.value==true){
+                                    AppConstants.standardProtection=true;
+                                  }else{
+                                    AppConstants.standardProtection=false;
+                                  }
+
+                                  if(controller.state.essential_protection.value==true){
+                                    AppConstants.liabilityProtection=true;
+                                  }else{
+                                    AppConstants.liabilityProtection=false;
+                                  }
+                                  if(controller.state.i_have_own.value==true){
+                                    AppConstants.i_have_own=true;
+                                  }else{
+                                    AppConstants.i_have_own=false;
+                                  }
+
+                                  //customCoverageConditions
+                                  if(controller.state.customCoverage==true){
+                                    AppConstants.customCoverage=true;
+                                    if(controller.state.cdwSwitchVal.value==true){
+                                      controller.addInTotalCustomCoverageValue(controller.state.CDW!);
+                                    }
+                                    if(controller.state.rcliSwitchVal.value==true){
+                                      controller.addInTotalCustomCoverageValue(controller.state.RCLI!);
+                                    }
+                                    if(controller.state.assistanceVal.value==true){
+                                      controller.addInTotalCustomCoverageValue(controller.state.assistance!);
+                                    }
+                                    if(controller.state.sliSwitchVal.value==true){
+                                      controller.addInTotalCustomCoverageValue(controller.state.SLI!);
+                                    }
+                                  }else{
+                                    AppConstants.customCoverage=false;
+                                    AppConstants.totalCustomCoverage=0.0;
+                                  }
+
+                                  print(AppConstants.standardProtection);
+                                  print(AppConstants.liabilityProtection);
+                                  print(AppConstants.i_have_own);
+                                  print(AppConstants.customCoverage);
+                                  print(AppConstants.totalCustomCoverage);
+                                  print(AppConstants.isPickup);
+                                  print(AppConstants.isDeliver);
+                                  print(AppConstants.unlimitedMiles);
+                                  print(AppConstants.under25Years);
+                                  print(AppConstants.toAddress);
+                                  print(AppConstants.rentDays);
+                                  print(AppConstants.fromDate);
+                                  print(AppConstants.toDate);
+                                  print(AppConstants.isPickup);
+                                  print(AppConstants.cardNumber);
+                                  print(AppConstants.cardCvv);
+                                  print(AppConstants.cardExp);
+                                  print(AppConstants.cardZip);
+                                  print(AppConstants.custFirstName);
+                                  print(AppConstants.custLastName);
+                                  print(AppConstants.custEmail);
+                                  print(AppConstants.custPhoneNo);
+                                  print(AppConstants.totalPrice);
+                                  print(AppConstants.vehicleType);
+                                  print(AppConstants.isPromoApplied);
+                                  print(AppConstants.promoDiscountAmount);
+                                  print(AppConstants.epochFromDate);
+                                  print(AppConstants.epochToDate);
+                                  print(AppConstants.toDate);
+                                  print(AppConstants.toMonth);
+
+                                  // model necessary data
+                                  /*
+                                  id==UserId
+                                  BookingDate
+                                  fullname
+                                  email
+                                  phoneNo
+                                  completefromaddress
+                                  completetoaddress
+                                  fromDateEpoch
+                                  toDateEpoch
+                                  fromTimeEpoch
+                                  fromTimeEpoch
+                                  NoOfDays
+                                  VehicelType
+                                  TotalPrice
+                                  isPickUp
+                                  isDelivery
+                                  isStandardProtection
+                                  isliabilityProtection
+                                  isIhaveOwnProtection
+                                  isCustomCoverage
+                                  totalCcustomCoverage
+                                  unlimitedMiles
+                                  under25years
+                                  cardNum
+                                  cardCVV
+                                  cardExp
+                                  cardZip
+                                  isPromoCodeApplied
+                                  promoDiscountAmount
+                                  status ()
+                                  */
+
                                 },
-                              child: Padding(
-                                padding:
-                                    EdgeInsets.only(bottom: mq.height * .017),
-                                child: Container(
-                                  height: 50,
-                                  width: 170,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.buttonColor.withOpacity(0.8),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(10),
-                                      // topRight: Radius.circular(10),
+                                child: Padding(
+                                  padding:
+                                  EdgeInsets.only(bottom: mq.height * .017),
+                                  child: Container(
+                                    height: 50,
+                                    width: 170,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.buttonColor.withOpacity(0.8),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                        // topRight: Radius.circular(10),
+                                      ),
                                     ),
+                                    child: Center(
+                                        child: HeadingTextWidget(
+                                          title: 'Book and Pay',
+                                          textColor: Colors.white,
+                                          fontSize: 14,
+                                        )),
                                   ),
-                                  child: Center(
-                                      child: HeadingTextWidget(
-                                    title: 'Add personal data',
-                                    textColor: Colors.white,
-                                    fontSize: 14,
-                                  )),
                                 ),
-                              ),
-                            )
+                              ) :
+                              InkWell(
+                                onTap : (){
+
+                                  if(controller.checkNecessaryFieldsAdded()){
+                                    addPersonalDataSheet(context, controller);
+                                  }else{
+                                    Snackbar.showSnackBar("YB-Ride", "Select Necessary Requirments", Icons.error_outline);
+                                  }
+                                },
+                                child: Padding(
+                                  padding:
+                                  EdgeInsets.only(bottom: mq.height * .017),
+                                  child: Container(
+                                    height: 50,
+                                    width: 170,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.buttonColor.withOpacity(0.8),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                        // topRight: Radius.circular(10),
+                                      ),
+                                    ),
+                                    child: Center(
+                                        child: HeadingTextWidget(
+                                          title: 'Add personal data',
+                                          textColor: Colors.white,
+                                          fontSize: 14,
+                                        )),
+                                  ),
+                                ),
+                              );
+                            }),
                           ],
                         ),
                       ),

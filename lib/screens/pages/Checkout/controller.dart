@@ -334,31 +334,33 @@ class CheckOutCon extends GetxController {
 
     // Fetch the current document snapshot
     final userDocument = await userDocumentRef.get();
-    List list = userDocument['listOfusedCodes'];
+    List list = userDocument['listOfCodes'];
     if (list.length == 0) {
       await userDocumentRef.update({
-        'listOfusedCodes': FieldValue.arrayUnion([promoCode]),
+        'listOfCodes': FieldValue.arrayUnion([promoCode]),
       });
       // handle logic for giving discount
       applyDiscount(amount);
       state.promoCodeapplied.value = true;
+      state.promoDiscount.value = amount;
       Navigator.pop(context);
       print("give discount");
     } else {
       if (list != 0 && !list.contains(promoCode)) {
         // Update the document to add the new value to the list
         await userDocumentRef.update({
-          'listOfusedCodes': FieldValue.arrayUnion([promoCode]),
+          'listOfCodes': FieldValue.arrayUnion([promoCode]),
         });
         applyDiscount(amount);
         state.promoCodeapplied.value = true;
+        state.promoDiscount.value = amount;
         Navigator.pop(context);
         print('give discount');
       } else if (list.length != 0 && list.contains(promoCode)) {
         // Handle the case where the value already exists in the list
         // handle logic for not giving discount
         // return false;
-        print("dont give discount");
+
         Snackbar.showSnackBar(
             'YB-Ride', 'Already Used Promo Code', Icons.error_outline);
       }
@@ -368,6 +370,8 @@ class CheckOutCon extends GetxController {
 
   void applyDiscount(amount) {
     subtractFromTotalPrince(amount);
+    AppConstants.isPromoApplied=true;
+    AppConstants.promoDiscountAmount=amount;
   }
 
 
@@ -391,6 +395,25 @@ class CheckOutCon extends GetxController {
     }
 
 }
+
+void storeUserDetailsinConstants(){
+    AppConstants.custFirstName = state.fNameCon.text.trim().toString();
+    AppConstants.custLastName = state.lNameCon.text.trim().toString();
+    AppConstants.custEmail = state.emailCon.text.trim().toString();
+    AppConstants.custPhoneNo = getRawPhoneNumber(state.phoneNumberCon.text.trim().toString());
+    state.personalInfoAdded.value=true;
+    print("values added in constants");
+    Snackbar.showSnackBar("YB-Ride", "Details Saved", Icons.done_all);
+
+  }
+  String getRawPhoneNumber(String formatted) {
+    // Remove any non-numeric characters
+    return formatted.replaceAll(RegExp(r'[^0-9]'), '');
+  }
+
+  void addInTotalCustomCoverageValue(double amount){
+    AppConstants.totalCustomCoverage=AppConstants.totalCustomCoverage+amount;
+  }
 
 
 }

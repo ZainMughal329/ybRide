@@ -21,7 +21,7 @@ class SplashScreen extends GetView<SplashController> {
               height: mq.height*0.34,
               width: double.infinity,
               decoration: BoxDecoration(
-                  color: AppColors.buttonColor,
+                  color: Colors.white,
                 borderRadius: BorderRadius.circular(30),
               ),
 

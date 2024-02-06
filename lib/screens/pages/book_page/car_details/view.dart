@@ -136,8 +136,10 @@ class CarDetailsScreen extends GetView<CarDetailsController> {
                     return _buildCARCard(context, snapshot.data!.docs[index]);
                   },);
               }else{
-               return Container(
-                 child: Lottie.asset('assets/lottie/loading2.json',width: 200,height: 200),
+               return Center(
+                 child: Container(
+                   child: Lottie.asset('assets/lottie/loading2.json',width: 200,height: 200),
+                 ),
                ); 
               }
             },
@@ -165,10 +167,15 @@ class CarDetailsScreen extends GetView<CarDetailsController> {
       child: InkWell(
         onTap: () {
       // controller.calculateNoDays();
-          controller.state.rentPerDay = docData['pricePerDay'];
+          final rentPDay = docData['pricePerDay'];
+          controller.state.rentPerDay = double.parse(rentPDay.toString());
+          // double rent = double.parse(controller.state.rentPerDay.toString());
+          print(controller.state.rentPerDay);
           controller.calculateNoDays();
           Get.to(() => CheckOutScreen(
-              carRent: controller.state.rentPerDay * AppConstants.rentDays));
+              carRent: controller.state.rentPerDay * AppConstants.rentDays,
+          carType: carType,
+          ));
           // Get.toNamed(RoutesName.checkOutScreen,arguments: {'',controller.state.rentPerDay});
         },
         child: Container(

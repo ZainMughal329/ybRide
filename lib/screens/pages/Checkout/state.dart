@@ -1,5 +1,6 @@
 
 
+import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -34,6 +35,19 @@ RxDouble totalPrice = 0.0.obs;
   final sliSwitchVal = false.obs;
   final assistanceVal = false.obs;
 
+  // Firebase payment values
+  RxBool dataLoaded = false.obs;
+  double? delivery;
+  double? essential ;
+  double? standard ;
+  double? CDW ;
+  double? RCLI ;
+  double? SLI ;
+  double? assistance;
+  double? licenseFee ;
+  double? unlimitedMiles ;
+  String? pickupLoc;
+
 
   double? carRent;
 
@@ -52,21 +66,24 @@ RxDouble totalPrice = 0.0.obs;
   TextEditingController zipController = TextEditingController();
 
 
-  // Firebase payment values
-  RxBool dataLoaded = false.obs;
-  double? delivery;
-  double? essential ;
-  double? standard ;
-  double? CDW ;
-  double? RCLI ;
-  double? SLI ;
-  double? assistance;
-  double? licenseFee ;
-  double? unlimitedMiles ;
-  String? pickupLoc;
+
 
   RxBool promoCodeapplied = false.obs;
   RxDouble promoDiscount = 0.0.obs;
+
+
+  //Profile Section
+
+  RxBool focused = false.obs;
+  RxBool personalInfoAdded = false.obs;
+  final countryPicker = FlCountryCodePicker();
+  final fNameCon = TextEditingController();
+  final lNameCon = TextEditingController();
+  final emailCon = TextEditingController();
+  final phoneNumberCon = TextEditingController();
+
+  Rx<CountryCode> code =
+      CountryCode(name: 'United States', code: 'US', dialCode: '+1').obs;
 
 
 

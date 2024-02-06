@@ -20,7 +20,9 @@ class BookNowState {
 
   // variables to check selection
   RxBool locationSelected = false.obs;
+  //trued
   RxBool timeandDateSelected = false.obs;
+//trued
   RxBool startEndDateSelected = false.obs;
 
 
@@ -47,6 +49,8 @@ class BookNowState {
   RxString toDateName = "".obs;
   RxString toYear = "".obs;
   RxString toTime = "11:00 AM".obs;
+  String fromTimeinMiliSeconds = "";
+  String toTimeinMiliSeconds = "";
 
 
   final items = <DropdownMenuItem>[
