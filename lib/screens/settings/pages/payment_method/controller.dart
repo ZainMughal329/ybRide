@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yb_ride/api/api.dart';
 import 'package:yb_ride/components/snackbar_widget.dart';
+import 'package:yb_ride/helper/app_constants.dart';
 import 'package:yb_ride/helper/session_controller.dart';
 import 'package:yb_ride/screens/settings/inded.dart';
 import 'package:yb_ride/screens/settings/pages/payment_method/index.dart';
@@ -31,8 +32,8 @@ class PaymentCon extends GetxController {
         state.cvv.text = doc['cvv'];
         state.zipCode.text = doc['zipCode'];
         getCardType(state.cardNumber.text);
-
         state.cardExist.value=true;
+        storeDetailsinConstants(doc['number'], doc['cvv'], doc['expiryDate'], doc['zipCode']);
       }else{
         state.cardExist.value=false;
 
@@ -64,6 +65,8 @@ class PaymentCon extends GetxController {
                   zipCode: zipCode)
               .toJson())
           .then((value) {
+        storeDetailsinConstants(number,
+            cvv, expiryDate, zipCode);
             getCardType(number);
             state.cardExist.value=true;
             fetchCardDetails();
@@ -112,6 +115,7 @@ class PaymentCon extends GetxController {
   Future<void> delCard(BuildContext context) async{
     try{
       await APis.db.collection('credit_cards').doc(SessionController().userId.toString()).delete().then((value){
+        removeDetailsinConstants();
         cleanControllers();
         state.cardExist.value=false;
         PersistentNavBarNavigator
@@ -129,6 +133,19 @@ class PaymentCon extends GetxController {
       Snackbar.showSnackBar("YB-Ride", e.toString(), Icons.done_all);
     }
 
+  }
+  void storeDetailsinConstants(String cardNumber, String cvvNumber , String expDate, String zipCode){
+    AppConstants.cardNumber = cardNumber;
+    AppConstants.cardCvv = cvvNumber;
+    AppConstants.cardExp = expDate;
+    AppConstants.cardZip = zipCode;
+  }
+
+  void removeDetailsinConstants(){
+    AppConstants.cardNumber = "";
+    AppConstants.cardCvv = "cvvNumber";
+    AppConstants.cardExp = "";
+    AppConstants.cardZip = "";
   }
 
 }

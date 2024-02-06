@@ -46,6 +46,15 @@ class BookViewController extends GetxController {
     state.toMonth.value = formattedDateMonth;
     state.toMonthName.value = getMonthName(formattedDateMonth);
     state.toYear.value = formattedDateYear;
+
+
+    AppConstants.toDateName = getDayOfWeek(newDate).toString();
+    AppConstants.toDate =formattedDateDay;
+    AppConstants.toMonth = formattedDateMonth;
+    AppConstants.toMonthName = getMonthName(formattedDateMonth);
+    AppConstants.toYear = formattedDateYear;
+    // AppConstants.toDateName
+    // AppConstants.toDateName
     state.datesFetched = true;
   }
 
@@ -114,9 +123,16 @@ class BookViewController extends GetxController {
   }
 
   void extractStartEndDate(String output) {
+
+    state.startEndDateSelected.value=true;
+    print(state.startEndDateSelected.value);
+
+    // state.startEndDateSelected.value=true;
     // Find the index of "startDate" and extract the substring
     int startIndex = output.indexOf("startDate:");
     int endIndex = output.indexOf(",", startIndex);
+
+    // state.timeandDateSelected.value=true;
 
     // Check if "startDate" is found
     if (startIndex != -1 && endIndex != -1) {
@@ -125,6 +141,8 @@ class BookViewController extends GetxController {
       String formattedStartDate = startDate.split(' ')[0];
 
       DateTime startDateDay = DateTime.parse(formattedStartDate);
+      print(formattedStartDate);
+      print("milisec"+startDateDay.millisecondsSinceEpoch.toString());
       String day = getDayOfWeek(startDateDay);
       String formattedDateDay = DateFormat('dd').format(startDateDay);
       String formattedDateMonth = DateFormat('MM').format(startDateDay);
@@ -132,6 +150,7 @@ class BookViewController extends GetxController {
 
 
 
+      AppConstants.epochFromDate = startDateDay.millisecondsSinceEpoch.toString();
       state.fromDate.value = formattedDateDay;
       state.fromDateName.value = day;
       state.fromMonth.value = formattedDateMonth;
@@ -150,41 +169,41 @@ class BookViewController extends GetxController {
         String endDate =
             output.substring(startIndex + "endDate:".length, endIndex).trim();
         String formattedEndDate = endDate.split(' ')[0];
+        // added line
+
+
+
         if (formattedEndDate != "null") {
+
+
+          print(formattedEndDate);
+
           DateTime EndDateDay = DateTime.parse(formattedEndDate);
+
+          print(EndDateDay.microsecondsSinceEpoch);
+          print("milisec"+EndDateDay.millisecondsSinceEpoch.toString());
+
           String day = getDayOfWeek(EndDateDay);
 
           String formattedDateDay = DateFormat('dd').format(EndDateDay);
           String formattedDateMonth = DateFormat('MM').format(EndDateDay);
           String formattedDateYear = DateFormat('yy').format(EndDateDay);
 
+          AppConstants.epochToDate = EndDateDay.millisecondsSinceEpoch.toString();
           state.toDate.value = formattedDateDay;
           state.toDateName.value = day;
           state.toMonth.value = formattedDateMonth;
           state.toMonthName.value = getMonthName(formattedDateMonth);
           state.toYear.value = formattedDateYear;
-          state.startEndDateSelected.value=true;
 
 
+          // state.startEndDateSelected.value=true;
         }
 
       }
 
-
-      // print("------------");
-      // print(state.fromDate.value);
-      // print(state.fromDateName.value);
-      // print(state.fromMonth.value);
-      // print(state.fromMonthName.value);
-      // print(state.fromYear.value);
-      // print("============");
-      // print(state.toDate.value);
-      // print(state.toDateName.value);
-      // print(state.toMonth.value);
-      // print(state.toMonthName.value);
-      // print(state.toYear.value);
-
     }
+    state.startEndDateSelected.value=true;
   }
 
   String getDayOfWeek(DateTime date) {
@@ -248,6 +267,42 @@ class BookViewController extends GetxController {
     Get.to(CarDetailsScreen(isTextShow: false));
 
   }
+
+  int convertTimeEpoch(String time){
+    String timeString = time;
+
+    int milliseconds = getTimeInMillisecondsSinceMidnight(timeString);
+    print('Milliseconds since midnight (${time}): $milliseconds');
+    return milliseconds;
+
+
+  }
+
+  int getTimeInMillisecondsSinceMidnight(String timeString) {
+    List<String> parts = timeString.split(' ');
+
+    // Extract hour and minute
+    List<String> timeParts = parts[0].split(':');
+    int hour = int.parse(timeParts[0]);
+    int minute = int.parse(timeParts[1]);
+
+    // Adjust for PM times
+    if (parts[1] == "PM" && hour != 12) {
+      hour += 12;
+    }
+    // Adjust for midnight
+    else if (parts[1] == "AM" && hour == 12) {
+      hour = 0;
+    }
+
+    // Calculate the milliseconds since midnight
+    int millisecondsSinceMidnight =
+        hour * Duration.millisecondsPerHour +
+            minute * Duration.millisecondsPerMinute;
+
+    return millisecondsSinceMidnight;
+  }
+
 
 
 }

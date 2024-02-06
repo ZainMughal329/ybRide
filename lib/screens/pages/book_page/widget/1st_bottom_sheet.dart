@@ -309,6 +309,7 @@ Future firstBottomSheet(BuildContext context, BookViewController con) {
                 RoundButton(
                   title: 'Enter Location',
                   onPress: () {
+                    // con.moveToSelectVehicleScreen();
                     if(con.state.switchVal.value == true){
                       if(con.state.locationSelected.value != true && con.state.timeandDateSelected.value == true){
                         Snackbar.showSnackBar('YB Ride', 'Add delivery location', Icons.error_outline_outlined);
@@ -342,6 +343,9 @@ Future firstBottomSheet(BuildContext context, BookViewController con) {
 
 
                     }
+
+
+
                   },
                 ),
                 SizedBox(

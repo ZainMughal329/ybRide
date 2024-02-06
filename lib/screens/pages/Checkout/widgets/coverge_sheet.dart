@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
+import 'package:yb_ride/components/icon_container.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
@@ -62,10 +63,25 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 5),
-                  child: HeadingTextWidget(
-                    title: "Custom Coverage",
-                    fontWeight: FontWeight.bold,
-                    textColor: Theme.of(context).headingColor,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Spacer(),
+                      InkWell(
+                        onTap: (){
+                          Navigator.pop(context);
+                        },
+                        child: IconContainer(iconName: 'XMark.png',height: 15,width: 15,
+                        ),
+                      ),
+                      Spacer(flex: 2,),
+                      HeadingTextWidget(
+                        title: "Custom Coverage",
+                        fontWeight: FontWeight.bold,
+                        textColor: Theme.of(context).headingColor,
+                      ),
+                      Spacer(flex: 3,),
+                    ],
                   ),
                 ),
                 Divider(),
@@ -80,9 +96,9 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                         children: [
                           Obx(
                             () => _buildDetailItem(
-                              'Damage Protection (CDW) & Roadside',
+                              'Damage Protection (CDW) &\nRoadside',
                               '\$${con.state.CDW} | day',
-                              'Avoid paying for any damages done to the car that\nexceeds a \$500 deductible.',
+                              'Avoid paying for any damages done to \nthe car that exceeds a \$500 deductible.',
                               context,
                               con.state.cdwSwitchVal.value,
                               (value) {
@@ -204,7 +220,7 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                             ),
                           ),
                           SizedBox(
-                            height: 30,
+                            height: 50,
                           ),
                         ],
                       ),
@@ -395,6 +411,7 @@ Widget _buildDetailItem(String text, String suText, String subHeadingText,
                 ),
               ],
             ),
+            Spacer(),
             _switchButtonWithOutAppSettings(val, onChanged),
           ],
         ),

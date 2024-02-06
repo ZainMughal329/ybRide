@@ -1,5 +1,6 @@
 
 
+import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -34,23 +35,6 @@ RxDouble totalPrice = 0.0.obs;
   final sliSwitchVal = false.obs;
   final assistanceVal = false.obs;
 
-
-  double? carRent;
-
-  RxString cardNumber = "".obs;
-  RxString expNumber = "".obs;
-  RxString cvvNumber = "".obs;
-  RxString zipCode = "".obs;
-  RxString cardType = "".obs;
-
-  RxBool cardLoading = false.obs;
-
-  TextEditingController cardNumController =TextEditingController();
-  TextEditingController expiryController = TextEditingController();
-  TextEditingController cvvController = TextEditingController();
-  TextEditingController zipController = TextEditingController();
-
-
   // Firebase payment values
   RxBool dataLoaded = false.obs;
   double? delivery;
@@ -63,6 +47,43 @@ RxDouble totalPrice = 0.0.obs;
   double? licenseFee ;
   double? unlimitedMiles ;
   String? pickupLoc;
+
+
+  double? carRent;
+
+  RxString cardNumber = "".obs;
+  RxString expNumber = "".obs;
+  RxString cvvNumber = "".obs;
+  RxString zipCode = "".obs;
+  RxString cardType = "".obs;
+  RxBool cardAdded= false.obs;
+
+  RxBool cardLoading = false.obs;
+
+  TextEditingController cardNumController =TextEditingController();
+  TextEditingController expiryController = TextEditingController();
+  TextEditingController cvvController = TextEditingController();
+  TextEditingController zipController = TextEditingController();
+
+
+
+
+  RxBool promoCodeapplied = false.obs;
+  RxDouble promoDiscount = 0.0.obs;
+
+
+  //Profile Section
+
+  RxBool focused = false.obs;
+  RxBool personalInfoAdded = false.obs;
+  final countryPicker = FlCountryCodePicker();
+  final fNameCon = TextEditingController();
+  final lNameCon = TextEditingController();
+  final emailCon = TextEditingController();
+  final phoneNumberCon = TextEditingController();
+
+  Rx<CountryCode> code =
+      CountryCode(name: 'United States', code: 'US', dialCode: '+1').obs;
 
 
 

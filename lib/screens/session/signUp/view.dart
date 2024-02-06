@@ -82,6 +82,8 @@ class SignupScreen extends GetView<SignUpController> {
                         image: '',
                         email: controller.state.emailCon.text.trim(),
                         pushToken: '',
+                        dateTime: DateTime.now().millisecondsSinceEpoch.toString(),
+                        list: [],
                       );
                       controller.storeUser(
                         user,

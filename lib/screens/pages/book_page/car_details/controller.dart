@@ -10,11 +10,30 @@ import 'package:yb_ride/screens/pages/book_page/car_details/inded.dart';
 class CarDetailsController extends GetxController {
   final state = CarDetailsState();
 
-  List<String> imagesList = [
-    'assets/images/01.png',
-    'assets/images/2.png',
-    'assets/images/3.png',
-    'assets/images/4.jpeg',
+  List<String> seaterList = [
+    'assets/carImages/7_seater-1.png',
+    'assets/carImages/7_seater-2.png',
+    'assets/carImages/7_seater-3.png',
+  ];
+  List<String> awdList = [
+    'assets/carImages/awd-1.png',
+    'assets/carImages/awd-2.png',
+    'assets/carImages/awd-3.png',
+  ];
+  List<String> ecoList = [
+    'assets/carImages/eco-1.png',
+    'assets/carImages/eco-2.png',
+    'assets/carImages/eco-3.png',
+  ];
+  List<String> premimumList = [
+    'assets/carImages/premium-1.png',
+    'assets/carImages/premium-2.png',
+    'assets/carImages/premium-3.png',
+  ];
+  List<String> sedanList = [
+    'assets/carImages/sedan-1.png',
+    'assets/carImages/sedan-2.png',
+    'assets/carImages/sedan-3.png',
   ];
 
   void calculateNoDays(){

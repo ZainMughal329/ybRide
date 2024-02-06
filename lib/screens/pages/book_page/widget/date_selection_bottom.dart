@@ -230,11 +230,13 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
                       ],
                     ),
                   ),
-                  RoundButton(title: "Choose date & time", onPress: () {
-
+                  RoundButton(title: "Choose date & time",
+                      onPress: () {
                     if(cont.state.startEndDateSelected.value == true
                     ){
                       cont.state.timeandDateSelected.value = true;
+                      cont.state.fromTimeinMiliSeconds = cont.convertTimeEpoch(cont.state.fromTime.value).toString();
+                      cont.state.toTimeinMiliSeconds = cont.convertTimeEpoch(cont.state.toTime.value).toString();
                       Navigator.pop(context);
                     }else{
                       Snackbar.showSnackBar("Error","Select Date & Time", Icons.error_outline_outlined);
