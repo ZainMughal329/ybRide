@@ -11,6 +11,9 @@ import 'package:yb_ride/helper/app_constants.dart';
 import 'package:yb_ride/helper/session_controller.dart';
 import 'package:yb_ride/models/creditCart.dart';
 import 'package:yb_ride/screens/pages/Checkout/index.dart';
+import 'dart:math';
+import 'package:random_string/random_string.dart';
+
 
 class CheckOutCon extends GetxController {
   final state = CheckOutState();
@@ -188,7 +191,9 @@ class CheckOutCon extends GetxController {
         state.unlimitedMiles = firstDocument['unlimitedMiles'];
         state.assistance = firstDocument['assistance'];
         state.pickupLoc = firstDocument['pickUpLoc'];
+        AppConstants.deliveryCharges = firstDocument['delivery'];
         fetchCardDetails();
+        getReceiptCharges();
         setDataLoaded(true);
       } else {
         Snackbar.showSnackBar(
@@ -203,20 +208,58 @@ class CheckOutCon extends GetxController {
     }
   }
 
-  void addInTotalPrice(double? price) {
-    state.totalPrice.value = state.totalPrice.value + price!;
+  Future<void> getReceiptCharges() async{
+    try{
+      CollectionReference usersCollection =
+      APis.db.collection('receipt_charges');
+      QuerySnapshot querySnapshot = await usersCollection.get();
+
+      // Check if there are any documents in the collection
+      if (querySnapshot.docs.isNotEmpty) {
+        // Get the first document
+        QueryDocumentSnapshot firstDocument = querySnapshot.docs.first;
+
+        // Get the details from the document
+        AppConstants.bostonPoliceFees = double.parse((firstDocument['Boston Convention Center Financing Surcharge']).toString());
+        AppConstants.bostonParking = double.parse((firstDocument['Boston Parking Surcharge']).toString());
+        AppConstants.bostonConventionCenter = double.parse((firstDocument['Boston Police Training Fees']).toString());
+        AppConstants.tempDeposit = double.parse((firstDocument['tempDeposit']).toString());
+        AppConstants.salesTaxPercentage = double.parse((firstDocument['salesTaxPercentage']).toString());
+
+      }
+    }catch(e){
+      Snackbar.showSnackBar(
+          'Error', e.toString(), Icons.error_outline_outlined);
+    }
   }
 
-  void subtractFromTotalPrince(double? price) {
-    state.totalPrice.value = state.totalPrice.value - price!;
+  //
+  void addInTotalPrice(double? price, bool withRentDays) {
+    if(withRentDays==true){
+      double? newprice = AppConstants.rentDays*price!;
+      state.totalPrice.value = state.totalPrice.value + newprice;
+    }else if(withRentDays==false){
+      state.totalPrice.value = state.totalPrice.value + price!;
+    }
+
+  }
+
+  void subtractFromTotalPrince(double? price, bool withRentDays) {
+    if(withRentDays == true){
+      double? newprice = AppConstants.rentDays*price!;
+      state.totalPrice.value = state.totalPrice.value - newprice!;
+    }else if(withRentDays==false){
+      state.totalPrice.value = state.totalPrice.value - price!;
+    }
+
   }
 
   void removingAllValuesInChekout() {
     if (state.standard_protection.value == true) {
-      subtractFromTotalPrince(state.standard);
+      subtractFromTotalPrince(state.standard,true);
     }
     if (state.essential_protection.value == true) {
-      subtractFromTotalPrince(state.essential);
+      subtractFromTotalPrince(state.essential,true);
     }
     if (state.i_have_own.value == true) {}
     state.standard_protection.value = false;
@@ -369,7 +412,7 @@ class CheckOutCon extends GetxController {
 
 
   void applyDiscount(amount) {
-    subtractFromTotalPrince(amount);
+    subtractFromTotalPrince(amount,false);
     AppConstants.isPromoApplied=true;
     AppConstants.promoDiscountAmount=amount;
   }
@@ -413,6 +456,15 @@ void storeUserDetailsinConstants(){
 
   void addInTotalCustomCoverageValue(double amount){
     AppConstants.totalCustomCoverage=AppConstants.totalCustomCoverage+amount;
+  }
+
+
+
+  String generateRandomString() {
+    String prefix = "INV-";
+    String randomDigits = randomNumeric(8);
+    String randomLetters = randomAlpha(4);
+    return prefix + randomDigits + randomLetters;
   }
 
 

@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 class CheckOutState{
 
 
+  RxBool paymentLoading = false.obs;
+
   var isContainerVisible = true.obs;
   final promoCodeCon= TextEditingController();
 

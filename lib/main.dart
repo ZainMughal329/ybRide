@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/helper/app_constants.dart';
 import 'package:yb_ride/helper/prefs.dart';
 import 'package:yb_ride/routes/app_routes.dart';
 import 'package:yb_ride/routes/routes_name.dart';
@@ -15,6 +17,11 @@ late bool isDarkTheme;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Stripe.publishableKey = AppConstants.stripe_publish_key;
+  // Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
+  // Stripe.urlScheme = 'flutterstripe';await Stripe.instance.applySettings();
+  // await Stripe.instance.applySettings();
+  Stripe.publishableKey = AppConstants.stripe_publish_key;
   Pref.init();
   Pref.initialize();
 

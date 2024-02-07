@@ -28,6 +28,7 @@ class AppRoutes {
       page: () => SplashScreen(),
       binding: SplashBindings(),
       transition: Transition.downToUp,
+      transitionDuration: Duration(seconds: 3),
     ),
     GetPage(
       name: RoutesName.onBoardingScreen,
@@ -60,7 +61,7 @@ class AppRoutes {
     ),
     GetPage(
       name: RoutesName.applicationScreen,
-      page: () => ApplicationView(),
+      page: () => ApplicationView(index: 0,),
       bindings: <Bindings>[
         ApplicationViewBindings(),
         BookViewBindings(),

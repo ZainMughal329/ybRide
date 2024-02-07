@@ -18,10 +18,12 @@ import 'package:yb_ride/screens/settings/inded.dart';
 import '../../main.dart';
 
 class ApplicationView extends GetView<ApplicationViewController> {
-  const ApplicationView({Key? key}) : super(key: key);
+  int index;
+   ApplicationView({Key? key,required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    controller.changeTab(index);
     isDarkTheme = Theme.of(context).brightness == Brightness.dark;
     var navBarItems = [
       PersistentBottomNavBarItem(

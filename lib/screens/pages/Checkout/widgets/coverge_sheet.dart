@@ -105,7 +105,7 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                                 if (value == true) {
                                   con.state.customValueSelected.value = true;
                                   con.state.cdwSwitchVal.value = true;
-                                  con.addInTotalPrice(con.state.CDW);
+                                  con.addInTotalPrice(con.state.CDW,true);
                                   con.removingAllValuesInChekout();
                                 } else if (value == false) {
                                   con.state.cdwSwitchVal.value = false;
@@ -118,7 +118,7 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
 
                                   // con.state.customValueSelected.value = false;
                                   con.removingAllValuesInChekout();
-                                  con.subtractFromTotalPrince(con.state.CDW);
+                                  con.subtractFromTotalPrince(con.state.CDW,true);
                                 }
                               },
                             ),
@@ -137,7 +137,7 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                                 if (value == true) {
                                   con.state.customValueSelected.value = true;
                                   con.state.rcliSwitchVal.value = true;
-                                  con.addInTotalPrice(con.state.RCLI);
+                                  con.addInTotalPrice(con.state.RCLI,true);
                                   con.removingAllValuesInChekout();
                                 } else if (value == false) {
                                   con.state.rcliSwitchVal.value = false;
@@ -150,7 +150,7 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                                   // con.state.rcliSwitchVal.value = false;
                                   // con.state.customValueSelected.value = false;
                                   con.removingAllValuesInChekout();
-                                  con.subtractFromTotalPrince(con.state.RCLI);
+                                  con.subtractFromTotalPrince(con.state.RCLI,true);
                                 }
                               },
                             ),
@@ -169,7 +169,7 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                                 if (value == true) {
                                   con.state.customValueSelected.value = true;
                                   con.state.assistanceVal.value = true;
-                                  con.addInTotalPrice(con.state.assistance);
+                                  con.addInTotalPrice(con.state.assistance,true);
                                   con.removingAllValuesInChekout();
                                 } else if (value == false) {
                                   con.state.assistanceVal.value = false;
@@ -182,7 +182,7 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                                   // con.state.customValueSelected.value = false;
                                   con.removingAllValuesInChekout();
                                   con.subtractFromTotalPrince(
-                                      con.state.assistance);
+                                      con.state.assistance,true);
                                 }
                               },
                             ),
@@ -202,7 +202,7 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                                 if (value == true) {
                                   con.state.customValueSelected.value = true;
                                   con.state.sliSwitchVal.value = true;
-                                  con.addInTotalPrice(con.state.SLI);
+                                  con.addInTotalPrice(con.state.SLI,true);
                                   con.removingAllValuesInChekout();
                                 } else if (value == false) {
                                   con.state.sliSwitchVal.value = false;
@@ -214,7 +214,7 @@ Future coverageBottomSheet(BuildContext context, CheckOutCon con) {
                                   }
 
                                   con.removingAllValuesInChekout();
-                                  con.subtractFromTotalPrince(con.state.SLI);
+                                  con.subtractFromTotalPrince(con.state.SLI,true);
                                 }
                               },
                             ),

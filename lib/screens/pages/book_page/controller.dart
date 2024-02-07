@@ -256,8 +256,8 @@ class BookViewController extends GetxController {
     AppConstants.toYear = state.toYear.value;
     AppConstants.toTime = state.toTime.value;
     AppConstants.fromAddress = state.selectedPlace.value;
-    AppConstants.fromTimeinMiliSeconds = state.fromTimeinMiliSeconds;
-    AppConstants.toTimeinMiliSeconds = state.toTimeinMiliSeconds;
+    AppConstants.fromTimeinMiliSeconds = (convertTimeEpoch(state.fromTime.value)).toString();
+    AppConstants.toTimeinMiliSeconds = (convertTimeEpoch(state.toTime.value)).toString();
     if(state.returnPlace.value =='Return Place'){
       AppConstants.toAddress = state.selectedPlace.value;
     }else{
@@ -266,7 +266,7 @@ class BookViewController extends GetxController {
 
 
 
-    Get.to(CarDetailsScreen(isTextShow: false));
+    Get.toNamed(RoutesName.carDetailsScreen,arguments: {'isTextShow',false});
 
   }
 
