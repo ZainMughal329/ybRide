@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:yb_ride/screens/pages/trips_page/trip_pages/myTrips/controller.dart';
 
 import '../../../../../components/heading_text_widget.dart';
 import '../../../../../components/reuseable_button.dart';
@@ -16,6 +17,7 @@ class MyTripsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cont = MyTripController();
     return Container(
       child: Column(
         children: [
@@ -71,6 +73,9 @@ class MyTripsView extends StatelessWidget {
                   final con = Get.put(ApplicationViewController());
                   // con.state.currentNavIndex.value = 0;
                   con.changeTab(0);
+
+
+
 
                 }),
           ),

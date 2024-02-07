@@ -4,6 +4,7 @@ class BookingModel {
   final String bookingDate;
   final String fullName;
   String? id;
+  String? paymentId;
   final String email;
   final String phone;
   final String completeFromAddress;
@@ -24,10 +25,6 @@ class BookingModel {
   final double totalCustomCoverage;
   final bool isUnlimitedMiles;
   final bool isUnder25years;
-  final String cardNum;
-  final String cardExp;
-  final String cardCvv;
-  final String cardZip;
   final bool isPromoCodeApplied;
   final double promoDiscountAmount;
   final String status;
@@ -36,6 +33,7 @@ class BookingModel {
     required this.bookingDate,
     required this.fullName,
     this.id = '',
+    this.paymentId = '',
     required this.email,
     required this.phone,
     required this.completeFromAddress,
@@ -56,10 +54,6 @@ class BookingModel {
     required this.totalCustomCoverage,
     required this.isUnlimitedMiles,
     required this.isUnder25years,
-    required this.cardNum,
-    required this.cardCvv,
-    required this.cardExp,
-    required this.cardZip,
     required this.isPromoCodeApplied,
     required this.promoDiscountAmount,
     required this.status,
@@ -68,6 +62,7 @@ class BookingModel {
   toJson() {
     return {
       'id': id,
+      'paymentId': paymentId,
       'bookingDate': bookingDate,
       'fullName': fullName,
       'email': email,
@@ -90,10 +85,6 @@ class BookingModel {
       'totalCustomCoverage': totalCustomCoverage,
       'isUnlimitedMiles': isUnlimitedMiles,
       'isUnder25years': isUnder25years,
-      'cardNum': cardNum,
-      'cardZip': cardZip,
-      'cardExp': cardExp,
-      'cardCvv': cardCvv,
       'isPromoCodeApplied': isPromoCodeApplied,
       'promoDiscountAmount': promoDiscountAmount,
       'status': status,
@@ -106,6 +97,7 @@ class BookingModel {
     final json = snapshot.data()!;
     return BookingModel(
       id: json["id"],
+      paymentId: json["paymentId"],
       fullName: json["fullName"],
       bookingDate: json["bookingDate  "],
       email: json["email"],
@@ -128,10 +120,6 @@ class BookingModel {
       totalCustomCoverage: json['totalCustomCoverage'],
       isUnlimitedMiles: json['isUnlimitedMiles'],
       isUnder25years: json['isUnder25years'],
-      cardNum: json['cardNum'],
-      cardZip: json['cardZip'],
-      cardExp: json['cardExp'],
-      cardCvv: json['cardCvv'],
       isPromoCodeApplied: json['isPromoCodeApplied'],
       promoDiscountAmount: json['promoDiscountAmount'],
       status: json['status'],

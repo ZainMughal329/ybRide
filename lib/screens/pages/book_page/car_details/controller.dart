@@ -47,14 +47,7 @@ String endDateString = '20${AppConstants.toYear}-${AppConstants.toMonth}-${AppCo
 String startTimeString = '${state.fromHours}:${state.fromMinutes}:00';
 String endTimeString = '${state.toHours}:${state.toHours}:00';
 
-    // print('==========>');
-    // print(AppConstants.fromTime);
-    // print(AppConstants.toTime);
-    // print(startTimeString);
-    // print(startDateString);
-    // print(endTimeString);
-    // print(endDateString);
-    // Parse date and time strings into DateTime objects
+
     DateTime startDate = parseDateTime(startDateString, startTimeString);
     DateTime endDate = parseDateTime(endDateString, endTimeString);
 

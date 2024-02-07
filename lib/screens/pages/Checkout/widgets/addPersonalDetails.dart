@@ -69,6 +69,7 @@ Future addPersonalDataSheet(BuildContext context,CheckOutCon controller) async{
                 controller.state.emailCon.text.isNotEmpty&&
                 controller.state.phoneNumberCon.text.isNotEmpty
             ){
+              print(controller.state.fNameCon.text);
               controller.storeUserDetailsinConstants();
               Navigator.pop(context);
               // print(controller.state.phoneNumberCon.text.toString());
