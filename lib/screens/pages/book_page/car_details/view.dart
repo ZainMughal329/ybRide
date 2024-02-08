@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:yb_ride/api/api.dart';
 import 'package:yb_ride/components/custom_Appbar.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
@@ -24,10 +25,12 @@ import '../widget/1st_bottom_sheet.dart';
 class CarDetailsScreen extends GetView<CarDetailsController> {
   final bool isTextShow;
   CarDetailsScreen({Key? key, required this.isTextShow}) : super(key: key);
-  final controller = Get.put(CarDetailsController());
+
 
   @override
   Widget build(BuildContext context) {
+    // final controller = Get.put(CarDetailsController());
+    final carRef = APis.db.collection('vehicleData').snapshots();
     double notchHeight = MediaQuery.of(context).padding.top;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBgClr,
@@ -127,7 +130,7 @@ class CarDetailsScreen extends GetView<CarDetailsController> {
         child: Padding(
           padding:  EdgeInsets.only(left:mq.width*0.03,top:mq.width*0.01,right:mq.width*0.03),
           child: StreamBuilder(
-            stream: controller.state.vehicleRef,
+            stream: carRef,
             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if(snapshot.hasData){
                 return ListView.builder(

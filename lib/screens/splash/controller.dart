@@ -13,7 +13,9 @@ class SplashController extends GetxController {
       () {
         if (user != null) {
           SessionController().userId = user.uid.toString();
-          Get.offNamed(RoutesName.applicationScreen);
+          Get.offNamed(RoutesName.applicationScreen,arguments: {
+            'index':0,
+          });
         } else {
           if(Pref().getIsFirstOpen() == true){
             Get.offNamed(RoutesName.loginScreen);

@@ -124,7 +124,6 @@ Future timeSelBottomSheet(
                           : Text('${cont.state.toTime.value}'),
                         items: cont.state.items,
                         onChanged: (value) {
-                        cont.convertTimeEpoch(value);
                           isStartTime
                               ? cont.state.fromTime.value = value
                               : cont.state.toTime.value= value;
