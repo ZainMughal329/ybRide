@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ import 'package:yb_ride/screens/settings/pages/prefrences/inded.dart';
 import 'package:yb_ride/screens/settings/pages/profile/view.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import '../../components/custom_Appbar.dart';
+import '../../helper/session_controller.dart';
 import '../../main.dart';
 import 'package:get/get.dart';
 
@@ -186,9 +188,18 @@ class SettingsView extends GetView<SettingsController> {
                 SizedBox(
                   height: mq.height * .03,
                 ),
-                HeadingTextWidget(
-                  title: 'Log out',
-                  textColor: AppColors.orangeColor,
+                InkWell(
+                  onTap: () async {
+                    await FirebaseAuth.instance.signOut().then((value) {
+
+                      SessionController().userId = '';
+                      Get.offAllNamed(RoutesName.welcomeScreen);
+                    });
+                  },
+                  child: HeadingTextWidget(
+                    title: 'Log out',
+                    textColor: AppColors.orangeColor,
+                  ),
                 ),
                 SizedBox(
                   height: mq.height * .06,

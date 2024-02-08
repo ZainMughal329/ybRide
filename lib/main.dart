@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +12,7 @@ import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/settings/pages/prefrences/apperence/controller.dart';
 import 'firebase_options.dart';
 import 'helper/app_theme.dart';
+import 'helper/notification_services.dart';
 late Size mq;
 late bool isDarkTheme;
 
@@ -26,6 +29,13 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  NotificationServices().requestPermissions();
+  NotificationServices().setupBackgrounInteractMsg();
+  NotificationServices().initFirebase();
+  NotificationServices().getToken().then((value) {
+    log('Device Token');
+    log(value);
+  });
 
   // run app function
 

@@ -82,6 +82,9 @@ dependencies:
 
 
   card_swiper:
+  firebase_messaging:
+  flutter_local_notifications:
+
 
 
 

@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import '../../../api/api.dart';
 import '../../../components/snackbar_widget.dart';
 import '../../../helper/app_helpers.dart';
+import '../../../helper/notification_services.dart';
 
 
 
@@ -25,12 +26,18 @@ class LoginController extends GetxController {
   }
 
   static Future<void> createUser() async {
+    NotificationServices services = NotificationServices();
+    late String token;
+   await services.getToken().then((value) {
+      token = value;
+    });
+    log('message'+token.toString());
     final chatUser = UserModel(
         image: user.photoURL.toString(),
         name: user.displayName.toString(),
         id: user.uid.toString(),
         email: user.email.toString(),
-        pushToken: '',
+        pushToken: token,
       dateTime: DateTime.now().millisecondsSinceEpoch.toString(),
       list: [],
 
