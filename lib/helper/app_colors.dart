@@ -18,5 +18,6 @@ class AppColors {
   static final Color snackBarBgColor = Color(0xff583d8b);
   static final Color snackBarTextColor = Colors.white;
   static final Color whiteColor = Colors.white;
+  static final Color blackColor = Colors.black;
   static final Color settingsIconColor = Color(0xff606060);
 }

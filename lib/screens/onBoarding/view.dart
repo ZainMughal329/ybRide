@@ -79,7 +79,7 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
                           fontSize: ind == 0 ? 23 : 20,
                           textAlign: TextAlign.center,
                           title: list[ind].title,
-                            textColor: AppColors.headingColor
+                            textColor: Theme.of(context).headingColor
                         ),
                       ),
                     ),
