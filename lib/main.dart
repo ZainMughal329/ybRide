@@ -11,6 +11,7 @@ import 'package:yb_ride/helper/app_constants.dart';
 import 'package:yb_ride/helper/prefs.dart';
 import 'package:yb_ride/routes/app_routes.dart';
 import 'package:yb_ride/routes/routes_name.dart';
+import 'package:yb_ride/screens/settings/pages/faqs/view.dart';
 import 'package:yb_ride/screens/settings/pages/prefrences/apperence/controller.dart';
 import 'firebase_options.dart';
 import 'helper/app_theme.dart';
@@ -81,6 +82,7 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData.dark(),
       themeMode: Pref.defaultTheme(),
+      // home: FAQScreen(),
       initialRoute: RoutesName.splashScreen,
 
       getPages: AppRoutes.routes,

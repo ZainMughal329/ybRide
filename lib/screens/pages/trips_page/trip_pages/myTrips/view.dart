@@ -98,6 +98,10 @@ class MyTripsView extends StatelessWidget {
                     width: mq.width * .9,
                     decoration: BoxDecoration(
                       color: Theme.of(context).scaffoldBgClr,
+                      border: Border.all(
+                        color: AppColors.buttonColor,
+                        width: 0.2,
+                      ),
                       boxShadow: [
                         BoxShadow(
                           color: Theme.of(context).headingColor.withOpacity(.1),
@@ -131,9 +135,9 @@ class MyTripsView extends StatelessWidget {
                                           // border: Border.all(color: Colors.black12),
                                         ),
                                         child: Swiper(
-                                          itemBuilder: (BuildContext context, int index) {
+                                          itemBuilder: (BuildContext context, int ind) {
                                             return Image.asset(
-                                              data[index]['vehicleType'] == "Economy"? economyList[index] : data[index]['vehicleType'] == "Premium"? premiumList[index] : data[index]['vehicleType'] == "AllWheelDriveSUV"? avdList[index] : data[index]['vehicleType'] == "SUV"? suvList[index] : sedanList[index],
+                                              data[index]['vehicleType'] == "Premium"? premiumList[ind] : data[index]['vehicleType'] == "Economy"? economyList[ind] : data[index]['vehicleType'] == "AllWheelDriveSUV"? avdList[ind] : data[index]['vehicleType'] == "SUV"? suvList[ind] : sedanList[ind],
                                               fit: BoxFit.cover,
                                               // height: 188.h,
                                               width: 288,

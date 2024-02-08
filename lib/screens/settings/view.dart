@@ -7,6 +7,7 @@ import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/screens/settings/pages/faqs/faq_bottom_sheet.dart';
+import 'package:yb_ride/screens/settings/pages/faqs/view.dart';
 import 'package:yb_ride/screens/settings/pages/payment_method/view.dart';
 import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/onBoarding/inded.dart';
@@ -104,7 +105,8 @@ class SettingsView extends GetView<SettingsController> {
                 ),
                 _buildListTile('FAQ', FontAwesomeIcons.book,
                     Icons.arrow_forward_ios, () {
-                  // Get.to(faqBottomSheet(context),transition: Transition.downToUp);
+                      Get.to(FAQScreen());
+
                     },context),
                 SizedBox(
                   height: mq.height * .02,
