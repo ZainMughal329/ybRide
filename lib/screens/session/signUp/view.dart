@@ -11,6 +11,7 @@ import 'package:yb_ride/screens/session/signUp/controller.dart';
 import '../../../components/heading_text_widget.dart';
 import '../../../components/text_widget.dart';
 import '../../../helper/app_colors.dart';
+import '../../../helper/notification_services.dart';
 import '../../../main.dart';
 import '../../../models/usermodel.dart';
 
@@ -72,16 +73,22 @@ class SignupScreen extends GetView<SignUpController> {
               padding: EdgeInsets.symmetric(horizontal: mq.width * 0.06),
               child: RoundButton(
                   title: 'SignUp',
-                  onPress: () {
+                  onPress: () async {
                     if (controller.state.nameCon.text.isNotEmpty &&
                         controller.state.emailCon.text.isNotEmpty &&
                         controller.state.passCon.text.isNotEmpty) {
+                      NotificationServices services = NotificationServices();
+                      late String token;
+                      await services.getToken().then((value) {
+                        token = value;
+                      });
+                      log('token:$token');
                       log('SignUp Page:object');
                       UserModel user = UserModel(
                         name: controller.state.nameCon.text.trim(),
                         image: '',
                         email: controller.state.emailCon.text.trim(),
-                        pushToken: '',
+                        pushToken: token,
                         dateTime: DateTime.now().millisecondsSinceEpoch.toString(),
                         list: [],
                       );

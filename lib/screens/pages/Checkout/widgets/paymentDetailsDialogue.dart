@@ -16,7 +16,6 @@ Future showRecipetSheet(
   String serviceFromDateTime,
   String serviceToDateTime,
   double numberOfDays,
-  String receiptNumber,
   String invoiceId,
   String paymentMethod,
   Map<String, double> charges,
@@ -80,10 +79,10 @@ Future showRecipetSheet(
                   title: 'Number of Days: $numberOfDays',
                   textColor: Theme.of(context).headingColor,
                 ),
-                SubHeadingTextWidget(
-                  title: 'Receipt Number: $receiptNumber',
-                  textColor: Theme.of(context).headingColor,
-                ),
+                // SubHeadingTextWidget(
+                //   title: 'Receipt Number: $receiptNumber',
+                //   textColor: Theme.of(context).headingColor,
+                // ),
                 SubHeadingTextWidget(
                   title: 'Invoice Id: $invoiceId',
                   textColor: Theme.of(context).headingColor,

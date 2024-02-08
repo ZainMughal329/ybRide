@@ -1796,7 +1796,6 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                               '${AppConstants.toDate} ${AppConstants.toTime}',
                                 AppConstants.rentDays,
                               AppConstants.bookingDate,
-                              controller.generateRandomString(),
                                 'Card Payment',
                               {
                                   'Liability Charges\nRent & others': AppConstants.totalPrice,
