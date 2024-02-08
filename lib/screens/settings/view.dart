@@ -12,8 +12,10 @@ import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/onBoarding/inded.dart';
 import 'package:yb_ride/screens/settings/controller.dart';
 import 'package:yb_ride/screens/settings/pages/prefrences/inded.dart';
+import 'package:yb_ride/screens/settings/pages/privacy_policy/view.dart';
 import 'package:yb_ride/screens/settings/pages/profile/view.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:yb_ride/screens/settings/pages/termsAndServices/view.dart';
 import '../../components/custom_Appbar.dart';
 import '../../helper/session_controller.dart';
 import '../../main.dart';
@@ -170,12 +172,17 @@ class SettingsView extends GetView<SettingsController> {
                     'Terms of service',
                     FontAwesomeIcons.bookBookmark,
                     Icons.arrow_forward_ios,
-                    () {},context),
+                    () {
+                      Get.to(TermsAndServices());
+                    },context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
                 _buildListTile('Privacy Policy', FontAwesomeIcons.shieldHalved,
-                    Icons.arrow_forward_ios, () {},context),
+                    Icons.arrow_forward_ios, () {
+                      Get.to(PrivacyPolicy());
+
+                    },context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
