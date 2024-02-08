@@ -80,8 +80,8 @@ class PaymentController extends GetxController {
         // 'amount': calculateAmount(amount),
         'amount':calculateDoubleAmount(totalAmount),
         'currency': currency,
-        'receipt_email':'zainmughal4379329@gmail.com',
-        'description':'YB-RIde payment description',
+        'receipt_email':AppConstants.custEmail.toString(),
+        'description':'YB-Car rent for '+AppConstants.rentDays.toStringAsFixed(1)+' days', // The description of Payment
       };
 
       //Make post request to Stripe

@@ -1,3 +1,8 @@
+import 'package:get/get.dart';
+import 'package:yb_ride/screens/pages/Checkout/index.dart';
+import 'package:yb_ride/screens/pages/book_page/car_details/inded.dart';
+import 'package:yb_ride/screens/pages/book_page/inded.dart';
+
 class AppConstants {
   static final String google_api_key = '';
 
@@ -119,6 +124,9 @@ class AppConstants {
     custPhoneNo="";
     paymentId = '';
     bookingDate = '';
+    Get.delete<BookNowView>();
+    Get.delete<CarDetailsScreen>();
+    Get.delete<CheckOutScreen>();
   }
 
 }
