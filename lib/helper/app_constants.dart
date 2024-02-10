@@ -4,7 +4,7 @@ import 'package:yb_ride/screens/pages/book_page/car_details/inded.dart';
 import 'package:yb_ride/screens/pages/book_page/inded.dart';
 
 class AppConstants {
-  static final String google_api_key = '';
+  static final String google_api_key = 'AIzaSyAL3BrJ_7Q2cCjaPYMjEbfrmRSM2TBtPk0';
 
   static final String stripe_publish_key = 'pk_test_51Ogo46EwduwUAGBRz8KlKG0uKlP2DL1KfBVj3Iqum4fSQVtOfD4WPCisOOmVfIoEAKsBJNTI0WzOmpOLmntqPTTJ00F599LcQW';
 
@@ -12,6 +12,9 @@ class AppConstants {
 
   static final String kPlacesApiKey = 'AIzaSyDw220zwlHJ1LnBdx0udN_NM2i4nucLLwA';
   static final String placesBaseUrl = 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
+  static  String playStoreLink="";
+  static  String appStoreLink="";
+  static double referralDiscount=0;
 
   //Address Constants
   static String fromAddress = 'Tap to Search';

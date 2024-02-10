@@ -6,5 +6,6 @@ class SignUpState {
   final emailCon = TextEditingController();
   final passCon = TextEditingController();
   final nameCon = TextEditingController();
+  final refCon = TextEditingController();
 
 }
