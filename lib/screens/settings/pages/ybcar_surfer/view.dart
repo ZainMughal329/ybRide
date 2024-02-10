@@ -468,7 +468,8 @@ class SurferScreen extends GetView<SurferController> {
                 ],
               ),
               Positioned(
-                top: 180,
+                // top: 180,
+                top: mq.height * .25,
                 left: mq.width/2.5,
                 child: Center(
                   child: Container(
@@ -477,7 +478,9 @@ class SurferScreen extends GetView<SurferController> {
                     width: mq.height * .09,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        image: DecorationImage(image: AssetImage('assets/whiteIcons/WhiteLogo.png',),)
+                        image: Get.isDarkMode
+                      ? DecorationImage(image: AssetImage('assets/whiteIcons/WhiteLogo.png',),) :
+                        DecorationImage(image: AssetImage('assets/icons/Logo.png',),)
                     ),
                     // child: Image.asset('assets/images/logo1.jpeg' , fit: BoxFit.contain,),
                     // color: AppColors.orangeColor,

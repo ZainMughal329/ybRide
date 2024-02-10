@@ -21,60 +21,62 @@ class TripScreen extends GetView<TripController> {
         preferredSize: Size.fromHeight(mq.height * .08),
         child: CustomAppBarWidget(centerTitle: 'Trips', isLeading: false,),
       ),
-      body: SafeArea(child: Column(
-        children: [
-          Container(
-            child: TabBar(
-              indicatorSize: TabBarIndicatorSize.tab,
-              tabAlignment:TabAlignment.fill,
-              labelColor: Theme.of(context).headingColor,
-              indicatorColor: AppColors.buttonColor,
-              indicator: UnderlineTabIndicator(
-                borderSide: BorderSide(width: 2.0,color: AppColors.buttonColor), // Adjust the width of the line
-              ),
-              labelStyle: GoogleFonts.openSans(
-                fontSize: 16.0, // Customize the font size
-                fontWeight: FontWeight.w600,
-              ),
-
-              indicatorPadding: EdgeInsets.all(0),
-              unselectedLabelColor: Theme.of(context).headingColor,
-              unselectedLabelStyle: GoogleFonts.openSans(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-
-              ),
-
-              tabs: [
-
-                Tab(
-                  text: 'My Trips',
-                ),
-                Tab(
-                  text: 'Shared Trips',
-
-                ),
-
-              ],
-              controller: controller.tabController,
-            ),
-          ),
-          Expanded(
-            flex: 5,
-            child: Container(
-              margin: EdgeInsets.only(top: 10),
-              // height: MediaQuery.of(context).size.height,
-              width: double.infinity,
-              child: TabBarView(
-                controller: controller.tabController,
-                children: [
-                  MyTripsView(),
-                  SharedTripsView(),
-                ],
-              ),
-            ),)
-        ],
-      )),
-    );
+      body: SafeArea(
+    child: MyTripsView(),
+      //     child: Column(
+      //   children: [
+      //     Container(
+      //       child: TabBar(
+      //         indicatorSize: TabBarIndicatorSize.tab,
+      //         tabAlignment:TabAlignment.fill,
+      //         labelColor: Theme.of(context).headingColor,
+      //         indicatorColor: AppColors.buttonColor,
+      //         indicator: UnderlineTabIndicator(
+      //           borderSide: BorderSide(width: 2.0,color: AppColors.buttonColor), // Adjust the width of the line
+      //         ),
+      //         labelStyle: GoogleFonts.openSans(
+      //           fontSize: 16.0, // Customize the font size
+      //           fontWeight: FontWeight.w600,
+      //         ),
+      //
+      //         indicatorPadding: EdgeInsets.all(0),
+      //         unselectedLabelColor: Theme.of(context).headingColor,
+      //         unselectedLabelStyle: GoogleFonts.openSans(
+      //           fontSize: 16,
+      //           fontWeight: FontWeight.w600,
+      //
+      //         ),
+      //
+      //         tabs: [
+      //
+      //           Tab(
+      //             text: 'My Trips',
+      //           ),
+      //           // Tab(
+      //           //   text: 'Shared Trips',
+      //           //
+      //           // ),
+      //
+      //         ],
+      //         controller: controller.tabController,
+      //       ),
+      //     ),
+      //     Expanded(
+      //       flex: 5,
+      //       child: Container(
+      //         margin: EdgeInsets.only(top: 10),
+      //         // height: MediaQuery.of(context).size.height,
+      //         width: double.infinity,
+      //         child: TabBarView(
+      //           controller: controller.tabController,
+      //           children: [
+      //             MyTripsView(),
+      //             // SharedTripsView(),
+      //           ],
+      //         ),
+      //       ),)
+      //   ],
+      // )),
+    ));
   }
 }

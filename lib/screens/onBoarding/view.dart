@@ -21,7 +21,7 @@ class OnBoardingScreen extends GetView<OnBoardingController> {
     OnBoardingController controller =
         Get.put<OnBoardingController>(OnBoardingController());
 
-
+// OnBoardingController controller = OnBoardingController();
 
     final c = PageController();
     final list = [

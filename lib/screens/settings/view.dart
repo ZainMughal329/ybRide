@@ -105,7 +105,8 @@ class SettingsView extends GetView<SettingsController> {
                 ),
                 _buildListTile('FAQ', FontAwesomeIcons.book,
                     Icons.arrow_forward_ios, () {
-                      Get.to(FAQScreen());
+                      Get.to(()=>FAQScreen());
+
 
                     },context),
                 SizedBox(

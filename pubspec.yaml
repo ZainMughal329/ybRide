@@ -81,7 +81,7 @@ dependencies:
   credit_card_validator: ^2.1.0
 
 #  for payments
-  flutter_stripe: ^10.0.0
+  flutter_stripe:
 #  for generting random string
   random_string: ^2.3.1
 

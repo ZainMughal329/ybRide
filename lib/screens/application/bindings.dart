@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:yb_ride/screens/application/controller.dart';
 import 'package:yb_ride/screens/pages/book_page/controller.dart';
+import 'package:yb_ride/screens/pages/invite_page/controller.dart';
 import 'package:yb_ride/screens/settings/controller.dart';
 
 
@@ -14,6 +15,7 @@ class ApplicationViewBindings implements Bindings {
     Get.lazyPut<BookViewController>(()=>BookViewController());
     Get.lazyPut<TripController>(() => TripController());
     Get.lazyPut<SettingsController>(() => SettingsController());
+    Get.lazyPut<InviteCon>(() => InviteCon());
 
   }
 

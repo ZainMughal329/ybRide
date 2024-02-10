@@ -137,7 +137,7 @@ class CustomAlertDialog extends StatelessWidget {
                   child: HeadingTextWidget(
                     title: "Details",
                     fontWeight: FontWeight.bold,
-                    textColor: AppColors.blackColor,
+                    textColor: Theme.of(context).headingColor,
                   ),
                 ),
               ),

@@ -17,91 +17,94 @@ class SharedTripsView extends GetView<SharedTripController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: [
-          Spacer(),
-          Container(
-            height: mq.height * 0.4,
-            width: mq.width * .95,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Spacer(),
+            Container(
+              height: mq.height * 0.4,
+              width: mq.width * .95,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                border: Border.all(
+                  color: Colors.grey,
+                ),
               ),
-              border: Border.all(
-                color: Colors.grey,
-              ),
-            ),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: mq.height * .06,
-                ),
-                Container(
-                  height: mq.height * .05,
-                  width: mq.height * .05,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: mq.height * .06,
                   ),
-                  child: Icon(
-                    Icons.share_location_rounded,
-                    color: AppColors.iconColor,
-                    size: 40,
-                  ),
-                ),
-                SizedBox(
-                  height: mq.height * .04,
-                ),
-                Center(
-                  child: SizedBox(
-                    width: mq.width * .9,
-                    child: HeadingTextWidget(
-                      fontSize:  16,
-                      fontWeight: FontWeight.w600,
-                      textAlign: TextAlign.center,
-                      textColor: Theme.of(context).headingColor,
-                      title:'No trips (yet)',
+                  Container(
+                    height: mq.height * .05,
+                    width: mq.height * .05,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Icon(
+                      Icons.share_location_rounded,
+                      color: AppColors.iconColor,
+                      size: 40,
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: mq.height * .02,
-                ),
-                Center(
-                  child: SizedBox(
-                      width: mq.width * .8,
-                      child: SubHeadingTextWidget(
-                        textAlign: TextAlign.center,
-                        title:
-                        "Trips, where you have accepted and invite to be an additional driver, will show up here!",
+                  SizedBox(
+                    height: mq.height * .04,
+                  ),
+                  Center(
+                    child: SizedBox(
+                      width: mq.width * .9,
+                      child: HeadingTextWidget(
+                        fontSize:  16,
                         fontWeight: FontWeight.w600,
-                        textColor: Theme.of(context).lightTextColor,
-                        fontSize: 15,
-                        maxLines:5,
-                        overflow: TextOverflow.ellipsis,
-                      )),
-                ),
-                SizedBox(
-                  height: mq.height * .02,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: mq.width * .02, right: mq.width * .02),
-                  child: RoundButton(
-                      title:'Book a YBCar',
-                      onPress: () {
-                        final con = Get.put(ApplicationViewController());
-                        // con.state.currentNavIndex.value = 0;
-                        con.changeTab(0);
-                      }),
-                ),
+                        textAlign: TextAlign.center,
+                        textColor: Theme.of(context).headingColor,
+                        title:'No trips (yet)',
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: mq.height * .02,
+                  ),
+                  Center(
+                    child: SizedBox(
+                        width: mq.width * .8,
+                        child: SubHeadingTextWidget(
+                          textAlign: TextAlign.center,
+                          title:
+                          "Trips, where you have accepted and invite to be an additional driver, will show up here!",
+                          fontWeight: FontWeight.w600,
+                          textColor: Theme.of(context).lightTextColor,
+                          fontSize: 15,
+                          maxLines:5,
+                          overflow: TextOverflow.ellipsis,
+                        )),
+                  ),
+                  SizedBox(
+                    height: mq.height * .02,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: mq.width * .02, right: mq.width * .02),
+                    child: RoundButton(
+                        title:'Book a YBCar',
+                        onPress: () {
+                          final con = Get.put(ApplicationViewController());
+                          // con.state.currentNavIndex.value = 0;
+                          con.changeTab(0);
+                        }),
+                  ),
 
-              ],
+                ],
+              ),
             ),
-          ),
-          Spacer(
-            flex: 2,
-          ),
-        ],
+            // Spacer(
+            //   flex: 2,
+            // ),
+          ],
+        ),
       ),
     );
   }
