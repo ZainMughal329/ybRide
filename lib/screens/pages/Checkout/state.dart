@@ -87,7 +87,35 @@ RxDouble totalPrice = 0.0.obs;
   Rx<CountryCode> code =
       CountryCode(name: 'United States', code: 'US', dialCode: '+1').obs;
 
+  List<String> economyList = [
+    'assets/carImages/eco-1.png',
+    'assets/carImages/eco-2.png',
+    'assets/carImages/eco-3.png',
+  ];
 
+  List<String> premiumList = [
+    'assets/carImages/premium-1.png',
+    'assets/carImages/premium-2.png',
+    'assets/carImages/premium-3.png',
+  ];
+
+  List<String> sedanList = [
+    'assets/carImages/sedan-1.png',
+    'assets/carImages/sedan-2.png',
+    'assets/carImages/sedan-3.png',
+  ];
+
+
+  List<String> avdList = [
+    'assets/carImages/awd-1.png',
+    'assets/carImages/awd-2.png',
+    'assets/carImages/awd-3.png',
+  ];
+  List<String> suvList = [
+    'assets/carImages/7_seater-1.png',
+    'assets/carImages/7_seater-2.png',
+    'assets/carImages/7_seater-3.png',
+  ];
 
 
 

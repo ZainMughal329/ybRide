@@ -1,3 +1,4 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/helper/app_constants.dart';
+import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/pages/Checkout/controller.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/addPersonalDetails.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/agePolicy.dart';
@@ -28,9 +30,10 @@ class CheckOutScreen extends GetView<CheckOutCon> {
   final double carRent;
   final String carType;
   CheckOutScreen({super.key, required this.carRent,required this.carType});
-  final controller = Get.put(CheckOutCon());
+  // final controller = Get.put(CheckOutCon());
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CheckOutCon());
     AppConstants.vehicleType = carType;
     controller.getCheckoutPayments();
     controller.state.carRent = carRent;
@@ -171,7 +174,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                 // Promo code section
                 HeadingTextWidget(
                   title: 'Have a promo code?',
-                  fontSize: 18,
+                  fontSize: 14,
                   textColor: Theme.of(context).headingColor,
                 ),
                 SizedBox(
@@ -181,56 +184,59 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                   onTap: () {
                     promoCodeBottomSheet(context,controller);
                   },
-                  child: Container(
-                    height: mq.height * .08,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: mq.height * .02,
-                          horizontal: mq.width * .02),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Obx((){
-                                return controller.state.promoCodeapplied.value == true ? Container(): IconContainer(
-                                  iconName: 'Star.png',
-                                  height: 30,
-                                  width: 30,
-                                );
-                              }),
-                              SizedBox(
-                                width: mq.width * .18,
-                              ),
-                              Obx((){
-                                return controller.state.promoCodeapplied.value == true ?
-                                Container(
-                                  child: Flexible(
-                                    child: HeadingTextWidget(
-                                      title: 'Promo code discount applied \$-${controller.state.promoDiscount.value}',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      textColor: Theme.of(context).headingColor,
+                  child: Center(
+                    child: Container(
+                      height: mq.height * .08,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            // vertical: mq.height * .01,
+                            horizontal: mq.width * .02),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              children: [
+                                Obx((){
+                                  return controller.state.promoCodeapplied.value == true ? Container(): IconContainer(
+                                    iconName: 'Star.png',
+                                    height: 30,
+                                    width: 30,
+                                  );
+                                }),
+                                SizedBox(
+                                  width: mq.width * .18,
+                                ),
+                                Obx((){
+                                  return controller.state.promoCodeapplied.value == true ?
+                                  Container(
+                                    child: Flexible(
+                                      child: HeadingTextWidget(
+                                        title: 'Promo code discount applied \$-${controller.state.promoDiscount.value}',
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
+                                        textColor: Theme.of(context).headingColor,
+                                      ),
                                     ),
-                                  ),
-                                ) : HeadingTextWidget(
-                                  title: 'Add promo code',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                  textColor: Theme.of(context).headingColor,
-                                );
-                              }),
-                            ],
-                          ),
-                        ],
+                                  ) : HeadingTextWidget(
+                                    title: 'Add promo code',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                    textColor: Theme.of(context).headingColor,
+                                  );
+                                }),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).scaffoldBgClr,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(color: Colors.black.withOpacity(0.1))
+                          ],
+                          border: Border.all(color: Colors.black12)),
                     ),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).scaffoldBgClr,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(color: Colors.black.withOpacity(0.1))
-                        ],
-                        border: Border.all(color: Colors.black12)),
                   ),
                 ),
                 SizedBox(
@@ -276,9 +282,27 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                           width: mq.width * .3,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10)),
-                          child: Image(
-                            image: AssetImage('assets/images/3.png'),
-                            fit: BoxFit.fill,
+                          child: Swiper(
+                            itemBuilder: (BuildContext context, int ind) {
+                              return Image.asset(
+                                carType == "Premium"? controller.state.premiumList[ind] : carType == "Economy"? controller.state.economyList[ind] : carType == "AllWheelDriveSUV"? controller.state.avdList[ind] : carType == "SUV"? controller.state.suvList[ind] : controller.state.sedanList[ind],
+                                fit: BoxFit.cover,
+                                // height: 188.h,
+                                width: 288,
+                              );
+                            },
+                            autoplay: false,
+                            itemCount: controller.state.sedanList.length,
+                            viewportFraction: 0.8,
+                            scale: 0.9,
+                            pagination: SwiperPagination(
+                              alignment: Alignment.bottomCenter,
+                              builder: DotSwiperPaginationBuilder(
+                                  color: Colors.black12,
+                                  activeColor: Colors.white,
+                                  size: 2,
+                                  activeSize: 5),
+                            ),
                           ),
                         )
                       ],
@@ -286,21 +310,23 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                     SizedBox(
                       height: mq.height * .02,
                     ),
-                    Padding(
-                        padding: EdgeInsets.only(right: mq.width * .65),
-                        child: InkWell(
-                          onTap: () {
-                            Get.to(
-                              CarDetailsScreen(isTextShow: true),
-                            );
-                          },
-                          child: HeadingTextWidget(
-                            title: 'Change car',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                            textColor: AppColors.buttonColor,
-                          ),
-                        ))
+                    // Padding(
+                    //     padding: EdgeInsets.only(right: mq.width * .65),
+                    //     child: InkWell(
+                    //       onTap: () {
+                    //         // Get.back();
+                    //         // Get.toNamed(RoutesName.carDetailsScreen,arguments: {'isTextShown': true});
+                    //         Get.to(()=>
+                    //           CarDetailsScreen(isTextShow: true),
+                    //         );
+                    //       },
+                    //       child: HeadingTextWidget(
+                    //         title: 'Change car',
+                    //         fontWeight: FontWeight.w600,
+                    //         fontSize: 14,
+                    //         textColor: AppColors.buttonColor,
+                    //       ),
+                    //     ))
                   ],
                 ),
                 SizedBox(
@@ -508,11 +534,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                       // Instructions Bottom Sheet
                       InkWell(
                         onTap: () async {
-                          await showModalBottomSheet(
-                              context: context,
-                              builder: (_) {
-                                return Container();
-                              });
+                          await viewInstructionsBottomSheet(context);
                         },
                         child: HeadingTextWidget(
                           title: 'View instructions',
@@ -1620,47 +1642,14 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                   height: mq.height * .02,
                 ),
                 // Payment method
-                Row(
-                  children: [
-                    HeadingTextWidget(
-                      textColor: Theme.of(context).headingColor,
-                      title: 'Payment method',
-                    ),
-                    HeadingTextWidget(
-                      textColor: Colors.red,
-                      title: " *",
-                    ),
-                  ],
+                HeadingTextWidget(
+                  textColor: Theme.of(context).headingColor,
+                  title: 'Apply promo discount',
                 ),
                 SizedBox(
                   height: mq.height * .03,
                 ),
-                Obx(() {
-                  return controller.state.cardNumber.value == ""
-                      ? GestureDetector(
-                    onTap: () {
-                      // handel add payment method logic
-                      CardBottomSheet(context, false, controller);
-                    },
-                    child: HeadingTextWidget(
-                      title: 'Add payment method',
-                      textColor: AppColors.buttonColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 14,
-                    ),
-                  )
-                      : Container(
-                    child: controller.state.cardType.value == 'visa'
-                        ? paymentCard('visaCard.png', context,controller)
-                        : controller.state.cardType.value ==
-                        "master"
-                        ? paymentCard('masterCard.png', context,controller)
-                        : controller.state.cardType.value ==
-                        "default"
-                        ? paymentCard('invite.png', context,controller)
-                        : Container(),
-                  );
-                }),
+                
                 SizedBox(
                   height: mq.height * .03,
                 ),

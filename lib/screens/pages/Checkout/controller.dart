@@ -192,6 +192,7 @@ class CheckOutCon extends GetxController {
         state.assistance = firstDocument['assistance'];
         state.pickupLoc = firstDocument['pickUpLoc'];
         AppConstants.deliveryCharges = firstDocument['delivery'];
+        AppConstants.pickUpLoc = firstDocument['pickUpLoc'];
         fetchCardDetails();
         getReceiptCharges();
         setDataLoaded(true);
@@ -417,6 +418,26 @@ class CheckOutCon extends GetxController {
     AppConstants.promoDiscountAmount=amount;
   }
 
+//
+//   bool checkNecessaryFieldsAdded() {
+//     if (state.vehicle_delivery.value == true ||
+//         state.vehicle_pickup.value == true) {
+//       if (state.standard_protection.value == true ||
+//           state.essential_protection.value == true
+//           || state.i_have_own.value == true ||
+//           state.customCoverage.value == true) {
+//         if (state.cardAdded.value == true) {
+//           return true;
+//         } else {
+//           false;
+//         }
+//       } else {
+//         return false;
+//       }
+//     }{
+//       return false;
+//     }
+// }
 
   bool checkNecessaryFieldsAdded() {
     if (state.vehicle_delivery.value == true ||
@@ -425,19 +446,14 @@ class CheckOutCon extends GetxController {
           state.essential_protection.value == true
           || state.i_have_own.value == true ||
           state.customCoverage.value == true) {
-        if (state.cardAdded.value == true) {
-          return true;
-        } else {
-          false;
-        }
+       return true;
       } else {
         return false;
       }
-    }{
+    }else{
       return false;
     }
-
-}
+  }
 
 void storeUserDetailsinConstants(){
     AppConstants.custFirstName = state.fNameCon.text.trim().toString();

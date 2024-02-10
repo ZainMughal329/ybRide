@@ -65,6 +65,7 @@ class AppRoutes {
       bindings: <Bindings>[
         ApplicationViewBindings(),
         BookViewBindings(),
+        InviteBindings(),
       ],
       transition: Transition.downToUp,
     ),

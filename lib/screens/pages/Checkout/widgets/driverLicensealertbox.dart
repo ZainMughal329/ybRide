@@ -42,7 +42,7 @@ class CustomAlertDialog extends StatelessWidget {
       ),
       content: Container(
         width: MediaQuery.of(context).size.width * 0.8,
-        height: mq.height *0.4,
+        // height: mq.height *0.4,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -54,7 +54,7 @@ class CustomAlertDialog extends StatelessWidget {
             SectionWidget( "Additional drivers can be added free of charge. They will also be asked to verify their driver's license."),
             SizedBox(height: mq.height*.02),
             RoundButton(title: 'UnderStand', onPress: (){
-              Get.back();
+              Navigator.pop(context);
             }),
             SizedBox(height: mq.height*.001),
           ],

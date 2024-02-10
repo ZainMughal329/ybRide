@@ -175,6 +175,9 @@ class CarDetailsScreen extends GetView<CarDetailsController> {
           // double rent = double.parse(controller.state.rentPerDay.toString());
           print(controller.state.rentPerDay);
           controller.calculateNoDays();
+          // Get.toNamed(RoutesName.checkOutScreen,arguments: {'carRent':controller.state.rentPerDay * AppConstants.rentDays,
+          // 'carType':carType,
+          // });
           Get.to(() => CheckOutScreen(
               carRent: controller.state.rentPerDay * AppConstants.rentDays,
           carType: carType,

@@ -10,6 +10,7 @@ import 'package:lottie/lottie.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yb_ride/helper/session_controller.dart';
 import 'package:yb_ride/screens/pages/trips_page/trip_pages/myTrips/controller.dart';
+import 'package:yb_ride/screens/pages/trips_page/trip_pages/myTrips/widgets/tripsView.dart';
 import 'package:yb_ride/screens/pages/trips_page/trip_pages/myTrips/widgets/view.dart';
 
 import '../../../../../api/api.dart';
@@ -61,7 +62,7 @@ class MyTripsView extends StatelessWidget {
     return Container(
       child: StreamBuilder<QuerySnapshot>(
         stream:APis.db.collection('all_bookings').
-        // where('id' , isEqualTo: SessionController().userId.toString()).
+        where('id' , isEqualTo: SessionController().userId.toString()).
         snapshots(),
         builder: (context , AsyncSnapshot<QuerySnapshot> snapshot) {
           if(!snapshot.hasData){
@@ -80,6 +81,8 @@ class MyTripsView extends StatelessWidget {
               ListView.builder(
                   itemCount: data.length,
                   itemBuilder: (context , index) {
+                    var status = data[index]['status'];
+                    var price = double.parse((data[index]['totalPrice']).toString()).toStringAsFixed(2);
                     var fromDateString =
                     data[index]['fromDateEpoch']
                     as String;
@@ -175,88 +178,91 @@ class MyTripsView extends StatelessWidget {
                                                   InkWell(
                                                     onTap: ()
                                                     {
-                                                      var rowData = data[index];
-                                                      var fromDateString =
-                                                      rowData['bookingDate']
-                                                      as String;
-                                                      log('from:$fromDateString');
-                                                      var fromDateMillis =
-                                                      int.parse(fromDateString);
-                                                      var fromDate = DateTime
-                                                          .fromMillisecondsSinceEpoch(
-                                                          fromDateMillis);
-                                                      var fromFormattedDate =
-                                                      DateFormat.yMd().format(
-                                                          fromDate.toLocal());
-
-                                                      var toDateString =
-                                                      rowData['toDateEpoch']
-                                                      as String;
-                                                      log('startDateString:$toDateString');
-                                                      var toDateMillis =
-                                                      int.parse(toDateString);
-                                                      var toDate = DateTime
-                                                          .fromMillisecondsSinceEpoch(
-                                                          toDateMillis);
-                                                      var toFormattedDate =
-                                                      DateFormat.yMd()
-                                                          .format(toDate.toLocal());
-
-                                                      var fromTimeString =
-                                                      rowData['fromTimeEpoch']
-                                                      as String;
-                                                      log('startDateString:$fromTimeString');
-                                                      var fromTimeMillis =
-                                                      int.parse(fromTimeString);
-                                                      var fromTime = DateTime
-                                                          .fromMillisecondsSinceEpoch(
-                                                          fromTimeMillis);
-
-                                                      var formattedTime =
-                                                      DateFormat('h:mm a').format(
-                                                          fromTime.toLocal());
-
-                                                      var toTimeString =
-                                                      rowData['toTimeEpoch']
-                                                      as String;
-                                                      log('startDateString:$toTimeString');
-                                                      var toTimeMillis =
-                                                      int.parse(toTimeString);
-                                                      var toTime = DateTime
-                                                          .fromMillisecondsSinceEpoch(
-                                                          toTimeMillis);
-
-                                                      var toFormattedTime =
-                                                      DateFormat('h:mm a')
-                                                          .format(toTime.toLocal());
-
-                                                      showCustomAlertDialogTrips(
-                                                        context,
-                                                        rowData['fullName'],
-                                                        rowData['email'],
-                                                        rowData['phone'],
-                                                        rowData['completeFromAddress'],
-                                                        rowData['completeToAddress'],
-                                                        fromFormattedDate,
-                                                        toFormattedDate,
-                                                        formattedTime,
-                                                        toFormattedTime,
-                                                        rowData['vehicleType'],
-                                                        rowData['totalPrice'],
-                                                        rowData['isPickUp'],
-                                                        rowData['isDelivery'],
-                                                        rowData['isStandardProtection'],
-                                                        rowData[
-                                                        'isLiabilityProtection'],
-                                                        rowData['isIHaveOwnProtection'],
-                                                        rowData['isCustomCoverage'],
-                                                        rowData['totalCustomCoverage'],
-                                                        rowData['isUnlimitedMiles'],
-                                                        rowData['isUnder25years'],
-                                                        rowData['isPromoCodeApplied'],
-                                                        rowData['promoDiscountAmount'],
-                                                      );
+                                                     Get.to(()=>BookingDetailsScreen(docId: snapshot.data!.docs[index]['bookingDate'],)) ;
                                                     }
+                                                    // {
+                                                    //   var rowData = data[index];
+                                                    //   var fromDateString =
+                                                    //   rowData['bookingDate']
+                                                    //   as String;
+                                                    //   log('from:$fromDateString');
+                                                    //   var fromDateMillis =
+                                                    //   int.parse(fromDateString);
+                                                    //   var fromDate = DateTime
+                                                    //       .fromMillisecondsSinceEpoch(
+                                                    //       fromDateMillis);
+                                                    //   var fromFormattedDate =
+                                                    //   DateFormat.yMd().format(
+                                                    //       fromDate.toLocal());
+                                                    //
+                                                    //   var toDateString =
+                                                    //   rowData['toDateEpoch']
+                                                    //   as String;
+                                                    //   log('startDateString:$toDateString');
+                                                    //   var toDateMillis =
+                                                    //   int.parse(toDateString);
+                                                    //   var toDate = DateTime
+                                                    //       .fromMillisecondsSinceEpoch(
+                                                    //       toDateMillis);
+                                                    //   var toFormattedDate =
+                                                    //   DateFormat.yMd()
+                                                    //       .format(toDate.toLocal());
+                                                    //
+                                                    //   var fromTimeString =
+                                                    //   rowData['fromTimeEpoch']
+                                                    //   as String;
+                                                    //   log('startDateString:$fromTimeString');
+                                                    //   var fromTimeMillis =
+                                                    //   int.parse(fromTimeString);
+                                                    //   var fromTime = DateTime
+                                                    //       .fromMillisecondsSinceEpoch(
+                                                    //       fromTimeMillis);
+                                                    //
+                                                    //   var formattedTime =
+                                                    //   DateFormat('h:mm a').format(
+                                                    //       fromTime.toLocal());
+                                                    //
+                                                    //   var toTimeString =
+                                                    //   rowData['toTimeEpoch']
+                                                    //   as String;
+                                                    //   log('startDateString:$toTimeString');
+                                                    //   var toTimeMillis =
+                                                    //   int.parse(toTimeString);
+                                                    //   var toTime = DateTime
+                                                    //       .fromMillisecondsSinceEpoch(
+                                                    //       toTimeMillis);
+                                                    //
+                                                    //   var toFormattedTime =
+                                                    //   DateFormat('h:mm a')
+                                                    //       .format(toTime.toLocal());
+                                                    //
+                                                    //   showCustomAlertDialogTrips(
+                                                    //     context,
+                                                    //     rowData['fullName'],
+                                                    //     rowData['email'],
+                                                    //     rowData['phone'],
+                                                    //     rowData['completeFromAddress'],
+                                                    //     rowData['completeToAddress'],
+                                                    //     fromFormattedDate,
+                                                    //     toFormattedDate,
+                                                    //     convertMillisecondsToTimeString(rowData['fromTimeEpoch']),
+                                                    //     convertMillisecondsToTimeString(rowData['toTimeEpoch']),
+                                                    //     rowData['vehicleType'],
+                                                    //     rowData['totalPrice'],
+                                                    //     rowData['isPickUp'],
+                                                    //     rowData['isDelivery'],
+                                                    //     rowData['isStandardProtection'],
+                                                    //     rowData[
+                                                    //     'isLiabilityProtection'],
+                                                    //     rowData['isIHaveOwnProtection'],
+                                                    //     rowData['isCustomCoverage'],
+                                                    //     rowData['totalCustomCoverage'],
+                                                    //     rowData['isUnlimitedMiles'],
+                                                    //     rowData['isUnder25years'],
+                                                    //     rowData['isPromoCodeApplied'],
+                                                    //     rowData['promoDiscountAmount'],
+                                                    //   );
+                                                    // }
                                                     ,
                                                     child: Container(
                                                       height: 30,
@@ -280,14 +286,42 @@ class MyTripsView extends StatelessWidget {
                                                 height: 5,
                                               ),
                                               SubHeadingTextWidget(
-                                                title: 'Start Date:$fromFormattedDate',
+                                                title: 'Start Date:  $fromFormattedDate',
                                                 textColor: Theme.of(context).headingColor,
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.w600,
                                               ),
-                                              SubHeadingTextWidget(
-                                                  title:'Total Price' + data[index]['totalPrice'].toString(),textColor: Theme.of(context).headingColor,
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  SubHeadingTextWidget(
+                                                      title:'Total Price  \$' + price,textColor: Theme.of(context).headingColor,
+                                                          ),
+                                                  Container(
+                                                    height: 30,
+                                                    // width: 80,
+                                                    decoration: BoxDecoration(
+                                                      color: status=="pending"? AppColors.buttonColor.withOpacity(0.5) :
+                                                      status=="completed" ? Colors.green.withOpacity(0.5) :
+                                                      status=="canceled" ? Colors.red :
+                                                          status=="delivered" ? Colors.yellow.withOpacity(0.5):
+                                                          Colors.teal.withOpacity(0.5)
+                                                      ,
+                                                      borderRadius: BorderRadius.circular(5),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:  EdgeInsets.symmetric(horizontal: 8),
+                                                      child: Center(
+                                                        child: HeadingTextWidget(
+                                                          title: status,
+                                                          fontSize: 13,
+                                                          textColor: AppColors.whiteColor,
+                                                        ),
                                                       ),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                               SizedBox(
                                                 height: 20,
                                               ),
@@ -379,4 +413,5 @@ class MyTripsView extends StatelessWidget {
       ),
     );
   }
+
 }

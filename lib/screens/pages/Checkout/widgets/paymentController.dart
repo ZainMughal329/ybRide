@@ -103,14 +103,13 @@ class PaymentController extends GetxController {
   }
 
   Future<void> makePayment(BuildContext context,double totalAmount) async {
+
     try {
       //STEP 1: Create Payment Intent
       paymentIntent = await createPaymentIntent('USD',totalAmount);
-
       //STEP 2: Initialize Payment Sheet
       await Stripe.instance
           .initPaymentSheet(
-
           paymentSheetParameters: SetupPaymentSheetParameters(
               paymentIntentClientSecret: paymentIntent!['client_secret'], //Gotten from payment intent
               style: ThemeMode.light,
