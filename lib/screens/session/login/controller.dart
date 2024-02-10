@@ -40,6 +40,7 @@ class LoginController extends GetxController {
         pushToken: token,
       dateTime: DateTime.now().millisecondsSinceEpoch.toString(),
       list: [],
+      referralList: [],
 
     );
 
@@ -52,7 +53,7 @@ class LoginController extends GetxController {
     showProgressIndicator(context);
     _signInWithGoogle().then((user) async {
       // SessionController().userId = user!.uid.toString();
-      Navigator.pop(context);
+
       if (user != null) {
         SessionController().userId = user.user!.uid.toString();
         if ((await userExists())) {

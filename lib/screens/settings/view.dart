@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
+import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/screens/settings/pages/faqs/faq_bottom_sheet.dart';
@@ -200,11 +202,17 @@ class SettingsView extends GetView<SettingsController> {
                 ),
                 InkWell(
                   onTap: () async {
-                    await FirebaseAuth.instance.signOut().then((value) {
-
-                      SessionController().userId = '';
-                      Get.offAllNamed(RoutesName.welcomeScreen);
-                    });
+                    try{
+                      await FirebaseAuth.instance.signOut().then((value) {
+                        GoogleSignIn().signOut().then((value){
+                          SessionController().userId = '';
+                        });
+                        SessionController().userId = '';
+                        Get.offAllNamed(RoutesName.loginScreen);
+                      });
+                    }catch(e){
+                      Snackbar.showSnackBar("YB-Ride", e.toString(), Icons.error_outline);
+                    }
                   },
                   child: HeadingTextWidget(
                     title: 'Log out',

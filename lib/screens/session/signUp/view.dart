@@ -61,6 +61,15 @@ class SignupScreen extends GetView<SignUpController> {
               height: mq.height * .0015,
             ),
             ReuseableTextField(
+                contr: controller.state.refCon,
+                label: 'Referral Code (optional)',
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.emailAddress,
+                obsecure: false),
+            SizedBox(
+              height: mq.height * .0015,
+            ),
+            ReuseableTextField(
                 contr: controller.state.passCon,
                 label: 'Password',
                 textInputAction: TextInputAction.done,
@@ -90,7 +99,9 @@ class SignupScreen extends GetView<SignUpController> {
                         email: controller.state.emailCon.text.trim(),
                         pushToken: token,
                         dateTime: DateTime.now().millisecondsSinceEpoch.toString(),
+                        refCode: controller.state.refCon.text.trim().toString(),
                         list: [],
+                        referralList: [],
                       );
                       controller.storeUser(
                         user,

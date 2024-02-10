@@ -184,11 +184,11 @@ class InviteScreen extends GetView<InviteCon> {
                 padding: EdgeInsets.only(
                     left: mq.width * .02, right: mq.width * .02),
                 child: RoundButton(
-                    title:'Book your YBCar now',
+                    title:'Invite your friends via Socail Media',
                     onPress: () {
 
                       // code for bottom sheet
-                      ReferalBottoSheet(context);
+                      ReferalBottoSheet(context,controller);
 
 
                     }),

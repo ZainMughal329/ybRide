@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
 import 'package:yb_ride/components/text_widget.dart';
+import 'package:yb_ride/screens/pages/invite_page/controller.dart';
 
-Future<void> ReferalBottoSheet(BuildContext context) async {
+Future<void> ReferalBottoSheet(BuildContext context,InviteCon controller) async {
+  controller.generateCouponCode();
   showModalBottomSheet(
     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       isScrollControlled: true,
@@ -43,9 +48,24 @@ Future<void> ReferalBottoSheet(BuildContext context) async {
                       ),
                       child: Center(
                         child: Padding(
-                          padding:  EdgeInsets.symmetric(vertical: 10),
-                          child: SubHeadingTextWidget(
-                            title: 'AZXC345',
+                          padding:  EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+                          child: TextFormField(
+                            enabled: true,
+                            controller: controller.state.referralContr,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: Icon(Icons.refresh),
+                                onPressed: (){
+                                  controller.generateCouponCode();
+                                },
+                              ),
+                            ),
+                            style: GoogleFonts.openSans(
+                                fontSize: 15,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold
+                            ),
+
                           ),
                         ),
                       ),
@@ -54,10 +74,16 @@ Future<void> ReferalBottoSheet(BuildContext context) async {
                   SizedBox(
                     height: 20,
                   ),
-                  RoundButton(
-                    title: 'Send Invitation',
-                    onPress: () {},
-                  ),
+                  Obx((){
+                    return controller.state.shareLoading.value==false? RoundButton(
+                      title: 'Send Invitation',
+                      onPress: () {
+                        controller.handelShareTap(controller.state.referralContr.text.trim().toString(), context);
+                      },
+                    ): Container(
+                      child: Lottie.asset('assets/lottie/loading2.json',height: 100,width: 100),
+                    );
+                  })
                 ],
               ),
             ),

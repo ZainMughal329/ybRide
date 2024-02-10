@@ -90,6 +90,8 @@ dependencies:
   firebase_messaging:
   flutter_local_notifications:
   flutter_quill: ^9.2.11
+#  sharing to social media
+  share_plus: ^7.2.2
 
 
 

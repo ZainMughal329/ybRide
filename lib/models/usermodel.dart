@@ -7,7 +7,10 @@ class UserModel {
   final String email;
   final String pushToken;
   final String dateTime;
+  String? refCode;
   final List<String> list;
+  final List<String> referralList;
+  double referralDiscount;
 
   UserModel({
     required this.image,
@@ -16,7 +19,11 @@ class UserModel {
     required this.email,
     required this.pushToken,
     required this.dateTime,
+    this.refCode='',
      required this.list,
+    required this.referralList,
+    this.referralDiscount=0
+
   });
 
   toJson() {
@@ -27,7 +34,10 @@ class UserModel {
       'email': email,
       'pushToken' : pushToken,
       'dateTime':dateTime,
+      'refCode':refCode,
       'listOfCodes' : list,
+      'referralList' : referralList,
+      'referralDiscount' : referralDiscount,
     };
   }
 
@@ -42,7 +52,10 @@ class UserModel {
       email: json["email"],
       pushToken : json['pushToken'],
       dateTime : json['dateTime'],
+      refCode : json['refCode'],
       list : json['listOfCodes'],
+      referralList : json['referralList'],
+      referralDiscount : json['referralDiscount'],
     );
   }
 }
