@@ -17,14 +17,62 @@ class ReUseAbleChatBot extends StatelessWidget {
     'who are you',
     'what is flutter',
     'fuck',
-    'sorry'
+    'sorry',
+    'Account login',
+    'Profile update',
+    'Preferences',
+    'Dark mode',
+    'Light mode',
+    'Privacy policy',
+    'Car availability',
+    'Car selection',
+    'Rental duration',
+    'Rental cost',
+    'Booking confirmation',
+    'Trip details',
+    'Trip cancellation',
+    'Customer support',
+    'Help',
+    'Contact information',
+    'Payment confirmation',
+    'Invoice details',
+    'Driver application',
+    'Driver requirements',
+    'Invite friends',
+    'Earn rewards',
+    'Refer a friend',
+    'promo code',
   ];
 
   final List<String> responses = [
-    'I am a bot created by Iksoft Original, a proud Ghanaian',
+    'I am a bot created by Dev-Tech Originals',
     'Flutter transforms the app development process. Build, test, and deploy beautiful mobile, web, desktop, and embedded apps from a single codebase.',
     'You are such an idiot to tell me this. you dont have future. Look for D-Tech Original and seek for knowledge. here is his number +233550138086. call him you lazy deep shit',
-    'Good! i have forgiven you. dont do that again!'
+    'Good! i have forgiven you. dont do that again!',
+    'To access your YB-Ride account, enter your registered email and password on the login screen. Click on the Logi button to proceed.',
+    'Update your profile information such as name, email, phone number from the profile settings. Click on the Profile option to make changes.',
+    'Customize your YB-Ride experience by setting preferences such as notification preferences, language preferences, and vehicle preferences.',
+    'Switch to dark mode for a darker color scheme that is easier on the eyes, especially in low-light environments. Toggle dark mode on/off from the app settings.',
+    'Switch back to light mode for a brighter color scheme. Toggle light mode on/off from the app settings.',
+    'Read our privacy policy to understand how we collect, use, and protect your personal information. You can find our privacy policy in the app settings.',
+    'Check the availability of rental cars for your desired location, date, and time. Browse through available cars and select the one that meets your needs.',
+    'Choose from a variety of car types including economy, all-wheel drive, SUV, and sedan. Select the car that best suits your preferences and requirements.',
+    'Select the rental duration by specifying the pickup date and time, as well as the drop-off date and time. The rental duration determines the total cost of your rental.',
+    'The rental cost depends on factors such as the car type, rental duration, additional services (protection coverage, delivery/pickup options), and any applicable taxes or fees.',
+    'Upon successful booking, you will receive a confirmation email with your booking details including car type, rental duration, pickup/drop-off location, and total cost.',
+    'View your trip details including car type, pickup/drop-off location, rental duration, and total cost from the Trip Details section in the app',
+    'You can cancel your trip by contacting the YB-Ride support at ${AppConstants.ybEmail} or by phone at ${AppConstants.ybPhone}. Please note that cancellation fees may apply.',
+    'For assistance or inquiries, contact our customer support team. You can reach us via email at ${AppConstants.ybEmail} or by phone at ${AppConstants.ybPhone}.',
+    'Access help resources, FAQs, and troubleshooting guides from the Help section in the app. Find answers to common questions and get assistance with app-related issues.',
+    'For assistance or inquiries, contact our customer support team. You can reach us via email at ${AppConstants.ybEmail} or by phone at ${AppConstants.ybPhone}.',
+    'After successful payment, you will receive a payment confirmation email containing details of your transaction.',
+    'You can view and download your invoice details from the gallery of your mobile. Invoices include a breakdown of charges for your rental, taxes, fees, and any applicable discounts.',
+    'Interested in becoming a YB-Buddy driver? You can apply to become a driver by filling out the driver application form on our application and website. Once submitted, our team will review your application.',
+    'To qualify as a YB-Buddy driver, you must meet certain requirements including a valid driving license, clean driving record, background check, and vehicle eligibility. Additional requirements may apply based on your location.',
+    'Invite your friends to join YB-Ride and earn rewards! Share your unique referral code with friends, and when they sign up using your code you will receive reward.',
+    'Invite your friends to join YB-Ride and earn rewards! Share your unique referral code with friends, and when they sign up using your code you will receive reward.',
+    'Invite your friends to join YB-Ride and earn rewards! Share your unique referral code with friends, and when they sign up using your code you will receive reward.',
+    'Apply the promo code during checkout to get discounts on your trips',
   ];
 
   @override
@@ -62,16 +110,21 @@ class ReUseAbleChatBot extends StatelessWidget {
       keywords: keywords,
       responses: responses,
       backgroundColor: Theme.of(context).scaffoldBgClr,
-      backgroundImage: Pref.isDarkMode ? 'assets/images/black.jpeg' : 'assets/images/white.jpeg',
+      backgroundImage: Pref.isDarkMode
+          ? 'assets/images/black.jpeg'
+          : 'assets/images/white.jpeg',
       initialGreeting:
-      "Hello! \nWelcome to IkChatBot.\nHow can I assist you today?",
-      defaultResponse: "Sorry, I didn't understand your response.You can contact us at\n# ${AppConstants.ybPhone}\n@ ${AppConstants.ybEmail}",
+          "Hello! \nWelcome to IkChatBot.\nHow can I assist you today?",
+      defaultResponse:
+          "Sorry, I didn't understand your response.You can contact us at\n# ${AppConstants.ybPhone}\n@ ${AppConstants.ybEmail}",
       inactivityMessage: "Is there anything else you need help with?",
       closingMessage: "This conversation will now close.",
       inputHint: 'Send a message',
       waitingText: 'Please wait...',
-      useAsset: false, backgroundAssetimage: Pref.isDarkMode ? 'assets/images/black.jpeg' : 'assets/images/white.jpeg',
-
+      useAsset: false,
+      backgroundAssetimage: Pref.isDarkMode
+          ? 'assets/images/black.jpeg'
+          : 'assets/images/white.jpeg',
     );
 
     return MyHomePage(chatBotConfig: chatBotConfig);
@@ -102,10 +155,12 @@ class MyHomePage extends StatelessWidget {
         ),
         body: Stack(
           children: [
-
             _chatIsOpened
                 ? Center(
-                    child: HeadingTextWidget(title: 'Welcome to YBCar,' , textColor: Theme.of(context).headingColor,),
+                    child: HeadingTextWidget(
+                      title: 'Welcome to YBCar,',
+                      textColor: Theme.of(context).headingColor,
+                    ),
                   )
                 : ikchatbot(config: chatBotConfig),
             Positioned(
@@ -117,7 +172,7 @@ class MyHomePage extends StatelessWidget {
                   // Adjust the height based on your design
                   decoration: BoxDecoration(
                     color: Theme.of(context).scaffoldBgClr,
-                      // color: Colors.red,
+                    // color: Colors.red,
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(
@@ -131,26 +186,30 @@ class MyHomePage extends StatelessWidget {
                           children: [
                             Container(
                               height: mq.height * .1,
-                              width: mq.height *.1,
+                              width: mq.height * .1,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
-                              image: DecorationImage(image: AssetImage('assets/images/logo1.jpeg'),fit: BoxFit.fill),
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage('assets/images/logo1.jpeg'),
+                                    fit: BoxFit.fill),
                               ),
-
                             ),
                           ],
                         ),
                         SizedBox(height: mq.height * 0.03),
                         Padding(
                           padding: EdgeInsets.only(bottom: mq.height * .017),
-                          child: HeadingTextWidget(title: 'YBCar Support System is here for you.',textColor: Theme.of(context).headingColor,),
+                          child: HeadingTextWidget(
+                            title: 'YBCar Support System is here for you.',
+                            textColor: Theme.of(context).headingColor,
+                          ),
                         ),
                         Spacer(),
                       ],
                     ),
                   ),
                 )),
-
           ],
         ));
   }
