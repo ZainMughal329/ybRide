@@ -20,7 +20,9 @@ import 'package:yb_ride/screens/settings/pages/prefrences/inded.dart';
 import 'package:yb_ride/screens/settings/pages/ybcar_surfer/inded.dart';
 import 'package:yb_ride/screens/splash/bindings.dart';
 import 'package:yb_ride/screens/splash/view.dart';
-import 'package:yb_ride/screens/settings/pages/profile/inded.dart';
+
+import '../screens/settings/pages/profile/bindings.dart';
+import '../screens/settings/pages/profile/view.dart';
 class AppRoutes {
   static final List<GetPage> routes = [
     GetPage(
@@ -88,7 +90,7 @@ class AppRoutes {
 
     GetPage(
       name: RoutesName.profileScreen,
-      page: () => ProfileScreen(),
+      page: () => profileScreen(),
       binding: ProfileBindings(),
       transition: Transition.downToUp,
     ),
