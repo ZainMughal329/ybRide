@@ -417,6 +417,11 @@ class CheckOutCon extends GetxController {
     AppConstants.isPromoApplied=true;
     AppConstants.promoDiscountAmount=amount;
   }
+  void applyReferralDiscount(){
+    if(AppConstants.referralDiscount!=0){
+      state.totalPrice.value=state.totalPrice.value-AppConstants.referralDiscount;
+    }
+  }
 
 //
 //   bool checkNecessaryFieldsAdded() {

@@ -17,6 +17,7 @@ class PaymentState{
 
   final RxString expiryDateVal = ''.obs;
   RxBool loading = false.obs;
+  RxBool creditLoading = false.obs;
 
 
 }

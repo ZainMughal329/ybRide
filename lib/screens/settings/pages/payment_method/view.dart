@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/helper/app_constants.dart';
 import '../../../../components/custom_Appbar.dart';
 import '../../../../main.dart';
 import 'controller.dart';
@@ -14,7 +16,7 @@ class PaymentScreen extends GetView<PaymentCon> {
   final controller = Get.put(PaymentCon());
   @override
   Widget build(BuildContext context) {
-    controller.fetchCardDetails();
+    controller.getUserReferralDiscount();
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBgClr,
       appBar: PreferredSize(
@@ -34,61 +36,33 @@ class PaymentScreen extends GetView<PaymentCon> {
               horizontal: mq.width * .09, vertical: mq.height * .05),
           child: Column(
             children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: Obx(() {
-                  return controller.state.cardExist.value == true
-                      ? Container(
-                          child: controller.state.cardType.value == 'visa'
-                              ? paymentCard('visaCard.png', context)
-                              : controller.state.cardType.value == "master"
-                                  ? paymentCard('masterCard.png', context)
-                                  : controller.state.cardType.value == "default"
-                                      ? paymentCard('invite.png', context)
-                                      : Container(),
-                        )
-                      : InkWell(
-                          onTap: () {
-                            PersistentNavBarNavigator.pushNewScreen(context,
-                                screen: CreditCardScreen(), withNavBar: true);
-                          },
-                          child: HeadingTextWidget(
-                            title: 'Add payment method',
-                            textColor: AppColors.buttonColor,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ));
-                }),
-              ),
-
               // Align(
               //   alignment: Alignment.topLeft,
-              //   child: Obx(
-              //     () {
-              //       return
-              //       controller.state.cardType.value == 'visa'
-              //           ? paymentCard('visaCard.png', context)
-              //           : controller.state.cardType.value == "master"
-              //               ? paymentCard('masterCard.png', context)
-              //               : controller.state.cardType.value == "default"
-              //                   ? paymentCard('invite.png', context)
-              //                   : controller.state.cardType.value == ""
-              //                       ? InkWell(
-              //                           onTap: () {
-              //                             PersistentNavBarNavigator
-              //                                 .pushNewScreen(context,
-              //                                     screen: CreditCardScreen(),
-              //                                     withNavBar: true);
-              //                           },
-              //                           child: HeadingTextWidget(
-              //                             title: 'Add payment method',
-              //                             textColor: AppColors.buttonColor,
-              //                             fontSize: 16,
-              //                             fontWeight: FontWeight.w600,
-              //                           )):Container();
-              //     },
-              //   ),
+              //   child: Obx(() {
+              //     return controller.state.cardExist.value == true
+              //         ? Container(
+              //             child: controller.state.cardType.value == 'visa'
+              //                 ? paymentCard('visaCard.png', context)
+              //                 : controller.state.cardType.value == "master"
+              //                     ? paymentCard('masterCard.png', context)
+              //                     : controller.state.cardType.value == "default"
+              //                         ? paymentCard('invite.png', context)
+              //                         : Container(),
+              //           )
+              //         : InkWell(
+              //             onTap: () {
+              //               PersistentNavBarNavigator.pushNewScreen(context,
+              //                   screen: CreditCardScreen(), withNavBar: true);
+              //             },
+              //             child: HeadingTextWidget(
+              //               title: 'Add payment method',
+              //               textColor: AppColors.buttonColor,
+              //               fontSize: 16,
+              //               fontWeight: FontWeight.w600,
+              //             ));
+              //   }),
               // ),
+              HeadingTextWidget(title: 'Referral Discounts'),
               SizedBox(
                 height: mq.height * .02,
               ),
@@ -96,19 +70,24 @@ class PaymentScreen extends GetView<PaymentCon> {
               SizedBox(
                 height: mq.height * .02,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SubHeadingTextWidget(
-                    title: 'Your credits',
-                    fontWeight: FontWeight.w600,
-                    textColor: Theme.of(context).lightTextColor,
-                  ),
-                  SubHeadingTextWidget(
-                      title: '\$0.00',
-                      textColor: Theme.of(context).lightTextColor)
-                ],
-              )
+              Obx((){
+                return controller.state.creditLoading.value==false ?Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SubHeadingTextWidget(
+                      title: 'Your credits',
+                      fontWeight: FontWeight.w600,
+                      textColor: Theme.of(context).lightTextColor,
+                    ),
+                    SubHeadingTextWidget(
+                        title: '\$${AppConstants.referralDiscount}',
+                        textColor: Theme.of(context).lightTextColor)
+                  ],
+                ):
+                Container(
+                  child: Lottie.asset('assets/lottie/loading2.json',width: 100,height: 100),
+                );
+              }),
             ],
           ),
         ),

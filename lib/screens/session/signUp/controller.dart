@@ -22,7 +22,7 @@ class SignUpController extends GetxController {
       if (doc.exists) {
         AppConstants.playStoreLink = doc["playStoreLink"];
         AppConstants.appStoreLink = doc["appStoreLink"];
-        AppConstants.referralDiscount =
+        AppConstants.APPReferralDiscount =
             double.parse((doc['referralDiscount']).toString());
       }
     } catch (e) {
@@ -40,6 +40,7 @@ class SignUpController extends GetxController {
           .then((value) {
         userinfo.id = APis.auth.currentUser!.uid.toString();
         SessionController().userId = APis.auth.currentUser!.uid.toString();
+        getUserReferralDiscount();
         createUser(userinfo, context);
         if(state.refCon.text.isNotEmpty){
           checkReferralCode(state.refCon.text.trim().toString());
@@ -128,5 +129,16 @@ class SignUpController extends GetxController {
     state.emailCon.clear();
     state.passCon.clear();
     state.nameCon.clear();
+    state.refCon.clear();
   }
+
+  Future<void> getUserReferralDiscount() async{
+    var user = await APis.db.collection('users').doc(SessionController().userId).get();
+    if(user.exists){
+      AppConstants.referralDiscount=double.parse((user['referralDiscount']).toString());
+      print("=======================");
+      print(double.parse((user['referralDiscount']).toString()));
+    }
+  }
+
 }

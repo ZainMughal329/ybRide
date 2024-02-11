@@ -38,6 +38,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
     controller.getCheckoutPayments();
     controller.state.carRent = carRent;
     controller.state.totalPrice.value = carRent;
+    controller.applyReferralDiscount();
     return Obx(() {
       return controller.state.paymentLoading.value==true ? Scaffold(
         backgroundColor: Theme.of(context).scaffoldBgClr,
@@ -1642,6 +1643,28 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                   height: mq.height * .02,
                 ),
                 // Payment method
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        HeadingTextWidget(
+                          textColor: Theme.of(context).headingColor,
+                          title: 'Referral Credits',
+                        ),
+                        SubHeadingTextWidget(title: 'Discount will be applied\nautomatically'),
+                      ],
+                    ),SizedBox(
+                      width: 10,
+                    ),
+                    SubHeadingTextWidget(title: '\$${AppConstants.referralDiscount}'),
+                      ],
+                        ),
+                SizedBox(
+                  height: mq.height * .02,
+                ),
                 HeadingTextWidget(
                   textColor: Theme.of(context).headingColor,
                   title: 'Apply promo discount',
