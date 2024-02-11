@@ -67,7 +67,7 @@ class SettingsView extends GetView<SettingsController> {
                 ),
 
 
-                _buildListTile('Saved payment methods', FontAwesomeIcons.wallet,
+                _buildListTile('Referral Credits', FontAwesomeIcons.wallet,
                     Icons.arrow_forward_ios, () {
                   PersistentNavBarNavigator.pushNewScreen(context,
                       screen: PaymentScreen(), withNavBar: true);

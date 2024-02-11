@@ -148,4 +148,25 @@ class PaymentCon extends GetxController {
     AppConstants.cardZip = "";
   }
 
+
+  setCreditLoading(bool val){
+    state.creditLoading.value=val;
+  }
+  Future<void> getUserReferralDiscount() async{
+    setCreditLoading(true);
+   try{
+     var user = await APis.db.collection('users').doc(SessionController().userId).get();
+     if(user.exists){
+       AppConstants.referralDiscount=double.parse((user['referralDiscount']).toString());
+       setCreditLoading(true);
+       print("=======================");
+       print(double.parse((user['referralDiscount']).toString()));
+       setCreditLoading(false);
+     }
+   }catch(e){
+     setCreditLoading(false);
+     Snackbar.showSnackBar("YB-Ride", e.toString(), Icons.error_outline);
+   }
+  }
+
 }

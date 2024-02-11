@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yb_ride/helper/app_constants.dart';
 import 'package:yb_ride/helper/session_controller.dart';
 import 'package:yb_ride/screens/session/login/state.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -43,6 +44,7 @@ class LoginController extends GetxController {
       referralList: [],
 
     );
+    SessionController().userId=user.uid.toString();
 
     await APis.db.collection('users').doc(APis.auth.currentUser!.uid).set(
           chatUser.toJson(),
@@ -50,16 +52,18 @@ class LoginController extends GetxController {
   }
 
   handleGoogleSignIn(BuildContext context) async {
-    showProgressIndicator(context);
+    // showProgressIndicator(context);
     _signInWithGoogle().then((user) async {
       // SessionController().userId = user!.uid.toString();
 
       if (user != null) {
         SessionController().userId = user.user!.uid.toString();
         if ((await userExists())) {
+          getUserReferralDiscount();
           return Get.offAndToNamed(RoutesName.applicationScreen);
         } else {
           await createUser().then((value) {
+            getUserReferralDiscount();
             return Get.offAndToNamed(RoutesName.applicationScreen);
           });
         }
@@ -101,25 +105,9 @@ class LoginController extends GetxController {
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) async {
         SessionController().userId = value.user!.uid.toString();
+        getUserReferralDiscount();
         Get.offAllNamed(RoutesName.applicationScreen);
-        // final serviceData = await APis.db
-        //     .collection('serviceProviders')
-        //     .where('id', isEqualTo: APis.auth.currentUser!.uid.toString())
-        //     .get();
-        // if (serviceData.docs.isNotEmpty) {
-        //   // StorePrefrences sp = StorePrefrences();
-        //   // sp.setIsFirstOpen(true);
-        //
-        //   Navigator.pop(context);
-        // } else {
-        //   // StorePrefrences sp = StorePrefrences();
-        //   // sp.setIsFirstOpen(true);
-        //   Get.offAllNamed(RoutesName.onBoardingScreen);
-        //   Navigator.pop(context);
-        // }
-
         Navigator.pop(context);
-
         state.emailCon.clear();
         state.passCon.clear();
       }).onError((error, stackTrace) {
@@ -132,6 +120,16 @@ class LoginController extends GetxController {
     } catch (e) {
       Snackbar.showSnackBar("Error", e.toString(), Icons.error_outline);
       Navigator.pop(context);
+    }
+  }
+
+
+  Future<void> getUserReferralDiscount() async{
+    var user = await APis.db.collection('users').doc(SessionController().userId).get();
+    if(user.exists){
+      AppConstants.referralDiscount=double.parse((user['referralDiscount']).toString());
+      print("=======================");
+      print(double.parse((user['referralDiscount']).toString()));
     }
   }
 }

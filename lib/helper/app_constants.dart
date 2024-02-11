@@ -14,7 +14,9 @@ class AppConstants {
   static final String placesBaseUrl = 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
   static  String playStoreLink="";
   static  String appStoreLink="";
+  static double APPReferralDiscount=0;
   static double referralDiscount=0;
+
 
   //Address Constants
   static String fromAddress = 'Tap to Search';
