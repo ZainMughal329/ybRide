@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
+import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/components/text_form_field.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/helper/session_controller.dart';
+import 'package:yb_ride/models/surfer_model.dart';
 import 'package:yb_ride/screens/settings/pages/ybcar_surfer/inded.dart';
 
 
@@ -364,7 +368,8 @@ class SurferScreen extends GetView<SurferController> {
                       label: 'First Name',
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.text,
-                      obsecure: false),
+                      obsecure: false
+                  ),
                   SizedBox(
                     height: 10,
                   ),
@@ -461,10 +466,33 @@ class SurferScreen extends GetView<SurferController> {
                   SizedBox(
                     height: 25,
                   ),
-                  RoundButton(
-                    title: 'Submit',
-                    onPress: () {},
-                  ),
+                  Obx((){
+                    return controller.state.requestLoading.value== false ? RoundButton(
+                      title: 'Submit',
+                      onPress: () {
+                        if(controller.state.fNameCon.text.isEmpty ||
+                            controller.state.lNameCon.text.isEmpty ||
+                            controller.state.emailCon.text.isEmpty ||
+                            controller.state.phoneNumberCon.text.isEmpty
+                        ){
+                          Snackbar.showSnackBar('YB-Ride', "Enter all fields", Icons.error_outline);
+                        }else{
+                          String dateTime = DateTime.timestamp().millisecondsSinceEpoch.toString();
+                          DriverModel driver= DriverModel(
+                            id: SessionController().userId,
+                            image: '',
+                            name: controller.state.fNameCon.text.trim().toString()+controller.state.lNameCon.text.trim().toString(),
+                            phone: '+1-'+controller.state.phoneNumberCon.text.trim().toString(),
+                            email: controller.state.emailCon.text.trim().toString(),
+                            pushToken: '',
+                            dateTime: dateTime,
+                            city: controller.state.serviceOffering.value.toString(),
+                          );
+                          controller.sendYBBuddyRequest(driver, context);
+                        }
+                      },
+                    ) : Center(child: Lottie.asset('assets/lottie/loading2.json',width: 100,height: 100,));
+                  }),
                 ],
               ),
               Positioned(

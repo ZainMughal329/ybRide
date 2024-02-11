@@ -19,4 +19,6 @@ class SurferState {
 
   Rx<String> serviceOffering = 'Select'.obs;
 
+  RxBool requestLoading = false.obs;
+
 }
