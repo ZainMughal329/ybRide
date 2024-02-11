@@ -3,10 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
-
-import '../../../components/custom_Appbar.dart';
+import 'package:yb_ride/screens/pages/help_page/widgets/howCanEditMyTripBottomSheet.dart';
+import 'package:yb_ride/screens/pages/help_page/widgets/sendUsMessageAlertBox.dart';
+import 'package:yb_ride/screens/pages/help_page/widgets/whereIsMySurferBottomSheet.dart';
+import '../../../components/reuseable_chatbot.dart';
 import '../../../helper/app_colors.dart';
 import '../../../main.dart';
+import '../../settings/pages/faqs/view.dart';
 import 'controller.dart';
 
 class HelpScreen extends GetView<HelpCon> {
@@ -102,22 +105,32 @@ class HelpScreen extends GetView<HelpCon> {
                       child: Column(
                         children: [
                           SizedBox(height: mq.height * .002),
-                          ReuseableRow(
-                            title: 'Messages',
-                            textSize: 14,
-                            fontWeight: FontWeight.w500,
-                            iconData: Icons.message,
+                          InkWell(
+                            onTap: (){
+                              Get.to(()=>ReUseAbleChatBot());
+                            },
+                            child: ReuseableRow(
+                              title: 'Messages',
+                              textSize: 14,
+                              fontWeight: FontWeight.w500,
+                              iconData: Icons.message,
 
-                            iconColor: AppColors.buttonColor,
+                              iconColor: AppColors.buttonColor,
 
+                            ),
                           ),
                           Divider(),
-                          ReuseableRow(
-                            title: 'Help',
-                            textSize: 14,
-                            fontWeight: FontWeight.w500,
-                            iconData: Icons.question_mark,
-                            iconColor: AppColors.buttonColor,
+                          InkWell(
+                            onTap: (){
+                              Get.to(()=>FAQScreen());
+                            },
+                            child: ReuseableRow(
+                              title: 'Help',
+                              textSize: 14,
+                              fontWeight: FontWeight.w500,
+                              iconData: Icons.question_mark,
+                              iconColor: AppColors.buttonColor,
+                            ),
                           ),
                         ],
                       ),
@@ -140,24 +153,29 @@ class HelpScreen extends GetView<HelpCon> {
                         ),
                       ],
                     ),
-                    child: ListTile(
-                      title: HeadingTextWidget(
-                        title: 'Send us a message',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15,
-                        textColor: Theme.of(context).headingColor,
-                      ),
-                      subtitle: SubHeadingTextWidget(
-                        title: "We'll be back online in 30 minutes",
-                        fontWeight: FontWeight.w400,
-                        fontSize: 15,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        textColor: Theme.of(context).lightTextColor,
-                      ),
-                      trailing: Icon(
-                        Icons.navigate_next,
-                        color: AppColors.buttonColor,
+                    child: InkWell(
+                      onTap: (){
+                        sendUsMessageAlertDialog(context);
+                      },
+                      child: ListTile(
+                        title: HeadingTextWidget(
+                          title: 'Send us a message',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          textColor: Theme.of(context).headingColor,
+                        ),
+                        subtitle: SubHeadingTextWidget(
+                          title: "We'll be back online in 30 minutes",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textColor: Theme.of(context).lightTextColor,
+                        ),
+                        trailing: Icon(
+                          Icons.navigate_next,
+                          color: AppColors.buttonColor,
+                        ),
                       ),
                     ),
                   ),
@@ -183,12 +201,17 @@ class HelpScreen extends GetView<HelpCon> {
                       child: Column(
                         children: [
                           SizedBox(height: mq.height * .002),
-                          ReuseableRow(
-                            textSize: 15,
-                            title: 'Search for help',
-                            fontWeight: FontWeight.w500,
-                            iconData: Icons.search_outlined,
-                            iconColor: AppColors.buttonColor,
+                          InkWell(
+                            onTap: (){
+                              Get.to(()=>FAQScreen());
+                            },
+                            child: ReuseableRow(
+                              textSize: 15,
+                              title: 'Search for help',
+                              fontWeight: FontWeight.w500,
+                              iconData: Icons.search_outlined,
+                              iconColor: AppColors.buttonColor,
+                            ),
                           ),
                         ],
                       ),
@@ -210,22 +233,27 @@ class HelpScreen extends GetView<HelpCon> {
                         ),
                       ],
                     ),
-                    child: ListTile(
-                      title: HeadingTextWidget(
-                        title: 'Where is my Surfer?',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15,
-                        textColor: Theme.of(context).headingColor,
-                      ),
-                      subtitle: Padding(
-                        padding:  EdgeInsets.only(top: mq.height*.006),
-                        child: SubHeadingTextWidget(
-                          title:
-                              "When your Surfer starts their trip,you'll be able to see their...",
-                          fontWeight: FontWeight.w400,
+                    child: InkWell(
+                      onTap: (){
+                        WhereIsMySurferBottomSheet(context);
+                      },
+                      child: ListTile(
+                        title: HeadingTextWidget(
+                          title: 'Where is my Surfer?',
+                          fontWeight: FontWeight.w500,
                           fontSize: 15,
-                          maxLines: 2,
-                          textColor: Theme.of(context).lightTextColor,
+                          textColor: Theme.of(context).headingColor,
+                        ),
+                        subtitle: Padding(
+                          padding:  EdgeInsets.only(top: mq.height*.006),
+                          child: SubHeadingTextWidget(
+                            title:
+                                "When your Surfer starts their trip,you'll be able to see their...",
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15,
+                            maxLines: 2,
+                            textColor: Theme.of(context).lightTextColor,
+                          ),
                         ),
                       ),
                     ),
@@ -246,24 +274,29 @@ class HelpScreen extends GetView<HelpCon> {
                         ),
                       ],
                     ),
-                    child: ListTile(
-                      title: HeadingTextWidget(
-                        title:
-                            'How can i edit my trip? Can i extend or shorten it?',
-                        maxLines: 2,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15,
-                        textColor: Theme.of(context).headingColor,
-                      ),
-
-                      subtitle: Padding(
-                        padding:  EdgeInsets.only(top: mq.height*.006),
-                        child: SubHeadingTextWidget(
-                          title: "How to change dates, times, or address",
-                          fontWeight: FontWeight.w400,
-                          fontSize: 15,
+                    child: InkWell(
+                      onTap: (){
+                        HowCanEditMyTripBottomSheet(context);
+                      },
+                      child: ListTile(
+                        title: HeadingTextWidget(
+                          title:
+                              'How can i edit my trip? Can i extend or shorten it?',
                           maxLines: 2,
-                          textColor: Theme.of(context).lightTextColor,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                          textColor: Theme.of(context).headingColor,
+                        ),
+
+                        subtitle: Padding(
+                          padding:  EdgeInsets.only(top: mq.height*.006),
+                          child: SubHeadingTextWidget(
+                            title: "How to change dates, times, or address",
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15,
+                            maxLines: 2,
+                            textColor: Theme.of(context).lightTextColor,
+                          ),
                         ),
                       ),
                     ),
