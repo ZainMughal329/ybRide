@@ -305,7 +305,7 @@ class MyTripsView extends StatelessWidget {
                                                       status=="completed" ? Colors.green.withOpacity(0.5) :
                                                       status=="canceled" ? Colors.red :
                                                           status=="delivered" ? Colors.yellow.withOpacity(0.5):
-                                                          Colors.teal.withOpacity(0.5)
+                                                          Colors.teal.withOpacity(0.5)//for shipped
                                                       ,
                                                       borderRadius: BorderRadius.circular(5),
                                                     ),

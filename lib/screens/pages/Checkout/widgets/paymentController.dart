@@ -113,10 +113,8 @@ class PaymentController extends GetxController {
           paymentSheetParameters: SetupPaymentSheetParameters(
               paymentIntentClientSecret: paymentIntent!['client_secret'], //Gotten from payment intent
               style: ThemeMode.light,
-              merchantDisplayName: 'Ikay'))
+              merchantDisplayName: 'YB-Ride'))
           .then((value) {
-        print(":::::::::::Make Payment :::::::::::::");
-        print(value.toString());
       });
 
       //STEP 3: Display Payment sheet
@@ -181,7 +179,7 @@ class PaymentController extends GetxController {
         Snackbar.showSnackBar("YB-Ride", 'Payed and Booked Successfully', Icons.done_all);
         AppConstants.resetToInitialState();
         Get.offNamed(RoutesName.applicationScreen,arguments: {
-          'index':1,
+          'index':0,
         });
 
 

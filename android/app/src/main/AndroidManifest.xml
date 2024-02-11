@@ -4,6 +4,8 @@
 
     <!-- Include only if your app benefits from precise location access. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
@@ -15,7 +17,9 @@
         android:label="YB Ride"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:enableOnBackInvokedCallback="true">
+        android:enableOnBackInvokedCallback="true"
+        android:requestLegacyExternalStorage="true">
+
 
 
         <meta-data android:name="com.google.android.geo.API_KEY"

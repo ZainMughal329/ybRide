@@ -50,6 +50,8 @@
     <key>NSCameraUsageDescription
     &lt;string&gt;To scan cards&lt;/string&gt;</key>
     <string>To scan cards</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>We need access to your photo library to save receipts.</string>
 	<key>CFBundleURLTypes</key>
     <array>
     	<dict>
