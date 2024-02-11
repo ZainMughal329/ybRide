@@ -29,9 +29,9 @@ class SettingsView extends GetView<SettingsController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.fetchUrls();
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBgClr,
-
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(mq.height * .08),
         child: CustomAppBarWidget(
@@ -138,6 +138,13 @@ class SettingsView extends GetView<SettingsController> {
                 SizedBox(
                   height: mq.height * .02,
                 ),
+                _buildListTile('Follow us on Facebook', FontAwesomeIcons.facebook,
+                    Icons.arrow_forward_ios, () {
+                      controller.launchFacebook();
+                    },context),
+                SizedBox(
+                  height: mq.height * .02,
+                ),
                 Divider(),
                 SizedBox(
                   height: mq.height * .04,
@@ -161,7 +168,9 @@ class SettingsView extends GetView<SettingsController> {
                     'Partner with us',
                     FontAwesomeIcons.handshakeSimple,
                     Icons.arrow_forward_ios,
-                    () {},context),
+                    () {
+                      Snackbar.showSnackBar("YB-Ride", 'Coming Soon', Icons.real_estate_agent_outlined);
+                    },context),
                 SizedBox(
                   height: mq.height * .02,
                 ),

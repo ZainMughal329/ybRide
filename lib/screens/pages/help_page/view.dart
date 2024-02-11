@@ -17,6 +17,7 @@ class HelpScreen extends GetView<HelpCon> {
 
   @override
   Widget build(BuildContext context) {
+    controller.fetchContactDetails();
     mq = MediaQuery.sizeOf(context);
 
     return Scaffold(
