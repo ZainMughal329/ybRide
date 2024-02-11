@@ -11,7 +11,6 @@ import 'package:yb_ride/components/text_form_field.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/screens/settings/pages/prefrences/apperence/inded.dart';
 import 'package:yb_ride/screens/settings/pages/prefrences/controller.dart';
-import 'package:yb_ride/screens/settings/pages/profile/inded.dart';
 
 import '../../../../components/custom_Appbar.dart';
 import '../../../../components/phone_number_input_field.dart';

@@ -1,4 +1,4 @@
-library profile;
+library Profile;
 export './view.dart';
 export './bindings.dart';
 export './controller.dart';

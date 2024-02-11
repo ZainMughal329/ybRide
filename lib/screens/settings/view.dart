@@ -59,8 +59,9 @@ class SettingsView extends GetView<SettingsController> {
                 ),
                 _buildListTile('Profile', Icons.person, Icons.arrow_forward_ios,
                     () {
-                  PersistentNavBarNavigator.pushNewScreen(context,
-                      screen: ProfileScreen(), withNavBar: true);
+                  Get.to(()=>profileScreen());
+                  // PersistentNavBarNavigator.pushNewScreen(context,
+                  //     screen: profileScreen(), withNavBar: true);
                 },context),
                 SizedBox(
                   height: mq.height * .02,
