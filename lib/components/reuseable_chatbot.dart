@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:ikchatbot/ikchatbot.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
+import 'package:yb_ride/helper/app_constants.dart';
 import 'package:yb_ride/helper/prefs.dart';
 import 'package:yb_ride/main.dart';
 
@@ -22,7 +23,7 @@ class ReUseAbleChatBot extends StatelessWidget {
   final List<String> responses = [
     'I am a bot created by Iksoft Original, a proud Ghanaian',
     'Flutter transforms the app development process. Build, test, and deploy beautiful mobile, web, desktop, and embedded apps from a single codebase.',
-    'You are such an idiot to tell me this. you dont have future. Look for Iksoft Original and seek for knowledge. here is his number +233550138086. call him you lazy deep shit',
+    'You are such an idiot to tell me this. you dont have future. Look for D-Tech Original and seek for knowledge. here is his number +233550138086. call him you lazy deep shit',
     'Good! i have forgiven you. dont do that again!'
   ];
 
@@ -64,7 +65,7 @@ class ReUseAbleChatBot extends StatelessWidget {
       backgroundImage: Pref.isDarkMode ? 'assets/images/black.jpeg' : 'assets/images/white.jpeg',
       initialGreeting:
       "Hello! \nWelcome to IkChatBot.\nHow can I assist you today?",
-      defaultResponse: "Sorry, I didn't understand your response.",
+      defaultResponse: "Sorry, I didn't understand your response.You can contact us at\n# ${AppConstants.ybPhone}\n@ ${AppConstants.ybEmail}",
       inactivityMessage: "Is there anything else you need help with?",
       closingMessage: "This conversation will now close.",
       inputHint: 'Send a message',

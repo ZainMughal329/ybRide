@@ -175,6 +175,7 @@ class PaymentController extends GetxController {
       await APis.db.collection('all_bookings').doc(docId).set(booking.toJson()).then((value){
         Navigator.pop(context);
         // Code to redirect to Trips Screen
+        resetReferralCredit();
         setPaymentLoadin(false);
         Snackbar.showSnackBar("YB-Ride", 'Payed and Booked Successfully', Icons.done_all);
         AppConstants.resetToInitialState();
@@ -193,4 +194,11 @@ class PaymentController extends GetxController {
     }
 
   }
+
+
+  Future<void> resetReferralCredit() async{
+    await APis.db.collection('users').doc(SessionController().userId.toString()).update({
+      'referralDiscount':0
+    });
+    }
 }
