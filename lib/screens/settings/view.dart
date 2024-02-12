@@ -155,7 +155,7 @@ class SettingsView extends GetView<SettingsController> {
                   height: mq.height * .02,
                 ),
                 _buildListTile(
-                    'Become a YBCar Surfer',
+                    'Become a YBCar Buddy',
                     FontAwesomeIcons.personSnowboarding,
                     Icons.arrow_forward_ios,
                     () {

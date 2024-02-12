@@ -240,7 +240,7 @@ class HelpScreen extends GetView<HelpCon> {
                       },
                       child: ListTile(
                         title: HeadingTextWidget(
-                          title: 'Where is my Surfer?',
+                          title: 'Where is my Buddy?',
                           fontWeight: FontWeight.w500,
                           fontSize: 15,
                           textColor: Theme.of(context).headingColor,
@@ -249,7 +249,7 @@ class HelpScreen extends GetView<HelpCon> {
                           padding:  EdgeInsets.only(top: mq.height*.006),
                           child: SubHeadingTextWidget(
                             title:
-                                "When your Surfer starts their trip,you'll be able to see their...",
+                                "When your Buddy starts their trip,you'll be able to see their...",
                             fontWeight: FontWeight.w400,
                             fontSize: 15,
                             maxLines: 2,

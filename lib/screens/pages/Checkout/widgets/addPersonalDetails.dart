@@ -17,7 +17,7 @@ Future addPersonalDataSheet(BuildContext context,CheckOutCon controller) async{
       context: (context),
       builder: (context){
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).scaffoldBgClr,
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: mq.width * .02, vertical: mq.height * .02),

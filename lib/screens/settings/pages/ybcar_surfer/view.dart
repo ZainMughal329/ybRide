@@ -159,7 +159,7 @@ class SurferScreen extends GetView<SurferController> {
                                 ),
                                 SubHeadingTextWidget(
                                   title:
-                                      'Kyte is looking for passionate people who want to join our Kyte "Surfer" team! You will be responsible for delivering and picking up rental cars from different locations in your city. ',
+                                      'Kyte is looking for passionate people who want to join our YB-Ride "Buddy" team! You will be responsible for delivering and picking up rental cars from different locations in your city. ',
                                   textColor: Theme.of(context).lightTextColor,
                                   maxLines: controller.state.isCollapsed.value ? 3 : null,
                                   overflow: controller.state.isCollapsed.value
@@ -306,7 +306,7 @@ class SurferScreen extends GetView<SurferController> {
                                 ),
                                 SubHeadingTextWidget(
                                   title:
-                                  'Kyte is looking for passionate people who want to join our Kyte "Surfer" team! You will be....  ',
+                                  'Kyte is looking for passionate people who want to join our YB-Ride "Buddy" team! You will be....  ',
                                   textColor: Theme.of(context).lightTextColor,
                                   maxLines: controller.state.isCollapsed.value ? 3 : null,
                                   overflow: controller.state.isCollapsed.value
