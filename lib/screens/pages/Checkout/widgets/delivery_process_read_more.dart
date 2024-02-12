@@ -98,7 +98,7 @@ Future deliveryProcessSheet(BuildContext context) {
                         ),
                         SubHeadingTextWidget(
                           title:
-                          "Your Surfer will pick out your cleaned car from our lot and drive it to the delivery address of your choice."
+                          "Your Buddy will pick out your cleaned car from our lot and drive it to the delivery address of your choice."
                               "Please note that while we make every effort to be punctual, there may be an arrival window of +/- 15 minutes around the scheduled time."
                           ,
                           textColor: Theme.of(context).headingColor,
@@ -113,8 +113,8 @@ Future deliveryProcessSheet(BuildContext context) {
                           fontWeight: FontWeight.normal,
                           fontSize: 14,
                           title:
-                          "You can see your Surfer's ETA and live location in the Kyte app, as well as the make, model, color, and "
-                              "license plate of your vehicle. If you need to contact your Surfer, you'll be able to do so through the app.",
+                          "You can see your Buddy's ETA and live location in the YB-Ride app, as well as the make, model, color, and "
+                              "license plate of your vehicle. If you need to contact your Buddy, you'll be able to do so through the app.",
                         ),
                         SizedBox(
                           height: mq.height * .02,
@@ -133,7 +133,7 @@ Future deliveryProcessSheet(BuildContext context) {
                         ),
                         SubHeadingTextWidget(
                           title:
-                          "When your Surfer gets to you, they'll take photos of the vehicle and verify your driver's license. The final "
+                          "When your Buddy gets to you, they'll take photos of the vehicle and verify your driver's license. The final "
                               "step before the handover of keys is for you to sign the rental agreement. Yup, that’s really it - you're good to go!"
                           ,
                           textColor: Theme.of(context).headingColor,
@@ -155,7 +155,7 @@ Future deliveryProcessSheet(BuildContext context) {
                         SubHeadingTextWidget(
                           title:
                           "After the handover, we would greatly appreciate your feedback. If you were satisfied with the delivery, you"
-                              "may also leave a trip for the surfer, which will be given to them in full",
+                              "may also leave a trip for the Buddy, which will be given to them in full",
                           textColor: Theme.of(context).headingColor,
                           fontWeight: FontWeight.normal,
                           fontSize: 14,
@@ -184,7 +184,7 @@ Future deliveryProcessSheet(BuildContext context) {
                                 Padding(
                                   padding: const EdgeInsets.all(12.0),
                                   child: Center(
-                                    child: SubHeadingTextWidget(title: "Pro-tip: Surfers typically only wait for 10 minutes after the scheduled time before they may need to depart for next trip -they are busy peoples!",fontWeight: FontWeight.normal,fontSize: 12,textColor: Theme.of(context).headingColor,),
+                                    child: SubHeadingTextWidget(title: "Pro-tip: Buddy typically only wait for 10 minutes after the scheduled time before they may need to depart for next trip -they are busy peoples!",fontWeight: FontWeight.normal,fontSize: 12,textColor: Theme.of(context).headingColor,),
                                   ),
                                 ),
                               ],

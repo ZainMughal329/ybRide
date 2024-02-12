@@ -165,7 +165,7 @@ Future viewInstructionsBottomSheet(BuildContext context) {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: SubHeadingTextWidget(title: '3. your surfer will take photos of you car and verify your drivers license etc',fontSize: 12,),
+                  child: SubHeadingTextWidget(title: '3. your Buddy will take photos of you car and verify your drivers license etc',fontSize: 12,),
                 ),
 
                 SizedBox(
@@ -209,7 +209,7 @@ Future viewInstructionsBottomSheet(BuildContext context) {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: SubHeadingTextWidget(title: '4.Your check-in will notify your surfer,who will meet you to facilitate the key handover process. you will have to hand over the keys in person and cannot leave it in the vehicle',fontSize: 12,),
+                  child: SubHeadingTextWidget(title: '4.Your check-in will notify your Buddy,who will meet you to facilitate the key handover process. you will have to hand over the keys in person and cannot leave it in the vehicle',fontSize: 12,),
                 ),
                 SizedBox(
                   height: mq.height*.02,

@@ -192,6 +192,7 @@ Widget PhoneNumberField(CountryCode code, Function changeCountry, TextEditingCon
                           labelStyle: GoogleFonts.openSans(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
+                            color: Theme.of(context).headingColor
                           ),
                         ),
                       ),
