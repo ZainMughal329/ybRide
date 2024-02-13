@@ -106,8 +106,8 @@ class LoginController extends GetxController {
           .then((value) async {
         SessionController().userId = value.user!.uid.toString();
         getUserReferralDiscount();
-        Get.offAllNamed(RoutesName.applicationScreen);
         Navigator.pop(context);
+        Get.offAllNamed(RoutesName.applicationScreen);
         state.emailCon.clear();
         state.passCon.clear();
       }).onError((error, stackTrace) {

@@ -8,6 +8,7 @@ import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/helper/app_helpers.dart';
 import 'package:yb_ride/screens/settings/pages/faqs/faq_bottom_sheet.dart';
 import 'package:yb_ride/screens/settings/pages/faqs/view.dart';
 import 'package:yb_ride/screens/settings/pages/payment_method/view.dart';
@@ -59,20 +60,18 @@ class SettingsView extends GetView<SettingsController> {
                 ),
                 _buildListTile('Profile', Icons.person, Icons.arrow_forward_ios,
                     () {
-                  Get.to(()=>profileScreen());
+                  Get.to(() => profileScreen());
                   // PersistentNavBarNavigator.pushNewScreen(context,
                   //     screen: profileScreen(), withNavBar: true);
-                },context),
+                }, context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
-
-
                 _buildListTile('Referral Credits', FontAwesomeIcons.wallet,
                     Icons.arrow_forward_ios, () {
                   PersistentNavBarNavigator.pushNewScreen(context,
                       screen: PaymentScreen(), withNavBar: true);
-                },context),
+                }, context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -80,7 +79,7 @@ class SettingsView extends GetView<SettingsController> {
                     Icons.arrow_forward_ios, () {
                   PersistentNavBarNavigator.pushNewScreen(context,
                       screen: PreferenceScreen(), withNavBar: true);
-                },context),
+                }, context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -102,16 +101,14 @@ class SettingsView extends GetView<SettingsController> {
                     transition: Transition.downToUp,
                     duration: Duration(milliseconds: 500),
                   );
-                },context),
+                }, context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
-                _buildListTile('FAQ', FontAwesomeIcons.book,
-                    Icons.arrow_forward_ios, () {
-                      Get.to(()=>FAQScreen());
-
-
-                    },context),
+                _buildListTile(
+                    'FAQ', FontAwesomeIcons.book, Icons.arrow_forward_ios, () {
+                  Get.to(() => FAQScreen());
+                }, context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -127,21 +124,21 @@ class SettingsView extends GetView<SettingsController> {
                 _buildListTile('Follow us on Instagram',
                     Ionicons.logo_instagram, Icons.arrow_forward_ios, () {
                   controller.launchInstagram();
-                },context),
+                }, context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
                 _buildListTile('Follow us on Twitter', FontAwesomeIcons.twitter,
                     Icons.arrow_forward_ios, () {
                   controller.launchTwitter();
-                    },context),
+                }, context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
-                _buildListTile('Follow us on Facebook', FontAwesomeIcons.facebook,
-                    Icons.arrow_forward_ios, () {
-                      controller.launchFacebook();
-                    },context),
+                _buildListTile('Follow us on Facebook',
+                    FontAwesomeIcons.facebook, Icons.arrow_forward_ios, () {
+                  controller.launchFacebook();
+                }, context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -150,27 +147,27 @@ class SettingsView extends GetView<SettingsController> {
                   height: mq.height * .04,
                 ),
                 HeadingTextWidget(
-                    title: 'Partnerships', textColor: Theme.of(context).headingColor),
+                    title: 'Partnerships',
+                    textColor: Theme.of(context).headingColor),
                 SizedBox(
                   height: mq.height * .02,
                 ),
                 _buildListTile(
                     'Become a YBCar Buddy',
                     FontAwesomeIcons.personSnowboarding,
-                    Icons.arrow_forward_ios,
-                    () {
-                      Get.toNamed(RoutesName.surferScreen);
-                    },context),
+                    Icons.arrow_forward_ios, () {
+                  Get.toNamed(RoutesName.surferScreen);
+                }, context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
                 _buildListTile(
                     'Partner with us',
                     FontAwesomeIcons.handshakeSimple,
-                    Icons.arrow_forward_ios,
-                    () {
-                      Snackbar.showSnackBar("YB-Ride", 'Coming Soon', Icons.real_estate_agent_outlined);
-                    },context),
+                    Icons.arrow_forward_ios, () {
+                  Snackbar.showSnackBar("YB-Ride", 'Coming Soon',
+                      Icons.real_estate_agent_outlined);
+                }, context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -179,25 +176,22 @@ class SettingsView extends GetView<SettingsController> {
                   height: mq.height * .04,
                 ),
                 HeadingTextWidget(
-                    title: 'Legal', textColor: Theme.of(context).lightTextColor),
+                    title: 'Legal',
+                    textColor: Theme.of(context).lightTextColor),
                 SizedBox(
                   height: mq.height * .02,
                 ),
-                _buildListTile(
-                    'Terms of service',
-                    FontAwesomeIcons.bookBookmark,
-                    Icons.arrow_forward_ios,
-                    () {
-                      Get.to(TermsAndServices());
-                    },context),
+                _buildListTile('Terms of service',
+                    FontAwesomeIcons.bookBookmark, Icons.arrow_forward_ios, () {
+                  Get.to(TermsAndServices());
+                }, context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
                 _buildListTile('Privacy Policy', FontAwesomeIcons.shieldHalved,
                     Icons.arrow_forward_ios, () {
-                      Get.to(PrivacyPolicy());
-
-                    },context),
+                  Get.to(PrivacyPolicy());
+                }, context),
                 SizedBox(
                   height: mq.height * .02,
                 ),
@@ -206,22 +200,29 @@ class SettingsView extends GetView<SettingsController> {
                   height: mq.height * .04,
                 ),
                 HeadingTextWidget(
-                    title: 'Rate Our App', textColor: Theme.of(context).headingColor),
+                    title: 'Rate Our App',
+                    textColor: Theme.of(context).headingColor),
                 SizedBox(
                   height: mq.height * .03,
                 ),
                 InkWell(
                   onTap: () async {
-                    try{
-                      await FirebaseAuth.instance.signOut().then((value) {
-                        GoogleSignIn().signOut().then((value){
+                    try {
+                      showProgressIndicator(context);
+                      Future.delayed(Duration(seconds: 3), () async {
+                        await FirebaseAuth.instance.signOut().then((value) {
+                          GoogleSignIn().signOut().then((value) {
+                            SessionController().userId = '';
+                          });
                           SessionController().userId = '';
+                          Navigator.pop(context);
+                          Get.offAllNamed(RoutesName.loginScreen);
                         });
-                        SessionController().userId = '';
-                        Get.offAllNamed(RoutesName.loginScreen);
                       });
-                    }catch(e){
-                      Snackbar.showSnackBar("YB-Ride", e.toString(), Icons.error_outline);
+                    } catch (e) {
+                      Navigator.pop(context);
+                      Snackbar.showSnackBar(
+                          "YB-Ride", e.toString(), Icons.error_outline);
                     }
                   },
                   child: HeadingTextWidget(
@@ -250,7 +251,7 @@ class SettingsView extends GetView<SettingsController> {
   }
 
   Widget _buildListTile(String title, IconData leadingIcon,
-      IconData trailingIcon, VoidCallback onPress,BuildContext context) {
+      IconData trailingIcon, VoidCallback onPress, BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: mq.width * .005),
       child: InkWell(
