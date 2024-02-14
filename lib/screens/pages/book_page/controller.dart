@@ -238,8 +238,6 @@ class BookViewController extends GetxController {
     String monthName = DateFormat('MMM').format(DateTime(2022, month, 1));
 
     return monthName;
-
-
   }
 
   void moveToSelectVehicleScreen(){
