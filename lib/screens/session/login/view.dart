@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -107,7 +109,7 @@ class LoginScreen extends GetView<LoginController> {
             SizedBox(
               height: mq.height * .01,
             ),
-            Padding(
+            Platform.isAndroid ? Padding(
               padding: EdgeInsets.symmetric(horizontal: mq.width * 0.05),
               child: Row(
                 children: [
@@ -122,10 +124,11 @@ class LoginScreen extends GetView<LoginController> {
                   Expanded(child: Divider()),
                 ],
               ),
-            ),
+            ) : Container(),
             SizedBox(
               height: mq.height * .01,
             ),
+            Platform.isAndroid ?
             Padding(
               padding:
                   EdgeInsets.symmetric(vertical: 10, horizontal: mq.width * .1),
@@ -161,7 +164,7 @@ class LoginScreen extends GetView<LoginController> {
                   ),
                 ),
               ),
-            ),
+            ) : Container(),
           ],
         ),
       ),

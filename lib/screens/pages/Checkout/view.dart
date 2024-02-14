@@ -510,7 +510,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                       ),
                       SubHeadingTextWidget(
                         title:
-                        'Get delivery updates, track your surfer\'s location, and contact your surfer via our app.',
+                        'Get delivery updates, track your buddy\'s location, and contact your buddy via our app.',
                         fontWeight: FontWeight.w500,
                         fontSize: 13,
                         textColor:
@@ -801,7 +801,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                       ),
                       HeadingTextWidget(
                         title:
-                        'Your YBRide Surfer will wait 10 minutes upon arrival (at least until 12.40 PM),',
+                        'Your YBRide Buddy will wait 10 minutes upon arrival,',
                         fontSize: 14,
                         textColor: Theme.of(context).headingColor,
                         fontWeight: FontWeight.w600,
@@ -811,7 +811,7 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                       ),
                       SubHeadingTextWidget(
                         title:
-                        "We will keep you updated on your surfer's estimated arrival time through text and/ or push notifications. Enjoy your trip!",
+                        "We will keep you updated on your buddy's estimated arrival time through text and/ or push notifications. Enjoy your trip!",
                         fontSize: 13,
                         textColor: Theme.of(context).lightTextColor,
                         fontWeight: FontWeight.w500,

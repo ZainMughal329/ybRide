@@ -91,28 +91,28 @@ Future showRecipetSheet(
                 children: [
                   HeadingTextWidget(
                     title: 'YB-Ride Receipt',
-                    textColor: Theme.of(context).headingColor,
+                    textColor: AppColors.blackColor,
                   ),
                   SizedBox(height: 10),
                   SubHeadingTextWidget(
                     title: 'Total Rental Amount: $totalAmount',
-                    textColor: Theme.of(context).headingColor,
+                    textColor: AppColors.blackColor,
                   ),
                   SubHeadingTextWidget(
                     title: 'Invoice Date and Time: $invoiceDateTime',
-                    textColor: Theme.of(context).headingColor,
+                    textColor: AppColors.blackColor,
                   ),
                   SubHeadingTextWidget(
                     title: 'Service From Date and Time: $serviceFromDateTime',
-                    textColor: Theme.of(context).headingColor,
+                    textColor: AppColors.blackColor,
                   ),
                   SubHeadingTextWidget(
                     title: 'Service To Date and Time: $serviceToDateTime',
-                    textColor: Theme.of(context).headingColor,
+                    textColor: AppColors.blackColor,
                   ),
                   SubHeadingTextWidget(
                     title: 'Number of Days: $numberOfDays',
-                    textColor: Theme.of(context).headingColor,
+                    textColor: AppColors.blackColor,
                   ),
                   // SubHeadingTextWidget(
                   //   title: 'Receipt Number: $receiptNumber',
@@ -120,19 +120,19 @@ Future showRecipetSheet(
                   // ),
                   SubHeadingTextWidget(
                     title: 'Invoice Id: $invoiceId',
-                    textColor: Theme.of(context).headingColor,
+                    textColor: AppColors.blackColor,
                   ),
                   SubHeadingTextWidget(
                     title: 'Payment Method: $paymentMethod',
-                    textColor: Theme.of(context).headingColor,
+                    textColor: AppColors.blackColor,
                   ),
                   Divider(
-                    color: Theme.of(context).headingColor,
+                    color: AppColors.blackColor,
                   ),
                   SizedBox(height: 20),
                   HeadingTextWidget(
                     title: 'Details:',
-                    textColor: Theme.of(context).headingColor,
+                    textColor: AppColors.blackColor,
                   ),
                   SizedBox(height: 10),
                   Column(
@@ -154,12 +154,12 @@ Future showRecipetSheet(
                                 child: SubHeadingTextWidget(
                                   title: '${entry.key}',
                                   textAlign: TextAlign.left,
-                                  textColor: Theme.of(context).headingColor,
+                                  textColor: AppColors.blackColor,
                                 )),
                             Spacer(),
                             SubHeadingTextWidget(
                               title: '\$${entry.value.toStringAsFixed(2)}',
-                              textColor: Theme.of(context).headingColor,
+                              textColor: AppColors.blackColor,
                             ),
                           ],
                         ),
@@ -167,18 +167,18 @@ Future showRecipetSheet(
                     }).toList(),
                   ),
                   Divider(
-                    color: Theme.of(context).headingColor,
+                    color: AppColors.blackColor,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SubHeadingTextWidget(
                         title: 'SubTotal:',
-                        textColor: Theme.of(context).headingColor,
+                        textColor: AppColors.blackColor,
                       ),
                       SubHeadingTextWidget(
                         title: '\$${_calculateSubTotal().toStringAsFixed(2)}',
-                        textColor: Theme.of(context).headingColor,
+                        textColor: AppColors.blackColor,
                       ),
                     ],
                   ),
@@ -188,27 +188,27 @@ Future showRecipetSheet(
                       SubHeadingTextWidget(
                         title:
                             'Sales Tax (${AppConstants.salesTaxPercentage}%):',
-                        textColor: Theme.of(context).headingColor,
+                        textColor: AppColors.blackColor,
                       ),
                       SubHeadingTextWidget(
                         title: '\$${_calculateTax().toStringAsFixed(2)}',
-                        textColor: Theme.of(context).headingColor,
+                        textColor: AppColors.blackColor,
                       ),
                     ],
                   ),
                   Divider(
-                    color: Theme.of(context).headingColor,
+                    color: AppColors.blackColor,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SubHeadingTextWidget(
                         title: 'Total:',
-                        textColor: Theme.of(context).headingColor,
+                        textColor: AppColors.blackColor,
                       ),
                       SubHeadingTextWidget(
                         title: '\$${_calculateTotal().toStringAsFixed(2)}',
-                        textColor: Theme.of(context).headingColor,
+                        textColor: AppColors.blackColor,
                       ),
                     ],
                   ),
@@ -228,6 +228,9 @@ Future showRecipetSheet(
                         await payController.makePayment(
                             context, totalAmountToPay);
                       }),
+                  SizedBox(
+                    height: 20,
+                  ),
                 ],
               ),
             ),
