@@ -36,9 +36,11 @@ class CheckOutScreen extends GetView<CheckOutCon> {
     final controller = Get.put(CheckOutCon());
     AppConstants.vehicleType = carType;
     controller.getCheckoutPayments();
+    controller.getReceiptCharges();
     controller.state.carRent = carRent;
     controller.state.totalPrice.value = carRent;
     controller.applyReferralDiscount();
+    print('======>:${AppConstants.tempDeposit.toString()}');
     return Obx(() {
       return controller.state.paymentLoading.value==true ? Scaffold(
         backgroundColor: Theme.of(context).scaffoldBgClr,
@@ -1448,10 +1450,10 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                           controller.priceLoadingFunc();
                           if (value == true) {
                             controller.addInTotalPrice(
-                                controller.state.licenseFee,false);
+                                controller.state.licenseFee,true);
                           } else if (value == false) {
                             controller.subtractFromTotalPrince(
-                                controller.state.licenseFee,false);
+                                controller.state.licenseFee,true);
                           }
                           controller.state.driversCheckBoxVal.value =
                           value!;

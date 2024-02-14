@@ -49,7 +49,7 @@ Future addPersonalDataSheet(BuildContext context,CheckOutCon controller) async{
                   controller.state.code.value,
                       () async {
                     final code = await controller.state.countryPicker
-                        .showPicker(context: context);
+                        .showPicker(context: context,backgroundColor: Theme.of(context).scaffoldBgClr);
                     // Null check
                     if (code != null) {
                       controller.state.code.value = code;
