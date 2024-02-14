@@ -168,7 +168,7 @@ class PaymentController extends GetxController {
         isUnder25years: AppConstants.under25Years,
         isPromoCodeApplied: AppConstants.isPromoApplied,
         promoDiscountAmount: AppConstants.promoDiscountAmount,
-        status: 'pending',
+        status: 'pending', isReturnedDeposit: false,
     );
 
     try{

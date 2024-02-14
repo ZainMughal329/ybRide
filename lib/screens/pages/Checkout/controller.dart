@@ -171,6 +171,7 @@ class CheckOutCon extends GetxController {
   Future<void> getCheckoutPayments() async {
     setDataLoaded(false);
     try {
+      getReceiptCharges();
       CollectionReference usersCollection =
       APis.db.collection('checkoutPayment');
       QuerySnapshot querySnapshot = await usersCollection.get();
@@ -181,20 +182,19 @@ class CheckOutCon extends GetxController {
         QueryDocumentSnapshot firstDocument = querySnapshot.docs.first;
 
         // Get the details from the document
-        state.delivery = firstDocument['delivery'];
-        state.CDW = firstDocument['CDW'];
-        state.RCLI = firstDocument['RCLI'];
-        state.SLI = firstDocument['SLI'];
-        state.essential = firstDocument['essential'];
-        state.licenseFee = firstDocument['licenseFee'];
-        state.standard = firstDocument['standard'];
-        state.unlimitedMiles = firstDocument['unlimitedMiles'];
-        state.assistance = firstDocument['assistance'];
+        state.delivery = double.parse((firstDocument['delivery']).toString());
+        state.CDW = double.parse((firstDocument['CDW']).toString());
+        state.RCLI = double.parse((firstDocument['RCLI']).toString());
+        state.SLI = double.parse((firstDocument['SLI']).toString());
+        state.essential = double.parse((firstDocument['essential']).toString());
+        state.licenseFee = double.parse((firstDocument['licenseFee']).toString());
+        state.standard = double.parse((firstDocument['standard']).toString());
+        state.unlimitedMiles = double.parse((firstDocument['unlimitedMiles']).toString());
+        state.assistance = double.parse((firstDocument['assistance']).toString());
         state.pickupLoc = firstDocument['pickUpLoc'];
-        AppConstants.deliveryCharges = firstDocument['delivery'];
+        AppConstants.deliveryCharges = double.parse((firstDocument['delivery']).toString());
         AppConstants.pickUpLoc = firstDocument['pickUpLoc'];
         fetchCardDetails();
-        getReceiptCharges();
         setDataLoaded(true);
       } else {
         Snackbar.showSnackBar(

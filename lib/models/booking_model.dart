@@ -25,6 +25,7 @@ class BookingModel {
   final double totalCustomCoverage;
   final bool isUnlimitedMiles;
   final bool isUnder25years;
+  final bool isReturnedDeposit;
   final bool isPromoCodeApplied;
   final double promoDiscountAmount;
   final String status;
@@ -54,6 +55,7 @@ class BookingModel {
     required this.totalCustomCoverage,
     required this.isUnlimitedMiles,
     required this.isUnder25years,
+    required this.isReturnedDeposit,
     required this.isPromoCodeApplied,
     required this.promoDiscountAmount,
     required this.status,
@@ -85,6 +87,7 @@ class BookingModel {
       'totalCustomCoverage': totalCustomCoverage,
       'isUnlimitedMiles': isUnlimitedMiles,
       'isUnder25years': isUnder25years,
+      'isReturnedDeposit': isReturnedDeposit,
       'isPromoCodeApplied': isPromoCodeApplied,
       'promoDiscountAmount': promoDiscountAmount,
       'status': status,
@@ -120,6 +123,7 @@ class BookingModel {
       totalCustomCoverage: json['totalCustomCoverage'],
       isUnlimitedMiles: json['isUnlimitedMiles'],
       isUnder25years: json['isUnder25years'],
+      isReturnedDeposit: json['isReturnedDeposit'],
       isPromoCodeApplied: json['isPromoCodeApplied'],
       promoDiscountAmount: json['promoDiscountAmount'],
       status: json['status'],

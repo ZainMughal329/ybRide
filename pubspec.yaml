@@ -45,8 +45,8 @@ dependencies:
 # shared prefrences
   shared_preferences:
 # country code picker
-  fl_country_code_picker:
-# internet connectivity
+  fl_country_code_picker: ^0.1.9+1
+  # internet connectivity
   http: ^1.2.0
 
 #   to get the id of mobile device
@@ -84,7 +84,7 @@ dependencies:
   flutter_stripe:
 #  for generting random string
   random_string: ^2.3.1
-
+  permission_handler:
 
   card_swiper:
   firebase_messaging:
