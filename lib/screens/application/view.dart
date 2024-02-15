@@ -23,6 +23,7 @@ class ApplicationView extends GetView<ApplicationViewController> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     controller.changeTab(index);
     isDarkTheme = Theme.of(context).brightness == Brightness.dark;
     var navBarItems = [
