@@ -17,6 +17,7 @@ class BookingModel {
   final String vehicleType;
   final double totalPrice;
   final bool isPickUp;
+  final bool isPaid;
   final bool isDelivery;
   final bool isStandardProtection;
   final bool isLiabilityProtection;
@@ -47,6 +48,7 @@ class BookingModel {
     required this.vehicleType,
     required this.totalPrice,
     required this.isPickUp,
+    required this.isPaid,
     required this.isDelivery,
     required this.isStandardProtection,
     required this.isLiabilityProtection,
@@ -79,6 +81,7 @@ class BookingModel {
       'vehicleType': vehicleType,
       'totalPrice': totalPrice,
       'isPickUp': isPickUp,
+      'isPaid': isPaid,
       'isDelivery': isDelivery,
       'isStandardProtection': isStandardProtection,
       'isLiabilityProtection': isLiabilityProtection,
@@ -115,6 +118,7 @@ class BookingModel {
       vehicleType: json['vehicleType'],
       totalPrice: json['totalPrice'],
       isPickUp: json['isPickUp'],
+      isPaid: json['isPaid'],
       isDelivery: json['isDelivery'],
       isStandardProtection: json['isStandardProtection'],
       isLiabilityProtection: json['isLiabilityProtection'],
