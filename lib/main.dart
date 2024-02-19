@@ -25,7 +25,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Stripe.publishableKey = AppConstants.stripe_publish_key;
   Pref.init();
-  Pref.initialize();
+  // Pref.initialize();
 
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   await SystemChrome.setPreferredOrientations(
@@ -87,7 +87,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       darkTheme: ThemeData.dark(),
-      themeMode: Pref.defaultTheme(),
+      // themeMode: Pref.defaultTheme(),
       // home: FAQScreen(),
       initialRoute: RoutesName.splashScreen,
 
