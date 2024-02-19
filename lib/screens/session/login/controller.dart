@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/helper/app_constants.dart';
@@ -131,5 +132,18 @@ class LoginController extends GetxController {
       print("=======================");
       print(double.parse((user['referralDiscount']).toString()));
     }
+  }
+
+  List<String> list = [];
+
+  fetchUserCollectionData() async {
+    QuerySnapshot snapshot = await APis.db.collection('users').get();
+    if(snapshot.docs.isNotEmpty) {
+      snapshot.docs.forEach((element) {
+        var snap = element['email'];
+        list.add(snap);
+      });
+    }
+    print('len:'+list.length.toString());
   }
 }
