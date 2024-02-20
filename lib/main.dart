@@ -45,6 +45,7 @@ void main() async {
 
   NotificationServices().requestPermissions();
   NotificationServices().setupBackgrounInteractMsg();
+  NotificationServices().foregroundMessage();
   NotificationServices().initFirebase();
   NotificationServices().getToken().then((value) {
     log('Device Token');

@@ -476,7 +476,7 @@ void storeUserDetailsinConstants(){
   }
 
   void addInTotalCustomCoverageValue(double amount){
-    AppConstants.totalCustomCoverage=AppConstants.totalCustomCoverage+amount;
+    AppConstants.totalCustomCoverage=AppConstants.totalCustomCoverage+(amount*AppConstants.rentDays);
   }
 
 
