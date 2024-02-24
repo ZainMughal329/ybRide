@@ -102,6 +102,9 @@ class LoginController extends GetxController {
   void loginUserWithEmailAndPassword(String email, password,BuildContext context) async {
     showProgressIndicator(context);
     try {
+
+      bool isExist = await checkIfUserExists(email);
+      if(isExist) {
       await APis.auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) async {
@@ -115,6 +118,14 @@ class LoginController extends GetxController {
         Snackbar.showSnackBar("Error", error.toString(), Icons.error_outline);
         Navigator.pop(context);
       });
+      }else {
+        Snackbar.showSnackBar(
+            'YB-Ride',
+            'Your Email or password is not correct.Recheck them.',
+            Icons.error_outline);
+        Navigator.pop(context);
+
+      }
     } on FirebaseAuthException catch (e) {
       Snackbar.showSnackBar("Error", e.toString(), Icons.error_outline);
       Navigator.pop(context);
@@ -141,9 +152,25 @@ class LoginController extends GetxController {
     if(snapshot.docs.isNotEmpty) {
       snapshot.docs.forEach((element) {
         var snap = element['email'];
+        log('snap:${snap}');
         list.add(snap);
       });
     }
     print('len:'+list.length.toString());
   }
+
+  Future<bool> checkIfUserExists(String email) async {
+    try {
+      var snapshot = await APis.db
+          .collection('users')
+          .where('email', isEqualTo: email)
+          .get();
+      return snapshot.docs.isNotEmpty;
+    } catch (e) {
+      // Handle any errors
+      print(e);
+      return false;
+    }
+  }
+
 }

@@ -8,6 +8,7 @@ class DriverModel {
   final String email;
   final String pushToken;
   final String dateTime;
+  final bool isApproved;
   final String city;
 
 
@@ -19,19 +20,21 @@ class DriverModel {
     required this.email,
     required this.pushToken,
     required this.dateTime,
+    required this.isApproved,
     required this.city,
   });
 
   toJson() {
     return {
-    'id': id,
-    'image': image,
-    'phone': phone,
-    'name': name,
+      'id': id,
+      'image': image,
+      'phone': phone,
+      'name': name,
       'email': email,
       'pushToken' : pushToken,
       'dateTime':dateTime,
-      'city':city,
+      'isApproved' : isApproved,
+      'city' : city,
     };
   }
 
@@ -47,7 +50,9 @@ class DriverModel {
       email: json["email"],
       pushToken : json['pushToken'],
       dateTime : json['dateTime'],
+      isApproved : json['isApproved'],
       city : json['city'],
     );
   }
 }
+

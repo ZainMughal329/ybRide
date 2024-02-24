@@ -14,7 +14,6 @@ import 'package:yb_ride/helper/session_controller.dart';
 import 'package:yb_ride/models/surfer_model.dart';
 import 'package:yb_ride/screens/settings/pages/ybcar_surfer/inded.dart';
 
-
 import '../../../../components/phone_number_input_field.dart';
 import '../../../../main.dart';
 
@@ -65,7 +64,6 @@ class SurferScreen extends GetView<SurferController> {
         child: SingleChildScrollView(
           child: Stack(
             children: [
-
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +72,7 @@ class SurferScreen extends GetView<SurferController> {
                     height: mq.height * .3,
                     width: double.infinity,
                     color: AppColors.buttonColor,
-                    child:Center(
+                    child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,7 +80,7 @@ class SurferScreen extends GetView<SurferController> {
                           Padding(
                             padding: EdgeInsets.all(15.0),
                             child: GestureDetector(
-                              onTap: (){
+                              onTap: () {
                                 Navigator.pop(context);
                               },
                               child: Align(
@@ -107,15 +105,10 @@ class SurferScreen extends GetView<SurferController> {
                           Spacer(
                             flex: 2,
                           ),
-
                         ],
                       ),
                     ),
-
-
-
                   ),
-
                   SizedBox(
                     height: 50,
                   ),
@@ -141,181 +134,204 @@ class SurferScreen extends GetView<SurferController> {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: AppColors.buttonColor.withOpacity(.5),
-                            border: Border.all(color: Theme.of(context).headingColor),
-                            borderRadius: BorderRadius.all(Radius.circular(10),),
-                          ),
-                          child: Obx( () => controller.state.isCollapsed.value ? Container(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                HeadingTextWidget(
-                                  title:
-                                      'Rental Car Delivery Driver - Flexible Earning Opportunity!',
-                                  textColor: Theme.of(context).headingColor,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                SubHeadingTextWidget(
-                                  title:
-                                      'Kyte is looking for passionate people who want to join our YB-Ride "Buddy" team! You will be responsible for delivering and picking up rental cars from different locations in your city. ',
-                                  textColor: Theme.of(context).lightTextColor,
-                                  maxLines: controller.state.isCollapsed.value ? 3 : null,
-                                  overflow: controller.state.isCollapsed.value
-                                      ? TextOverflow.ellipsis
-                                      : null,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                HeadingTextWidget(
-                                  title: "Why you'll love working with Kyte:",
-                                  textColor: Theme.of(context).headingColor,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                SubHeadingTextWidget(
-                                    title:
-                                        "a : Earn more: Earn more than the industry average, plus 100% of tips and bonuses!",
-                                    textColor:
-                                        Theme.of(context).lightTextColor),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                SubHeadingTextWidget(
-                                    title:
-                                        "b : Be your own boss: Choose when you want to work! ",
-                                    textColor:
-                                        Theme.of(context).lightTextColor),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                SubHeadingTextWidget(
-                                    title:
-                                        "c : Easy to get started: No car needed!",
-                                    textColor:
-                                        Theme.of(context).lightTextColor),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                HeadingTextWidget(
-                                  title: "Requirements:",
-                                  textColor: Theme.of(context).headingColor,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                SubHeadingTextWidget(
-                                    title:
-                                        "a : Have a valid driver’s license and be legally authorized to work",
-                                    textColor:
-                                        Theme.of(context).lightTextColor),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                SubHeadingTextWidget(
-                                    title: "b : Must be 21+ years old",
-                                    textColor:
-                                        Theme.of(context).lightTextColor),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                HeadingTextWidget(
-                                  title: "About the role:",
-                                  textColor: Theme.of(context).headingColor,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                SubHeadingTextWidget(
-                                    title:
-                                        "a : You'll interact with customers as the face of the company - we're looking for people who are comfortable with face to face interactions!",
-                                    textColor:
-                                        Theme.of(context).lightTextColor),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                SubHeadingTextWidget(
-                                    title:
-                                        "b : Be ready to flag any maintenance, scratches, tire damage on the vehicles before delivery and after returns.",
-                                    textColor:
-                                        Theme.of(context).lightTextColor),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                SubHeadingTextWidget(
-                                    title:
-                                        "c : Weekends are our busiest times - look out for potential weekend bonuses!",
-                                    textColor:
-                                        Theme.of(context).lightTextColor),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                SubHeadingTextWidget(
-                                    title:
-                                        "d : Bonus points for a cool, crafty mode of transportation that will get you from one delivery/return to the next! This could be a scooter, scooter app, foldable bike, electric skateboard... show us what you've got!",
-                                    textColor:
-                                        Theme.of(context).lightTextColor),
-                                SizedBox(
-                                  height: 25,
-                                ),
-                                Row(
-                                  children: [
-                                    HeadingTextWidget(
-                                      title: 'Job Type: ',
-                                      textColor:
-                                          Theme.of(context).headingColor,
-                                    ),
-                                    SubHeadingTextWidget(
-                                        title: "Independent Contractor",
-                                        textColor:
-                                            Theme.of(context).lightTextColor),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  children: [
-                                    HeadingTextWidget(
-                                      title: 'Salary: ',
-                                      textColor:
-                                          Theme.of(context).headingColor,
-                                    ),
-                                    SubHeadingTextWidget(
-                                        title: "Task-based",
-                                        textColor:
-                                            Theme.of(context).lightTextColor),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ) : Container(
-                            child:
-                            Column(
-                              children: [
-                                HeadingTextWidget(
-                                  title:
-                                  'Rental Car Delivery Driver - Flexible Earning Opportunity!',
-                                  textColor: Theme.of(context).headingColor,
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                SubHeadingTextWidget(
-                                  title:
-                                  'Kyte is looking for passionate people who want to join our YB-Ride "Buddy" team! You will be....  ',
-                                  textColor: Theme.of(context).lightTextColor,
-                                  maxLines: controller.state.isCollapsed.value ? 3 : null,
-                                  overflow: controller.state.isCollapsed.value
-                                      ? TextOverflow.ellipsis
-                                      : null,
-                                ),
-                              ],
+                            border: Border.all(
+                                color: Theme.of(context).headingColor),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
                             ),
                           ),
+                          child: Obx(
+                            () => controller.state.isCollapsed.value
+                                ? Container(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        HeadingTextWidget(
+                                          title:
+                                              'Rental Car Delivery Driver - Flexible Earning Opportunity!',
+                                          textColor:
+                                              Theme.of(context).headingColor,
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        SubHeadingTextWidget(
+                                          title:
+                                              'Kyte is looking for passionate people who want to join our YB-Ride "Buddy" team! You will be responsible for delivering and picking up rental cars from different locations in your city. ',
+                                          textColor:
+                                              Theme.of(context).lightTextColor,
+                                          maxLines:
+                                              controller.state.isCollapsed.value
+                                                  ? 3
+                                                  : null,
+                                          overflow:
+                                              controller.state.isCollapsed.value
+                                                  ? TextOverflow.ellipsis
+                                                  : null,
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        HeadingTextWidget(
+                                          title:
+                                              "Why you'll love working with Kyte:",
+                                          textColor:
+                                              Theme.of(context).headingColor,
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        SubHeadingTextWidget(
+                                            title:
+                                                "a : Earn more: Earn more than the industry average, plus 100% of tips and bonuses!",
+                                            textColor: Theme.of(context)
+                                                .lightTextColor),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        SubHeadingTextWidget(
+                                            title:
+                                                "b : Be your own boss: Choose when you want to work! ",
+                                            textColor: Theme.of(context)
+                                                .lightTextColor),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        SubHeadingTextWidget(
+                                            title:
+                                                "c : Easy to get started: No car needed!",
+                                            textColor: Theme.of(context)
+                                                .lightTextColor),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        HeadingTextWidget(
+                                          title: "Requirements:",
+                                          textColor:
+                                              Theme.of(context).headingColor,
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        SubHeadingTextWidget(
+                                            title:
+                                                "a : Have a valid driver’s license and be legally authorized to work",
+                                            textColor: Theme.of(context)
+                                                .lightTextColor),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        SubHeadingTextWidget(
+                                            title: "b : Must be 21+ years old",
+                                            textColor: Theme.of(context)
+                                                .lightTextColor),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        HeadingTextWidget(
+                                          title: "About the role:",
+                                          textColor:
+                                              Theme.of(context).headingColor,
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        SubHeadingTextWidget(
+                                            title:
+                                                "a : You'll interact with customers as the face of the company - we're looking for people who are comfortable with face to face interactions!",
+                                            textColor: Theme.of(context)
+                                                .lightTextColor),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        SubHeadingTextWidget(
+                                            title:
+                                                "b : Be ready to flag any maintenance, scratches, tire damage on the vehicles before delivery and after returns.",
+                                            textColor: Theme.of(context)
+                                                .lightTextColor),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        SubHeadingTextWidget(
+                                            title:
+                                                "c : Weekends are our busiest times - look out for potential weekend bonuses!",
+                                            textColor: Theme.of(context)
+                                                .lightTextColor),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        SubHeadingTextWidget(
+                                            title:
+                                                "d : Bonus points for a cool, crafty mode of transportation that will get you from one delivery/return to the next! This could be a scooter, scooter app, foldable bike, electric skateboard... show us what you've got!",
+                                            textColor: Theme.of(context)
+                                                .lightTextColor),
+                                        SizedBox(
+                                          height: 25,
+                                        ),
+                                        Row(
+                                          children: [
+                                            HeadingTextWidget(
+                                              title: 'Job Type: ',
+                                              textColor: Theme.of(context)
+                                                  .headingColor,
+                                            ),
+                                            SubHeadingTextWidget(
+                                                title: "Independent Contractor",
+                                                textColor: Theme.of(context)
+                                                    .lightTextColor),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: [
+                                            HeadingTextWidget(
+                                              title: 'Salary: ',
+                                              textColor: Theme.of(context)
+                                                  .headingColor,
+                                            ),
+                                            SubHeadingTextWidget(
+                                                title: "Task-based",
+                                                textColor: Theme.of(context)
+                                                    .lightTextColor),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : Container(
+                                    child: Column(
+                                      children: [
+                                        HeadingTextWidget(
+                                          title:
+                                              'Rental Car Delivery Driver - Flexible Earning Opportunity!',
+                                          textColor:
+                                              Theme.of(context).headingColor,
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        SubHeadingTextWidget(
+                                          title:
+                                              'Kyte is looking for passionate people who want to join our YB-Ride "Buddy" team! You will be....  ',
+                                          textColor:
+                                              Theme.of(context).lightTextColor,
+                                          maxLines:
+                                              controller.state.isCollapsed.value
+                                                  ? 3
+                                                  : null,
+                                          overflow:
+                                              controller.state.isCollapsed.value
+                                                  ? TextOverflow.ellipsis
+                                                  : null,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                           ),
                         ),
                       ],
@@ -325,7 +341,7 @@ class SurferScreen extends GetView<SurferController> {
                     height: 10,
                   ),
                   Obx(
-                    ()=> Align(
+                    () => Align(
                       alignment: Alignment.center,
                       child: Container(
                         height: 50,
@@ -340,7 +356,9 @@ class SurferScreen extends GetView<SurferController> {
                           },
                           child: Center(
                             child: SubHeadingTextWidget(
-                              title: controller.state.isCollapsed.value ? 'Collapse Content' : 'Continue Reading',
+                              title: controller.state.isCollapsed.value
+                                  ? 'Collapse Content'
+                                  : 'Continue Reading',
                               textAlign: TextAlign.center,
                               textColor: AppColors.buttonTextColor,
                               fontSize: 13,
@@ -368,8 +386,7 @@ class SurferScreen extends GetView<SurferController> {
                       label: 'First Name',
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.text,
-                      obsecure: false
-                  ),
+                      obsecure: false),
                   SizedBox(
                     height: 10,
                   ),
@@ -423,7 +440,10 @@ class SurferScreen extends GetView<SurferController> {
                         controller.state.code.value,
                         () async {
                           final code = await controller.state.countryPicker
-                              .showPicker(context: context,backgroundColor: Theme.of(context).scaffoldBgClr);
+                              .showPicker(
+                                  context: context,
+                                  backgroundColor:
+                                      Theme.of(context).scaffoldBgClr);
                           // Null check
                           if (code != null) {
                             controller.state.code.value = code;
@@ -466,39 +486,36 @@ class SurferScreen extends GetView<SurferController> {
                   SizedBox(
                     height: 25,
                   ),
-                  Obx((){
-                    return controller.state.requestLoading.value== false ? RoundButton(
-                      title: 'Submit',
-                      onPress: () {
-                        if(controller.state.fNameCon.text.isEmpty ||
-                            controller.state.lNameCon.text.isEmpty ||
-                            controller.state.emailCon.text.isEmpty ||
-                            controller.state.phoneNumberCon.text.isEmpty
-                        ){
-                          Snackbar.showSnackBar('YB-Ride', "Enter all fields", Icons.error_outline);
-                        }else{
-                          String dateTime = DateTime.timestamp().millisecondsSinceEpoch.toString();
-                          DriverModel driver= DriverModel(
-                            id: SessionController().userId,
-                            image: '',
-                            name: controller.state.fNameCon.text.trim().toString()+controller.state.lNameCon.text.trim().toString(),
-                            phone: '+1-'+controller.state.phoneNumberCon.text.trim().toString(),
-                            email: controller.state.emailCon.text.trim().toString(),
-                            pushToken: '',
-                            dateTime: dateTime,
-                            city: controller.state.serviceOffering.value.toString(),
-                          );
-                          controller.sendYBBuddyRequest(driver, context);
-                        }
-                      },
-                    ) : Center(child: Lottie.asset('assets/lottie/loading2.json',width: 100,height: 100,));
+                  Obx(() {
+                    return controller.state.requestLoading.value == false
+                        ? RoundButton(
+                            title: 'Submit',
+                            onPress: () {
+                              if (controller.state.fNameCon.text.isEmpty ||
+                                  controller.state.lNameCon.text.isEmpty ||
+                                  controller.state.emailCon.text.isEmpty ||
+                                  controller
+                                      .state.phoneNumberCon.text.isEmpty) {
+                                Snackbar.showSnackBar('YB-Ride',
+                                    "Enter all fields", Icons.error_outline);
+                              } else {
+                                controller.sendYBBuddyRequest(context);
+                              }
+                            },
+                          )
+                        : Center(
+                            child: Lottie.asset(
+                            'assets/lottie/loading2.json',
+                            width: 100,
+                            height: 100,
+                          ));
                   }),
                 ],
               ),
               Positioned(
                 // top: 180,
                 top: mq.height * .25,
-                left: mq.width/2.5,
+                left: mq.width / 2.5,
                 child: Center(
                   child: Container(
                     alignment: Alignment.center,
@@ -507,15 +524,21 @@ class SurferScreen extends GetView<SurferController> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         image: Get.isDarkMode
-                      ? DecorationImage(image: AssetImage('assets/whiteIcons/WhiteLogo.png',),) :
-                        DecorationImage(image: AssetImage('assets/icons/Logo.png',),)
-                    ),
+                            ? DecorationImage(
+                                image: AssetImage(
+                                  'assets/whiteIcons/WhiteLogo.png',
+                                ),
+                              )
+                            : DecorationImage(
+                                image: AssetImage(
+                                  'assets/icons/Logo.png',
+                                ),
+                              )),
                     // child: Image.asset('assets/images/logo1.jpeg' , fit: BoxFit.contain,),
                     // color: AppColors.orangeColor,
                   ),
                 ),
               ),
-
             ],
           ),
         ),

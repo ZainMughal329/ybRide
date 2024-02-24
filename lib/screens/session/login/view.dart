@@ -78,18 +78,11 @@ class LoginScreen extends GetView<LoginController> {
               child: RoundButton(
                 title: 'Login',
                 onPress: () {
-                  if (controller.list.contains(
-                      controller.state.emailCon.text.trim().toString())) {
                     controller.loginUserWithEmailAndPassword(
                         controller.state.emailCon.text.trim().toString(),
                         controller.state.passCon.text.trim().toString(),
                         context);
-                  } else {
-                    Snackbar.showSnackBar(
-                        'YB-Ride',
-                        'Your Email or password is not correct.Recheck them.',
-                        Icons.error_outline);
-                  }
+
                 },
               ),
             ),

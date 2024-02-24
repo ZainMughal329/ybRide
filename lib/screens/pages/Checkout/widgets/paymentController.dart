@@ -207,4 +207,5 @@ class PaymentController extends GetxController {
         .doc(SessionController().userId.toString())
         .update({'referralDiscount': 0});
   }
+
 }

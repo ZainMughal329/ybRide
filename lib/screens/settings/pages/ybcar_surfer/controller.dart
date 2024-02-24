@@ -10,60 +10,74 @@ import '../../../../models/surfer_model.dart';
 class SurferController extends GetxController {
   final state = SurferState();
 
-
   void toggleCollapsed() {
     state.isCollapsed.value = !state.isCollapsed.value;
   }
 
-  void setLoading(bool val){
-    state.requestLoading.value=val;
+  void setLoading(bool val) {
+    state.requestLoading.value = val;
   }
 
-  Future<void> sendYBBuddyRequest(DriverModel model,BuildContext context) async{
+  Future<void> sendYBBuddyRequest(BuildContext context) async {
     setLoading(true);
-    final userId = SessionController().userId.toString();
-    try{
-      await APis.db.collection('buddyRequest').doc(userId).set(model.toJson()).then((value){
+    String dateTime = DateTime.timestamp().millisecondsSinceEpoch.toString();
+
+    try {
+      await APis.db
+          .collection('drivers')
+          .doc(dateTime)
+          .set(DriverModel(
+            id: dateTime,
+            image: '',
+            name: state.fNameCon.text.trim().toString() +
+                state.lNameCon.text.trim().toString(),
+            phone: '+1-' + state.phoneNumberCon.text.trim().toString(),
+            email: state.emailCon.text.trim().toString(),
+            pushToken: '',
+            dateTime: dateTime,
+            city: state.serviceOffering.value.toString(),
+            isApproved: false,
+          ).toJson())
+          .then((value) {
         setLoading(false);
         clearController();
         showConfirmationDialogue(context);
-      }).onError((error, stackTrace){
+      }).onError((error, stackTrace) {
         setLoading(false);
         Snackbar.showSnackBar('YB-Ride', error.toString(), Icons.error_outline);
       });
-    }catch(e){
+    } catch (e) {
       setLoading(false);
       Snackbar.showSnackBar('YB-Ride', e.toString(), Icons.error_outline);
     }
   }
 
-  Future<void> showConfirmationDialogue(BuildContext context) async{
+  Future<void> showConfirmationDialogue(BuildContext context) async {
     showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children:  [
-              Icon(
-                Icons.check_circle,
-                color: Colors.green,
-                size: 100.0,
-              ),
-              SizedBox(height: 10.0),
-              Text("Request Successful!\nWe will contact you soon"),
-              SizedBox(height: 10.0),
-            ],
-          ),
+      context: context,
+      builder: (_) => AlertDialog(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.check_circle,
+              color: Colors.green,
+              size: 100.0,
+            ),
+            SizedBox(height: 10.0),
+            Text("Request Successful!\nWe will contact you soon"),
+            SizedBox(height: 10.0),
+          ],
         ),
+      ),
     );
   }
-  void clearController(){
+
+  void clearController() {
     state.fNameCon.clear();
     state.lNameCon.clear();
     state.emailCon.clear();
     state.phoneNumberCon.clear();
-    state.serviceOffering.value='Select';
+    state.serviceOffering.value = 'Select';
   }
-
-
 }
