@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
@@ -21,9 +22,10 @@ class PaymentController extends GetxController {
 
   dynamic paymentIntent;
 
-  displayPaymentSheet(BuildContext context) async {
+  displayPaymentSheet(BuildContext context,String id) async {
     try {
       await Stripe.instance.presentPaymentSheet().then((value) {
+        Navigator.pop(context);
         print(":::::::::::DisplaypaymentResponse:::::::::::");
         print(value);
 
@@ -44,7 +46,7 @@ class PaymentController extends GetxController {
                     ],
                   ),
                 ));
-        createBooking(context);
+        createBooking(context,id);
 
         paymentIntent = null;
       }).onError((error, stackTrace) {
@@ -98,6 +100,7 @@ class PaymentController extends GetxController {
       );
       print(":::::::::::Create Payment Intent :::::::::::::");
       final data = json.decode(response.body);
+      print('data:$data');
       AppConstants.paymentId = data['id'].toString();
       return json.decode(response.body);
     } catch (err) {
@@ -105,7 +108,7 @@ class PaymentController extends GetxController {
     }
   }
 
-  Future<void> makePayment(BuildContext context, double totalAmount) async {
+  Future<void> makePayment(BuildContext context, double totalAmount,String id) async {
     try {
       //STEP 1: Create Payment Intent
       paymentIntent = await createPaymentIntent('USD', totalAmount);
@@ -120,7 +123,7 @@ class PaymentController extends GetxController {
           .then((value) {});
 
       //STEP 3: Display Payment sheet
-      displayPaymentSheet(context);
+      displayPaymentSheet(context,id);
     } catch (err) {
       throw Exception(err);
     }
@@ -140,7 +143,7 @@ class PaymentController extends GetxController {
     cont.state.paymentLoading.value = val;
   }
 
-  Future<void> createBooking(BuildContext context) async {
+  Future<void> createBooking(BuildContext context,String id) async {
     String docId = DateTime.now().millisecondsSinceEpoch.toString();
     setPaymentLoadin(true);
     BookingModel booking = BookingModel(
@@ -181,6 +184,7 @@ class PaymentController extends GetxController {
           .doc(docId)
           .set(booking.toJson())
           .then((value) {
+        updateFirestoreValue(id);
         Navigator.pop(context);
         // Code to redirect to Trips Screen
         resetReferralCredit();
@@ -207,5 +211,33 @@ class PaymentController extends GetxController {
         .doc(SessionController().userId.toString())
         .update({'referralDiscount': 0});
   }
+
+  Future<void> updateFirestoreValue(String id) async {
+    final _firestore = FirebaseFirestore.instance.collection('vehicleData');
+
+    try {
+      // Step 1: Retrieve the string value from Firestore
+      DocumentSnapshot snapshot = await _firestore.doc(id).get();
+      var stringVal = snapshot.data() as Map<String, dynamic>;
+      final stringValue = stringVal['noOfVehicles'];
+
+      // Step 2: Convert the string value to an integer
+      int? integerValue = int.tryParse(stringValue);
+
+      if (integerValue != null) { // Ensure the conversion was successful
+        // Step 3: Subtract one from the integer
+        int updatedValue = integerValue - 1;
+
+        // Step 4: Store the updated integer value back into Firestore
+        await _firestore.doc(id).update({'noOfVehicles': updatedValue.toString()});
+        print("Value successfully updated in Firestore.");
+      } else {
+        print("Failed to convert string value to integer.");
+      }
+    } catch (error) {
+      print("Error updating value in Firestore: $error");
+    }
+  }
+
 
 }
