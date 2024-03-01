@@ -12,6 +12,7 @@ import '../../../../main.dart';
 
 class profileScreen extends GetView<ProfileController> {
   profileScreen({super.key});
+
   final controller = Get.put(ProfileController());
 
   @override
@@ -27,7 +28,6 @@ class profileScreen extends GetView<ProfileController> {
           leadingIcon: Icons.arrow_back_ios_new,
           trailingIcon: Icons.delete,
           leadingPress: () {
-          leadingPress: (){
             Navigator.pop(context);
           },
         ),
@@ -47,7 +47,9 @@ class profileScreen extends GetView<ProfileController> {
                     label: 'First Name',
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.emailAddress,
-                    inputFormatters:[FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))
+                    ],
                     obsecure: false),
                 SizedBox(
                   height: mq.height * .02,
@@ -57,7 +59,9 @@ class profileScreen extends GetView<ProfileController> {
                     label: 'Last Name',
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.emailAddress,
-                    inputFormatters:[FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))
+                    ],
                     obsecure: false),
                 SizedBox(
                   height: mq.height * .02,
@@ -96,28 +100,28 @@ class profileScreen extends GetView<ProfileController> {
                 RoundButton(title: 'Save', onPress: () {}),
               ],
             ),
-            child: Obx((){
-              return controller.state.loading.value==false? Column(
-                children: [
-                  SizedBox(height: mq.height*.02,),
-                  ReuseableTextField(contr: controller.state.fNameCon, label: 'First Name', textInputAction: TextInputAction.next, keyboardType: TextInputType.emailAddress, obsecure: false),
-                  SizedBox(height: mq.height*.02,),
-                  ReuseableTextField(contr: controller.state.emailCon,
-                    readOnly: true,label: 'E-mail', textInputAction: TextInputAction.next, keyboardType: TextInputType.emailAddress, obsecure: false,),
-                  SizedBox(height:mq.height*.03,),
-                  RoundButton(
-                    title: 'Save',
-                    onPress: () {
-controller.updateUserData();
-                  },
-                  ),
-                ],
-              ):Center(
-                child: Container(
-                  child: Center(child: Lottie.asset('assets/lottie/loading2.json',height: 100,width: 200)),
-                ),
-              );
-            }),
+            // child: Obx((){
+            // return controller.state.loading.value==false? Column(
+            // children: [
+            // SizedBox(height: mq.height*.02,),
+            // ReuseableTextField(contr: controller.state.fNameCon, label: 'First Name', textInputAction: TextInputAction.next, keyboardType: TextInputType.emailAddress, obsecure: false),
+            // SizedBox(height: mq.height*.02,),
+            // ReuseableTextField(contr: controller.state.emailCon,
+            // readOnly: true,label: 'E-mail', textInputAction: TextInputAction.next, keyboardType: TextInputType.emailAddress, obsecure: false,),
+            // SizedBox(height:mq.height*.03,),
+            // RoundButton(
+            // title: 'Save',
+            // onPress: () {
+            // controller.updateUserData();
+            // },
+            // ),
+            // ],
+            // ):Center(
+            // child: Container(
+            // child: Center(child: Lottie.asset('assets/lottie/loading2.json',height: 100,width: 200)),
+            // ),
+            // );
+            // }),
           ),
         ),
       ),
