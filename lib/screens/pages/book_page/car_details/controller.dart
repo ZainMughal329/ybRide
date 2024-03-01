@@ -42,10 +42,10 @@ class CarDetailsController extends GetxController {
     getFromHoursAndMinutes(AppConstants.fromTime);
     getToHoursAndMinutes(AppConstants.toTime);
 
-String startDateString = '20${AppConstants.fromYear}-${AppConstants.fromMonth}-${AppConstants.fromDate}';
-String endDateString = '20${AppConstants.toYear}-${AppConstants.toMonth}-${AppConstants.toDate}';
-String startTimeString = '${state.fromHours}:${state.fromMinutes}:00';
-String endTimeString = '${state.toHours}:${state.toHours}:00';
+  String startDateString = '20${AppConstants.fromYear}-${AppConstants.fromMonth}-${AppConstants.fromDate}';
+  String endDateString = '20${AppConstants.toYear}-${AppConstants.toMonth}-${AppConstants.toDate}';
+  String startTimeString = '${state.fromHours}:${state.fromMinutes}:00';
+  String endTimeString = '${state.toHours}:${state.toHours}:00';
 
 
     DateTime startDate = parseDateTime(startDateString, startTimeString);

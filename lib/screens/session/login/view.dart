@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
+import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/components/text_form_field.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
@@ -16,6 +19,7 @@ class LoginScreen extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.fetchUserCollectionData();
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBgClr,
       body: SingleChildScrollView(
@@ -75,10 +79,11 @@ class LoginScreen extends GetView<LoginController> {
               child: RoundButton(
                 title: 'Login',
                 onPress: () {
-                  controller.loginUserWithEmailAndPassword(
-                      controller.state.emailCon.text.trim().toString(),
-                      controller.state.passCon.text.trim().toString(),
-                      context);
+                    controller.loginUserWithEmailAndPassword(
+                        controller.state.emailCon.text.trim().toString(),
+                        controller.state.passCon.text.trim().toString(),
+                        context);
+
                 },
               ),
             ),
@@ -92,7 +97,7 @@ class LoginScreen extends GetView<LoginController> {
                   textColor: Theme.of(context).lightTextColor,
                 ),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Get.offNamed(RoutesName.signUpScreen);
                   },
                   child: HeadingTextWidget(
@@ -108,61 +113,64 @@ class LoginScreen extends GetView<LoginController> {
             SizedBox(
               height: mq.height * .01,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: mq.width * 0.05),
-              child: Row(
-                children: [
-                  Expanded(child: Divider()),
-                  SubHeadingTextWidget(
-                    title: ' or ',
-                    fontSize: 10,
-                    fontWeight: FontWeight.w600,
-                    textColor: Theme.of(context).lightTextColor,
-
-                  ),
-                  Expanded(child: Divider()),
-                ],
-              ),
-            ),
+            Platform.isAndroid
+                ? Padding(
+                    padding: EdgeInsets.symmetric(horizontal: mq.width * 0.05),
+                    child: Row(
+                      children: [
+                        Expanded(child: Divider()),
+                        SubHeadingTextWidget(
+                          title: ' or ',
+                          fontSize: 10,
+                          fontWeight: FontWeight.w600,
+                          textColor: Theme.of(context).lightTextColor,
+                        ),
+                        Expanded(child: Divider()),
+                      ],
+                    ),
+                  )
+                : Container(),
             SizedBox(
               height: mq.height * .01,
             ),
-            Padding(
-              padding:
-                  EdgeInsets.symmetric(vertical: 10, horizontal: mq.width * .1),
-              child: InkWell(
-                onTap: () {
-                  controller.handleGoogleSignIn(context);
-                },
-                child: Container(
-                  height: mq.height * .06,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: AppColors.buttonColor,
-                  ),
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.g_mobiledata,
-                          color: AppColors.buttonTextColor,
+            Platform.isAndroid
+                ? Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: 10, horizontal: mq.width * .1),
+                    child: InkWell(
+                      onTap: () {
+                        controller.handleGoogleSignIn(context);
+                      },
+                      child: Container(
+                        height: mq.height * .06,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: AppColors.buttonColor,
                         ),
-                        Text(
-                          'Sign in with google',
-                          style: GoogleFonts.openSans(
-                              color: AppColors.buttonTextColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.g_mobiledata,
+                                color: AppColors.buttonTextColor,
+                              ),
+                              Text(
+                                'Sign in with google',
+                                style: GoogleFonts.openSans(
+                                    color: AppColors.buttonTextColor,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              ),
-            ),
+                  )
+                : Container(),
           ],
         ),
       ),

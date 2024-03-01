@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -10,6 +11,8 @@ import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/pages/book_page/car_details/inded.dart';
 import 'package:yb_ride/screens/pages/book_page/inded.dart';
 import 'package:http/http.dart' as http;
+import 'package:yb_ride/helper/prefs.dart';
+
 
 class BookViewController extends GetxController {
   final state = BookNowState();
@@ -27,6 +30,28 @@ class BookViewController extends GetxController {
     state.fromYear.value = formattedDateYear;
     getLaterDate();
   }
+
+
+
+  void updateMapTheme(GoogleMapController controller) {
+    Pref.isDarkMode
+        ? getJsonFileFromThemes("themes/night_style.json")
+        .then((value) => setGoogleMapStyle(value, controller))
+        : getJsonFileFromThemes("themes/standard_style.json")
+        .then((value) => setGoogleMapStyle(value, controller));
+  }
+
+
+  Future<String> getJsonFileFromThemes(String mapStylePath) async {
+    ByteData byteData = await rootBundle.load(mapStylePath);
+    var list = byteData.buffer
+        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
+    return utf8.decode(list);
+  }
+  setGoogleMapStyle(String googleMapStyle, GoogleMapController controller) {
+    controller.setMapStyle(googleMapStyle);
+  }
+
 
   void getLaterDate(){
     // Get the current date
@@ -238,8 +263,6 @@ class BookViewController extends GetxController {
     String monthName = DateFormat('MMM').format(DateTime(2022, month, 1));
 
     return monthName;
-
-
   }
 
   void moveToSelectVehicleScreen(){

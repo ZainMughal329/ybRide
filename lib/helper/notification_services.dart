@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:math' as m;
 import 'package:app_settings/app_settings.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -19,6 +20,12 @@ class NotificationServices {
       print('data' + message.data.toString());
       print('data' + message.data['type'].toString());
       print('data' + message.data['id'].toString());
+
+      if(Platform.isIOS){
+        foregroundMessage();
+      }
+
+
       if (Platform.isAndroid) {
         initNotifications(message);
         showNotifications(message);
@@ -140,4 +147,15 @@ class NotificationServices {
       log('something  went wrong');
     }
   }
+
+  Future foregroundMessage() async {
+    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+  }
+
+
+
 }

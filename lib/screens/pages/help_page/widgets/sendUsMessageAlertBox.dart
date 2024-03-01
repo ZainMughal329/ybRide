@@ -29,7 +29,7 @@ class CustomAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBgClr,
       elevation: 0,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10)
@@ -38,7 +38,10 @@ class CustomAlertDialog extends StatelessWidget {
       title: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10.0),
-          child: HeadingTextWidget(title: 'Contact Us',fontSize:14,fontWeight: FontWeight.bold,),
+          child: HeadingTextWidget(title: 'Contact Us',fontSize:14,fontWeight: FontWeight.bold,
+            textColor: Theme.of(context).headingColor,
+
+          ),
         ),
       ),
       content: Container(
@@ -86,7 +89,10 @@ class SectionWidget extends StatelessWidget {
           ),
         ),
         SizedBox(width: mq.width*.02),
-        Expanded(child: SubHeadingTextWidget(title: text,fontSize: 16,fontWeight: FontWeight.w500,)),
+        Expanded(child: SubHeadingTextWidget(title: text,fontSize: 16,fontWeight: FontWeight.w500,
+          textColor: Theme.of(context).headingColor,
+
+        )),
       ],
     );
   }

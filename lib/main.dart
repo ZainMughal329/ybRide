@@ -16,15 +16,13 @@ import 'package:yb_ride/screens/settings/pages/prefrences/apperence/controller.d
 import 'firebase_options.dart';
 import 'helper/app_theme.dart';
 import 'helper/notification_services.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 late Size mq;
 late bool isDarkTheme;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Stripe.publishableKey = AppConstants.stripe_publish_key;
-  // Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
-  // Stripe.urlScheme = 'flutterstripe';await Stripe.instance.applySettings();
-  // await Stripe.instance.applySettings();
   Stripe.publishableKey = AppConstants.stripe_publish_key;
   Pref.init();
   Pref.initialize();
@@ -37,8 +35,17 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  await Permission.locationWhenInUse.isDenied.then((valueOfPermission)
+  {
+    if(valueOfPermission)
+    {
+      Permission.locationWhenInUse.request();
+    }
+  });
+
   NotificationServices().requestPermissions();
   NotificationServices().setupBackgrounInteractMsg();
+  NotificationServices().foregroundMessage();
   NotificationServices().initFirebase();
   NotificationServices().getToken().then((value) {
     log('Device Token');

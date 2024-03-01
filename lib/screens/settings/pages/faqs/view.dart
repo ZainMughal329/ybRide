@@ -8,6 +8,7 @@ import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/helper/app_helpers.dart';
 import 'package:yb_ride/screens/settings/pages/faqs/controller.dart';
 import 'package:yb_ride/screens/settings/pages/faqs/show_faqs/view.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../main.dart';
 
@@ -74,6 +75,20 @@ class FAQScreen extends StatelessWidget {
     );
   }
 
+  Widget _buildLoadingWidget(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      child: Center(
+        child: Container(
+          height: 100,
+          width: 100,
+          child: Lottie.asset('assets/lottie/loading2.json'),
+        ),
+      ),
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final con = Get.put(FAQController());
@@ -81,7 +96,7 @@ class FAQScreen extends StatelessWidget {
     return Obx(
             () => con.loaded.value == false
             ? Scaffold(
-              body: showProgressIndicator(context),
+              body: _buildLoadingWidget(context),
             )
             :  Scaffold(
         backgroundColor: Theme.of(context).scaffoldBgClr,

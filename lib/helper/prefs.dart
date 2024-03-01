@@ -6,6 +6,9 @@ import 'package:path_provider/path_provider.dart';
 import 'network_con.dart';
 
 class Pref {
+
+  // static bool isDarkMode = false;
+
   static late Box _box;
 
   static Future<void> initialize() async {

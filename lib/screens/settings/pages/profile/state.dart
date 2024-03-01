@@ -13,4 +13,6 @@ class profileState{
   final phoneNumberCon = TextEditingController();
   Rx<CountryCode> code =
       CountryCode(name: 'United States', code: 'US', dialCode: '+1').obs;
+
+  RxBool loading = false.obs;
 }
