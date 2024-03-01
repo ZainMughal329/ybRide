@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -384,6 +385,7 @@ class SurferScreen extends GetView<SurferController> {
                   ReuseableTextField(
                       contr: controller.state.fNameCon,
                       label: 'First Name',
+                      inputFormatters:[FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.text,
                       obsecure: false),
@@ -402,6 +404,8 @@ class SurferScreen extends GetView<SurferController> {
                   ReuseableTextField(
                       contr: controller.state.lNameCon,
                       label: 'Last Name',
+                      inputFormatters:[FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
+
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.text,
                       obsecure: false),
@@ -420,6 +424,7 @@ class SurferScreen extends GetView<SurferController> {
                   ReuseableTextField(
                       contr: controller.state.emailCon,
                       label: 'Email',
+                      useEmailValidation: true,
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.text,
                       obsecure: false),
