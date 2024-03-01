@@ -21,7 +21,7 @@ import '../../../../main.dart';
 class SurferScreen extends GetView<SurferController> {
   const SurferScreen({super.key});
 
-  Widget _serviceList() {
+  Widget _serviceList(BuildContext context) {
     return Obx(() {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 20),
@@ -29,11 +29,12 @@ class SurferScreen extends GetView<SurferController> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Select Service',
+              'Select State',
               style: GoogleFonts.openSans(fontSize: 17),
             ),
             DropdownButton(
                 iconEnabledColor: AppColors.buttonColor,
+                dropdownColor: Theme.of(context).scaffoldBackgroundColor,
                 hint: Text(
                   controller.state.serviceOffering.value,
                   style: GoogleFonts.openSans(
@@ -43,9 +44,24 @@ class SurferScreen extends GetView<SurferController> {
                 ),
                 items: [
                   DropdownMenuItem(
-                    child: Text('Boston'),
-                    value: 'Boston',
+
+                    child: SubHeadingTextWidget(title: 'Massachusetts' , textColor: Theme.of(context).headingColor,fontWeight: FontWeight.w500,),
+                    value: 'massachusetts',
                   ),
+                  DropdownMenuItem(
+                    child: SubHeadingTextWidget(title:'Virginia', textColor: Theme.of(context).headingColor,fontWeight: FontWeight.w500,),
+                    value: 'virginia',
+                  ),
+                  DropdownMenuItem(
+                    child: SubHeadingTextWidget(title:'District of Columbia', textColor: Theme.of(context).headingColor,fontWeight: FontWeight.w500,),
+                    value: 'districtOfColumbia',
+                  ),
+                  DropdownMenuItem(
+                    child: SubHeadingTextWidget(title:'Maryland', textColor: Theme.of(context).headingColor,fontWeight: FontWeight.w500,),
+                    value: 'maryland',
+                  ),
+
+
                 ],
                 onChanged: (value) {
                   controller.state.serviceOffering.value = value.toString();
@@ -476,7 +492,7 @@ class SurferScreen extends GetView<SurferController> {
                   SizedBox(
                     height: 5,
                   ),
-                  _serviceList(),
+                  _serviceList(context),
                   SizedBox(
                     height: 15,
                   ),
@@ -504,7 +520,14 @@ class SurferScreen extends GetView<SurferController> {
                                 Snackbar.showSnackBar('YB-Ride',
                                     "Enter all fields", Icons.error_outline);
                               } else {
-                                controller.sendYBBuddyRequest(context);
+                                if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                    .hasMatch(controller.state.emailCon.text)) {
+                                  Snackbar.showSnackBar(
+                                      'YB-Buddy', 'Enter a valid email address',
+                                      Icons.error_outline);
+                                } else {
+                                  controller.sendYBBuddyRequest(context);
+                                }
                               }
                             },
                           )
