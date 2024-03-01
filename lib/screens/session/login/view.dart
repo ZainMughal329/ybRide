@@ -49,6 +49,7 @@ class LoginScreen extends GetView<LoginController> {
                 label: 'Password',
                 textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.visiblePassword,
+                useEmailValidation: true,
                 obsecure: true),
             SizedBox(
               height: mq.height * .01,

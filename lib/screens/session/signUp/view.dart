@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/api/api.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
@@ -45,6 +46,7 @@ class SignupScreen extends GetView<SignUpController> {
             ReuseableTextField(
                 contr: controller.state.nameCon,
                 label: 'Name',
+                inputFormatters:[FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.text,
                 obsecure: false),
@@ -56,6 +58,7 @@ class SignupScreen extends GetView<SignUpController> {
                 label: 'Email',
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.emailAddress,
+                useEmailValidation: true,
                 obsecure: false),
             SizedBox(
               height: mq.height * .0015,

@@ -1,6 +1,5 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/components/text_form_field.dart';
 import 'package:yb_ride/screens/settings/pages/profile/index.dart';
@@ -10,8 +9,8 @@ import '../../../../components/phone_number_input_field.dart';
 import '../../../../components/reuseable_button.dart';
 import '../../../../main.dart';
 
-class profileScreen extends GetView<ProfileController>{
-   profileScreen({super.key});
+class profileScreen extends GetView<ProfileController> {
+  profileScreen({super.key});
   final controller = Get.put(ProfileController());
 
   @override
@@ -26,7 +25,7 @@ class profileScreen extends GetView<ProfileController>{
           isLeading: true,
           leadingIcon: Icons.arrow_back_ios_new,
           trailingIcon: Icons.delete,
-          leadingPress: (){
+          leadingPress: () {
             Navigator.pop(context);
           },
         ),
@@ -38,16 +37,42 @@ class profileScreen extends GetView<ProfileController>{
                 horizontal: mq.width * .02, vertical: mq.height * .02),
             child: Column(
               children: [
-                SizedBox(height: mq.height*.02,),
-                ReuseableTextField(contr: controller.state.fNameCon, label: 'First Name', textInputAction: TextInputAction.next, keyboardType: TextInputType.emailAddress, obsecure: false),
-                SizedBox(height: mq.height*.02,),
-                ReuseableTextField(contr: controller.state.lNameCon, label: 'Last Name', textInputAction: TextInputAction.next, keyboardType: TextInputType.emailAddress, obsecure: false),
-                SizedBox(height: mq.height*.02,),
-                ReuseableTextField(contr: controller.state.emailCon, label: 'E-mail', textInputAction: TextInputAction.next, keyboardType: TextInputType.emailAddress, obsecure: false),
-                SizedBox(height: mq.height*.02,),
+                SizedBox(
+                  height: mq.height * .02,
+                ),
+                ReuseableTextField(
+                    contr: controller.state.fNameCon,
+                    label: 'First Name',
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.emailAddress,
+                    inputFormatters:[FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
+                    obsecure: false),
+                SizedBox(
+                  height: mq.height * .02,
+                ),
+                ReuseableTextField(
+                    contr: controller.state.lNameCon,
+                    label: 'Last Name',
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.emailAddress,
+                    inputFormatters:[FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
+                    obsecure: false),
+                SizedBox(
+                  height: mq.height * .02,
+                ),
+                ReuseableTextField(
+                    contr: controller.state.emailCon,
+                    label: 'E-mail',
+                    textInputAction: TextInputAction.next,
+                    useEmailValidation: true,
+                    keyboardType: TextInputType.emailAddress,
+                    obsecure: false),
+                SizedBox(
+                  height: mq.height * .02,
+                ),
                 Obx(() => PhoneNumberField(
                     controller.state.code.value,
-                        () async {
+                    () async {
                       final code = await controller.state.countryPicker
                           .showPicker(context: context);
                       // Null check
@@ -58,14 +83,15 @@ class profileScreen extends GetView<ProfileController>{
                     },
                     controller.state.phoneNumberCon,
                     controller.state.focused.value,
-                        () {
-                      controller.state.focused.value = !controller.state.focused.value;
-                    },context)),
-                SizedBox(height:mq.height*.28,),
+                    () {
+                      controller.state.focused.value =
+                          !controller.state.focused.value;
+                    },
+                    context)),
+                SizedBox(
+                  height: mq.height * .28,
+                ),
                 RoundButton(title: 'Save', onPress: () {}),
-        
-        
-        
               ],
             ),
           ),
