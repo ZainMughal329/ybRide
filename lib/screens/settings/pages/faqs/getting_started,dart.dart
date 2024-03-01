@@ -98,7 +98,7 @@ Future gettingStartedSheet(BuildContext context) {
               FAQItem(
                 question: 'How does YBCar work?',
                 answer:
-                    "Book a car from our new and clean fleet.\nTell us where you want to get the car and choose a good time to meet.\nYBCar Surfers can deliver your vehicle and pick it up when you’re done. If it’s more convenient, you can pick it up yourself at one of our lots.\nIf you chose delivery, a YBCar Surfer will pick up the car at the return address you selected. Otherwise, you can return the car to one of our lots.\nIt's that easy, no lines, no paperwork, just rental cars, your way.",
+                    "Book a car from our new and clean fleet.\nTell us where you want to get the car and choose a good time to meet.\nYBCar Buddy\'s can deliver your vehicle and pick it up when you’re done. If it’s more convenient, you can pick it up yourself at one of our lots.\nIf you chose delivery, a YBCar Buddy will pick up the car at the return address you selected. Otherwise, you can return the car to one of our lots.\nIt's that easy, no lines, no paperwork, just rental cars, your way.",
               ),
               Divider(),
               FAQItem(

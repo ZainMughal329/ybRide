@@ -68,7 +68,7 @@ Future WhereIsMySurferBottomSheet(BuildContext context) {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         HeadingTextWidget(
-                          title: "Where is my Surfer?",
+                          title: "Where is my Buddy?",
                           fontWeight: FontWeight.bold,
                           textColor: Theme.of(context).headingColor,
                           // maxLines: 2,
@@ -93,8 +93,8 @@ Future WhereIsMySurferBottomSheet(BuildContext context) {
                           fontWeight: FontWeight.w500,
                           fontSize: 14,
                           title:
-                          "When your Surfer starts their trip, you'll be able to see their ETA and location in the app. if you need to call"
-                              "your Surfer, you can also call the them through the app once they're on their way.",
+                          "When your Buddy starts their trip, you'll be able to see their ETA and location in the app. if you need to call"
+                              "your Buddy, you can also call the them through the app once they're on their way.",
                         ),
                         SizedBox(
                           height: mq.height * .02,
@@ -128,7 +128,7 @@ Future WhereIsMySurferBottomSheet(BuildContext context) {
                           fontWeight: FontWeight.w500,
                           fontSize: 14,
                           title:
-                          "Remember that your Surfer will wait for an extra 10 minutes after the scheduled time. or 10 minutes after their"
+                          "Remember that your Buddy will wait for an extra 10 minutes after the scheduled time. or 10 minutes after their"
                               "arrival time if they're running behind scheduled time!.",
                         ),
                         SizedBox(

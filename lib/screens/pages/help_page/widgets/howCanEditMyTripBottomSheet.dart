@@ -151,7 +151,10 @@ Future HowCanEditMyTripBottomSheet(BuildContext context) {
                         SizedBox(
                           height: mq.height * .05,
                         ),
-                        HeadingTextWidget(title: 'Refund Policy for Shortened Trips',fontWeight: FontWeight.bold,fontSize: 14,),
+                        HeadingTextWidget(title: 'Refund Policy for Shortened Trips',fontWeight: FontWeight.bold,fontSize: 14,
+                          textColor: Theme.of(context).headingColor,
+
+                        ),
                         SizedBox(
                           height: mq.height * .05,
                         ),

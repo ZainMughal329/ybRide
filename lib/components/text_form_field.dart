@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/main.dart';
 
 class ReuseableTextField extends StatelessWidget {
   final TextInputType keyboardType;
@@ -71,7 +72,7 @@ class ReuseableTextField extends StatelessWidget {
           labelStyle: GoogleFonts.openSans(
             fontSize: 14,
             fontWeight: FontWeight.w500,
-
+            color: Theme.of(context).headingColor,
           ),
         ),
       ),

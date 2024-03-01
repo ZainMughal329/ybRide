@@ -29,6 +29,8 @@ class BookNowView extends StatelessWidget {
               onMapCreated: (con) {
                 cont.state.mapController = con;
                 // await firstBottomSheet(context, cont);
+                controller.updateMapTheme(controller.state.mapController!);
+
               },
               initialCameraPosition: CameraPosition(
                 target: cont.state.loc.value,

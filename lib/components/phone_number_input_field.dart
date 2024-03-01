@@ -12,102 +12,7 @@ import 'package:yb_ride/screens/settings/pages/profile/controller.dart';
 
 
 
-// Widget PhoneNumberField(CountryCode code, Function changeCountry,TextEditingController phone,bool isFocus , Function onPress,BuildContext context) {
-//   return Padding(
-//     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-//     child: InkWell(
-//         onFocusChange: (value) {
-//           final con = Get.put(ProfileController());
-//           con.onFocusChange(value ?? false);
-//         },
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Container(
-//             height: 65,
-//             width: double.infinity,
-//             decoration: BoxDecoration(
-//               // color: AppColors.activeTextFieldColor,
-//               borderRadius: BorderRadius.circular(10),
-//               border: Border.all(
-//                 color: isFocus ? AppColors.activeTextFieldColor : AppColors.nonActiveTextFieldColor,
-//               )
-//
-//             ),
-//             child: Padding(
-//               padding:  EdgeInsets.symmetric(horizontal: 5),
-//               child: Row(
-//                 children: [
-//                   Expanded(
-//                     flex: 1,
-//                     child: Container(
-//                       child: GestureDetector(
-//                         onTap: () => changeCountry(),
-//                         child: Row(
-//                           children: [
-//                             SizedBox(
-//                               width: 5,
-//                             ),
-//                             Expanded(
-//                               child: Container(
-//                                 child: code.flagImage,
-//                               ),
-//                             ),
-//                             SizedBox(
-//                               width: 5,
-//                             ),
-//                             TextWidget(
-//                               text: code.dialCode.toString(),
-//                             ),
-//                             Icon(
-//                               Icons.keyboard_arrow_down_outlined,
-//                               color: Theme.of(context).lightTextColor,
-//                             )
-//                           ],
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                   Container(
-//                     height: 45,
-//                     width: 1,
-//                     color: Theme.of(context).lightTextColor,
-//                   ),
-//                   Expanded(
-//                     flex: 3,
-//                     child: Padding(
-//                       padding: EdgeInsets.symmetric(horizontal: 10),
-//                       child: TextFormField(
-//                         controller: phone,
-//                         textInputAction: TextInputAction.done,
-//                         keyboardType: TextInputType.phone,
-//                         style: GoogleFonts.openSans(
-//                           fontSize: 15,
-//                         ),
-//
-//                         // focusNode: focNode,
-//                         decoration: InputDecoration(
-//                           labelText: 'Phone',
-//                           floatingLabelAlignment: FloatingLabelAlignment.start,
-//                           border: InputBorder.none,
-//                           labelStyle: GoogleFonts.openSans(
-//                             fontSize: 14,
-//                             fontWeight: FontWeight.w500,
-//
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     ),
-//   );
-// }
+
 
 
 Widget PhoneNumberField(CountryCode code, Function changeCountry, TextEditingController phone, bool isFocus, Function onPress, BuildContext context) {
@@ -146,7 +51,15 @@ Widget PhoneNumberField(CountryCode code, Function changeCountry, TextEditingCon
                             ),
                             Expanded(
                               child: Container(
-                                child: code.flagImage,
+                                child: CountryCodeFlagWidget(
+
+                                  width: 34,
+                                  alignment: Alignment.center,
+                                  countryCode: CountryCode(
+                                      name: code.name,
+                                      code: code.code,
+                                      dialCode: code.dialCode),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -192,6 +105,7 @@ Widget PhoneNumberField(CountryCode code, Function changeCountry, TextEditingCon
                           labelStyle: GoogleFonts.openSans(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
+                            color: Theme.of(context).headingColor
                           ),
                         ),
                       ),

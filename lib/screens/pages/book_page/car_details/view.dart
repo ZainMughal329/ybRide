@@ -1,7 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,12 +11,9 @@ import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/helper/app_constants.dart';
-import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/pages/Checkout/index.dart';
 import 'package:yb_ride/screens/pages/book_page/car_details/inded.dart';
 import 'package:yb_ride/screens/pages/book_page/car_details/widgets/details_sheet.dart';
-import 'package:yb_ride/screens/splash/controller.dart';
-
 import '../../../../main.dart';
 import '../controller.dart';
 import '../widget/1st_bottom_sheet.dart';
@@ -89,10 +85,14 @@ class CarDetailsScreen extends GetView<CarDetailsController> {
                                   child: Column(
                                     children: [
                                       Text(
-                                        'Boston',
+                                        AppConstants.selectedPlaceState,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
                                         style: GoogleFonts.openSans(
                                           fontWeight: FontWeight.w700,
-                                          fontSize: 18,
+                                          fontSize: 15,
+
+
                                           color: AppColors.buttonColor,
                                         ),
                                       ),
@@ -165,10 +165,174 @@ class CarDetailsScreen extends GetView<CarDetailsController> {
   Widget _buildCARCard(BuildContext context,docData) {
     String carType = docData['type'];
     print(carType);
-    return Padding(
+    return docData['noOfVehicles'] == '0' ?
+    Stack(
+      children: [
+
+        Padding(
+          padding: EdgeInsets.only(bottom: 5),
+          child: InkWell(
+            onTap: () {},
+            child: Container(
+              // height: mq.height * .38,
+              width: double.infinity,
+              child: Column(
+                children: [
+                  Container(
+                    height: mq.height * .23,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      // color: Colors.red,
+                      border: Border.all(color: Colors.black12),
+                    ),
+                    child: Swiper(
+                      itemBuilder: (BuildContext context, int index) {
+                        return Image.asset(
+                          carType == "SUV"
+                              ? controller.seaterList[index]
+                              : carType == "AllWheelDriveSUV"
+                              ? controller.awdList[index]
+                              : carType == "Economy"
+                              ? controller.ecoList[index]
+                              : carType == "Premium"
+                              ? controller.premimumList[index]
+                              : controller.sedanList[index],
+                          fit: BoxFit.cover,
+                          // height: 188.h,
+                          width: mq.width * .288,
+                        );
+                      },
+                      autoplay: false,
+                      itemCount: 3,
+                      viewportFraction: 0.8,
+                      scale: 0.9,
+                      pagination: SwiperPagination(
+                        alignment: Alignment.bottomCenter,
+                        builder: DotSwiperPaginationBuilder(
+                            color: Colors.black12,
+                            activeColor: Colors.white,
+                            activeSize: 13),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: mq.height * .01,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      HeadingTextWidget(
+                        title: docData['type'],
+                        textColor: Theme.of(context).headingColor,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          detailsBottomSheet(context);
+                        },
+                        child: SubHeadingTextWidget(
+                          title: 'See details',
+                          fontWeight: FontWeight.w600,
+                          textColor: AppColors.buttonColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: mq.height * .01,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SubHeadingTextWidget(
+                            title: docData['type'],
+                            textColor: Theme.of(context).headingColor,
+                          ),
+                          SubHeadingTextWidget(
+                            title: '${docData['seats']} seats . ${docData['suitcase']} suitcase',
+                            textColor: Theme.of(context).lightTextColor,
+                          ),
+                          SizedBox(
+                            height: mq.height * .015,
+                          ),
+                          HeadingTextWidget(
+                            // title: '\$${controller.state.rentPerDay} | day',
+                            title: '\$${docData['pricePerDay']} | day',
+                            textColor: Theme.of(context).headingColor,
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: mq.height * .06),
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 1),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  FontAwesomeIcons.stopwatch,
+                                  color: Colors.blue,
+                                  size: 18,
+                                ),
+                                SizedBox(
+                                  width: mq.width * .015,
+                                ),
+                                HeadingTextWidget(
+                                  title: '${docData['noOfVehicles']} vehicles left',
+                                  textColor: Colors.blue,
+                                  fontSize: 10,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: mq.height * .02,
+                  ),
+                  Divider(
+                    color: AppColors.dotColor,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(bottom: 5),
+          child: InkWell(
+            onTap: () {},
+            child: Container(
+              // height: mq.height * .38,
+              width: double.infinity,
+              color: Theme.of(context).headingColor.withOpacity(.7),
+              child: Container(
+                height: mq.height * .23,
+                width: double.infinity,
+                child: Center(
+                  child: HeadingTextWidget(
+                    title: 'Sold Out',
+                    textColor: Theme.of(context).scaffoldBgClr,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+
+      ],
+    )
+        : Padding(
       padding: EdgeInsets.only(bottom: 5),
       child: InkWell(
         onTap: () {
+          // controller.updateFirestoreValue(docData['id']);
       // controller.calculateNoDays();
           final rentPDay = docData['pricePerDay'];
           controller.state.rentPerDay = double.parse(rentPDay.toString());
@@ -181,6 +345,7 @@ class CarDetailsScreen extends GetView<CarDetailsController> {
           Get.to(() => CheckOutScreen(
               carRent: controller.state.rentPerDay * AppConstants.rentDays,
           carType: carType,
+            id: docData['id'],
           ));
           // Get.toNamed(RoutesName.checkOutScreen,arguments: {'',controller.state.rentPerDay});
         },

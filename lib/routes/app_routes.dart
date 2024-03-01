@@ -10,9 +10,11 @@ import 'package:yb_ride/screens/pages/book_page/inded.dart';
 import 'package:yb_ride/screens/pages/help_page/bindings.dart';
 import 'package:yb_ride/screens/pages/help_page/view.dart';
 import 'package:yb_ride/screens/pages/invite_page/inded.dart';
+import 'package:yb_ride/screens/pages/trips_page/bindings.dart';
 import 'package:yb_ride/screens/session/login/inded.dart';
 import 'package:yb_ride/screens/session/signUp/inded.dart';
 import 'package:yb_ride/screens/session/welcome.dart';
+import 'package:yb_ride/screens/settings/bindings.dart';
 import 'package:yb_ride/screens/settings/pages/payment_method/bindings.dart';
 import 'package:yb_ride/screens/settings/pages/payment_method/view.dart';
 import 'package:yb_ride/screens/settings/pages/prefrences/apperence/inded.dart';
@@ -68,6 +70,9 @@ class AppRoutes {
         ApplicationViewBindings(),
         BookViewBindings(),
         InviteBindings(),
+        TripBindings(),
+        HelpBindings(),
+        SettingsBindings(),
       ],
       transition: Transition.downToUp,
     ),
@@ -123,7 +128,7 @@ class AppRoutes {
 
     GetPage(
       name: RoutesName.checkOutScreen,
-      page: () => CheckOutScreen(carRent: 0.0,carType: "",),
+      page: () => CheckOutScreen(carRent: 0.0,carType: "",id: '',),
       binding: CheckOutBindings(),
       transition: Transition.downToUp,
     ),
