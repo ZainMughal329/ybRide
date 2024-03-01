@@ -14,6 +14,7 @@ class ReuseableTextField extends StatelessWidget {
   final FocusNode? focusNode;
   final void Function(String)? onChange;
   final List<TextInputFormatter>? inputFormatters;
+  final bool useEmailValidation;
   final Icon? prefixIcon;
   ReuseableTextField({
     super.key,
@@ -27,6 +28,7 @@ class ReuseableTextField extends StatelessWidget {
     this.readOnly = false,
     this.inputFormatters,
     this.prefixIcon,
+    this.useEmailValidation = false,
 
     //
   });
@@ -46,6 +48,7 @@ class ReuseableTextField extends StatelessWidget {
         style: GoogleFonts.openSans(
           fontSize: 15,
         ),
+        validator: useEmailValidation ? _validateEmail : null,
         inputFormatters: inputFormatters,
 
         // focusNode: focNode,
@@ -75,4 +78,15 @@ class ReuseableTextField extends StatelessWidget {
       ),
     );
   }
+}
+String? _validateEmail(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'Email is required';
+  }
+  // Regular expression for email validation
+  final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  if (!emailRegex.hasMatch(value)) {
+    return 'Enter a valid email address';
+  }
+  return null;
 }
