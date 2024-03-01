@@ -492,7 +492,6 @@ class SurferScreen extends GetView<SurferController> {
                   ),
                 ),
               ),
-
             ],
           ),
         ),
