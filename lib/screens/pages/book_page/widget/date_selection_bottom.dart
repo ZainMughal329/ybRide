@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:date_ranger/date_ranger.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +24,7 @@ import 'package:yb_ride/screens/pages/book_page/widget/time_selection_bottom.dar
 import '../../../../main.dart';
 
 Future dateBottomSheet(BuildContext context, BookViewController cont) {
+  var initialDate = DateTime.now();
   return showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -100,51 +103,90 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
                   ),
                   Container(
                     height: 800,
-                    child: SfDateRangePicker(
-                      view: DateRangePickerView.month,
-                      selectionMode: DateRangePickerSelectionMode.range,
-                      minDate: DateTime(
-                          2024, int.parse("${cont.state.fromMonth.value}"), int.parse("${cont.state.fromDate.value}")),
-                      maxDate: DateTime(2029, 12, 31),
-                      todayHighlightColor: AppColors.buttonColor,
-                      viewSpacing: 5,
-                      headerStyle: DateRangePickerHeaderStyle(
-                        textStyle:
-                            GoogleFonts.openSans(fontWeight: FontWeight.w600),
-                      ),
-                      monthViewSettings: DateRangePickerMonthViewSettings(
-                        // viewHeaderHeight: 50,
-                        showTrailingAndLeadingDates: false,
-                        dayFormat: 'EEE',
-                        viewHeaderStyle: DateRangePickerViewHeaderStyle(
-                          textStyle:
-                              GoogleFonts.openSans(fontWeight: FontWeight.w700),
-                        ),
-                      ),
-                      monthCellStyle: DateRangePickerMonthCellStyle(
-                        cellDecoration: BoxDecoration(),
-                        textStyle:
-                            GoogleFonts.openSans(fontWeight: FontWeight.w500),
-                      ),
-                      yearCellStyle: DateRangePickerYearCellStyle(
-                        textStyle:
-                            GoogleFonts.openSans(fontWeight: FontWeight.w500),
-                      ),
-                      onSelectionChanged:
-                          (DateRangePickerSelectionChangedArgs args) {
-                        final dynamic value = args.value;
-                        cont.extractStartEndDate(args.value.toString());
+                    child: DateRanger(
+                      backgroundColor: Colors.white,
+                      activeItemBackground: AppColors.buttonColor,
+                      rangeBackground: AppColors.buttonColor.withOpacity(0.5),
+                      runSpacing: 20,
+                      // initialDate: initialDate,
+                      // initialRange: initialDateRange,
+                      activeDateBottomSpace: 20,
+                      onRangeChanged: (range) {
+                        print(range.toString());
+                        cont.extractFromNewRangePicker(range.toString());
+                        // setState(() {
+                        //   initialDateRange = range;
+                        // });
                       },
-                      onViewChanged: (DateRangePickerViewChangedArgs args) {
-                        final PickerDateRange visibleDates =
-                            args.visibleDateRange;
-                        final DateRangePickerView view = args.view;
-                      },
-                      navigationDirection:
-                          DateRangePickerNavigationDirection.vertical,
-                      navigationMode: DateRangePickerNavigationMode.scroll,
                     ),
                   ),
+                  // date range picker for android
+                  // Platform.isAndroid ? Container(
+                  //   height: 800,
+                  //   child: SfDateRangePicker(
+                  //     view: DateRangePickerView.month,
+                  //     selectionMode: DateRangePickerSelectionMode.range,
+                  //     minDate: DateTime(
+                  //         2024, int.parse("${cont.state.fromMonth.value}"), int.parse("${cont.state.fromDate.value}")),
+                  //     maxDate: DateTime(2029, 12, 31),
+                  //     todayHighlightColor: AppColors.buttonColor,
+                  //     viewSpacing: 5,
+                  //     headerStyle: DateRangePickerHeaderStyle(
+                  //       textStyle:
+                  //       GoogleFonts.openSans(fontWeight: FontWeight.w600),
+                  //     ),
+                  //     monthViewSettings: DateRangePickerMonthViewSettings(
+                  //       // viewHeaderHeight: 50,
+                  //       showTrailingAndLeadingDates: false,
+                  //       dayFormat: 'EEE',
+                  //       viewHeaderStyle: DateRangePickerViewHeaderStyle(
+                  //         textStyle:
+                  //         GoogleFonts.openSans(fontWeight: FontWeight.w700),
+                  //       ),
+                  //     ),
+                  //     monthCellStyle: DateRangePickerMonthCellStyle(
+                  //       cellDecoration: BoxDecoration(),
+                  //       textStyle:
+                  //       GoogleFonts.openSans(fontWeight: FontWeight.w500),
+                  //     ),
+                  //     yearCellStyle: DateRangePickerYearCellStyle(
+                  //       textStyle:
+                  //       GoogleFonts.openSans(fontWeight: FontWeight.w500),
+                  //     ),
+                  //     onSelectionChanged:
+                  //         (DateRangePickerSelectionChangedArgs args) {
+                  //       final dynamic value = args.value;
+                  //       cont.extractStartEndDate(args.value.toString());
+                  //     },
+                  //     onViewChanged: (DateRangePickerViewChangedArgs args) {
+                  //       final PickerDateRange visibleDates =
+                  //           args.visibleDateRange;
+                  //       final DateRangePickerView view = args.view;
+                  //     },
+                  //     navigationDirection:
+                  //     DateRangePickerNavigationDirection.vertical,
+                  //     navigationMode: DateRangePickerNavigationMode.scroll,
+                  //   ),
+                  //   // date range picker for ios
+                  // ) : Platform.isIOS ? Container(
+                  //   height: 800,
+                  //   child: DateRanger(
+                  //     backgroundColor: Colors.white,
+                  //     activeItemBackground: AppColors.buttonColor,
+                  //     rangeBackground: AppColors.buttonColor.withOpacity(0.5),
+                  //     runSpacing: 20,
+                  //     // initialDate: initialDate,
+                  //     // initialRange: initialDateRange,
+                  //     activeDateBottomSpace: 20,
+                  //     onRangeChanged: (range) {
+                  //       print(range.toString());
+                  //       cont.extractFromNewRangePicker(range.toString());
+                  //       // setState(() {
+                  //       //   initialDateRange = range;
+                  //       // });
+                  //     },
+                  //   ),
+                  // ) : Container(),
                 ],
               ),
             ),
@@ -182,7 +224,7 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
                                 Obx(() {
                                   return SubHeadingTextWidget(
                                     title:
-                                        "${cont.state.fromDateName.value} ${cont.state.fromMonthName.value} ${cont.state.fromDate.value} 20${cont.state.fromYear.value}",
+                                        "${cont.state.fromDateName.value} ${cont.state.fromMonthName.value} ${cont.state.fromDate.value} ${cont.state.fromYear.value}",
                                     textColor: Theme.of(context).headingColor,
                                     fontWeight: FontWeight.w600,
                                   );
@@ -215,7 +257,7 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
                                 Obx(() {
                                   return SubHeadingTextWidget(
                                       title:
-                                          "${cont.state.toDateName.value} ${cont.state.toMonthName.value} ${cont.state.toDate.value} 20${cont.state.toYear.value}",
+                                          "${cont.state.toDateName.value} ${cont.state.toMonthName.value} ${cont.state.toDate.value} ${cont.state.toYear.value}",
                                       textColor: Theme.of(context).headingColor,
                                       fontWeight: FontWeight.w600);
                                 }),

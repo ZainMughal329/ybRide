@@ -97,6 +97,8 @@ dependencies:
 #  for screenshot the recepit
   screenshot: ^2.1.0
   image_gallery_saver: ^2.0.3
+#  date range picker for ios
+  date_ranger: ^1.0.1
 
 
 

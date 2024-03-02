@@ -1789,14 +1789,16 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                                   ),
                                   SubHeadingTextWidget(
                                       title:
-                                          'Discount will be applied\nautomatically'),
+                                          'Discount will be applied\nautomatically',textColor: AppColors.buttonColor,),
                                 ],
                               ),
                               SizedBox(
                                 width: 10,
                               ),
                               SubHeadingTextWidget(
-                                  title: '\$${AppConstants.referralDiscount}'),
+                                  title: '\$${AppConstants.referralDiscount}',
+                                textColor: Theme.of(context).headingColor,
+                              ),
                             ],
                           ),
                           SizedBox(

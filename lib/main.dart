@@ -27,8 +27,7 @@ void main() async {
 
   Pref.init();
   Pref.initialize();
-  await dotenv.load(fileName: "assets/keyFile/keys.env");
-  Stripe.publishableKey = dotenv.env['STRIPE_PUBLISH_KEY']!;
+  Stripe.publishableKey = 'pk_test_51Ogo46EwduwUAGBRz8KlKG0uKlP2DL1KfBVj3Iqum4fSQVtOfD4WPCisOOmVfIoEAKsBJNTI0WzOmpOLmntqPTTJ00F599LcQW';
 
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   await SystemChrome.setPreferredOrientations(
@@ -51,8 +50,6 @@ void main() async {
   NotificationServices().foregroundMessage();
   NotificationServices().initFirebase();
   NotificationServices().getToken().then((value) {
-    log('Device Token');
-    log(value);
   });
 
   // run app function
@@ -70,8 +67,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.sizeOf(context);
-    print("Striper PUblish Key" + dotenv.env['STRIPE_PUBLISH_KEY'].toString());
-    print("Striper PUblish Key" + dotenv.env['STRIPE_SECRET_KEY'].toString());
+
     // AppConstants.stripe_publish_key = dotenv.env['STRIPE_PUBLISH_KEY']!;
     // AppConstants.stripe_secret_key = dotenv.env['STRIPE_SECRET_KEY']!;
     AppConstants.stripe_secret_key ="sk_test_51Ogo46EwduwUAGBR6619v0dguE6DlSE4n461X2P3SPjB36K9zAqbU8lQyp7WuqIMQatRCsf7LQx7w5nKAfRKluYy00k7p6obF5";
