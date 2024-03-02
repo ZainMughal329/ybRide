@@ -33,7 +33,7 @@ class BookViewController extends GetxController {
   void updateMapTheme(GoogleMapController controller) {
     Pref.isDarkMode
         ? getJsonFileFromThemes("themes/night_style.json")
-            .then((value) => setGoogleMapStyle(value, controller))
+ .then((value) => setGoogleMapStyle(value, controller))
         : getJsonFileFromThemes("themes/standard_style.json")
             .then((value) => setGoogleMapStyle(value, controller));
   }
@@ -114,7 +114,7 @@ class BookViewController extends GetxController {
 
   void GetCoordinates(BuildContext context) async {
     List<Location> coordinates =
-        await locationFromAddress(state.selectedPlace.toString());
+    await locationFromAddress(state.selectedPlace.toString());
     if (coordinates.isNotEmpty) {
       final lat = coordinates.first;
       state.loc.value = LatLng(lat.latitude, lat.longitude);
@@ -136,7 +136,7 @@ class BookViewController extends GetxController {
 
   void GetCoordinatesofReturn(BuildContext context) async {
     List<Location> coordinates =
-        await locationFromAddress(state.returnPlace.toString());
+    await locationFromAddress(state.returnPlace.toString());
     if (coordinates.isNotEmpty) {
       final lat = coordinates.first;
       state.returnLoc.value = LatLng(lat.latitude, lat.longitude);
@@ -157,7 +157,7 @@ class BookViewController extends GetxController {
     // Check if "startDate" is found
     if (startIndex != -1 && endIndex != -1) {
       String startDate =
-          output.substring(startIndex + "startDate:".length, endIndex).trim();
+      output.substring(startIndex + "startDate:".length, endIndex).trim();
       String formattedStartDate = startDate.split(' ')[0];
 
       DateTime startDateDay = DateTime.parse(formattedStartDate);
@@ -183,7 +183,7 @@ class BookViewController extends GetxController {
       // Check if "endDate" is found
       if (startIndex != -1 && endIndex != -1) {
         String endDate =
-            output.substring(startIndex + "endDate:".length, endIndex).trim();
+        output.substring(startIndex + "endDate:".length, endIndex).trim();
         String formattedEndDate = endDate.split(' ')[0];
         // added line
 
@@ -308,4 +308,6 @@ class BookViewController extends GetxController {
 
     return millisecondsSinceMidnight;
   }
+
 }
+
