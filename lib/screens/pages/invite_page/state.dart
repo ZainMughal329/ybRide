@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class InviteState{
 
-  RxBool loading = true.obs;
+  RxBool loading = false.obs;
   RxBool carBooked = false.obs;
   RxBool shareLoading = false.obs;
   TextEditingController referralContr = TextEditingController();

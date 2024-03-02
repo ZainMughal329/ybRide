@@ -128,7 +128,7 @@ class AppRoutes {
 
     GetPage(
       name: RoutesName.checkOutScreen,
-      page: () => CheckOutScreen(carRent: 0.0,carType: "",),
+      page: () => CheckOutScreen(carRent: 0.0,carType: "",id: '',),
       binding: CheckOutBindings(),
       transition: Transition.downToUp,
     ),

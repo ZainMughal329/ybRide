@@ -160,6 +160,11 @@ Future largeBottomSheet(BuildContext context, BookViewController cont) {
                                                 ['secondary_text']
                                             .toString()),
                                         onTap: () {
+                                          AppConstants.selectedPlaceState = cont.state
+                                              .placeList[index]
+                                          ['structured_formatting']
+                                          ['secondary_text']
+                                              .toString();
                                           cont.state.selectedPlace.value = cont
                                               .state
                                               .placeList[index]['description']

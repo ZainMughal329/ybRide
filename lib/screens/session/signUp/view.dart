@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/api/api.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
@@ -9,6 +10,7 @@ import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/session/signUp/controller.dart';
 
 import '../../../components/heading_text_widget.dart';
+import '../../../components/snackbar_widget.dart';
 import '../../../components/text_widget.dart';
 import '../../../helper/app_colors.dart';
 import '../../../helper/notification_services.dart';
@@ -45,6 +47,7 @@ class SignupScreen extends GetView<SignUpController> {
             ReuseableTextField(
                 contr: controller.state.nameCon,
                 label: 'Name',
+                inputFormatters:[FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.text,
                 obsecure: false),
@@ -56,6 +59,7 @@ class SignupScreen extends GetView<SignUpController> {
                 label: 'Email',
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.emailAddress,
+                useEmailValidation: true,
                 obsecure: false),
             SizedBox(
               height: mq.height * .0015,
@@ -86,30 +90,41 @@ class SignupScreen extends GetView<SignUpController> {
                     if (controller.state.nameCon.text.isNotEmpty &&
                         controller.state.emailCon.text.isNotEmpty &&
                         controller.state.passCon.text.isNotEmpty) {
-                      NotificationServices services = NotificationServices();
-                      late String token;
-                      await services.getToken().then((value) {
-                        token = value;
-                      });
-                      log('token:$token');
-                      log('SignUp Page:object');
-                      UserModel user = UserModel(
-                        name: controller.state.nameCon.text.trim(),
-                        image: '',
-                        email: controller.state.emailCon.text.trim(),
-                        pushToken: token,
-                        dateTime: DateTime.now().millisecondsSinceEpoch.toString(),
-                        refCode: controller.state.refCon.text.trim().toString(),
-                        list: [],
-                        referralList: [],
-                      );
-                      controller.storeUser(
-                        user,
-                        context,
-                        controller.state.emailCon.text.trim(),
-                        controller.state.passCon.text.trim(),
-                      );
-                    } else {
+                      if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                          .hasMatch(controller.state.emailCon.text)) {
+                        Snackbar.showSnackBar(
+                            'YB-Ride', 'Enter a valid email address',
+                            Icons.error_outline);
+                      } else {
+                        NotificationServices services = NotificationServices();
+                        late String token;
+                        await services.getToken().then((value) {
+                          token = value;
+                        });
+                        log('token:$token');
+                        log('SignUp Page:object');
+                        UserModel user = UserModel(
+                          name: controller.state.nameCon.text.trim(),
+                          image: '',
+                          email: controller.state.emailCon.text.trim(),
+                          pushToken: token,
+                          dateTime: DateTime
+                              .now()
+                              .millisecondsSinceEpoch
+                              .toString(),
+                          refCode: controller.state.refCon.text.trim()
+                              .toString(),
+                          list: [],
+                          referralList: [],
+                        );
+                        controller.storeUser(
+                          user,
+                          context,
+                          controller.state.emailCon.text.trim(),
+                          controller.state.passCon.text.trim(),
+                        );
+                      }
+                    }else {
                       log('Signup page:Error');
                       // Snackbar.showSnackBar('Error', 'All fields must be filled',
                       //     Icons.info_outline);

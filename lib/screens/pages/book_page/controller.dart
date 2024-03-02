@@ -33,9 +33,9 @@ class BookViewController extends GetxController {
   void updateMapTheme(GoogleMapController controller) {
     Pref.isDarkMode
         ? getJsonFileFromThemes("themes/night_style.json")
-        .then((value) => setGoogleMapStyle(value, controller))
+ .then((value) => setGoogleMapStyle(value, controller))
         : getJsonFileFromThemes("themes/standard_style.json")
-        .then((value) => setGoogleMapStyle(value, controller));
+            .then((value) => setGoogleMapStyle(value, controller));
   }
 
   Future<String> getJsonFileFromThemes(String mapStylePath) async {
@@ -308,4 +308,6 @@ class BookViewController extends GetxController {
 
     return millisecondsSinceMidnight;
   }
+
 }
+
