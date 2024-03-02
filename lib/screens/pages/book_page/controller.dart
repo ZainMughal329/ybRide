@@ -13,11 +13,10 @@ import 'package:yb_ride/screens/pages/book_page/inded.dart';
 import 'package:http/http.dart' as http;
 import 'package:yb_ride/helper/prefs.dart';
 
-
 class BookViewController extends GetxController {
   final state = BookNowState();
 
-  void getCurrentDate(){
+  void getCurrentDate() {
     DateTime currentDate = DateTime.now();
     // Format the date as MMDDYYYY
     String formattedDateDay = DateFormat('dd').format(currentDate);
@@ -31,13 +30,31 @@ class BookViewController extends GetxController {
     getLaterDate();
   }
 
-  void getLaterDate(){
+  void updateMapTheme(GoogleMapController controller) {
+    Pref.isDarkMode
+        ? getJsonFileFromThemes("themes/night_style.json")
+            .then((value) => setGoogleMapStyle(value, controller))
+        : getJsonFileFromThemes("themes/standard_style.json")
+            .then((value) => setGoogleMapStyle(value, controller));
+  }
+
+  Future<String> getJsonFileFromThemes(String mapStylePath) async {
+    ByteData byteData = await rootBundle.load(mapStylePath);
+    var list = byteData.buffer
+        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
+    return utf8.decode(list);
+  }
+
+  setGoogleMapStyle(String googleMapStyle, GoogleMapController controller) {
+    controller.setMapStyle(googleMapStyle);
+  }
+
+  void getLaterDate() {
     // Get the current date
     DateTime currentDate = DateTime.now();
 
     // Add 5 days to the current date
     DateTime newDate = currentDate.add(Duration(days: 5));
-
 
     String formattedDateDay = DateFormat('dd').format(newDate);
     String formattedDateMonth = DateFormat('MM').format(newDate);
@@ -50,9 +67,8 @@ class BookViewController extends GetxController {
     state.toMonthName.value = getMonthName(formattedDateMonth);
     state.toYear.value = formattedDateYear;
 
-
     AppConstants.toDateName = getDayOfWeek(newDate).toString();
-    AppConstants.toDate =formattedDateDay;
+    AppConstants.toDate = formattedDateDay;
     AppConstants.toMonth = formattedDateMonth;
     AppConstants.toMonthName = getMonthName(formattedDateMonth);
     AppConstants.toYear = formattedDateYear;
@@ -60,33 +76,6 @@ class BookViewController extends GetxController {
     // AppConstants.toDateName
     state.datesFetched = true;
   }
-
-
-
-  void updateMapTheme(GoogleMapController controller) {
-    Pref.isDarkMode
-        ? getJsonFileFromThemes("themes/night_style.json")
-        .then((value) => setGoogleMapStyle(value, controller))
-        : getJsonFileFromThemes("themes/standard_style.json")
-        .then((value) => setGoogleMapStyle(value, controller));
-  }
-
-
-  Future<String> getJsonFileFromThemes(String mapStylePath) async {
-    ByteData byteData = await rootBundle.load(mapStylePath);
-    var list = byteData.buffer
-        .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
-    return utf8.decode(list);
-  }
-  setGoogleMapStyle(String googleMapStyle, GoogleMapController controller) {
-    controller.setMapStyle(googleMapStyle);
-  }
-
-
-
-
-
-
 
   void getSuggestions(
       String input, dynamic sessionToken, BookViewController cont) async {
@@ -99,13 +88,21 @@ class BookViewController extends GetxController {
     var response = await http.get(Uri.parse(request)).then((response) {
       if (response.statusCode == 200) {
         List predictions = jsonDecode(response.body.toString())['predictions'];
+        print('predictions: ' + predictions.toString());
         List bostonPredictions = predictions.where((prediction) {
-          return prediction['description'].toLowerCase().contains('boston');
+          print('inside:'+prediction.toString());
+          print('virginia: ' + prediction['structured_formatting']['secondary_text'].toLowerCase());
+          print('inside 121');
+
+          return prediction['structured_formatting']['secondary_text'].toLowerCase().contains('va, usa') ||
+              prediction['structured_formatting']['secondary_text'].toLowerCase().contains('ma, usa') ||
+              prediction['structured_formatting']['secondary_text'].toLowerCase().contains('dc, usa') ||
+              prediction['structured_formatting']['secondary_text'].toLowerCase().contains('md, usa');
         }).toList();
 
         state.results.value = bostonPredictions.length;
         // cont.state.placeList.value =
-            cont.state.placeList.value = bostonPredictions;
+        cont.state.placeList.value = bostonPredictions;
         state.searchLoading.value == false;
       } else {
         state.searchLoading.value = false;
@@ -116,7 +113,6 @@ class BookViewController extends GetxController {
   }
 
   void GetCoordinates(BuildContext context) async {
-
     List<Location> coordinates =
         await locationFromAddress(state.selectedPlace.toString());
     if (coordinates.isNotEmpty) {
@@ -144,14 +140,11 @@ class BookViewController extends GetxController {
     if (coordinates.isNotEmpty) {
       final lat = coordinates.first;
       state.returnLoc.value = LatLng(lat.latitude, lat.longitude);
-
     }
-
   }
 
   void extractStartEndDate(String output) {
-
-    state.startEndDateSelected.value=true;
+    state.startEndDateSelected.value = true;
     print(state.startEndDateSelected.value);
 
     // state.startEndDateSelected.value=true;
@@ -169,23 +162,19 @@ class BookViewController extends GetxController {
 
       DateTime startDateDay = DateTime.parse(formattedStartDate);
       print(formattedStartDate);
-      print("milisec"+startDateDay.millisecondsSinceEpoch.toString());
+      print("milisec" + startDateDay.millisecondsSinceEpoch.toString());
       String day = getDayOfWeek(startDateDay);
       String formattedDateDay = DateFormat('dd').format(startDateDay);
       String formattedDateMonth = DateFormat('MM').format(startDateDay);
       String formattedDateYear = DateFormat('yy').format(startDateDay);
 
-
-
-      AppConstants.epochFromDate = startDateDay.millisecondsSinceEpoch.toString();
+      AppConstants.epochFromDate =
+          startDateDay.millisecondsSinceEpoch.toString();
       state.fromDate.value = formattedDateDay;
       state.fromDateName.value = day;
       state.fromMonth.value = formattedDateMonth;
       state.fromMonthName.value = getMonthName(formattedDateMonth);
       state.fromYear.value = formattedDateYear;
-
-
-
 
       // Find the index of "endDate" and extract the substring
       startIndex = output.indexOf("endDate:");
@@ -198,17 +187,13 @@ class BookViewController extends GetxController {
         String formattedEndDate = endDate.split(' ')[0];
         // added line
 
-
-
         if (formattedEndDate != "null") {
-
-
           print(formattedEndDate);
 
           DateTime EndDateDay = DateTime.parse(formattedEndDate);
 
           print(EndDateDay.microsecondsSinceEpoch);
-          print("milisec"+EndDateDay.millisecondsSinceEpoch.toString());
+          print("milisec" + EndDateDay.millisecondsSinceEpoch.toString());
 
           String day = getDayOfWeek(EndDateDay);
 
@@ -216,21 +201,19 @@ class BookViewController extends GetxController {
           String formattedDateMonth = DateFormat('MM').format(EndDateDay);
           String formattedDateYear = DateFormat('yy').format(EndDateDay);
 
-          AppConstants.epochToDate = EndDateDay.millisecondsSinceEpoch.toString();
+          AppConstants.epochToDate =
+              EndDateDay.millisecondsSinceEpoch.toString();
           state.toDate.value = formattedDateDay;
           state.toDateName.value = day;
           state.toMonth.value = formattedDateMonth;
           state.toMonthName.value = getMonthName(formattedDateMonth);
           state.toYear.value = formattedDateYear;
 
-
           // state.startEndDateSelected.value=true;
         }
-
       }
-
     }
-    state.startEndDateSelected.value=true;
+    state.startEndDateSelected.value = true;
   }
 
   String getDayOfWeek(DateTime date) {
@@ -254,7 +237,7 @@ class BookViewController extends GetxController {
     }
   }
 
-  String getMonthName(String mon){
+  String getMonthName(String mon) {
     // Assuming you have the month as a numerical string "01"
     String monthString = mon;
 
@@ -267,7 +250,7 @@ class BookViewController extends GetxController {
     return monthName;
   }
 
-  void moveToSelectVehicleScreen(){
+  void moveToSelectVehicleScreen() {
     AppConstants.fromMonth = state.fromMonth.value;
     AppConstants.fromMonthName = state.fromMonthName.value;
     AppConstants.fromDate = state.fromDate.value;
@@ -281,28 +264,25 @@ class BookViewController extends GetxController {
     AppConstants.toYear = state.toYear.value;
     AppConstants.toTime = state.toTime.value;
     AppConstants.fromAddress = state.selectedPlace.value;
-    AppConstants.fromTimeinMiliSeconds = (convertTimeEpoch(state.fromTime.value)).toString();
-    AppConstants.toTimeinMiliSeconds = (convertTimeEpoch(state.toTime.value)).toString();
-    if(state.returnPlace.value =='Return Place'){
+    AppConstants.fromTimeinMiliSeconds =
+        (convertTimeEpoch(state.fromTime.value)).toString();
+    AppConstants.toTimeinMiliSeconds =
+        (convertTimeEpoch(state.toTime.value)).toString();
+    if (state.returnPlace.value == 'Return Place') {
       AppConstants.toAddress = state.selectedPlace.value;
-    }else{
+    } else {
       AppConstants.toAddress = state.returnPlace.value;
     }
 
-
-
-    Get.toNamed(RoutesName.carDetailsScreen,arguments: {'isTextShow',false});
-
+    Get.toNamed(RoutesName.carDetailsScreen, arguments: {'isTextShow', false , 'stateName' , ''});
   }
 
-  int convertTimeEpoch(String time){
+  int convertTimeEpoch(String time) {
     String timeString = time;
 
     int milliseconds = getTimeInMillisecondsSinceMidnight(timeString);
     print('Milliseconds since midnight (${time}): $milliseconds');
     return milliseconds;
-
-
   }
 
   int getTimeInMillisecondsSinceMidnight(String timeString) {
@@ -323,13 +303,9 @@ class BookViewController extends GetxController {
     }
 
     // Calculate the milliseconds since midnight
-    int millisecondsSinceMidnight =
-        hour * Duration.millisecondsPerHour +
-            minute * Duration.millisecondsPerMinute;
+    int millisecondsSinceMidnight = hour * Duration.millisecondsPerHour +
+        minute * Duration.millisecondsPerMinute;
 
     return millisecondsSinceMidnight;
   }
-
-
-
 }
