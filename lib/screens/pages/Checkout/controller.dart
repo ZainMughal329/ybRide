@@ -169,17 +169,30 @@ class CheckOutCon extends GetxController {
   }
 
   Future<void> getCheckoutPayments() async {
+    String docName = "";
+    if(AppConstants.selectedPlaceState == 'MA, USA'){
+      docName = 'massachusetts';
+    }else  if(AppConstants.selectedPlaceState == 'VA, USA'){
+      docName = 'virginia';
+    }else  if(AppConstants.selectedPlaceState == 'MD, USA'){
+      docName = 'maryland';
+    }else
+    if(AppConstants.selectedPlaceState == 'DC, USA'){
+      docName = 'districtOfColumbia';
+    }
+
+
     setDataLoaded(false);
     try {
       getReceiptCharges();
       CollectionReference usersCollection =
       APis.db.collection('checkoutPayment');
-      QuerySnapshot querySnapshot = await usersCollection.get();
+      DocumentSnapshot querySnapshot = await usersCollection.doc(docName).get();
 
       // Check if there are any documents in the collection
-      if (querySnapshot.docs.isNotEmpty) {
+      if (querySnapshot.exists) {
         // Get the first document
-        QueryDocumentSnapshot firstDocument = querySnapshot.docs.first;
+        dynamic firstDocument = querySnapshot;
 
         // Get the details from the document
         state.delivery = double.parse((firstDocument['delivery']).toString());
@@ -210,20 +223,31 @@ class CheckOutCon extends GetxController {
   }
 
   Future<void> getReceiptCharges() async{
+    String docName = "";
+    if(AppConstants.selectedPlaceState == 'MA, USA'){
+      docName = 'massachusetts';
+    }else  if(AppConstants.selectedPlaceState == 'VA, USA'){
+      docName = 'virginia';
+    }else  if(AppConstants.selectedPlaceState == 'MD, USA'){
+      docName = 'maryland';
+    }else
+    if(AppConstants.selectedPlaceState == 'DC, USA'){
+      docName = 'districtOfColumbia';
+    }
     try{
       CollectionReference usersCollection =
       APis.db.collection('receipt_charges');
-      QuerySnapshot querySnapshot = await usersCollection.get();
+      DocumentSnapshot querySnapshot = await usersCollection.doc(docName).get();
 
       // Check if there are any documents in the collection
-      if (querySnapshot.docs.isNotEmpty) {
+      if (querySnapshot.exists) {
         // Get the first document
-        QueryDocumentSnapshot firstDocument = querySnapshot.docs.first;
+        dynamic firstDocument = querySnapshot;
 
         // Get the details from the document
-        AppConstants.bostonPoliceFees = double.parse((firstDocument['Boston Convention Center Financing Surcharge']).toString());
+        AppConstants.bostonConventionCenter = double.parse((firstDocument['Boston Convention Center Financing Surcharge']).toString());
         AppConstants.bostonParking = double.parse((firstDocument['Boston Parking Surcharge']).toString());
-        AppConstants.bostonConventionCenter = double.parse((firstDocument['Boston Police Training Fees']).toString());
+        AppConstants.bostonPoliceFees = double.parse((firstDocument['Boston Police Training Fees']).toString());
         AppConstants.tempDeposit = double.parse((firstDocument['tempDeposit']).toString());
         AppConstants.salesTaxPercentage = double.parse((firstDocument['salesTaxPercentage']).toString());
 

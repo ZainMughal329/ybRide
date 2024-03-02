@@ -474,72 +474,72 @@ class CheckOutScreen extends GetView<CheckOutCon> {
                           SizedBox(
                             height: mq.height * .02,
                           ),
-                          Column(
-                            children: [
-                              Row(
-                                // crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      HeadingTextWidget(
-                                        title: 'Pickup',
-                                        fontSize: 14,
-                                        textColor:
-                                            Theme.of(context).headingColor,
-                                      ),
-                                      SizedBox(
-                                        height: mq.height * .002,
-                                      ),
-                                      SubHeadingTextWidget(
-                                        title:
-                                            'Meet us at our lot and save \non delivery fees',
-                                        fontSize: 14,
-                                        textColor:
-                                            Theme.of(context).lightTextColor,
-                                      ),
-                                    ],
-                                  ),
-                                  Spacer(),
-                                  // PICKUP CHECK BOX
-                                  Obx(
-                                    () => Checkbox(
-                                      shape: ContinuousRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                        side: BorderSide(
-                                            color: Colors.grey.withOpacity(.1),
-                                            width: .5),
-                                      ),
-                                      visualDensity: VisualDensity.compact,
-                                      value:
-                                          controller.state.vehicle_pickup.value,
-                                      onChanged: (bool? value) {
-                                        controller.priceLoadingFunc();
-                                        if (value == true) {
-                                          if (controller.state.vehicle_delivery
-                                                  .value ==
-                                              true) {
-                                            controller.state.vehicle_delivery
-                                                .value = false;
-                                            controller.subtractFromTotalPrince(
-                                                controller.state.delivery,
-                                                false);
-                                          }
-                                          pickUpBottomSheet(
-                                              context, controller);
-                                        }
-
-                                        controller.state.vehicle_pickup.value =
-                                            value!;
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                          // Column(
+                          //   children: [
+                          //     Row(
+                          //       // crossAxisAlignment: CrossAxisAlignment.center,
+                          //       children: [
+                          //         Column(
+                          //           mainAxisAlignment: MainAxisAlignment.start,
+                          //           crossAxisAlignment:
+                          //               CrossAxisAlignment.start,
+                          //           children: [
+                          //             HeadingTextWidget(
+                          //               title: 'Pickup',
+                          //               fontSize: 14,
+                          //               textColor:
+                          //                   Theme.of(context).headingColor,
+                          //             ),
+                          //             SizedBox(
+                          //               height: mq.height * .002,
+                          //             ),
+                          //             SubHeadingTextWidget(
+                          //               title:
+                          //                   'Meet us at our lot and save \non delivery fees',
+                          //               fontSize: 14,
+                          //               textColor:
+                          //                   Theme.of(context).lightTextColor,
+                          //             ),
+                          //           ],
+                          //         ),
+                          //         Spacer(),
+                          //         // PICKUP CHECK BOX
+                          //         Obx(
+                          //           () => Checkbox(
+                          //             shape: ContinuousRectangleBorder(
+                          //               borderRadius: BorderRadius.circular(8),
+                          //               side: BorderSide(
+                          //                   color: Colors.grey.withOpacity(.1),
+                          //                   width: .5),
+                          //             ),
+                          //             visualDensity: VisualDensity.compact,
+                          //             value:
+                          //                 controller.state.vehicle_pickup.value,
+                          //             onChanged: (bool? value) {
+                          //               controller.priceLoadingFunc();
+                          //               if (value == true) {
+                          //                 if (controller.state.vehicle_delivery
+                          //                         .value ==
+                          //                     true) {
+                          //                   controller.state.vehicle_delivery
+                          //                       .value = false;
+                          //                   controller.subtractFromTotalPrince(
+                          //                       controller.state.delivery,
+                          //                       false);
+                          //                 }
+                          //                 pickUpBottomSheet(
+                          //                     context, controller);
+                          //               }
+                          //
+                          //               controller.state.vehicle_pickup.value =
+                          //                   value!;
+                          //             },
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ],
+                          // ),
                           SizedBox(
                             height: mq.height * .02,
                           ),
