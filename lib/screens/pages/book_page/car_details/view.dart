@@ -168,7 +168,6 @@ class CarDetailsScreen extends GetView<CarDetailsController> {
     return docData['noOfVehicles'] == '0' ?
     Stack(
       children: [
-
         Padding(
           padding: EdgeInsets.only(bottom: 5),
           child: InkWell(
