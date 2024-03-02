@@ -82,6 +82,8 @@ dependencies:
 
 #  for payments
   flutter_stripe:
+#  protection for keys
+  flutter_dotenv: ^5.1.0
 #  for generting random string
   random_string: ^2.3.1
   permission_handler:
@@ -119,4 +121,5 @@ flutter:
     - assets/whiteIcons/
     - assets/appImages/
     - assets/carImages/
+    - assets/keyFile/
     - themes/
