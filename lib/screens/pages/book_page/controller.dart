@@ -309,5 +309,72 @@ class BookViewController extends GetxController {
     return millisecondsSinceMidnight;
   }
 
+
+
+  void extractFromNewRangePicker(String range){
+    String dateString = range;
+
+    List<String> dateParts = dateString.split(' - ');
+
+    // Start Date
+    String startDateString = dateParts[0];
+    List<String> startDateComponents = startDateString.split('-');
+    String startYear = startDateComponents[0];
+    String startMonth = startDateComponents[1];
+    String startDate = startDateComponents[2].split(' ')[0];
+    DateTime startDateObject = DateTime(int.parse(startYear), int.parse(startMonth),int.parse(startDate));
+    String startDateDayName = getDayOfWeek(startDateObject);
+    int startMillisecondsSinceEpoch = startDateObject.millisecondsSinceEpoch;
+
+    // Storing Start Values
+    AppConstants.epochFromDate = startMillisecondsSinceEpoch.toString();
+    state.fromDate.value = startDate;
+    state.fromDateName.value = startDateDayName;
+    state.fromMonth.value = startMonth;
+    state.fromMonthName.value = getMonthName(startMonth);
+    state.fromYear.value = startYear;
+
+
+    print("Start values stored");
+    print(AppConstants.epochFromDate);
+    print(state.fromDate.value);
+    print(state.fromDateName.value);
+    print(state.fromMonth.value);
+    print(state.fromMonthName.value);
+    print(state.fromYear.value);
+
+    // remove time part
+
+    // End Date
+    String endDateString = dateParts[1];
+    List<String> endDateComponents = endDateString.split('-');
+    String endYear = endDateComponents[0];
+    String endMonth = endDateComponents[1];
+    String endDate = endDateComponents[2].split(' ')[0];
+    DateTime endDateObject = DateTime(int.parse(endYear), int.parse(endMonth),int.parse(endDate));
+    String endDateDayName = getDayOfWeek(endDateObject);
+    int endMillisecondsSinceEpoch = startDateObject.millisecondsSinceEpoch;// remove time part
+
+    // storing end values
+    AppConstants.epochToDate = endMillisecondsSinceEpoch.toString();
+    state.toDate.value = endDate;
+    state.toDateName.value = getDayOfWeek(endDateObject);
+    state.toMonth.value = endMonth;
+    state.toMonthName.value = getMonthName(endMonth);
+    state.toYear.value = endYear;
+
+    print("End values stored");
+    print(AppConstants.epochToDate);
+    print(state.toDate.value);
+    print(state.toDateName.value);
+    print(state.toMonth.value);
+    print(state.toMonthName.value);
+    print(state.toYear.value);
+    state.startEndDateSelected.value=true;
+
+
+
+  }
+
 }
 

@@ -84,16 +84,18 @@ class CarDetailsScreen extends GetView<CarDetailsController> {
                                   padding: EdgeInsets.only(top: 12.0),
                                   child: Column(
                                     children: [
-                                      Text(
-                                        AppConstants.selectedPlaceState,
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                        style: GoogleFonts.openSans(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 15,
-
-
-                                          color: AppColors.buttonColor,
+                                      Flexible(
+                                        child: Text(
+                                          AppConstants.selectedPlaceState,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          style: GoogleFonts.openSans(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 15,
+                                        
+                                        
+                                            color: AppColors.buttonColor,
+                                          ),
                                         ),
                                       ),
                                       Text(

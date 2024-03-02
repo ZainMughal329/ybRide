@@ -30,6 +30,7 @@ class BookingModel {
   final bool isPromoCodeApplied;
   final double promoDiscountAmount;
   final String status;
+  final String state;
 
   BookingModel({
     required this.bookingDate,
@@ -61,6 +62,7 @@ class BookingModel {
     required this.isPromoCodeApplied,
     required this.promoDiscountAmount,
     required this.status,
+    required this.state,
   });
 
   toJson() {
@@ -94,6 +96,7 @@ class BookingModel {
       'isPromoCodeApplied': isPromoCodeApplied,
       'promoDiscountAmount': promoDiscountAmount,
       'status': status,
+      'state':state,
     };
   }
 
@@ -131,6 +134,7 @@ class BookingModel {
       isPromoCodeApplied: json['isPromoCodeApplied'],
       promoDiscountAmount: json['promoDiscountAmount'],
       status: json['status'],
+      state: json['state'],
     );
   }
 }
