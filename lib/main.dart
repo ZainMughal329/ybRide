@@ -99,7 +99,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       themeMode: Pref.defaultTheme(),
       // home: FAQScreen(),
-      initialRoute: RoutesName.splashScreen,
+      initialRoute: RoutesName.applicationScreen,
 
       getPages: AppRoutes.routes,
     );

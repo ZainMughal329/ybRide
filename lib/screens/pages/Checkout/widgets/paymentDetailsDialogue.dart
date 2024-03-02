@@ -7,6 +7,7 @@ import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
 import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/components/text_widget.dart';
+import 'package:yb_ride/helper/app_helpers.dart';
 import 'package:yb_ride/main.dart';
 import 'package:yb_ride/screens/pages/Checkout/widgets/paymentController.dart';
 
@@ -14,6 +15,7 @@ import '../../../../helper/app_colors.dart';
 import '../../../../helper/app_constants.dart';
 
 Future showRecipetSheet(
+  String id,
   BuildContext context,
   double noOfDays,
   String totalAmount,
@@ -39,13 +41,13 @@ Future showRecipetSheet(
       // ScaffoldMessenger.of(context).showSnackBar(
       //   SnackBar(content: Text('Receipt saved to gallery')),
       // );
-      Snackbar.showSnackBar('YB-Ride', "Receipt saved to gallery", Icons.done_all);
+      Snackbar.showSnackBar(
+          'YB-Ride', "Receipt saved to gallery", Icons.done_all);
     } catch (e) {
-
       Snackbar.showSnackBar('YB-Ride', e.toString(), Icons.done_all);
-
     }
   }
+
   double totalAmountToPay = 0.0;
   double _calculateSubTotal() {
     double subTotal = 0;
@@ -56,7 +58,6 @@ Future showRecipetSheet(
         AppConstants.tempDeposit;
     return subTotal;
   }
-
 
   double _calculateTax() {
     // return _calculateSubTotal() * 0.0625;
@@ -218,15 +219,17 @@ Future showRecipetSheet(
                   RoundButton(
                       title: "Pay",
                       onPress: () async {
+
                         screenshotController.capture().then(
-                              (Uint8List? image) {
+                          (Uint8List? image) {
                             _saveReceipt(image);
                           },
                         );
                         Navigator.pop(context);
+                        showProgressIndicator(context);
                         final payController = PaymentController();
                         await payController.makePayment(
-                            context, totalAmountToPay);
+                            context, totalAmountToPay, id);
                       }),
                   SizedBox(
                     height: 20,

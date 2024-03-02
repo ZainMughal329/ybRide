@@ -29,6 +29,7 @@ class AppConstants {
   //Address Constants
   static String fromAddress = 'Tap to Search';
   static String toAddress = 'Return Place';
+  static String selectedPlaceState = '';
 
   //Time Constants
   static   String epochFromDate = "";
