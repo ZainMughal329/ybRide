@@ -104,7 +104,7 @@ Future dateBottomSheet(BuildContext context, BookViewController cont) {
                   Container(
                     height: 800,
                     child: DateRanger(
-                      backgroundColor: Colors.white,
+                      backgroundColor: Theme.of(context).scaffoldBgClr,
                       activeItemBackground: AppColors.buttonColor,
                       rangeBackground: AppColors.buttonColor.withOpacity(0.5),
                       runSpacing: 20,
