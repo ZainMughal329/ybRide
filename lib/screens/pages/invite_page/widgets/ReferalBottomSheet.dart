@@ -24,7 +24,7 @@ Future<void> ReferalBottoSheet(BuildContext context,InviteCon controller) async 
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Center(child: HeadingTextWidget(title: 'Invite Friends ',textColor: Theme.of(context).scaffoldBgClr,)),
+                  Center(child: HeadingTextWidget(title: 'Invite Friends ',textColor: Theme.of(context).headingColor,)),
                   SizedBox(
                     height: 30,
                   ),
@@ -34,8 +34,8 @@ Future<void> ReferalBottoSheet(BuildContext context,InviteCon controller) async 
                       title:
                           'Invite your firends and you will get \$30 discount on your checkout',
                       maxLines: 4,
-                      textAlign: TextAlign.center
-                        ,textColor: Theme.of(context).scaffoldBgClr
+                      textAlign: TextAlign.center,
+                        textColor:Theme.of(context).headingColor,
                     ),
                   ),
                   SizedBox(
@@ -64,7 +64,7 @@ Future<void> ReferalBottoSheet(BuildContext context,InviteCon controller) async 
                             ),
                             style: GoogleFonts.openSans(
                                 fontSize: 15,
-                                color:Theme.of(context).scaffoldBgClr,
+                                color:Theme.of(context).headingColor,
                                 fontWeight: FontWeight.bold
                             ),
 
