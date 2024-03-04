@@ -104,6 +104,7 @@ class CheckOutCon extends GetxController {
     }
   }
 
+
   void subtractCustomCoverageValue(String coverageType) {
     double coverageValue = 0;
 
