@@ -24,7 +24,7 @@ class DriverModel {
     required this.city,
   });
 
-  toJson() {
+ Map<String, dynamic> toJson() {
     return {
       'id': id,
       'image': image,

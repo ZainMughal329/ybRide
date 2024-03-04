@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:yb_ride/components/heading_text_widget.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
 import 'package:yb_ride/components/text_widget.dart';
+import 'package:yb_ride/main.dart';
 import 'package:yb_ride/screens/pages/invite_page/controller.dart';
 
 Future<void> ReferalBottoSheet(BuildContext context,InviteCon controller) async {
@@ -23,7 +24,7 @@ Future<void> ReferalBottoSheet(BuildContext context,InviteCon controller) async 
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Center(child: HeadingTextWidget(title: 'Invite Friends ')),
+                  Center(child: HeadingTextWidget(title: 'Invite Friends ',textColor: Theme.of(context).headingColor,)),
                   SizedBox(
                     height: 30,
                   ),
@@ -34,6 +35,7 @@ Future<void> ReferalBottoSheet(BuildContext context,InviteCon controller) async 
                           'Invite your firends and you will get \$30 discount on your checkout',
                       maxLines: 4,
                       textAlign: TextAlign.center,
+                        textColor:Theme.of(context).headingColor,
                     ),
                   ),
                   SizedBox(
@@ -62,7 +64,7 @@ Future<void> ReferalBottoSheet(BuildContext context,InviteCon controller) async 
                             ),
                             style: GoogleFonts.openSans(
                                 fontSize: 15,
-                                color: Colors.black,
+                                color:Theme.of(context).headingColor,
                                 fontWeight: FontWeight.bold
                             ),
 

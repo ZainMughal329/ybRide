@@ -82,6 +82,8 @@ dependencies:
 
 #  for payments
   flutter_stripe:
+#  protection for keys
+  flutter_dotenv: ^5.1.0
 #  for generting random string
   random_string: ^2.3.1
   permission_handler:
@@ -95,6 +97,8 @@ dependencies:
 #  for screenshot the recepit
   screenshot: ^2.1.0
   image_gallery_saver: ^2.0.3
+#  date range picker for ios
+  date_ranger: ^1.0.1
 
 
 
@@ -119,4 +123,5 @@ flutter:
     - assets/whiteIcons/
     - assets/appImages/
     - assets/carImages/
+    - assets/keyFile/
     - themes/

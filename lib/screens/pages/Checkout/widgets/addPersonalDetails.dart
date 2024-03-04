@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
 import 'package:yb_ride/components/snackbar_widget.dart';
@@ -27,6 +28,7 @@ Future addPersonalDataSheet(BuildContext context,CheckOutCon controller) async{
                 contr: controller.state.fNameCon,
                 label: "First Name",
                 textInputAction: TextInputAction.next,
+                inputFormatters:[FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
                 keyboardType: TextInputType.text,
                 obsecure: false),
             SizedBox(height: 5,),
@@ -34,6 +36,7 @@ Future addPersonalDataSheet(BuildContext context,CheckOutCon controller) async{
                 contr: controller.state.lNameCon,
                 label: "Last Name",
                 textInputAction: TextInputAction.next,
+                inputFormatters:[FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
                 keyboardType: TextInputType.text,
                 obsecure: false),
             SizedBox(height: 5,),
@@ -71,11 +74,20 @@ Future addPersonalDataSheet(BuildContext context,CheckOutCon controller) async{
                   controller.state.emailCon.text.isNotEmpty&&
                   controller.state.phoneNumberCon.text.isNotEmpty
               ){
-                print(controller.state.fNameCon.text);
-                controller.storeUserDetailsinConstants();
-                Navigator.pop(context);
-                // print(controller.state.phoneNumberCon.text.toString());
-                // print("raw form"+getRawPhoneNumber(controller.state.phoneNumberCon.text.toString()));
+                if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                    .hasMatch(controller.state.emailCon.text)) {
+                  Snackbar.showSnackBar(
+                      'YB-Ride', 'Enter a valid email address',
+                      Icons.error_outline);
+                }else{
+
+                  print(controller.state.fNameCon.text);
+                  controller.storeUserDetailsinConstants();
+                  Navigator.pop(context);
+                  // print(controller.state.phoneNumberCon.text.toString());
+                  // print("raw form"+getRawPhoneNumber(controller.state.phoneNumberCon.text.toString()));
+
+                }
 
               }else{
                 Snackbar.showSnackBar("YB-Ride", "Enter all fields", Icons.error_outline);

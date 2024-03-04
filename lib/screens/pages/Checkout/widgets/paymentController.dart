@@ -176,6 +176,7 @@ class PaymentController extends GetxController {
       status: 'pending',
       isReturnedDeposit: false,
       isPaid: true,
+      state: AppConstants.selectedPlaceState,
     );
 
     try {
