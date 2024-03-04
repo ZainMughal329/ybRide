@@ -170,14 +170,14 @@ class CheckOutCon extends GetxController {
 
   Future<void> getCheckoutPayments() async {
     String docName = "";
-    if(AppConstants.selectedPlaceState == 'MA, USA'){
+    if(AppConstants.selectedPlaceState.contains('MA, USA')){
       docName = 'massachusetts';
-    }else  if(AppConstants.selectedPlaceState == 'VA, USA'){
+    }else  if(AppConstants.selectedPlaceState.contains('VA, USA')){
       docName = 'virginia';
-    }else  if(AppConstants.selectedPlaceState == 'MD, USA'){
+    }else  if(AppConstants.selectedPlaceState.contains('MD, USA')){
       docName = 'maryland';
     }else
-    if(AppConstants.selectedPlaceState == 'DC, USA'){
+    if(AppConstants.selectedPlaceState.contains('DC, USA')){
       docName = 'districtOfColumbia';
     }
 
@@ -224,14 +224,14 @@ class CheckOutCon extends GetxController {
 
   Future<void> getReceiptCharges() async{
     String docName = "";
-    if(AppConstants.selectedPlaceState == 'MA, USA'){
+    if(AppConstants.selectedPlaceState.contains('MA, USA')){
       docName = 'massachusetts';
-    }else  if(AppConstants.selectedPlaceState == 'VA, USA'){
+    }else  if(AppConstants.selectedPlaceState.contains('VA, USA')){
       docName = 'virginia';
-    }else  if(AppConstants.selectedPlaceState == 'MD, USA'){
+    }else  if(AppConstants.selectedPlaceState.contains('MD, USA')){
       docName = 'maryland';
     }else
-    if(AppConstants.selectedPlaceState == 'DC, USA'){
+    if(AppConstants.selectedPlaceState.contains('DC, USA')){
       docName = 'districtOfColumbia';
     }
     try{
