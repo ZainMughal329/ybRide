@@ -53,7 +53,7 @@ class LoginController extends GetxController {
   }
 
   handleGoogleSignIn(BuildContext context) async {
-    // showProgressIndicator(context);
+    showProgressIndicator(context);
     _signInWithGoogle().then((user) async {
       // SessionController().userId = user!.uid.toString();
 
@@ -69,6 +69,9 @@ class LoginController extends GetxController {
           });
         }
       }
+    }).onError((error, stackTrace){
+      Navigator.pop(context);
+      Snackbar.showSnackBar("YB-Ride", 'Error while google signing', Icons.error_outline);
     });
   }
 
