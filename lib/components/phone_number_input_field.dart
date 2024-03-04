@@ -9,13 +9,13 @@ import 'package:yb_ride/helper/app_colors.dart';
 import 'package:yb_ride/main.dart';
 import 'package:yb_ride/screens/settings/pages/profile/controller.dart';
 
-
-
-
-
-
-
-Widget PhoneNumberField(CountryCode code, Function changeCountry, TextEditingController phone, bool isFocus, Function onPress, BuildContext context) {
+Widget PhoneNumberField(
+    CountryCode code,
+    Function changeCountry,
+    TextEditingController phone,
+    bool isFocus,
+    Function onPress,
+    BuildContext context) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
     child: InkWell(
@@ -32,7 +32,9 @@ Widget PhoneNumberField(CountryCode code, Function changeCountry, TextEditingCon
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: isFocus ? AppColors.activeTextFieldColor : AppColors.nonActiveTextFieldColor,
+                color: isFocus
+                    ? AppColors.activeTextFieldColor
+                    : AppColors.nonActiveTextFieldColor,
               ),
             ),
             child: Padding(
@@ -52,7 +54,6 @@ Widget PhoneNumberField(CountryCode code, Function changeCountry, TextEditingCon
                             Expanded(
                               child: Container(
                                 child: CountryCodeFlagWidget(
-
                                   width: 34,
                                   alignment: Alignment.center,
                                   countryCode: CountryCode(
@@ -103,10 +104,9 @@ Widget PhoneNumberField(CountryCode code, Function changeCountry, TextEditingCon
                           floatingLabelAlignment: FloatingLabelAlignment.start,
                           border: InputBorder.none,
                           labelStyle: GoogleFonts.openSans(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: Theme.of(context).headingColor
-                          ),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: Theme.of(context).headingColor),
                         ),
                       ),
                     ),
@@ -123,7 +123,8 @@ Widget PhoneNumberField(CountryCode code, Function changeCountry, TextEditingCon
 
 class PhoneNumberFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
     final text = newValue.text.replaceAll(RegExp(r'[^0-9]'), '');
     final formattedText = StringBuffer();
 
@@ -140,7 +141,6 @@ class PhoneNumberFormatter extends TextInputFormatter {
     );
   }
 }
-
 
 Widget TextWidget({
   required String text,
