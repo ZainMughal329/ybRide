@@ -50,21 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAL3BrJ_7Q2cCjaPYMjEbfrmRSM2TBtPk0',
-    appId: '1:1046745632203:android:d540eab0c11b153bae7a4e',
-    messagingSenderId: '1046745632203',
-    projectId: 'yb-ride-88e8b',
-    storageBucket: 'yb-ride-88e8b.appspot.com',
+    apiKey: 'AIzaSyD6qyZHi0zLgP091Zs8Pu4aDHucLT4ofXI',
+    appId: '1:782774219638:android:29c7ba83300a53d20e4057',
+    messagingSenderId: '782774219638',
+    projectId: 'yb-ride-83505',
+    storageBucket: 'yb-ride-83505.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBuB6luQPFkwpMfkDxZ-_5RzEPQ-kTV-9Y',
-    appId: '1:1046745632203:ios:253ba1f04d1bc303ae7a4e',
-    messagingSenderId: '1046745632203',
-    projectId: 'yb-ride-88e8b',
-    storageBucket: 'yb-ride-88e8b.appspot.com',
-    androidClientId: '1046745632203-pfcd5glhbsh04tp9pvtflegec796h70t.apps.googleusercontent.com',
-    iosClientId: '1046745632203-fccvitagq7oa35p3lf7jebg8hoq8u5mq.apps.googleusercontent.com',
-    iosBundleId: 'com.example.ybRide',
+    apiKey: 'AIzaSyD3_51intphkkZskb4ta-oACx5Kt8ZCgxQ',
+    appId: '1:782774219638:ios:5a98e9631c575dea0e4057',
+    messagingSenderId: '782774219638',
+    projectId: 'yb-ride-83505',
+    storageBucket: 'yb-ride-83505.appspot.com',
+    androidClientId: '782774219638-q425s01mtjnn15ve7kscer8nh6futvj5.apps.googleusercontent.com',
+    iosClientId: '782774219638-bq3vp1ov0d6vjpc2vc91aep17f9gk18g.apps.googleusercontent.com',
+    iosBundleId: 'com.dev.ybride',
   );
 }

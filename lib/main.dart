@@ -22,6 +22,9 @@ import 'package:permission_handler/permission_handler.dart';
 late Size mq;
 late bool isDarkTheme;
 
+//apple notification key
+// T6449XQPV6
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -95,7 +98,8 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       themeMode: Pref.defaultTheme(),
       // home: FAQScreen(),
-      initialRoute: RoutesName.applicationScreen,
+      initialRoute: RoutesName.splashScreen,
+      // initialRoute: RoutesName.welcomeScreen,
 
       getPages: AppRoutes.routes,
     );
