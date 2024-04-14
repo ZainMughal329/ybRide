@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:782774219638:android:29c7ba83300a53d20e4057",
+        "mobilesdk_app_id": "1:782774219638:android:6fd9db2ce6fba1700e4057",
         "android_client_info": {
-          "package_name": "com.dev.ybride"
+          "package_name": "com.dev.ybbuddy"
         }
       },
       "oauth_client": [
@@ -30,6 +30,57 @@
             {
               "client_id": "782774219638-u6519fugiid5sgj9un4mqtgacekqbhad.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "782774219638-bq3vp1ov0d6vjpc2vc91aep17f9gk18g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dev.ybride"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782774219638:android:29c7ba83300a53d20e4057",
+        "android_client_info": {
+          "package_name": "com.dev.ybride"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782774219638-q425s01mtjnn15ve7kscer8nh6futvj5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dev.ybride",
+            "certificate_hash": "33873a85501259c81992a5f29bf78272ea6fa5bd"
+          }
+        },
+        {
+          "client_id": "782774219638-u6519fugiid5sgj9un4mqtgacekqbhad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6qyZHi0zLgP091Zs8Pu4aDHucLT4ofXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782774219638-u6519fugiid5sgj9un4mqtgacekqbhad.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "782774219638-bq3vp1ov0d6vjpc2vc91aep17f9gk18g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dev.ybride"
+              }
             }
           ]
         }

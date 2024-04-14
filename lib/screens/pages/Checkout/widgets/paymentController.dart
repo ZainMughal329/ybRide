@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -76,6 +77,8 @@ class PaymentController extends GetxController {
   }
 
   createPaymentIntent(String currency, double totalAmount) async {
+    AppConstants.stripe_secret_key = dotenv.env['STRIPE_SECRET_KEY']!;
+
     try {
       //Request body
       Map<String, dynamic> body = {

@@ -126,3 +126,4 @@ flutter:
     - assets/carImages/
     - assets/keyFile/
     - themes/
+    - assets/keyFile/keys.env
