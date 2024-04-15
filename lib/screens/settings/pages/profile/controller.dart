@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:yb_ride/api/api.dart';
 import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/helper/session_controller.dart';
+import 'package:yb_ride/models/usermodel.dart';
 import 'package:yb_ride/screens/settings/pages/profile/index.dart';
 
 class ProfileController extends GetxController{
@@ -17,8 +18,12 @@ class ProfileController extends GetxController{
 
   Future<void> fetchUserDetails() async{
     setLoading(true);
+
+    // SessionController().userId.toString() = 0Wv5X0uyseR1q2kUsxLMhq8Wbwp1;
     try{
       var userData= await APis.db.collection('users').doc(SessionController().userId.toString()).get().then((value){
+
+
         String name = value['name'];
         String email = value['email'];
         state.fNameCon.text=name.toString();

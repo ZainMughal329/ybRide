@@ -73,12 +73,26 @@ class SignupScreen extends GetView<SignUpController> {
             SizedBox(
               height: mq.height * .0015,
             ),
-            ReuseableTextField(
-                contr: controller.state.passCon,
-                label: 'Password',
-                textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.visiblePassword,
-                obsecure: true),
+            Obx(() => ReuseableTextField(
+              contr: controller.state.passCon,
+              label: 'Password',
+              textInputAction: TextInputAction.done,
+              keyboardType: TextInputType.visiblePassword,
+              obsecure:  controller.state.isObscure.value,
+            )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text("Hide Password"),
+                SizedBox(width: 3,),
+                Obx(() => Checkbox(value: controller.state.isObscure.value,
+                  onChanged: (val){
+                    controller.state.isObscure.value = val!;
+                  },
+                )),
+                SizedBox(width: 3,),
+              ],
+            ),
             SizedBox(
               height: mq.height * .03,
             ),
