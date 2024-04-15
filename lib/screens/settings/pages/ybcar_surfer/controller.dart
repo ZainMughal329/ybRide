@@ -22,9 +22,12 @@ class SurferController extends GetxController {
     setLoading(true);
     String dateTime = DateTime.timestamp().millisecondsSinceEpoch.toString();
 
+
+
+    // code for storing data in firestore
     try {
       await APis.db
-          .collection('drivers')
+          .collection('surferForm')
           .doc(dateTime)
           .set(DriverModel(
             id: dateTime,
@@ -50,6 +53,8 @@ class SurferController extends GetxController {
       setLoading(false);
       Snackbar.showSnackBar('YB-Ride', e.toString(), Icons.error_outline);
     }
+
+
   }
 
   Future<void> showConfirmationDialogue(BuildContext context) async {
