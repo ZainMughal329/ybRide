@@ -101,42 +101,6 @@ class LoginController extends GetxController {
   }
 
 
-// user Login function
-  void loginUserWithEmailAndPassword(String email, password,BuildContext context) async {
-    showProgressIndicator(context);
-    try {
-
-      bool isExist = await checkIfUserExists(email);
-      if(isExist) {
-      await APis.auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) async {
-        SessionController().userId = value.user!.uid.toString();
-        getUserReferralDiscount();
-        Navigator.pop(context);
-        Get.offAllNamed(RoutesName.applicationScreen);
-        state.emailCon.clear();
-        state.passCon.clear();
-      }).onError((error, stackTrace) {
-        Snackbar.showSnackBar("Error", error.toString(), Icons.error_outline);
-        Navigator.pop(context);
-      });
-      }else {
-        Snackbar.showSnackBar(
-            'YB-Ride',
-            'Your Email or password is not correct.Recheck them.',
-            Icons.error_outline);
-        Navigator.pop(context);
-
-      }
-    } on FirebaseAuthException catch (e) {
-      Snackbar.showSnackBar("Error", e.toString(), Icons.error_outline);
-      Navigator.pop(context);
-    } catch (e) {
-      Snackbar.showSnackBar("Error", e.toString(), Icons.error_outline);
-      Navigator.pop(context);
-    }
-  }
 
 
   Future<void> getUserReferralDiscount() async{
@@ -155,7 +119,7 @@ class LoginController extends GetxController {
     if(snapshot.docs.isNotEmpty) {
       snapshot.docs.forEach((element) {
         var snap = element['email'];
-        log('snap:${snap}');
+        // log('snap:${snap}');
         list.add(snap);
       });
     }
@@ -173,6 +137,43 @@ class LoginController extends GetxController {
       // Handle any errors
       print(e);
       return false;
+    }
+  }
+
+  // user Login function
+  void loginUserWithEmailAndPassword(String email, password,BuildContext context) async {
+    showProgressIndicator(context);
+    try {
+
+      bool isExist = await checkIfUserExists(email);
+      if(isExist) {
+        await APis.auth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((value) async {
+          SessionController().userId = value.user!.uid.toString();
+          getUserReferralDiscount();
+          Navigator.pop(context);
+          Get.offAllNamed(RoutesName.applicationScreen);
+          state.emailCon.clear();
+          state.passCon.clear();
+        }).onError((error, stackTrace) {
+          Snackbar.showSnackBar("Error", error.toString(), Icons.error_outline);
+          Navigator.pop(context);
+        });
+      }else {
+        Snackbar.showSnackBar(
+            'YB-Ride',
+            'Your Email or password is not correct.Recheck them.',
+            Icons.error_outline);
+        Navigator.pop(context);
+
+      }
+    } on FirebaseAuthException catch (e) {
+      Snackbar.showSnackBar("Error", e.toString(), Icons.error_outline);
+      Navigator.pop(context);
+    } catch (e) {
+      Snackbar.showSnackBar("Error", e.toString(), Icons.error_outline);
+      Navigator.pop(context);
     }
   }
 

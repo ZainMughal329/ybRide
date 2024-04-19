@@ -1,11 +1,16 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:yb_ride/api/api.dart';
 import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/helper/app_constants.dart';
 import 'package:yb_ride/helper/app_helpers.dart';
+import 'package:yb_ride/helper/notification_services.dart';
 import 'package:yb_ride/helper/session_controller.dart';
 import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/session/signUp/inded.dart';
@@ -140,5 +145,130 @@ class SignUpController extends GetxController {
       print(double.parse((user['referralDiscount']).toString()));
     }
   }
+
+
+
+  static User get user => APis.auth.currentUser!;
+
+  static Future<bool> userExists() async {
+    return (await APis.db.collection('users').doc(user.uid).get()).exists;
+  }
+
+  static Future<void> createGoogleUser() async {
+    NotificationServices services = NotificationServices();
+    late String token;
+    await services.getToken().then((value) {
+      token = value;
+    });
+    // log('message'+token.toString());
+    final chatUser = UserModel(
+      image: user.photoURL.toString(),
+      name: user.displayName.toString(),
+      id: user.uid.toString(),
+      email: user.email.toString(),
+      pushToken: token,
+      dateTime: DateTime.now().millisecondsSinceEpoch.toString(),
+      list: [],
+      referralList: [],
+
+    );
+    SessionController().userId=user.uid.toString();
+
+    await APis.db.collection('users').doc(APis.auth.currentUser!.uid).set(
+      chatUser.toJson(),
+    );
+  }
+
+  handleGoogleSignIn(BuildContext context) async {
+    showProgressIndicator(context);
+    _signInWithGoogle().then((user) async {
+      // SessionController().userId = user!.uid.toString();
+
+      if (user != null) {
+        SessionController().userId = user.user!.uid.toString();
+        if ((await userExists())) {
+          getUserReferralDiscount();
+          return Get.offAndToNamed(RoutesName.applicationScreen);
+        } else {
+          await createGoogleUser().then((value) {
+            getUserReferralDiscount();
+            return Get.offAndToNamed(RoutesName.applicationScreen);
+          });
+        }
+      }
+    }).onError((error, stackTrace){
+      Navigator.pop(context);
+      Snackbar.showSnackBar("YB-Ride", 'Error while google signing', Icons.error_outline);
+    });
+  }
+
+  Future<UserCredential?> _signInWithGoogle() async {
+    try {
+      await InternetAddress.lookup('google.com');
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth =
+      await googleUser?.authentication;
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      // Once signed in, return the UserCredential
+      return await APis.auth.signInWithCredential(credential);
+    } catch (e) {
+      // log('\n_signInWithGoogle: $e');
+      // Snackbar.showSnackBar('Something went wrong!!!', 'Check your internet.');
+      return null;
+    }
+  }
+
+
+
+
+  // Future<void> getUserReferralDiscount() async{
+  //   var user = await APis.db.collection('users').doc(SessionController().userId).get();
+  //   if(user.exists){
+  //     AppConstants.referralDiscount=double.parse((user['referralDiscount']).toString());
+  //     print("=======================");
+  //     print(double.parse((user['referralDiscount']).toString()));
+  //   }
+  // }
+
+  List<String> list = [];
+
+  fetchUserCollectionData() async {
+    QuerySnapshot snapshot = await APis.db.collection('users').get();
+    if(snapshot.docs.isNotEmpty) {
+      snapshot.docs.forEach((element) {
+        var snap = element['email'];
+        // log('snap:${snap}');
+        list.add(snap);
+      });
+    }
+    print('len:'+list.length.toString());
+  }
+
+  Future<bool> checkIfUserExists(String email) async {
+    try {
+      var snapshot = await APis.db
+          .collection('users')
+          .where('email', isEqualTo: email)
+          .get();
+      return snapshot.docs.isNotEmpty;
+    } catch (e) {
+      // Handle any errors
+      print(e);
+      return false;
+    }
+  }
+
+
+
+
 
 }
