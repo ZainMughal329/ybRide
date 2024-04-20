@@ -324,6 +324,7 @@ class SettingsView extends GetView<SettingsController> {
                   ),
                 ],
               ),
+
               Icon(
                 trailingIcon,
                 color: AppColors.settingsIconColor,
