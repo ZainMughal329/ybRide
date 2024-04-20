@@ -357,6 +357,12 @@ class CheckOutCon extends GetxController {
         setCardLoading(false);
         Snackbar.showSnackBar(
             'YB-Ride', "Error ${error.toString()}", Icons.done);
+      }).timeout(Duration(seconds: 20),onTimeout: (){
+        Navigator.pop(context);
+        Snackbar.showSnackBar(
+            'YB-Ride',
+            'Something went wrong. Try again in some time!',
+            Icons.error_outline);
       });
     } catch (error) {
       setCardLoading(false);

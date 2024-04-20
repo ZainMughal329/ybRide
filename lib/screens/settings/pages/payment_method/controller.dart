@@ -80,6 +80,12 @@ class PaymentCon extends GetxController {
         setLoading(false);
         Snackbar.showSnackBar(
             'YB-Ride', "Error ${error.toString()}", Icons.done);
+      }).timeout(Duration(seconds: 20),onTimeout: (){
+        Navigator.pop(context);
+        Snackbar.showSnackBar(
+            'YB-Ride',
+            'Something went wrong. Try again in some time!',
+            Icons.error_outline);
       });
     } catch (error) {
       setLoading(false);
@@ -127,6 +133,12 @@ class PaymentCon extends GetxController {
       }).onError((error, stackTrace){
         Snackbar.showSnackBar("YB-Ride", error.toString(), Icons.done_all);
         setLoading(false);
+      }).timeout(Duration(seconds: 20),onTimeout: (){
+        Navigator.pop(context);
+        Snackbar.showSnackBar(
+            'YB-Ride',
+            'Something went wrong. Try again in some time!',
+            Icons.error_outline);
       });
     }catch(e){
       setLoading(false);

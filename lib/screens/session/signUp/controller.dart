@@ -57,6 +57,12 @@ class SignUpController extends GetxController {
         clearControllers();
       }).onError((error, stackTrace) {
         Snackbar.showSnackBar("Error", error.toString(), Icons.error_outline);
+      }).timeout(Duration(seconds: 20),onTimeout: (){
+        Navigator.pop(context);
+        Snackbar.showSnackBar(
+            'YB-Ride',
+            'Something went wrong. Try again in some time!',
+            Icons.error_outline);
       });
     } catch (e) {
       Navigator.pop(context);
@@ -199,6 +205,12 @@ class SignUpController extends GetxController {
     }).onError((error, stackTrace){
       Navigator.pop(context);
       Snackbar.showSnackBar("YB-Ride", 'Error while google signing', Icons.error_outline);
+    }).timeout(Duration(seconds: 20),onTimeout: (){
+      Navigator.pop(context);
+      Snackbar.showSnackBar(
+          'YB-Ride',
+          'Something went wrong. Try again in some time!',
+          Icons.error_outline);
     });
   }
 
