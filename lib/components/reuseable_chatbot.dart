@@ -154,11 +154,13 @@ class MyHomePage extends StatelessWidget {
             },
           ),
         ),
-        body: Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).padding.bottom),
-              child: _chatIsOpened
+
+        body: Padding(
+          padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).padding.bottom),
+          child: Stack(
+            children: [
+              _chatIsOpened
+
                   ? Center(
                       child: HeadingTextWidget(
                         title: 'Welcome to YBCar,',
@@ -166,55 +168,56 @@ class MyHomePage extends StatelessWidget {
                       ),
                     )
                   : ikchatbot(config: chatBotConfig),
-            ),
-            Positioned(
-                top: mq.height * 0,
-                left: mq.width * 0,
-                right: mq.width * 0,
-                child: Container(
-                  height: mq.height * .20,
-                  // Adjust the height based on your design
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBgClr,
-                    // color: Colors.red,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: mq.height * .01, horizontal: mq.width * .05),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Spacer(),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: mq.height * .07,
-                              width: mq.height * .07,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                image: DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/logo1.jpeg'),
-                                    fit: BoxFit.fill),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: mq.height * 0.03),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: mq.height * .001),
-                          child: HeadingTextWidget(
-                            title: 'YBCar Support System is here for you.',
-                            textColor: Theme.of(context).headingColor,
-                          ),
-                        ),
-                        Spacer(),
-                      ],
+
+              Positioned(
+                  top: mq.height * 0,
+                  left: mq.width * 0,
+                  right: mq.width * 0,
+                  child: Container(
+                    height: mq.height * .24,
+                    // Adjust the height based on your design
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBgClr,
+                      // color: Colors.red,
                     ),
-                  ),
-                )),
-          ],
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: mq.height * .01, horizontal: mq.width * .05),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Spacer(),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: mq.height * .1,
+                                width: mq.height * .1,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  image: DecorationImage(
+                                      image:
+                                          AssetImage('assets/images/logo1.jpeg'),
+                                      fit: BoxFit.fill),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: mq.height * 0.03),
+                          Padding(
+                            padding: EdgeInsets.only(bottom: mq.height * .017),
+                            child: HeadingTextWidget(
+                              title: 'YBCar Support System is here for you.',
+                              textColor: Theme.of(context).headingColor,
+                            ),
+                          ),
+                          Spacer(),
+                        ],
+                      ),
+                    ),
+                  )),
+            ],
+          ),
         ));
   }
 }

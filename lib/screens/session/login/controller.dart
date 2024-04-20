@@ -178,3 +178,4 @@ class LoginController extends GetxController {
   }
 
 }
+

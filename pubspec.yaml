@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 2.0.0+2
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -99,6 +99,7 @@ dependencies:
   image_gallery_saver: ^2.0.3
 #  date range picker for ios
   date_ranger: ^1.0.1
+  recaptcha_enterprise_flutter: ^18.4.2
 
 
 
@@ -125,3 +126,4 @@ flutter:
     - assets/carImages/
     - assets/keyFile/
     - themes/
+    - assets/keyFile/keys.env

@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1046745632203-fccvitagq7oa35p3lf7jebg8hoq8u5mq.apps.googleusercontent.com</string>
+	<string>782774219638-bq3vp1ov0d6vjpc2vc91aep17f9gk18g.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1046745632203-fccvitagq7oa35p3lf7jebg8hoq8u5mq</string>
+	<string>com.googleusercontent.apps.782774219638-bq3vp1ov0d6vjpc2vc91aep17f9gk18g</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>1046745632203-2asipa39p63bajc51m90m4gl112mslqv.apps.googleusercontent.com</string>
+	<string>782774219638-q425s01mtjnn15ve7kscer8nh6futvj5.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBuB6luQPFkwpMfkDxZ-_5RzEPQ-kTV-9Y</string>
+	<string>AIzaSyD3_51intphkkZskb4ta-oACx5Kt8ZCgxQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1046745632203</string>
+	<string>782774219638</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.ybRide</string>
+	<string>com.dev.ybride</string>
 	<key>PROJECT_ID</key>
-	<string>yb-ride-88e8b</string>
+	<string>yb-ride-83505</string>
 	<key>STORAGE_BUCKET</key>
-	<string>yb-ride-88e8b.appspot.com</string>
+	<string>yb-ride-83505.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +31,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1046745632203:ios:253ba1f04d1bc303ae7a4e</string>
+	<string>1:782774219638:ios:5a98e9631c575dea0e4057</string>
 	<key>DATABASE_URL</key>
-	<string>https://yb-ride-88e8b-default-rtdb.firebaseio.com</string>
+	<string>https://yb-ride-83505-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

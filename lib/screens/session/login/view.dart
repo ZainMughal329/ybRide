@@ -48,29 +48,42 @@ class LoginScreen extends GetView<LoginController> {
             SizedBox(
               height: mq.height * .0005,
             ),
-            ReuseableTextField(
-                contr: controller.state.passCon,
-                label: 'Password',
-                textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.visiblePassword,
-                useEmailValidation: true,
-                obsecure: true),
-            SizedBox(
-              height: mq.height * .01,
+           Obx(() =>  ReuseableTextField(
+               contr: controller.state.passCon,
+               label: 'Password',
+               textInputAction: TextInputAction.done,
+               keyboardType: TextInputType.visiblePassword,
+               useEmailValidation: true,
+               obsecure: controller.state.isObscure.value)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text("Hide Password"),
+                SizedBox(width: 3,),
+                Obx(() => Checkbox(value: controller.state.isObscure.value,
+                  onChanged: (val){
+                    controller.state.isObscure.value = val!;
+                  },
+                )),
+                SizedBox(width: 3,),
+              ],
             ),
-            Padding(
-              padding: EdgeInsets.only(right: mq.width * 0.06),
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: HeadingTextWidget(
-                  title: 'Forgot Password?',
-                  decoration: TextDecoration.underline,
-                  decorationColor: AppColors.buttonColor,
-                  fontSize: 12,
-                  textColor: AppColors.buttonColor,
-                ),
-              ),
-            ),
+            // SizedBox(
+            //   height: mq.height * .01,
+            // ),
+            // Padding(
+            //   padding: EdgeInsets.only(right: mq.width * 0.06),
+            //   child: Align(
+            //     alignment: Alignment.bottomRight,
+            //     child: HeadingTextWidget(
+            //       title: 'Forgot Password?',
+            //       decoration: TextDecoration.underline,
+            //       decorationColor: AppColors.buttonColor,
+            //       fontSize: 12,
+            //       textColor: AppColors.buttonColor,
+            //     ),
+            //   ),
+            // ),
             SizedBox(
               height: mq.height * .02,
             ),

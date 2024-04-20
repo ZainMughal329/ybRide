@@ -22,13 +22,15 @@ import 'package:permission_handler/permission_handler.dart';
 late Size mq;
 late bool isDarkTheme;
 
+//apple notification key
+// T6449XQPV6
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   Pref.init();
   // Pref.initialize();
   Stripe.publishableKey = 'pk_test_51Ogo46EwduwUAGBRz8KlKG0uKlP2DL1KfBVj3Iqum4fSQVtOfD4WPCisOOmVfIoEAKsBJNTI0WzOmpOLmntqPTTJ00F599LcQW';
-
+  await dotenv.load(fileName: "assets/keyFile/keys.env");
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]
@@ -68,15 +70,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     mq = MediaQuery.sizeOf(context);
 
+
     // AppConstants.stripe_publish_key = dotenv.env['STRIPE_PUBLISH_KEY']!;
     // AppConstants.stripe_secret_key = dotenv.env['STRIPE_SECRET_KEY']!;
-    AppConstants.stripe_secret_key ="sk_test_51Ogo46EwduwUAGBR6619v0dguE6DlSE4n461X2P3SPjB36K9zAqbU8lQyp7WuqIMQatRCsf7LQx7w5nKAfRKluYy00k7p6obF5";
-    AppConstants.stripe_publish_key = "pk_test_51Ogo46EwduwUAGBRz8KlKG0uKlP2DL1KfBVj3Iqum4fSQVtOfD4WPCisOOmVfIoEAKsBJNTI0WzOmpOLmntqPTTJ00F599LcQW";
+    // AppConstants.stripe_secret_key ="sk_test_51Ogo46EwduwUAGBR6619v0dguE6DlSE4n461X2P3SPjB36K9zAqbU8lQyp7WuqIMQatRCsf7LQx7w5nKAfRKluYy00k7p6obF5";
+    // AppConstants.stripe_publish_key = "pk_test_51Ogo46EwduwUAGBRz8KlKG0uKlP2DL1KfBVj3Iqum4fSQVtOfD4WPCisOOmVfIoEAKsBJNTI0WzOmpOLmntqPTTJ00F599LcQW";
     return GetMaterialApp(
       title: 'YB Ride',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-
         appBarTheme: AppBarTheme(
           elevation: 3,
           centerTitle: false,
@@ -96,6 +98,7 @@ class MyApp extends StatelessWidget {
       // themeMode: Pref.defaultTheme(),
       // home: FAQScreen(),
       initialRoute: RoutesName.splashScreen,
+
 
       getPages: AppRoutes.routes,
     );
