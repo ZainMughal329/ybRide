@@ -62,7 +62,7 @@ class PaymentScreen extends GetView<PaymentCon> {
               //             ));
               //   }),
               // ),
-              HeadingTextWidget(title: 'Referral Discounts'),
+              HeadingTextWidget(title: 'Referral Discounts',textColor: Theme.of(context).headingColor,),
               SizedBox(
                 height: mq.height * .02,
               ),

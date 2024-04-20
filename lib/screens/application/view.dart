@@ -31,11 +31,11 @@ class ApplicationView extends GetView<ApplicationViewController> {
         title: 'Book',
 
         activeColorPrimary: AppColors.buttonColor,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        inactiveColorPrimary: Theme.of(context).headingColor,
         textStyle: GoogleFonts.openSans(
             fontWeight: FontWeight.w700,
             fontSize: 12,
-            color: CupertinoColors.systemGrey
+            color: Theme.of(context).headingColor
         ),
       ),
       PersistentBottomNavBarItem(
@@ -43,11 +43,11 @@ class ApplicationView extends GetView<ApplicationViewController> {
         title: 'Trips',
 
         activeColorPrimary: AppColors.buttonColor,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        inactiveColorPrimary: Theme.of(context).headingColor,
         textStyle: GoogleFonts.openSans(
             fontWeight: FontWeight.w700,
             fontSize: 12,
-            color: CupertinoColors.systemGrey,
+            color: Theme.of(context).headingColor,
         ),
 
       ),
@@ -56,11 +56,11 @@ class ApplicationView extends GetView<ApplicationViewController> {
         title: 'Invite',
 
         activeColorPrimary: AppColors.buttonColor,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        inactiveColorPrimary: Theme.of(context).headingColor,
         textStyle: GoogleFonts.openSans(
             fontWeight: FontWeight.w700,
             fontSize: 12,
-            color: CupertinoColors.systemGrey,
+            color: Theme.of(context).headingColor,
         ),
 
       ),
@@ -69,11 +69,11 @@ class ApplicationView extends GetView<ApplicationViewController> {
         title: 'Help',
 
         activeColorPrimary: AppColors.buttonColor,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        inactiveColorPrimary: Theme.of(context).headingColor,
         textStyle: GoogleFonts.openSans(
             fontWeight: FontWeight.w700,
             fontSize: 12,
-            color: CupertinoColors.systemGrey,
+            color: Theme.of(context).headingColor,
         ),
 
       ),
@@ -81,11 +81,11 @@ class ApplicationView extends GetView<ApplicationViewController> {
         icon: returnNavBarIcon(Icons.settings,context),
         title: 'Settings',
         activeColorPrimary: AppColors.buttonColor,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        inactiveColorPrimary: Theme.of(context).headingColor,
         textStyle: GoogleFonts.openSans(
             fontWeight: FontWeight.w700,
             fontSize: 12,
-            color: CupertinoColors.systemGrey,
+            color: Theme.of(context).headingColor,
         ),
 
       ),

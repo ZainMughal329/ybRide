@@ -21,8 +21,10 @@ class ProfileController extends GetxController{
       var userData= await APis.db.collection('users').doc(SessionController().userId.toString()).get().then((value){
         String name = value['name'];
         String email = value['email'];
+        // String phone = value['phone'] ?? '' ;
         state.fNameCon.text=name.toString();
         state.emailCon.text=email.toString();
+        // state.phoneNumberCon.text=phone.toString();
         setLoading(false);
 
       }).onError((error, stackTrace){

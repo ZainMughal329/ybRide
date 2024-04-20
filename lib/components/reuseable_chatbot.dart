@@ -77,12 +77,13 @@ class ReUseAbleChatBot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     final chatBotConfig = IkChatBotConfig(
       //SMTP Rating to your mail Settings
       ratingIconYes: const Icon(Icons.star),
       ratingIconNo: const Icon(Icons.star_border),
       ratingIconColor: Colors.black,
+
       ratingBackgroundColor: Colors.white,
       ratingButtonText: 'Submit Rating',
       thankyouText: 'Thanks for your rating!',
@@ -155,20 +156,23 @@ class MyHomePage extends StatelessWidget {
         ),
         body: Stack(
           children: [
-            _chatIsOpened
-                ? Center(
-                    child: HeadingTextWidget(
-                      title: 'Welcome to YBCar,',
-                      textColor: Theme.of(context).headingColor,
-                    ),
-                  )
-                : ikchatbot(config: chatBotConfig),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).padding.bottom),
+              child: _chatIsOpened
+                  ? Center(
+                      child: HeadingTextWidget(
+                        title: 'Welcome to YBCar,',
+                        textColor: Theme.of(context).headingColor,
+                      ),
+                    )
+                  : ikchatbot(config: chatBotConfig),
+            ),
             Positioned(
                 top: mq.height * 0,
                 left: mq.width * 0,
                 right: mq.width * 0,
                 child: Container(
-                  height: mq.height * .24,
+                  height: mq.height * .20,
                   // Adjust the height based on your design
                   decoration: BoxDecoration(
                     color: Theme.of(context).scaffoldBgClr,
@@ -185,8 +189,8 @@ class MyHomePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              height: mq.height * .1,
-                              width: mq.height * .1,
+                              height: mq.height * .07,
+                              width: mq.height * .07,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
                                 image: DecorationImage(
@@ -199,7 +203,7 @@ class MyHomePage extends StatelessWidget {
                         ),
                         SizedBox(height: mq.height * 0.03),
                         Padding(
-                          padding: EdgeInsets.only(bottom: mq.height * .017),
+                          padding: EdgeInsets.only(bottom: mq.height * .001),
                           child: HeadingTextWidget(
                             title: 'YBCar Support System is here for you.',
                             textColor: Theme.of(context).headingColor,

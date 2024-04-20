@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -26,9 +28,10 @@ class profileScreen extends GetView<ProfileController> {
           centerTitle: 'Profile',
           isLeading: true,
           leadingIcon: Icons.arrow_back_ios_new,
-          trailingIcon: Icons.delete,
+          // trailingIcon: Icons.delete,
           leadingPress: () {
             Navigator.pop(context);
+
           },
         ),
       ),
@@ -44,23 +47,11 @@ class profileScreen extends GetView<ProfileController> {
                 ),
                 ReuseableTextField(
                     contr: controller.state.fNameCon,
-                    label: 'First Name',
+                    label: 'User Name',
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.emailAddress,
                     inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))
-                    ],
-                    obsecure: false),
-                SizedBox(
-                  height: mq.height * .02,
-                ),
-                ReuseableTextField(
-                    contr: controller.state.lNameCon,
-                    label: 'Last Name',
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.emailAddress,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))
+                      FilteringTextInputFormatter.allow(RegExp(r'[a-z A-Z]'))
                     ],
                     obsecure: false),
                 SizedBox(
@@ -69,35 +60,47 @@ class profileScreen extends GetView<ProfileController> {
                 ReuseableTextField(
                     contr: controller.state.emailCon,
                     label: 'E-mail',
+                    readOnly: true,
                     textInputAction: TextInputAction.next,
                     useEmailValidation: true,
                     keyboardType: TextInputType.emailAddress,
                     obsecure: false),
-                SizedBox(
-                  height: mq.height * .02,
-                ),
-                Obx(() => PhoneNumberField(
-                    controller.state.code.value,
-                    () async {
-                      final code = await controller.state.countryPicker
-                          .showPicker(context: context);
-                      // Null check
-                      if (code != null) {
-                        controller.state.code.value = code;
-                      }
-                      ;
-                    },
-                    controller.state.phoneNumberCon,
-                    controller.state.focused.value,
-                    () {
-                      controller.state.focused.value =
-                          !controller.state.focused.value;
-                    },
-                    context)),
+                // SizedBox(
+                //   height: mq.height * .02,
+                // ),
+                // Obx(() => PhoneNumberField(
+                //     controller.state.code.value,
+                //     () async {
+                //       final code = await controller.state.countryPicker
+                //           .showPicker(context: context);
+                //       // Null check
+                //       if (code != null) {
+                //         controller.state.code.value = code;
+                //       }
+                //       ;
+                //     },
+                //     controller.state.phoneNumberCon,
+                //     controller.state.focused.value,
+                //     () {
+                //       controller.state.focused.value =
+                //           !controller.state.focused.value;
+                //     },
+                //     context)),
                 SizedBox(
                   height: mq.height * .28,
                 ),
-                RoundButton(title: 'Save', onPress: () {}),
+                RoundButton(
+                    title: 'Save',
+                    onPress: () async {
+                      await FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                          .update({
+                        'name': controller.state.fNameCon.text.toString(),
+                      }).then((value) {
+                        Get.back();
+                      });
+                    }),
               ],
             ),
             // child: Obx((){

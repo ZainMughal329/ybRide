@@ -26,7 +26,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   Pref.init();
-  Pref.initialize();
+  // Pref.initialize();
   Stripe.publishableKey = 'pk_test_51Ogo46EwduwUAGBRz8KlKG0uKlP2DL1KfBVj3Iqum4fSQVtOfD4WPCisOOmVfIoEAKsBJNTI0WzOmpOLmntqPTTJ00F599LcQW';
 
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
@@ -93,9 +93,9 @@ class MyApp extends StatelessWidget {
         ),
       ),
       darkTheme: ThemeData.dark(),
-      themeMode: Pref.defaultTheme(),
+      // themeMode: Pref.defaultTheme(),
       // home: FAQScreen(),
-      initialRoute: RoutesName.applicationScreen,
+      initialRoute: RoutesName.splashScreen,
 
       getPages: AppRoutes.routes,
     );

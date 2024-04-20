@@ -16,6 +16,7 @@ class ReuseableTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool useEmailValidation;
   final Icon? prefixIcon;
+  void Function(String)? onFieldSubmitted;
   ReuseableTextField({
     super.key,
     required this.contr,
@@ -29,6 +30,7 @@ class ReuseableTextField extends StatelessWidget {
     this.inputFormatters,
     this.prefixIcon,
     this.useEmailValidation = false,
+    this.onFieldSubmitted,
 
     //
   });
@@ -38,6 +40,7 @@ class ReuseableTextField extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       child: TextFormField(
+
         controller: contr,
         focusNode: focusNode,
         readOnly: readOnly,
@@ -45,6 +48,7 @@ class ReuseableTextField extends StatelessWidget {
         obscureText: obsecure,
         keyboardType: keyboardType,
         onChanged: onChange,
+        onFieldSubmitted: onFieldSubmitted,
         style: GoogleFonts.openSans(
           fontSize: 15,
         ),

@@ -30,16 +30,16 @@ class LoginController extends GetxController {
   static Future<void> createUser() async {
     NotificationServices services = NotificationServices();
     late String token;
-   await services.getToken().then((value) {
+    await services.getToken().then((value) {
       token = value;
     });
     log('message'+token.toString());
     final chatUser = UserModel(
-        image: user.photoURL.toString(),
-        name: user.displayName.toString(),
-        id: user.uid.toString(),
-        email: user.email.toString(),
-        pushToken: token,
+      image: user.photoURL.toString(),
+      name: user.displayName.toString(),
+      id: user.uid.toString(),
+      email: user.email.toString(),
+      pushToken: token,
       dateTime: DateTime.now().millisecondsSinceEpoch.toString(),
       list: [],
       referralList: [],
@@ -48,12 +48,12 @@ class LoginController extends GetxController {
     SessionController().userId=user.uid.toString();
 
     await APis.db.collection('users').doc(APis.auth.currentUser!.uid).set(
-          chatUser.toJson(),
-        );
+      chatUser.toJson(),
+    );
   }
 
   handleGoogleSignIn(BuildContext context) async {
-    // showProgressIndicator(context);
+    showProgressIndicator(context);
     _signInWithGoogle().then((user) async {
       // SessionController().userId = user!.uid.toString();
 
@@ -69,6 +69,9 @@ class LoginController extends GetxController {
           });
         }
       }
+    }).onError((error, stackTrace){
+      Navigator.pop(context);
+      Snackbar.showSnackBar("YB-Ride", 'Error while google signing', Icons.error_outline);
     });
   }
 
@@ -80,7 +83,7 @@ class LoginController extends GetxController {
 
       // Obtain the auth details from the request
       final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
+      await googleUser?.authentication;
 
       // Create a new credential
       final credential = GoogleAuthProvider.credential(
@@ -98,42 +101,6 @@ class LoginController extends GetxController {
   }
 
 
-// user Login function
-  void loginUserWithEmailAndPassword(String email, password,BuildContext context) async {
-    showProgressIndicator(context);
-    try {
-
-      bool isExist = await checkIfUserExists(email);
-      if(isExist) {
-      await APis.auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) async {
-        SessionController().userId = value.user!.uid.toString();
-        getUserReferralDiscount();
-        Navigator.pop(context);
-        Get.offAllNamed(RoutesName.applicationScreen);
-        state.emailCon.clear();
-        state.passCon.clear();
-      }).onError((error, stackTrace) {
-        Snackbar.showSnackBar("Error", error.toString(), Icons.error_outline);
-        Navigator.pop(context);
-      });
-      }else {
-        Snackbar.showSnackBar(
-            'YB-Ride',
-            'Your Email or password is not correct.Recheck them.',
-            Icons.error_outline);
-        Navigator.pop(context);
-
-      }
-    } on FirebaseAuthException catch (e) {
-      Snackbar.showSnackBar("Error", e.toString(), Icons.error_outline);
-      Navigator.pop(context);
-    } catch (e) {
-      Snackbar.showSnackBar("Error", e.toString(), Icons.error_outline);
-      Navigator.pop(context);
-    }
-  }
 
 
   Future<void> getUserReferralDiscount() async{
@@ -152,7 +119,7 @@ class LoginController extends GetxController {
     if(snapshot.docs.isNotEmpty) {
       snapshot.docs.forEach((element) {
         var snap = element['email'];
-        log('snap:${snap}');
+        // log('snap:${snap}');
         list.add(snap);
       });
     }
@@ -170,6 +137,43 @@ class LoginController extends GetxController {
       // Handle any errors
       print(e);
       return false;
+    }
+  }
+
+  // user Login function
+  void loginUserWithEmailAndPassword(String email, password,BuildContext context) async {
+    showProgressIndicator(context);
+    try {
+
+      bool isExist = await checkIfUserExists(email);
+      if(isExist) {
+        await APis.auth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((value) async {
+          SessionController().userId = value.user!.uid.toString();
+          getUserReferralDiscount();
+          Navigator.pop(context);
+          Get.offAllNamed(RoutesName.applicationScreen);
+          state.emailCon.clear();
+          state.passCon.clear();
+        }).onError((error, stackTrace) {
+          Snackbar.showSnackBar("Error", error.toString(), Icons.error_outline);
+          Navigator.pop(context);
+        });
+      }else {
+        Snackbar.showSnackBar(
+            'YB-Ride',
+            'Your Email or password is not correct.Recheck them.',
+            Icons.error_outline);
+        Navigator.pop(context);
+
+      }
+    } on FirebaseAuthException catch (e) {
+      Snackbar.showSnackBar("Error", e.toString(), Icons.error_outline);
+      Navigator.pop(context);
+    } catch (e) {
+      Snackbar.showSnackBar("Error", e.toString(), Icons.error_outline);
+      Navigator.pop(context);
     }
   }
 
