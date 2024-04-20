@@ -92,11 +92,36 @@ class LoginScreen extends GetView<LoginController> {
               child: RoundButton(
                 title: 'Login',
                 onPress: () {
-                    controller.loginUserWithEmailAndPassword(
-                        controller.state.emailCon.text.trim().toString(),
-                        controller.state.passCon.text.trim().toString(),
-                        context);
-
+                  if (controller.state.emailCon.text.isNotEmpty &&
+                      controller.state.passCon.text.isNotEmpty) {
+                    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                        .hasMatch(controller.state.emailCon.text)) {
+                      Snackbar.showSnackBar(
+                        'Error',
+                        'Please enter a valid email',
+                        Icons.error_outline,
+                      );
+                    } else {
+                      if (controller.state.passCon.text.length < 6) {
+                        Snackbar.showSnackBar(
+                          'Error',
+                          'Password cannot be less then 6 chracters',
+                          Icons.error_outline,
+                        );
+                      } else {
+                        controller.loginUserWithEmailAndPassword(
+                            controller.state.emailCon.text.trim().toString(),
+                            controller.state.passCon.text.trim().toString(),
+                            context);
+                      }
+                    }
+                  } else {
+                    Snackbar.showSnackBar(
+                      'Error',
+                      'All fields must be filled',
+                      Icons.error_outline,
+                    );
+                  }
                 },
               ),
             ),

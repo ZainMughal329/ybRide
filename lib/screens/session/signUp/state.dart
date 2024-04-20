@@ -7,7 +7,6 @@ class SignUpState {
   final passCon = TextEditingController();
   final nameCon = TextEditingController();
   final refCon = TextEditingController();
-
   RxBool isObscure = true.obs;
 
 }

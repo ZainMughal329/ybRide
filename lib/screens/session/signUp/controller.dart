@@ -87,11 +87,11 @@ class SignUpController extends GetxController {
     try {
       // Assuming 'users' is the collection in Firestore
       QuerySnapshot querySnapshot =
-          await FirebaseFirestore.instance.collection('users').get();
+      await FirebaseFirestore.instance.collection('users').get();
 
       // Loop through each document in the collection
       querySnapshot.docs.forEach(
-        (doc) async{
+            (doc) async{
           var listOfCode = doc['referralList'];
 
 
@@ -266,6 +266,7 @@ class SignUpController extends GetxController {
       return false;
     }
   }
+
 
 
 

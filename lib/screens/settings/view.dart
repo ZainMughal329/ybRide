@@ -205,11 +205,51 @@ class SettingsView extends GetView<SettingsController> {
                 SizedBox(
                   height: mq.height * .03,
                 ),
+
                 InkWell(
                   onTap: () async {
                     try {
+
                       showProgressIndicator(context);
                       Future.delayed(Duration(seconds: 3), () async {
+
+
+                        await FirebaseAuth.instance.currentUser!.delete().then((value){
+                            GoogleSignIn().signOut().then((value) {
+                              SessionController().userId = '';
+                            });
+                            SessionController().userId = '';
+                            Navigator.pop(context);
+                            Get.offAllNamed(RoutesName.loginScreen);
+                        });
+                      });
+                    } catch (e) {
+                      Navigator.pop(context);
+                      Snackbar.showSnackBar(
+                          "YB-Ride", e.toString(), Icons.error_outline);
+                    }
+                  },
+
+
+
+                  child: HeadingTextWidget(
+                    title: 'Delete Account',
+                    textColor: AppColors.orangeColor,
+                  ),
+                ),
+
+
+                SizedBox(
+                  height: 10,
+                ),
+                // ------------
+                InkWell(
+                  onTap: () async {
+                    try {
+
+                      showProgressIndicator(context);
+                      Future.delayed(Duration(seconds: 3), () async {
+
                         await FirebaseAuth.instance.signOut().then((value) {
                           GoogleSignIn().signOut().then((value) {
                             SessionController().userId = '';
@@ -225,6 +265,9 @@ class SettingsView extends GetView<SettingsController> {
                           "YB-Ride", e.toString(), Icons.error_outline);
                     }
                   },
+
+
+
                   child: HeadingTextWidget(
                     title: 'Log out',
                     textColor: AppColors.orangeColor,

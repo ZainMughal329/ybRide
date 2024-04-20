@@ -24,13 +24,13 @@ class SignupScreen extends GetView<SignUpController> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).scaffoldBgClr,
 
       body: Padding(
-        padding:  EdgeInsets.symmetric(vertical: MediaQuery.of(context).padding.bottom),
+        padding: EdgeInsets.symmetric(
+            vertical: MediaQuery.of(context).padding.bottom),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -51,7 +51,9 @@ class SignupScreen extends GetView<SignUpController> {
               ReuseableTextField(
                   contr: controller.state.nameCon,
                   label: 'Name',
-                  inputFormatters:[FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))],
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z]'))
+                  ],
                   textInputAction: TextInputAction.next,
                   keyboardType: TextInputType.text,
                   obsecure: false),
@@ -78,23 +80,28 @@ class SignupScreen extends GetView<SignUpController> {
                 height: mq.height * .0015,
               ),
               Obx(() => ReuseableTextField(
-                contr: controller.state.passCon,
-                label: 'Password',
-                textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.visiblePassword,
-                obsecure:  controller.state.isObscure.value,
-              )),
+                    contr: controller.state.passCon,
+                    label: 'Password',
+                    textInputAction: TextInputAction.done,
+                    keyboardType: TextInputType.visiblePassword,
+                    obsecure: controller.state.isObscure.value,
+                  )),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text("Hide Password"),
-                  SizedBox(width: 3,),
-                  Obx(() => Checkbox(value: controller.state.isObscure.value,
-                    onChanged: (val){
-                      controller.state.isObscure.value = val!;
-                    },
-                  )),
-                  SizedBox(width: 3,),
+                  SizedBox(
+                    width: 3,
+                  ),
+                  Obx(() => Checkbox(
+                        value: controller.state.isObscure.value,
+                        onChanged: (val) {
+                          controller.state.isObscure.value = val!;
+                        },
+                      )),
+                  SizedBox(
+                    width: 3,
+                  ),
                 ],
               ),
               SizedBox(
@@ -111,81 +118,92 @@ class SignupScreen extends GetView<SignUpController> {
                         if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
                             .hasMatch(controller.state.emailCon.text)) {
                           Snackbar.showSnackBar(
-                              'YB-Ride', 'Enter a valid email address',
+                              'YB-Ride',
+                              'Enter a valid email address',
                               Icons.error_outline);
                         } else {
-                          NotificationServices services = NotificationServices();
-                          late String token;
-                          await services.getToken().then((value) {
-                            token = value;
-                          });
-                          log('token:$token');
-                          log('SignUp Page:object');
-                          UserModel user = UserModel(
-                            name: controller.state.nameCon.text.trim(),
-                            image: '',
-                            email: controller.state.emailCon.text.trim(),
-                            pushToken: token,
-                            dateTime: DateTime
-                                .now()
-                                .millisecondsSinceEpoch
-                                .toString(),
-                            refCode: controller.state.refCon.text.trim()
-                                .toString(),
-                            list: [],
-                            referralList: [],
-                          );
-                          controller.storeUser(
-                            user,
-                            context,
-                            controller.state.emailCon.text.trim(),
-                            controller.state.passCon.text.trim(),
-                          );
+                          if (controller.state.passCon.text.length < 6) {
+                            Snackbar.showSnackBar(
+                              'Error',
+                              'Password cannot be less then 6 chracters',
+                              Icons.error_outline,
+                            );
+                          } else {
+                            NotificationServices services =
+                                NotificationServices();
+                            late String token;
+                            await services.getToken().then((value) {
+                              token = value;
+                            });
+                            log('token:$token');
+                            log('SignUp Page:object');
+                            UserModel user = UserModel(
+                              name: controller.state.nameCon.text.trim(),
+                              image: '',
+                              email: controller.state.emailCon.text.trim(),
+                              pushToken: token,
+                              dateTime: DateTime.now()
+                                  .millisecondsSinceEpoch
+                                  .toString(),
+                              refCode: controller.state.refCon.text
+                                  .trim()
+                                  .toString(),
+                              list: [],
+                              referralList: [],
+                            );
+                            controller.storeUser(
+                              user,
+                              context,
+                              controller.state.emailCon.text.trim(),
+                              controller.state.passCon.text.trim(),
+                            );
+                          }
                         }
-                      }else {
+                      } else {
                         log('Signup page:Error');
                         // Snackbar.showSnackBar('Error', 'All fields must be filled',
                         //     Icons.info_outline);
                       }
                     }),
               ),
+
               Platform.isAndroid
                   ? Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: 10, horizontal: mq.width * .1),
-                child: InkWell(
-                  onTap: () {
-                    controller.handleGoogleSignIn(context);
-                  },
-                  child: Container(
-                    height: mq.height * .06,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: AppColors.buttonColor,
-                    ),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.g_mobiledata,
-                            color: AppColors.buttonTextColor,
+                      padding: EdgeInsets.symmetric(
+                          vertical: 10, horizontal: mq.width * .1),
+                      child: InkWell(
+                        onTap: () {
+                          controller.handleGoogleSignIn(context);
+                        },
+                        child: Container(
+                          height: mq.height * .06,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: AppColors.buttonColor,
                           ),
-                          Text(
-                            'Sign in with google',
-                            style: GoogleFonts.openSans(
-                                color: AppColors.buttonTextColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.g_mobiledata,
+                                  color: AppColors.buttonTextColor,
+                                ),
+                                Text(
+                                  'Sign in with google',
+                                  style: GoogleFonts.openSans(
+                                      color: AppColors.buttonTextColor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              )
+                    )
                   : Container(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -195,10 +213,9 @@ class SignupScreen extends GetView<SignUpController> {
                     fontSize: 10,
                     fontWeight: FontWeight.w600,
                     textColor: Theme.of(context).lightTextColor,
-
                   ),
                   InkWell(
-                    onTap: (){
+                    onTap: () {
                       Get.offNamed(RoutesName.loginScreen);
                     },
                     child: HeadingTextWidget(

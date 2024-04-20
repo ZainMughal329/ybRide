@@ -77,12 +77,13 @@ class ReUseAbleChatBot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     final chatBotConfig = IkChatBotConfig(
       //SMTP Rating to your mail Settings
       ratingIconYes: const Icon(Icons.star),
       ratingIconNo: const Icon(Icons.star_border),
       ratingIconColor: Colors.black,
+
       ratingBackgroundColor: Colors.white,
       ratingButtonText: 'Submit Rating',
       thankyouText: 'Thanks for your rating!',
@@ -153,11 +154,13 @@ class MyHomePage extends StatelessWidget {
             },
           ),
         ),
+
         body: Padding(
           padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).padding.bottom),
           child: Stack(
             children: [
               _chatIsOpened
+
                   ? Center(
                       child: HeadingTextWidget(
                         title: 'Welcome to YBCar,',
@@ -165,6 +168,7 @@ class MyHomePage extends StatelessWidget {
                       ),
                     )
                   : ikchatbot(config: chatBotConfig),
+
               Positioned(
                   top: mq.height * 0,
                   left: mq.width * 0,

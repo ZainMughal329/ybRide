@@ -30,16 +30,16 @@ class LoginController extends GetxController {
   static Future<void> createUser() async {
     NotificationServices services = NotificationServices();
     late String token;
-   await services.getToken().then((value) {
+    await services.getToken().then((value) {
       token = value;
     });
     log('message'+token.toString());
     final chatUser = UserModel(
-        image: user.photoURL.toString(),
-        name: user.displayName.toString(),
-        id: user.uid.toString(),
-        email: user.email.toString(),
-        pushToken: token,
+      image: user.photoURL.toString(),
+      name: user.displayName.toString(),
+      id: user.uid.toString(),
+      email: user.email.toString(),
+      pushToken: token,
       dateTime: DateTime.now().millisecondsSinceEpoch.toString(),
       list: [],
       referralList: [],
@@ -48,8 +48,8 @@ class LoginController extends GetxController {
     SessionController().userId=user.uid.toString();
 
     await APis.db.collection('users').doc(APis.auth.currentUser!.uid).set(
-          chatUser.toJson(),
-        );
+      chatUser.toJson(),
+    );
   }
 
   handleGoogleSignIn(BuildContext context) async {
@@ -83,7 +83,7 @@ class LoginController extends GetxController {
 
       // Obtain the auth details from the request
       final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
+      await googleUser?.authentication;
 
       // Create a new credential
       final credential = GoogleAuthProvider.credential(
@@ -178,3 +178,4 @@ class LoginController extends GetxController {
   }
 
 }
+
