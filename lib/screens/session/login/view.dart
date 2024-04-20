@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +10,7 @@ import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/components/text_form_field.dart';
 import 'package:yb_ride/components/text_widget.dart';
 import 'package:yb_ride/helper/app_colors.dart';
+import 'package:yb_ride/helper/app_helpers.dart';
 import 'package:yb_ride/screens/session/login/controller.dart';
 
 import '../../../main.dart';
@@ -91,7 +93,7 @@ class LoginScreen extends GetView<LoginController> {
               padding: EdgeInsets.symmetric(horizontal: mq.width * 0.06),
               child: RoundButton(
                 title: 'Login',
-                onPress: () {
+                onPress: () async{
                   if (controller.state.emailCon.text.isNotEmpty &&
                       controller.state.passCon.text.isNotEmpty) {
                     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
@@ -109,10 +111,28 @@ class LoginScreen extends GetView<LoginController> {
                           Icons.error_outline,
                         );
                       } else {
-                        controller.loginUserWithEmailAndPassword(
-                            controller.state.emailCon.text.trim().toString(),
-                            controller.state.passCon.text.trim().toString(),
-                            context);
+                        showProgressIndicator(context);
+                        var connectivityResult = await (Connectivity().checkConnectivity());
+
+                        // If connected via mobile data or WiFi
+                        if (connectivityResult == ConnectivityResult.mobile ||
+                            connectivityResult == ConnectivityResult.wifi) {
+
+                          controller.loginUserWithEmailAndPassword(
+                              controller.state.emailCon.text.trim().toString(),
+                              controller.state.passCon.text.trim().toString(),
+                              context);
+                          Navigator.pop(context);
+                        }else {
+                          Snackbar.showSnackBar(
+                            'Error',
+                            'Something went wrong. Check your internet connection and try again.',
+                            Icons.error_outline,
+                          );
+                          Navigator.pop(context);
+
+                        }
+
                       }
                     }
                   } else {

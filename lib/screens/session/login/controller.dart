@@ -72,6 +72,12 @@ class LoginController extends GetxController {
     }).onError((error, stackTrace){
       Navigator.pop(context);
       Snackbar.showSnackBar("YB-Ride", 'Error while google signing', Icons.error_outline);
+    }).timeout(Duration(seconds: 20),onTimeout: (){
+      Navigator.pop(context);
+      Snackbar.showSnackBar(
+          'YB-Ride',
+          'Something went wrong. Try again in some time!',
+          Icons.error_outline);
     });
   }
 
@@ -147,6 +153,7 @@ class LoginController extends GetxController {
 
       bool isExist = await checkIfUserExists(email);
       if(isExist) {
+
         await APis.auth
             .signInWithEmailAndPassword(email: email, password: password)
             .then((value) async {
@@ -157,13 +164,21 @@ class LoginController extends GetxController {
           state.emailCon.clear();
           state.passCon.clear();
         }).onError((error, stackTrace) {
-          Snackbar.showSnackBar("Error", error.toString(), Icons.error_outline);
+          // Snackbar.showSnackBar("r", error.toString(), Icons.error_outline);
+          // Navigator.pop(context);
+          log('Something went wrong');
+
+        }).timeout(Duration(seconds: 20),onTimeout: (){
           Navigator.pop(context);
+          Snackbar.showSnackBar(
+              'YB-Ride',
+              'Something went wrong. Try again in some time!',
+              Icons.error_outline);
         });
       }else {
         Snackbar.showSnackBar(
             'YB-Ride',
-            'Your Email or password is not correct.Recheck them.',
+            'Something went wrong. Try again!',
             Icons.error_outline);
         Navigator.pop(context);
 

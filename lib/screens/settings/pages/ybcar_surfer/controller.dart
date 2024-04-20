@@ -48,6 +48,12 @@ class SurferController extends GetxController {
       }).onError((error, stackTrace) {
         setLoading(false);
         Snackbar.showSnackBar('YB-Ride', error.toString(), Icons.error_outline);
+      }).timeout(Duration(seconds: 20),onTimeout: (){
+        Navigator.pop(context);
+        Snackbar.showSnackBar(
+            'YB-Ride',
+            'Something went wrong. Try again in some time!',
+            Icons.error_outline);
       });
     } catch (e) {
       setLoading(false);

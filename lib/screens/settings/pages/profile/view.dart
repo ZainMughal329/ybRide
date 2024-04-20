@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/components/text_form_field.dart';
 import 'package:yb_ride/screens/settings/pages/profile/index.dart';
 
@@ -99,6 +100,12 @@ class profileScreen extends GetView<ProfileController> {
                         'name': controller.state.fNameCon.text.toString(),
                       }).then((value) {
                         Get.back();
+                      }).timeout(Duration(seconds: 20),onTimeout: (){
+                        Navigator.pop(context);
+                        Snackbar.showSnackBar(
+                            'YB-Ride',
+                            'Something went wrong. Try again in some time!',
+                            Icons.error_outline);
                       });
                     }),
               ],

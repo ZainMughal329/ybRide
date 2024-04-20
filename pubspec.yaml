@@ -124,6 +124,6 @@ flutter:
     - assets/whiteIcons/
     - assets/appImages/
     - assets/carImages/
-    - assets/keyFile/
+#    - assets/keyFile/
     - themes/
-    - assets/keyFile/keys.env
+#    - assets/keyFile/keys.env
