@@ -3,7 +3,7 @@ description: "A new Flutter project."
 
 publish_to: 'none'
 
-version: 2.0.0+2
+version: 1.0.0
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -124,6 +124,6 @@ flutter:
     - assets/whiteIcons/
     - assets/appImages/
     - assets/carImages/
-#    - assets/keyFile/
+    - assets/keyFile/
     - themes/
 #    - assets/keyFile/keys.env

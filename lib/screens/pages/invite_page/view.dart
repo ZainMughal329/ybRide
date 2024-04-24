@@ -23,7 +23,9 @@ class InviteScreen extends GetView<InviteCon> {
 
   @override
   Widget build(BuildContext context) {
+    controller.state.loading.value=false;;
     controller.fetchFirstOrder();
+
     final subtittle =
         "They get a chance to avail discount on booking and you earn \$30.00 in YBride credits. Your code will be created after you first booking.";
     final referralSubtitle =

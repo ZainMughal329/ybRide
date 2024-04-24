@@ -49,7 +49,10 @@ class LoginController extends GetxController {
 
     await APis.db.collection('users').doc(APis.auth.currentUser!.uid).set(
       chatUser.toJson(),
-    );
+    ).then((value){
+    }).onError((error, stackTrace){
+      Snackbar.showSnackBar("YB-Ride", error.toString(), Icons.error_outline);
+    });
   }
 
   handleGoogleSignIn(BuildContext context) async {
@@ -71,13 +74,7 @@ class LoginController extends GetxController {
       }
     }).onError((error, stackTrace){
       Navigator.pop(context);
-      Snackbar.showSnackBar("YB-Ride", 'Error while google signing', Icons.error_outline);
-    }).timeout(Duration(seconds: 20),onTimeout: (){
-      Navigator.pop(context);
-      Snackbar.showSnackBar(
-          'YB-Ride',
-          'Something went wrong. Try again in some time!',
-          Icons.error_outline);
+      Snackbar.showSnackBar("YB-Ride", 'Error + ${error.toString()}', Icons.error_outline);
     });
   }
 
@@ -100,10 +97,12 @@ class LoginController extends GetxController {
       // Once signed in, return the UserCredential
       return await APis.auth.signInWithCredential(credential);
     } catch (e) {
-      log('\n_signInWithGoogle: $e');
+      Snackbar.showSnackBar("YB-Ride", e.toString(), Icons.error_outline);
+      // log('\n_signInWithGoogle: $e');
       // Snackbar.showSnackBar('Something went wrong!!!', 'Check your internet.');
       return null;
     }
+
   }
 
 
@@ -140,7 +139,7 @@ class LoginController extends GetxController {
           .get();
       return snapshot.docs.isNotEmpty;
     } catch (e) {
-      // Handle any errors
+      Snackbar.showSnackBar("YB-Ride", e.toString(), Icons.error_outline);
       print(e);
       return false;
     }
@@ -164,16 +163,8 @@ class LoginController extends GetxController {
           state.emailCon.clear();
           state.passCon.clear();
         }).onError((error, stackTrace) {
-          // Snackbar.showSnackBar("r", error.toString(), Icons.error_outline);
-          // Navigator.pop(context);
-          log('Something went wrong');
-
-        }).timeout(Duration(seconds: 20),onTimeout: (){
           Navigator.pop(context);
-          Snackbar.showSnackBar(
-              'YB-Ride',
-              'Something went wrong. Try again in some time!',
-              Icons.error_outline);
+          Snackbar.showSnackBar("YB-Ride", error.toString(), Icons.error_outline);
         });
       }else {
         Snackbar.showSnackBar(

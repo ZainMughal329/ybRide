@@ -76,8 +76,6 @@ class InviteCon extends GetxController {
           APis.db.collection('users').doc(SessionController().userId);
       final userDocument = await userDocumentRef.get();
       List list = userDocument['referralList'];
-      print("storeing code");
-      print(list.toString());
       if (list.length == 0) {
         await userDocumentRef.update({
           'referralList': FieldValue.arrayUnion([referralCode]),
@@ -91,7 +89,6 @@ class InviteCon extends GetxController {
           await userDocumentRef.update({
             'referralList': FieldValue.arrayUnion([referralCode]),
           });
-
           Snackbar.showSnackBar("YB-Ride", "code shared", Icons.done);
           setShareLoading(false);
           Navigator.pop(context);

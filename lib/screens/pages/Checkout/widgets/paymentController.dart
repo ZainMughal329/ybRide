@@ -52,12 +52,6 @@ class PaymentController extends GetxController {
         paymentIntent = null;
       }).onError((error, stackTrace) {
         throw Exception(error);
-      }).timeout(Duration(seconds: 20),onTimeout: (){
-        Navigator.pop(context);
-        Snackbar.showSnackBar(
-            'YB-Ride',
-            'Something went wrong. Try again in some time!',
-            Icons.error_outline);
       });
     } on StripeException catch (e) {
       print('Error is:---> $e');
@@ -129,13 +123,7 @@ class PaymentController extends GetxController {
                   //Gotten from payment intent
                   style: ThemeMode.light,
                   merchantDisplayName: 'YB-Ride'))
-          .then((value) {}).timeout(Duration(seconds: 20),onTimeout: (){
-        Navigator.pop(context);
-        Snackbar.showSnackBar(
-            'YB-Ride',
-            'Something went wrong. Try again in some time!',
-            Icons.error_outline);
-      });
+          .then((value) {});
 
       //STEP 3: Display Payment sheet
       displayPaymentSheet(context,id);
@@ -214,12 +202,6 @@ class PaymentController extends GetxController {
       }).onError((error, stackTrace) {
         setPaymentLoadin(false);
         Snackbar.showSnackBar("YB-Ride", error.toString(), Icons.error_outline);
-      }).timeout(Duration(seconds: 20),onTimeout: (){
-        Navigator.pop(context);
-        Snackbar.showSnackBar(
-            'YB-Ride',
-            'Something went wrong. Try again in some time!',
-            Icons.error_outline);
       });
     } catch (e) {
       setPaymentLoadin(false);
