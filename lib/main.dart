@@ -28,7 +28,7 @@ late bool isDarkTheme;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Pref.init();
-  // Pref.initialize();
+  Pref.initialize();
   Stripe.publishableKey = 'pk_test_51Ogo46EwduwUAGBRz8KlKG0uKlP2DL1KfBVj3Iqum4fSQVtOfD4WPCisOOmVfIoEAKsBJNTI0WzOmpOLmntqPTTJ00F599LcQW';
   await dotenv.load(fileName: "assets/keyFile/keys.env");
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
@@ -93,7 +93,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       darkTheme: ThemeData.dark(),
-      // themeMode: Pref.defaultTheme(),
+      themeMode: Pref.defaultTheme(),
       // home: FAQScreen(),
       initialRoute: RoutesName.splashScreen,
 

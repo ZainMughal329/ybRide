@@ -26,6 +26,9 @@ class BookNowView extends StatelessWidget {
         children: [
           GetBuilder<BookViewController>(builder: (controller){
             return GoogleMap(
+              zoomControlsEnabled: true,
+              zoomGesturesEnabled: true,
+              markers: controller.markers,
               onMapCreated: (con) {
                 cont.state.mapController = con;
                 // await firstBottomSheet(context, cont);
