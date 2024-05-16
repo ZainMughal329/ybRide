@@ -79,13 +79,16 @@ class BookViewController extends GetxController {
 
   void getSuggestions(
       String input, dynamic sessionToken, BookViewController cont) async {
+    print("get suggestion called");
     String baseURL = AppConstants.placesBaseUrl;
     String kPLACES_API_KEY = AppConstants.kPlacesApiKey;
     String request =
-        '$baseURL?input=$input&key=$kPLACES_API_KEY&sessiontoken=$sessionToken';
+        '${baseURL}?input=${input}&key=AIzaSyA8mT_fcQoFRNpBokvTjVXsuc-TB9k-leI&sessiontoken=${sessionToken}';
 
     state.searchLoading.value == true;
     var response = await http.get(Uri.parse(request)).then((response) {
+      print(response.statusCode);
+      print(jsonDecode(response.body.toString())['predictions']);
       if (response.statusCode == 200) {
         List predictions = jsonDecode(response.body.toString())['predictions'];
         print('predictions: ' + predictions.toString());
