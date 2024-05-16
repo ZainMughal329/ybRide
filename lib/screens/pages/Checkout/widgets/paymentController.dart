@@ -25,7 +25,8 @@ class PaymentController extends GetxController {
 
   displayPaymentSheet(BuildContext context,String id) async {
     try {
-      await Stripe.instance.presentPaymentSheet().then((value) {
+      await Stripe.instance.presentPaymentSheet(
+      ).then((value) {
         Navigator.pop(context);
         print(":::::::::::DisplaypaymentResponse:::::::::::");
         print(value);
