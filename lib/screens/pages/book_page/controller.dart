@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +12,7 @@ import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/pages/book_page/car_details/inded.dart';
 import 'package:yb_ride/screens/pages/book_page/inded.dart';
 import 'package:http/http.dart' as http;
+import 'dart:ui' as ui;
 import 'package:yb_ride/helper/prefs.dart';
 
 class BookViewController extends GetxController {
@@ -18,6 +20,7 @@ class BookViewController extends GetxController {
 
   void getCurrentDate() {
     DateTime currentDate = DateTime.now();
+    createMarkers();
     // Format the date as MMDDYYYY
     String formattedDateDay = DateFormat('dd').format(currentDate);
     String formattedDateMonth = DateFormat('MM').format(currentDate);
@@ -155,7 +158,7 @@ class BookViewController extends GetxController {
     int startIndex = output.indexOf("startDate:");
     int endIndex = output.indexOf(",", startIndex);
 
-    // state.timeandDateSelected.value=true;
+    // state.e=true;
 
     // Check if "startDate" is found
     if (startIndex != -1 && endIndex != -1) {
@@ -377,6 +380,69 @@ class BookViewController extends GetxController {
 
 
 
+  }
+
+  Set<Marker> markers = Set<Marker>();
+
+  void createMarkers() async {
+    final Uint8List carIcon = await getBytesFromAssets('assets/car.png', 80);
+
+    // Clear existing markers
+    markers.clear();
+    log('cleared');
+
+    // Add new markers with the updated icon
+    markers.add(
+      Marker(
+        markerId: MarkerId('Virginia'),
+        position: LatLng(37.4316, -78.6569), // Coordinates for Virginia
+        infoWindow: InfoWindow(title: 'Virginia'),
+        icon: BitmapDescriptor.fromBytes(carIcon),
+      ),
+    );
+    log('add1');
+    markers.add(
+      Marker(
+        markerId: MarkerId('Massachusetts'),
+        position: LatLng(42.4072, -71.3824), // Coordinates for Massachusetts
+        infoWindow: InfoWindow(title: 'Massachusetts'),
+        icon: BitmapDescriptor.fromBytes(carIcon),
+      ),
+    );
+    log('add2');
+
+    markers.add(
+      Marker(
+        markerId: MarkerId('District of Columbia'),
+        position: LatLng(38.9072, -77.0369), // Coordinates for District of Columbia
+        infoWindow: InfoWindow(title: 'District of Columbia'),
+        icon: BitmapDescriptor.fromBytes(carIcon),
+      ),
+    );
+    log('add3');
+    markers.add(
+      Marker(
+        markerId: MarkerId('Maryland'),
+        position: LatLng(39.0458, -76.6413), // Coordinates for Maryland
+        infoWindow: InfoWindow(title: 'Maryland'),
+        icon: BitmapDescriptor.fromBytes(carIcon),
+      ),
+    );
+    log('add4');
+
+  }
+
+
+  Future<Uint8List> getBytesFromAssets(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(
+      data.buffer.asUint8List(),
+      targetWidth: width,
+    );
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return fi.image.toByteData(format: ui.ImageByteFormat.png).then((byteData) {
+      return byteData!.buffer.asUint8List();
+    });
   }
 
 }
