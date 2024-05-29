@@ -55,6 +55,9 @@ class PaymentController extends GetxController {
 
         paymentIntent = null;
       }).onError((error, stackTrace) {
+        print("error in displaying sheet");
+        Snackbar.showSnackBar("YBRIDE", "error in displaying sheet ${error}", Icons.error_outline_rounded);
+
         throw Exception(error);
       });
     } on StripeException catch (e) {
@@ -81,8 +84,6 @@ class PaymentController extends GetxController {
   }
 
   createPaymentIntent(String currency, double totalAmount) async {
-    // AppConstants.stripe_secret_key = dotenv.env['STRIPE_SECRET_KEY']!;
-    AppConstants.stripe_secret_key = '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';
 
     try {
       //Request body
@@ -111,8 +112,10 @@ class PaymentController extends GetxController {
       print('data:$data');
       AppConstants.paymentId = data['id'].toString();
       return json.decode(response.body);
-    } catch (err) {
-      throw Exception(err.toString());
+    } catch (error) {
+      print(error);
+      Snackbar.showSnackBar("YBRIDE", "In post requeset${error}", Icons.error_outline_rounded);
+      throw Exception(error.toString());
     }
   }
 
@@ -138,8 +141,11 @@ class PaymentController extends GetxController {
               ),
 
 
-      )
-          .then((value) {});
+      ).then((value) {}).onError((error, stackTrace){
+        Snackbar.showSnackBar("YBRIDE", "In payment sheet ${error}", Icons.error_outline_rounded);
+
+            // Snackbar.showSnackBar("YBRIDE", "${error}", Icons.error_outline_rounded);
+      });
 
       //STEP 3: Display Payment sheet
       displayPaymentSheet(context,id);

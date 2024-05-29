@@ -30,7 +30,7 @@ late bool isDarkTheme;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Pref.init();
-  // Pref.initialize();
+  Pref.initialize();
   Stripe.publishableKey =
   'pk_live_51PGJESBOId3miMVoyqKD71ZnMes96MzglILbMGpvjhzHVtZlSUEIKGJZtqj3IA5jzZXU5Eqn0ZLHPPuGl8RU5E3A00xuzOsClr';
   Stripe.merchantIdentifier = 'YB Ride';
@@ -77,10 +77,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.sizeOf(context);
-    // AppConstants.stripe_publish_key = kDebugMode? dotenv.env['STRIPE_PUBLISH_KEY']!:dotenv.env['LIVE_STRIPE_PUBLISH_KEY']!;
-    // AppConstants.stripe_secret_key = kDebugMode? dotenv.env['STRIPE_SECRET_KEY']! :dotenv.env['LIVE_STRIPE_SECRET_KEY']!;
-    // AppConstants.stripe_secret_key ="sk_test_51Ogo46EwduwUAGBR6619v0dguE6DlSE4n461X2P3SPjB36K9zAqbU8lQyp7WuqIMQatRCsf7LQx7w5nKAfRKluYy00k7p6obF5";
-    // AppConstants.stripe_publish_key = "pk_test_51Ogo46EwduwUAGBRz8KlKG0uKlP2DL1KfBVj3Iqum4fSQVtOfD4WPCisOOmVfIoEAKsBJNTI0WzOmpOLmntqPTTJ00F599LcQW";
+    AppConstants.stripe_publish_key = kDebugMode? dotenv.env['STRIPE_PUBLISH_KEY']!:dotenv.env['LIVE_STRIPE_PUBLISH_KEY']!;
+    AppConstants.stripe_secret_key = kDebugMode? dotenv.env['STRIPE_SECRET_KEY']! :dotenv.env['LIVE_STRIPE_SECRET_KEY']!;
+
     return GetMaterialApp(
       title: 'YB Ride',
       debugShowCheckedModeBanner: false,

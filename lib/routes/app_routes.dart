@@ -114,7 +114,7 @@ class AppRoutes {
     GetPage(
       name: RoutesName.appearanceScreen,
       page: () => AppearanceScreen(),
-      binding: AppearanceBindings(),
+      // binding: AppearanceBindings(),
       transition: Transition.downToUp,
     ),    GetPage(
       name: RoutesName.surferScreen,
