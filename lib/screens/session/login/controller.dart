@@ -159,6 +159,7 @@ class LoginController extends GetxController {
           SessionController().userId = value.user!.uid.toString();
           getUserReferralDiscount();
           Navigator.pop(context);
+          Snackbar.showSnackBar("YB-Ride", "Login successfully", Icons.done_all_rounded);
           Get.offAllNamed(RoutesName.applicationScreen);
           state.emailCon.clear();
           state.passCon.clear();

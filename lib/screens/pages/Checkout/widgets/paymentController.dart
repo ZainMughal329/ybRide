@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -20,6 +21,8 @@ import '../../../../components/heading_text_widget.dart';
 
 class PaymentController extends GetxController {
   final cont = CheckOutCon();
+
+
 
   dynamic paymentIntent;
 
@@ -52,6 +55,9 @@ class PaymentController extends GetxController {
 
         paymentIntent = null;
       }).onError((error, stackTrace) {
+        print("error in displaying sheet");
+        Snackbar.showSnackBar("YBRIDE", "error in displaying sheet ${error}", Icons.error_outline_rounded);
+
         throw Exception(error);
       });
     } on StripeException catch (e) {
@@ -78,7 +84,6 @@ class PaymentController extends GetxController {
   }
 
   createPaymentIntent(String currency, double totalAmount) async {
-    AppConstants.stripe_secret_key = dotenv.env['STRIPE_SECRET_KEY']!;
 
     try {
       //Request body
@@ -107,8 +112,10 @@ class PaymentController extends GetxController {
       print('data:$data');
       AppConstants.paymentId = data['id'].toString();
       return json.decode(response.body);
-    } catch (err) {
-      throw Exception(err.toString());
+    } catch (error) {
+      print(error);
+      Snackbar.showSnackBar("YBRIDE", "In post requeset${error}", Icons.error_outline_rounded);
+      throw Exception(error.toString());
     }
   }
 
@@ -121,10 +128,24 @@ class PaymentController extends GetxController {
           .initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
                   paymentIntentClientSecret: paymentIntent!['client_secret'],
+                  // customerId: paymentIntent['customer'],
                   //Gotten from payment intent
                   style: ThemeMode.light,
-                  merchantDisplayName: 'YB-Ride'))
-          .then((value) {});
+                  merchantDisplayName: 'YB-Ride',
+                // new added
+                returnURL: 'flutterstripe://redirect',
+                googlePay: PaymentSheetGooglePay(
+                    merchantCountryCode: 'US',
+                    testEnv: !kDebugMode,
+                ),
+              ),
+
+
+      ).then((value) {}).onError((error, stackTrace){
+        Snackbar.showSnackBar("YBRIDE", "In payment sheet ${error}", Icons.error_outline_rounded);
+
+            // Snackbar.showSnackBar("YBRIDE", "${error}", Icons.error_outline_rounded);
+      });
 
       //STEP 3: Display Payment sheet
       displayPaymentSheet(context,id);

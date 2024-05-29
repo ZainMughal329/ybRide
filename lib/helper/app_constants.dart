@@ -8,15 +8,6 @@ class AppConstants {
 
   static late String stripe_publish_key;
   static late String stripe_secret_key;
-
-  static late String live_stripe_publish_key;
-  static late String live_stripe_secret_key;
-
-  // static late String stripe_publish_key = 'pk_test_51Ogo46EwduwUAGBRz8KlKG0uKlP2DL1KfBVj3Iqum4fSQVtOfD4WPCisOOmVfIoEAKsBJNTI0WzOmpOLmntqPTTJ00F599LcQW';
-  //
-  // static late String stripe_secret_key = 'sk_test_51Ogo46EwduwUAGBR6619v0dguE6DlSE4n461X2P3SPjB36K9zAqbU8lQyp7WuqIMQatRCsf7LQx7w5nKAfRKluYy00k7p6obF5';
-
-  // static final String kPlacesApiKey = 'AIzaSyCwUkzpQiVcZmmWbzKEqY4Usngn-LX7eqQ';
   static final String kPlacesApiKey = 'AIzaSyA8mT_fcQoFRNpBokvTjVXsuc-TB9k-leI';
   static final String placesBaseUrl = 'https://maps.googleapis.com/maps/api/place/autocomplete/json';
   static  String playStoreLink="";
