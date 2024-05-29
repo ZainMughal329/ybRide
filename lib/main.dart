@@ -15,6 +15,7 @@ import 'package:yb_ride/routes/app_routes.dart';
 import 'package:yb_ride/routes/routes_name.dart';
 import 'package:yb_ride/screens/settings/pages/faqs/view.dart';
 import 'package:yb_ride/screens/settings/pages/prefrences/apperence/controller.dart';
+import 'package:yb_ride/screens/splash/view.dart';
 import 'firebase_options.dart';
 import 'helper/app_theme.dart';
 import 'helper/notification_services.dart';
@@ -30,7 +31,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Pref.init();
   // Pref.initialize();
-  Stripe.publishableKey = kDebugMode?'pk_test_51Ogo46EwduwUAGBRz8KlKG0uKlP2DL1KfBVj3Iqum4fSQVtOfD4WPCisOOmVfIoEAKsBJNTI0WzOmpOLmntqPTTJ00F599LcQW':'pk_live_51PGJESBOId3miMVoyqKD71ZnMes96MzglILbMGpvjhzHVtZlSUEIKGJZtqj3IA5jzZXU5Eqn0ZLHPPuGl8RU5E3A00xuzOsClr';
+  Stripe.publishableKey =
+  'pk_live_51PGJESBOId3miMVoyqKD71ZnMes96MzglILbMGpvjhzHVtZlSUEIKGJZtqj3IA5jzZXU5Eqn0ZLHPPuGl8RU5E3A00xuzOsClr';
+  Stripe.merchantIdentifier = 'YB Ride';
+  Stripe.urlScheme = 'flutterstripe';
+  await Stripe.instance.applySettings(
+
+  );
   await dotenv.load(fileName: "assets/keyFile/keys.env");
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   await SystemChrome.setPreferredOrientations(
@@ -70,8 +77,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.sizeOf(context);
-    AppConstants.stripe_publish_key = kDebugMode? dotenv.env['STRIPE_PUBLISH_KEY']!:dotenv.env['LIVE_STRIPE_PUBLISH_KEY']!;
-    AppConstants.stripe_secret_key = kDebugMode? dotenv.env['STRIPE_SECRET_KEY']! :dotenv.env['LIVE_STRIPE_SECRET_KEY']!;
+    // AppConstants.stripe_publish_key = kDebugMode? dotenv.env['STRIPE_PUBLISH_KEY']!:dotenv.env['LIVE_STRIPE_PUBLISH_KEY']!;
+    // AppConstants.stripe_secret_key = kDebugMode? dotenv.env['STRIPE_SECRET_KEY']! :dotenv.env['LIVE_STRIPE_SECRET_KEY']!;
     // AppConstants.stripe_secret_key ="sk_test_51Ogo46EwduwUAGBR6619v0dguE6DlSE4n461X2P3SPjB36K9zAqbU8lQyp7WuqIMQatRCsf7LQx7w5nKAfRKluYy00k7p6obF5";
     // AppConstants.stripe_publish_key = "pk_test_51Ogo46EwduwUAGBRz8KlKG0uKlP2DL1KfBVj3Iqum4fSQVtOfD4WPCisOOmVfIoEAKsBJNTI0WzOmpOLmntqPTTJ00F599LcQW";
     return GetMaterialApp(
@@ -97,8 +104,8 @@ class MyApp extends StatelessWidget {
       // themeMode: Pref.defaultTheme(),
       // home: FAQScreen(),
       initialRoute: RoutesName.splashScreen,
-
-
+      // home: SplashScreen(),
+      // initialRoute: ,
       getPages: AppRoutes.routes,
     );
   }

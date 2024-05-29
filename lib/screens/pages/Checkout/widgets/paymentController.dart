@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -20,6 +21,8 @@ import '../../../../components/heading_text_widget.dart';
 
 class PaymentController extends GetxController {
   final cont = CheckOutCon();
+
+
 
   dynamic paymentIntent;
 
@@ -78,7 +81,8 @@ class PaymentController extends GetxController {
   }
 
   createPaymentIntent(String currency, double totalAmount) async {
-    AppConstants.stripe_secret_key = dotenv.env['STRIPE_SECRET_KEY']!;
+    // AppConstants.stripe_secret_key = dotenv.env['STRIPE_SECRET_KEY']!;
+    AppConstants.stripe_secret_key = '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';
 
     try {
       //Request body
@@ -121,9 +125,20 @@ class PaymentController extends GetxController {
           .initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
                   paymentIntentClientSecret: paymentIntent!['client_secret'],
+                  // customerId: paymentIntent['customer'],
                   //Gotten from payment intent
                   style: ThemeMode.light,
-                  merchantDisplayName: 'YB-Ride'))
+                  merchantDisplayName: 'YB-Ride',
+                // new added
+                returnURL: 'flutterstripe://redirect',
+                googlePay: PaymentSheetGooglePay(
+                    merchantCountryCode: 'US',
+                    testEnv: !kDebugMode,
+                ),
+              ),
+
+
+      )
           .then((value) {});
 
       //STEP 3: Display Payment sheet
