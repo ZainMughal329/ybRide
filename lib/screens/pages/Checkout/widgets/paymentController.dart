@@ -26,7 +26,7 @@ class PaymentController extends GetxController {
 
   dynamic paymentIntent;
 
-  displayPaymentSheet(BuildContext context,String id) async {
+  displayPaymentSheet(BuildContext context,String id, paymentIntent) async {
     try {
       await Stripe.instance.presentPaymentSheet(
       ).then((value) {
@@ -37,28 +37,32 @@ class PaymentController extends GetxController {
         showDialog(
             context: context,
             builder: (_) => AlertDialog(
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.check_circle,
-                        color: Colors.green,
-                        size: 100.0,
-                      ),
-                      SizedBox(height: 10.0),
-                      Text("Payment Successful!"),
-                      SizedBox(height: 10.0),
-                    ],
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.check_circle,
+                    color: Colors.green,
+                    size: 100.0,
                   ),
-                ));
+                  SizedBox(height: 10.0),
+                  Text("Payment Successful!"),
+                  SizedBox(height: 10.0),
+                ],
+              ),
+            ));
+
         createBooking(context,id);
-
         paymentIntent = null;
-      }).onError((error, stackTrace) {
-        print("error in displaying sheet");
-        Snackbar.showSnackBar("YBRIDE", "error in displaying sheet ${error}", Icons.error_outline_rounded);
 
-        throw Exception(error);
+      }).onError((error, stackTrace) {
+        Navigator.pop(context);
+        showDialog(
+          context: context,
+          builder: (context) {
+            return PaymentErrorDialog(error: error.toString());
+          },
+        );
       });
     } on StripeException catch (e) {
       print('Error is:---> $e');
@@ -102,7 +106,7 @@ class PaymentController extends GetxController {
       var response = await http.post(
         Uri.parse('https://api.stripe.com/v1/payment_intents'),
         headers: {
-          'Authorization': 'Bearer ${AppConstants.stripe_secret_key}',
+          'Authorization': 'Bearer ${dotenv.env['LIVE_STRIPE_SECRET_KEY']}',
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: body,
@@ -126,29 +130,25 @@ class PaymentController extends GetxController {
       //STEP 2: Initialize Payment Sheet
       await Stripe.instance
           .initPaymentSheet(
-              paymentSheetParameters: SetupPaymentSheetParameters(
-                  paymentIntentClientSecret: paymentIntent!['client_secret'],
-                  // customerId: paymentIntent['customer'],
-                  //Gotten from payment intent
-                  style: ThemeMode.light,
-                  merchantDisplayName: 'YB-Ride',
-                // new added
-                returnURL: 'flutterstripe://redirect',
-                googlePay: PaymentSheetGooglePay(
-                    merchantCountryCode: 'US',
-                    testEnv: !kDebugMode,
-                ),
-              ),
+        paymentSheetParameters: SetupPaymentSheetParameters(
+          paymentIntentClientSecret: paymentIntent!['client_secret'],
+          // customerId: paymentIntent['customer'],
+          //Gotten from payment intent
+          style: ThemeMode.light,
+          merchantDisplayName: 'YB-Ride',
+          // new added
+        ),
 
 
-      ).then((value) {}).onError((error, stackTrace){
+      ).then(
+            (value) {
+          // //STEP 3: Display Payment sheet
+          displayPaymentSheet(context,id, paymentIntent);
+        },).then((value) {}).onError((error, stackTrace){
         Snackbar.showSnackBar("YBRIDE", "In payment sheet ${error}", Icons.error_outline_rounded);
 
-            // Snackbar.showSnackBar("YBRIDE", "${error}", Icons.error_outline_rounded);
+        // Snackbar.showSnackBar("YBRIDE", "${error}", Icons.error_outline_rounded);
       });
-
-      //STEP 3: Display Payment sheet
-      displayPaymentSheet(context,id);
     } catch (err) {
       throw Exception(err);
     }
@@ -266,4 +266,72 @@ class PaymentController extends GetxController {
   }
 
 
+}
+
+class PaymentErrorDialog extends StatelessWidget {
+  const PaymentErrorDialog({
+    super.key,
+    this.error,
+  });
+
+  final String? error;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      contentPadding: const EdgeInsets.all(10),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            error != null ? "Canceled payment" : "Payment error",
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
+          const SizedBox(height: 10),
+          const Icon(
+            Icons.warning_rounded,
+            size: 50,
+            color: Colors.red,
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            "You have canceled the payment process\nPlease try again",
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+      actions: [
+        InkWell(
+          onTap: () => Navigator.pop(context),
+          child: Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [
+                  Color(0xFFC067DE),
+                  Color(0xFF802FC6),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: const Center(
+              child: Text(
+                "Cancel",
+                style: TextStyle(
+                  fontFamily: "Urbanist",
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+      actionsPadding: const EdgeInsets.all(15),
+    );
+  }
 }

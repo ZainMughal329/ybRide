@@ -32,13 +32,13 @@ void main() async {
   Pref.init();
   Pref.initialize();
   Stripe.publishableKey =
-  'pk_live_51PGJESBOId3miMVoyqKD71ZnMes96MzglILbMGpvjhzHVtZlSUEIKGJZtqj3IA5jzZXU5Eqn0ZLHPPuGl8RU5E3A00xuzOsClr';
+  'pk_live_51PGJESBOId3miMVo61uIisHvhZ1EA3VlfUHhraMJILZ9ZrU56rAJ4XxPuFILHvFoohDdBF76UBhJGpaOMqYGw9GP00W9EhCUAi';
   Stripe.merchantIdentifier = 'YB Ride';
   Stripe.urlScheme = 'flutterstripe';
   await Stripe.instance.applySettings(
 
   );
-  await dotenv.load(fileName: "assets/keyFile/keys.env");
+  await dotenv.load(fileName: "assets/.env");
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]
@@ -77,8 +77,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.sizeOf(context);
-    AppConstants.stripe_publish_key = kDebugMode? dotenv.env['STRIPE_PUBLISH_KEY']!:dotenv.env['LIVE_STRIPE_PUBLISH_KEY']!;
-    AppConstants.stripe_secret_key = kDebugMode? dotenv.env['STRIPE_SECRET_KEY']! :dotenv.env['LIVE_STRIPE_SECRET_KEY']!;
+    AppConstants.stripe_publish_key = dotenv.env['LIVE_STRIPE_PUBLISH_KEY']!;
+    AppConstants.stripe_secret_key =  dotenv.env['LIVE_STRIPE_SECRET_KEY']!;
 
     return GetMaterialApp(
       title: 'YB Ride',
