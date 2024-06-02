@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +14,6 @@ import 'package:yb_ride/helper/app_constants.dart';
 import 'package:yb_ride/helper/prefs.dart';
 import 'package:yb_ride/routes/app_routes.dart';
 import 'package:yb_ride/routes/routes_name.dart';
-import 'package:yb_ride/screens/settings/pages/faqs/view.dart';
-import 'package:yb_ride/screens/settings/pages/prefrences/apperence/controller.dart';
-import 'package:yb_ride/screens/splash/view.dart';
 import 'firebase_options.dart';
 import 'helper/app_theme.dart';
 import 'helper/notification_services.dart';
@@ -27,9 +25,31 @@ late bool isDarkTheme;
 //apple notification key
 // T6449XQPV6
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Pref.init();
+  await Firebase.initializeApp(
+
+    options: Platform.isAndroid?FirebaseOptions(
+      apiKey: 'AIzaSyD6qyZHi0zLgP091Zs8Pu4aDHucLT4ofXI',
+      appId: '1:782774219638:android:0c4461b6608a5a880e4057',
+      messagingSenderId: '782774219638',
+      projectId: 'yb-ride-83505',
+      storageBucket: 'yb-ride-83505.appspot.com',
+      androidClientId: '782774219638-q425s01mtjnn15ve7kscer8nh6futvj5.apps.googleusercontent.com',
+      iosClientId: '782774219638-bq3vp1ov0d6vjpc2vc91aep17f9gk18g.apps.googleusercontent.com',
+      iosBundleId: 'com.dev.ybride',
+    ): FirebaseOptions(
+      apiKey: 'AIzaSyD3_51intphkkZskb4ta-oACx5Kt8ZCgxQ',
+      appId: '1:782774219638:ios:5a98e9631c575dea0e4057',
+      messagingSenderId: '782774219638',
+      projectId: 'yb-ride-83505',
+      storageBucket: 'yb-ride-83505.appspot.com',
+      androidClientId: '782774219638-09p6k5p450h4nlvvfqtsvanj9tam41g2.apps.googleusercontent.com',
+      iosClientId: '782774219638-bq3vp1ov0d6vjpc2vc91aep17f9gk18g.apps.googleusercontent.com',
+      iosBundleId: 'com.dev.ybride',
+    )
+  );
+  // Pref.init();
   Pref.initialize();
   Stripe.publishableKey =
   'pk_live_51PGJESBOId3miMVo61uIisHvhZ1EA3VlfUHhraMJILZ9ZrU56rAJ4XxPuFILHvFoohDdBF76UBhJGpaOMqYGw9GP00W9EhCUAi';
@@ -43,9 +63,7 @@ void main() async {
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]
   );
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
 
   await Permission.locationWhenInUse.isDenied.then((valueOfPermission)
   {
@@ -65,7 +83,7 @@ void main() async {
   // run app function
 
 
-  runApp(const MyApp());
+  runApp( MyApp());
 
 
 }

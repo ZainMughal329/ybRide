@@ -59,11 +59,27 @@
       },
       "oauth_client": [
         {
+          "client_id": "782774219638-dejgq5besa6qcuv4qud0qa6lfpjbj7jk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dev.ybride",
+            "certificate_hash": "8927bd3371b31221f3e255ab5a93d17361c2a12e"
+          }
+        },
+        {
           "client_id": "782774219638-q425s01mtjnn15ve7kscer8nh6futvj5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.dev.ybride",
             "certificate_hash": "33873a85501259c81992a5f29bf78272ea6fa5bd"
+          }
+        },
+        {
+          "client_id": "782774219638-ssbdn40dmccs0t6b1mvgp78u2o71atm1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dev.ybride",
+            "certificate_hash": "bbfb95c962e358a8c8d49464326c5cf3a73e07ef"
           }
         },
         {
@@ -108,6 +124,30 @@
           "android_info": {
             "package_name": "com.dev.ybrideUser",
             "certificate_hash": "33873a85501259c81992a5f29bf78272ea6fa5bd"
+          }
+        },
+        {
+          "client_id": "782774219638-h4skvqrenmusnqmud3jgp6u1aoslj0d9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dev.ybrideUser",
+            "certificate_hash": "bbfb95c962e358a8c8d49464326c5cf3a73e07ef"
+          }
+        },
+        {
+          "client_id": "782774219638-istk0t7jkj5j1ld0dafhdh8nm4lrhbcp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dev.ybrideUser",
+            "certificate_hash": "8927bd3371b31221f3e255ab5a93d17361c2a12e"
+          }
+        },
+        {
+          "client_id": "782774219638-kcqv8gejk5dl2ilqu6igfbnhr9aa67ao.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dev.ybrideUser",
+            "certificate_hash": "ea66162e5d0e4427fd13f499fa9fe15b655f0615"
           }
         },
         {
