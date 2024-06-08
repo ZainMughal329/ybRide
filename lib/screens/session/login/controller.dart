@@ -64,7 +64,7 @@ class LoginController extends GetxController {
         SessionController().userId = user.user!.uid.toString();
         if ((await userExists())) {
           getUserReferralDiscount();
-          return Get.offAndToNamed(RoutesName.applicationScreen);
+          return Get.offAllNamed(RoutesName.applicationScreen);
         } else {
           await createUser().then((value) {
             getUserReferralDiscount();
