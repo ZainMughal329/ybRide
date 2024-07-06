@@ -1,5 +1,9 @@
 import 'dart:developer';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'dart:io';
+
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +26,13 @@ import 'package:permission_handler/permission_handler.dart';
 late Size mq;
 late bool isDarkTheme;
 
-//apple notification key
-// T6449XQPV6
+
+
+
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage remoteMessage) async {
+  await Firebase.initializeApp();
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -74,7 +83,7 @@ Future<void> main() async {
   });
 
   NotificationServices().requestPermissions();
-  NotificationServices().setupBackgrounInteractMsg();
+  NotificationServices().setupBackgroundInteractMsg();
   NotificationServices().foregroundMessage();
   NotificationServices().initFirebase();
   NotificationServices().getToken().then((value) {

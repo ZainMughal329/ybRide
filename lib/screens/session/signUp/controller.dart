@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -48,10 +49,12 @@ class SignUpController extends GetxController {
         userinfo.id = APis.auth.currentUser!.uid.toString();
         SessionController().userId = APis.auth.currentUser!.uid.toString();
         getUserReferralDiscount();
+        subscribeToTopic(value.user!.uid.toString());
+
         createUser(userinfo, context);
-        if(state.refCon.text.isNotEmpty){
+        if (state.refCon.text.isNotEmpty) {
           checkReferralCode(state.refCon.text.trim().toString());
-        }else if(state.refCon.text.isEmpty){
+        } else if (state.refCon.text.isEmpty) {
           Get.offAllNamed(RoutesName.applicationScreen);
         }
         clearControllers();
@@ -88,17 +91,15 @@ class SignUpController extends GetxController {
     try {
       // Assuming 'users' is the collection in Firestore
       QuerySnapshot querySnapshot =
-      await FirebaseFirestore.instance.collection('users').get();
+          await FirebaseFirestore.instance.collection('users').get();
 
       // Loop through each document in the collection
       querySnapshot.docs.forEach(
-            (doc) async{
+        (doc) async {
           var listOfCode = doc['referralList'];
-
 
           // Check if "XACDS" is present in the list of codes
           if (listOfCode.contains(referralCode)) {
-
             var docId = doc['id'];
             print("id of user shared referal code is" + docId.toString());
             addReferralDiscountToId(docId);
@@ -109,11 +110,9 @@ class SignUpController extends GetxController {
                 .collection('users')
                 .doc(docId)
                 .update({'referralList': listOfCode}).then((value) {
-                  print("update referral list called");
+              print("update referral list called");
             });
-          } else {
-
-          }
+          } else {}
         },
       );
       Get.offAllNamed(RoutesName.applicationScreen);
@@ -126,13 +125,14 @@ class SignUpController extends GetxController {
     print("function addReferralDiscountToId() executed");
     try {
       print("--------------");
-      print("user id is "+id.toString());
-      print("Referaal amount is is "+AppConstants.referralDiscount.toString());
+      print("user id is " + id.toString());
+      print(
+          "Referaal amount is is " + AppConstants.referralDiscount.toString());
       await APis.db.collection('users').doc(id).set({
-        'referralDiscount': AppConstants.referralDiscount+AppConstants.APPReferralDiscount,
-      },
-          SetOptions(merge: true)).then((value) {
-            print("Inside then of addReferralDiscountToId()");
+        'referralDiscount':
+            AppConstants.referralDiscount + AppConstants.APPReferralDiscount,
+      }, SetOptions(merge: true)).then((value) {
+        print("Inside then of addReferralDiscountToId()");
         Get.offAllNamed(RoutesName.applicationScreen);
       }).onError((error, stackTrace) {
         Snackbar.showSnackBar("YB-Ride", error.toString(), Icons.error);
@@ -149,14 +149,14 @@ class SignUpController extends GetxController {
     state.refCon.clear();
   }
 
-  Future<void> getUserReferralDiscount() async{
-    var user = await APis.db.collection('users').doc(SessionController().userId).get();
-    if(user.exists){
-      AppConstants.referralDiscount=double.parse((user['referralDiscount']).toString());
+  Future<void> getUserReferralDiscount() async {
+    var user =
+        await APis.db.collection('users').doc(SessionController().userId).get();
+    if (user.exists) {
+      AppConstants.referralDiscount =
+          double.parse((user['referralDiscount']).toString());
     }
   }
-
-
 
   static User get user => APis.auth.currentUser!;
 
@@ -180,13 +180,16 @@ class SignUpController extends GetxController {
       dateTime: DateTime.now().millisecondsSinceEpoch.toString(),
       list: [],
       referralList: [],
-
     );
-    SessionController().userId=user.uid.toString();
+    SessionController().userId = user.uid.toString();
 
-    await APis.db.collection('users').doc(APis.auth.currentUser!.uid).set(
-      chatUser.toJson(),
-    ).onError((error, stackTrace){
+    await APis.db
+        .collection('users')
+        .doc(APis.auth.currentUser!.uid)
+        .set(
+          chatUser.toJson(),
+        )
+        .onError((error, stackTrace) {
       Snackbar.showSnackBar("YB-Ride", error.toString(), Icons.error_outline);
     });
   }
@@ -198,6 +201,7 @@ class SignUpController extends GetxController {
 
       if (user != null) {
         SessionController().userId = user.user!.uid.toString();
+        subscribeToTopic(user.user!.uid.toString());
         if ((await userExists())) {
           getUserReferralDiscount();
           return Get.offAndToNamed(RoutesName.applicationScreen);
@@ -208,9 +212,10 @@ class SignUpController extends GetxController {
           });
         }
       }
-    }).onError((error, stackTrace){
+    }).onError((error, stackTrace) {
       Navigator.pop(context);
-      Snackbar.showSnackBar("YB-Ride", 'Error while google signing', Icons.error_outline);
+      Snackbar.showSnackBar(
+          "YB-Ride", 'Error while google signing', Icons.error_outline);
     });
   }
 
@@ -222,7 +227,7 @@ class SignUpController extends GetxController {
 
       // Obtain the auth details from the request
       final GoogleSignInAuthentication? googleAuth =
-      await googleUser?.authentication;
+          await googleUser?.authentication;
 
       // Create a new credential
       final credential = GoogleAuthProvider.credential(
@@ -241,7 +246,7 @@ class SignUpController extends GetxController {
 
   fetchUserCollectionData() async {
     QuerySnapshot snapshot = await APis.db.collection('users').get();
-    if(snapshot.docs.isNotEmpty) {
+    if (snapshot.docs.isNotEmpty) {
       snapshot.docs.forEach((element) {
         var snap = element['email'];
         // log('snap:${snap}');
@@ -266,9 +271,17 @@ class SignUpController extends GetxController {
     }
   }
 
-
-
-
-
-
+  Future<void> subscribeToTopic(String topic) async {
+    try {
+      await FirebaseMessaging.instance
+          .subscribeToTopic(topic)
+          .then((value) {})
+          .onError((error, stackTrace) {
+        print("ERROR IS ${error}");
+      });
+    } catch (e) {
+      print(e);
+      print("Exception");
+    }
+  }
 }
