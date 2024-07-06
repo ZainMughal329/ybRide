@@ -55,6 +55,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '782774219638',
     projectId: 'yb-ride-83505',
     storageBucket: 'yb-ride-83505.appspot.com',
+    androidClientId: '782774219638-q425s01mtjnn15ve7kscer8nh6futvj5.apps.googleusercontent.com',
+    iosClientId: '782774219638-bq3vp1ov0d6vjpc2vc91aep17f9gk18g.apps.googleusercontent.com',
+    iosBundleId: 'com.dev.ybride',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(

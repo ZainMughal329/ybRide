@@ -18,6 +18,7 @@ class BookNowState {
 
   GoogleMapController? mapController;
   RxInt results = 0.obs;
+
   RxDouble heightOfSheet = 0.0.obs;
 
   // variables to check selection

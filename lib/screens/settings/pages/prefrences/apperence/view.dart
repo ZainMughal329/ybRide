@@ -14,6 +14,7 @@ import '../../../../../main.dart';
 class AppearanceScreen extends StatelessWidget {
   final _appearanceController = Get.put(AppearanceController());
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

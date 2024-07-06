@@ -1,6 +1,11 @@
 import 'dart:developer';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import 'dart:io';
+
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -13,8 +18,6 @@ import 'package:yb_ride/helper/app_constants.dart';
 import 'package:yb_ride/helper/prefs.dart';
 import 'package:yb_ride/routes/app_routes.dart';
 import 'package:yb_ride/routes/routes_name.dart';
-import 'package:yb_ride/screens/settings/pages/faqs/view.dart';
-import 'package:yb_ride/screens/settings/pages/prefrences/apperence/controller.dart';
 import 'firebase_options.dart';
 import 'helper/app_theme.dart';
 import 'helper/notification_services.dart';
@@ -31,19 +34,45 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage remoteMessage) as
   await Firebase.initializeApp();
 }
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Pref.init();
+  await Firebase.initializeApp(
+
+    options: Platform.isAndroid?FirebaseOptions(
+      apiKey: 'AIzaSyD6qyZHi0zLgP091Zs8Pu4aDHucLT4ofXI',
+      appId: '1:782774219638:android:0c4461b6608a5a880e4057',
+      messagingSenderId: '782774219638',
+      projectId: 'yb-ride-83505',
+      storageBucket: 'yb-ride-83505.appspot.com',
+      androidClientId: '782774219638-q425s01mtjnn15ve7kscer8nh6futvj5.apps.googleusercontent.com',
+      iosClientId: '782774219638-bq3vp1ov0d6vjpc2vc91aep17f9gk18g.apps.googleusercontent.com',
+      iosBundleId: 'com.dev.ybride',
+    ): FirebaseOptions(
+      apiKey: 'AIzaSyD3_51intphkkZskb4ta-oACx5Kt8ZCgxQ',
+      appId: '1:782774219638:ios:5a98e9631c575dea0e4057',
+      messagingSenderId: '782774219638',
+      projectId: 'yb-ride-83505',
+      storageBucket: 'yb-ride-83505.appspot.com',
+      androidClientId: '782774219638-09p6k5p450h4nlvvfqtsvanj9tam41g2.apps.googleusercontent.com',
+      iosClientId: '782774219638-bq3vp1ov0d6vjpc2vc91aep17f9gk18g.apps.googleusercontent.com',
+      iosBundleId: 'com.dev.ybride',
+    )
+  );
+  // Pref.init();
   Pref.initialize();
-  Stripe.publishableKey = 'pk_test_51Ogo46EwduwUAGBRz8KlKG0uKlP2DL1KfBVj3Iqum4fSQVtOfD4WPCisOOmVfIoEAKsBJNTI0WzOmpOLmntqPTTJ00F599LcQW';
-  await dotenv.load(fileName: "assets/keyFile/keys.env");
+  Stripe.publishableKey =
+  'pk_live_51PGJESBOId3miMVo61uIisHvhZ1EA3VlfUHhraMJILZ9ZrU56rAJ4XxPuFILHvFoohDdBF76UBhJGpaOMqYGw9GP00W9EhCUAi';
+  Stripe.merchantIdentifier = 'YB Ride';
+  Stripe.urlScheme = 'flutterstripe';
+  await Stripe.instance.applySettings(
+
+  );
+  await dotenv.load(fileName: "assets/.env");
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]
   );
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
 
   await Permission.locationWhenInUse.isDenied.then((valueOfPermission)
   {
@@ -63,7 +92,7 @@ void main() async {
   // run app function
 
 
-  runApp(const MyApp());
+  runApp( MyApp());
 
 
 }
@@ -75,10 +104,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.sizeOf(context);
-    AppConstants.stripe_publish_key = dotenv.env['STRIPE_PUBLISH_KEY']!;
-    AppConstants.stripe_secret_key = dotenv.env['STRIPE_SECRET_KEY']!;
-    // AppConstants.stripe_secret_key ="sk_test_51Ogo46EwduwUAGBR6619v0dguE6DlSE4n461X2P3SPjB36K9zAqbU8lQyp7WuqIMQatRCsf7LQx7w5nKAfRKluYy00k7p6obF5";
-    // AppConstants.stripe_publish_key = "pk_test_51Ogo46EwduwUAGBRz8KlKG0uKlP2DL1KfBVj3Iqum4fSQVtOfD4WPCisOOmVfIoEAKsBJNTI0WzOmpOLmntqPTTJ00F599LcQW";
+    AppConstants.stripe_publish_key = dotenv.env['LIVE_STRIPE_PUBLISH_KEY']!;
+    AppConstants.stripe_secret_key =  dotenv.env['LIVE_STRIPE_SECRET_KEY']!;
+
     return GetMaterialApp(
       title: 'YB Ride',
       debugShowCheckedModeBanner: false,
@@ -99,11 +127,11 @@ class MyApp extends StatelessWidget {
         ),
       ),
       darkTheme: ThemeData.dark(),
-      themeMode: Pref.defaultTheme(),
+      // themeMode: Pref.defaultTheme(),
       // home: FAQScreen(),
       initialRoute: RoutesName.splashScreen,
-
-
+      // home: SplashScreen(),
+      // initialRoute: ,
       getPages: AppRoutes.routes,
     );
   }

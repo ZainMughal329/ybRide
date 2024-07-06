@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:yb_ride/components/reuseable_button.dart';
+import 'package:yb_ride/components/snackbar_widget.dart';
 import 'package:yb_ride/main.dart';
 import 'package:yb_ride/screens/application/inded.dart';
 import 'package:yb_ride/screens/pages/book_page/widget/1st_bottom_sheet.dart';
@@ -77,6 +78,12 @@ class BookNowView extends StatelessWidget {
                           title: 'Start Searching',
                           onPress: () {
                             firstBottomSheet(context,cont);
+                           // try{
+                           //   Snackbar.showSnackBar("Ybride", "msg", Icons.error_outline_rounded);
+                           // }catch(e){
+                           //   print("Exception is$e");
+                           // }
+
                           },
                         ),
                       ),

@@ -67,7 +67,7 @@ class LoginController extends GetxController {
         if ((await userExists())) {
           subscribeToTopic(user.user!.uid.toString());
           getUserReferralDiscount();
-          return Get.offAndToNamed(RoutesName.applicationScreen);
+          return Get.offAllNamed(RoutesName.applicationScreen);
         } else {
           await createUser().then((value) {
             getUserReferralDiscount();
@@ -163,6 +163,7 @@ class LoginController extends GetxController {
 
           getUserReferralDiscount();
           Navigator.pop(context);
+          Snackbar.showSnackBar("YB-Ride", "Login successfully", Icons.done_all_rounded);
           Get.offAllNamed(RoutesName.applicationScreen);
           state.emailCon.clear();
           state.passCon.clear();

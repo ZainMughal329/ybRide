@@ -127,7 +127,11 @@ class NotificationServices {
 
   Future<String> getToken() async {
     // String? token = await messaging.getToken();
-    return "";
+
+//     return "";
+    String? token  = "";
+    return token;
+
   }
 
   void refreshToken() {
