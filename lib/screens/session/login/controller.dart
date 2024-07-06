@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yb_ride/helper/app_constants.dart';
@@ -16,8 +17,6 @@ import '../../../components/snackbar_widget.dart';
 import '../../../helper/app_helpers.dart';
 import '../../../helper/notification_services.dart';
 
-
-
 class LoginController extends GetxController {
   final state = LoginState();
 
@@ -33,7 +32,7 @@ class LoginController extends GetxController {
     await services.getToken().then((value) {
       token = value;
     });
-    log('message'+token.toString());
+    log('message' + token.toString());
     final chatUser = UserModel(
       image: user.photoURL.toString(),
       name: user.displayName.toString(),
@@ -43,14 +42,17 @@ class LoginController extends GetxController {
       dateTime: DateTime.now().millisecondsSinceEpoch.toString(),
       list: [],
       referralList: [],
-
     );
-    SessionController().userId=user.uid.toString();
+    SessionController().userId = user.uid.toString();
 
-    await APis.db.collection('users').doc(APis.auth.currentUser!.uid).set(
-      chatUser.toJson(),
-    ).then((value){
-    }).onError((error, stackTrace){
+    await APis.db
+        .collection('users')
+        .doc(APis.auth.currentUser!.uid)
+        .set(
+          chatUser.toJson(),
+        )
+        .then((value) {})
+        .onError((error, stackTrace) {
       Snackbar.showSnackBar("YB-Ride", error.toString(), Icons.error_outline);
     });
   }
@@ -63,18 +65,21 @@ class LoginController extends GetxController {
       if (user != null) {
         SessionController().userId = user.user!.uid.toString();
         if ((await userExists())) {
+          subscribeToTopic(user.user!.uid.toString());
           getUserReferralDiscount();
           return Get.offAndToNamed(RoutesName.applicationScreen);
         } else {
           await createUser().then((value) {
             getUserReferralDiscount();
+            subscribeToTopic(user.user!.uid.toString());
             return Get.offAndToNamed(RoutesName.applicationScreen);
           });
         }
       }
-    }).onError((error, stackTrace){
+    }).onError((error, stackTrace) {
       Navigator.pop(context);
-      Snackbar.showSnackBar("YB-Ride", 'Error + ${error.toString()}', Icons.error_outline);
+      Snackbar.showSnackBar(
+          "YB-Ride", 'Error + ${error.toString()}', Icons.error_outline);
     });
   }
 
@@ -86,7 +91,7 @@ class LoginController extends GetxController {
 
       // Obtain the auth details from the request
       final GoogleSignInAuthentication? googleAuth =
-      await googleUser?.authentication;
+          await googleUser?.authentication;
 
       // Create a new credential
       final credential = GoogleAuthProvider.credential(
@@ -102,16 +107,14 @@ class LoginController extends GetxController {
       // Snackbar.showSnackBar('Something went wrong!!!', 'Check your internet.');
       return null;
     }
-
   }
 
-
-
-
-  Future<void> getUserReferralDiscount() async{
-    var user = await APis.db.collection('users').doc(SessionController().userId).get();
-    if(user.exists){
-      AppConstants.referralDiscount=double.parse((user['referralDiscount']).toString());
+  Future<void> getUserReferralDiscount() async {
+    var user =
+        await APis.db.collection('users').doc(SessionController().userId).get();
+    if (user.exists) {
+      AppConstants.referralDiscount =
+          double.parse((user['referralDiscount']).toString());
       print("=======================");
       print(double.parse((user['referralDiscount']).toString()));
     }
@@ -121,14 +124,14 @@ class LoginController extends GetxController {
 
   fetchUserCollectionData() async {
     QuerySnapshot snapshot = await APis.db.collection('users').get();
-    if(snapshot.docs.isNotEmpty) {
+    if (snapshot.docs.isNotEmpty) {
       snapshot.docs.forEach((element) {
         var snap = element['email'];
         // log('snap:${snap}');
         list.add(snap);
       });
     }
-    print('len:'+list.length.toString());
+    print('len:' + list.length.toString());
   }
 
   Future<bool> checkIfUserExists(String email) async {
@@ -146,17 +149,18 @@ class LoginController extends GetxController {
   }
 
   // user Login function
-  void loginUserWithEmailAndPassword(String email, password,BuildContext context) async {
+  void loginUserWithEmailAndPassword(
+      String email, password, BuildContext context) async {
     showProgressIndicator(context);
     try {
-
       bool isExist = await checkIfUserExists(email);
-      if(isExist) {
-
+      if (isExist) {
         await APis.auth
             .signInWithEmailAndPassword(email: email, password: password)
             .then((value) async {
           SessionController().userId = value.user!.uid.toString();
+          subscribeToTopic(value.user!.uid.toString());
+
           getUserReferralDiscount();
           Navigator.pop(context);
           Get.offAllNamed(RoutesName.applicationScreen);
@@ -164,15 +168,13 @@ class LoginController extends GetxController {
           state.passCon.clear();
         }).onError((error, stackTrace) {
           Navigator.pop(context);
-          Snackbar.showSnackBar("YB-Ride", error.toString(), Icons.error_outline);
+          Snackbar.showSnackBar(
+              "YB-Ride", error.toString(), Icons.error_outline);
         });
-      }else {
+      } else {
         Snackbar.showSnackBar(
-            'YB-Ride',
-            'Something went wrong. Try again!',
-            Icons.error_outline);
+            'YB-Ride', 'Something went wrong. Try again!', Icons.error_outline);
         Navigator.pop(context);
-
       }
     } on FirebaseAuthException catch (e) {
       Snackbar.showSnackBar("Error", e.toString(), Icons.error_outline);
@@ -183,5 +185,17 @@ class LoginController extends GetxController {
     }
   }
 
+  Future<void> subscribeToTopic(String topic) async {
+    try {
+      await FirebaseMessaging.instance
+          .subscribeToTopic(topic)
+          .then((value) {})
+          .onError((error, stackTrace) {
+        print("ERROR IS ${error}");
+      });
+    } catch (e) {
+      print(e);
+      print("Exception");
+    }
+  }
 }
-

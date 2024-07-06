@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -215,7 +216,7 @@ class SettingsView extends GetView<SettingsController> {
 
                       showProgressIndicator(context);
                       Future.delayed(Duration(seconds: 3), () async {
-
+                        await FirebaseMessaging.instance.unsubscribeFromTopic(SessionController().userId.toString());
                         await FirebaseAuth.instance.signOut().then((value) {
                           GoogleSignIn().signOut().then((value) {
                             SessionController().userId = '';
